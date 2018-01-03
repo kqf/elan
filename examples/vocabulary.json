@@ -1,0 +1,26 @@
+{
+	"Lesson 1": {
+		"words": 
+		{
+			"une acrochette": "a hook",
+			"une plante": "a plant",
+			"une table basse": "a low/coffe table",
+			"une armoire": "wardrobe",
+			"une decoration": "a decoration"
+		},
+		"verbs": 
+		{
+			"peindre - to paint": {"Je": "peins", "tu": "peins", "il": "peint", "nous": "peignons", "vous": "peignez", "ils": "peignent"}
+		}
+	},
+	"Lesson 2": {
+		"words": 
+		{
+			"un plombier": "a plumber",
+			"un serrurier": "a locksmith",
+			"un robinet": "a tap",
+			"un tuyau": " a piete"
+		},
+		"verbs": {}
+	}
+}
