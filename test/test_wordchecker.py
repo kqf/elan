@@ -1,3 +1,4 @@
+import os
 import json
 import unittest
 from elan.words import WordsChecker
@@ -25,4 +26,9 @@ class TestWordsChecker(unittest.TestCase):
 	def test_checks_words(self):
 		checker = WordsChecker(self.file, "Chapter1", {"word": ""})
 		checker.test_words()
+
+
+	def tearDown(self):
+		os.remove(self.file)
+
 
