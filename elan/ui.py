@@ -1,6 +1,7 @@
 from words import WordsChecker
-from Tkinter import *
-import ttk
+from tkinter import *
+from tkinter import ttk
+
    
 def gui(infile, chapter, option):
 	root = Tk()
