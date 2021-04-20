@@ -52,7 +52,7 @@ class WordsChecker(object):
 
     def test_dictionary(self, wdict):
         weak_words = {}
-        for foreign, native in wdict.iteritems():
+        for foreign, native in wdict.items():
             suggestion = input(f'Type in translation for:\n{native}')
             if suggestion != foreign:
                 weak_words[foreign] = native
