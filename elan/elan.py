@@ -9,6 +9,19 @@ def needs_file(argv):
             return f
 
 
+"""
+Usage:
+
+words:
+    elan/./elan.py "Lesson 1" --words --gui examples/vocabulary.json
+
+verbs:
+    elan/./elan.py "Lesson 1" --verbs --gui examples/vocabulary.json
+
+.PHONY: words verbs
+"""
+
+
 def main():
     infile = needs_file(sys.argv)
     print(infile)
