@@ -54,8 +54,3 @@ def gui(infile, chapter, option):
     root.attributes("-topmost", True)
     main_entry.focus()
     root.mainloop()
-
-
-def cmline(infile, chapter):
-    w = WordsChecker(infile, chapter)
-    w.test_words()

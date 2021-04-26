@@ -1,12 +1,5 @@
 import click
-
-from ui import gui, cmline
-
-
-def needs_file(argv):
-    for f in argv:
-        if '.json' in f:
-            return f
+from elan.words import WordsChecker
 
 
 """
@@ -29,9 +22,11 @@ verbs:
 @click.option("--objective", type=str)
 def main(infile, mode, lesson, objective):
     if mode == "cli":
-        cmline(infile, lesson, objective)
+        w = WordsChecker(infile, lesson)
+        w.test_words()
         return
 
+    from ui import gui
     gui(infile, lesson, objective)
 
 
