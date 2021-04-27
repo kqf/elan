@@ -5,36 +5,32 @@ class WordsChecker(object):
     def __init__(self, filename, chapter, option, strict=False):
         super(WordsChecker, self).__init__()
         self.option = option
-        self.vocabulary = []
         self.vtype = 'words' if 'word' in self.option else 'verbs'
-        self.read_file(filename, chapter)
+        self.vocabulary = self.read_file(filename, chapter)
         self.stack = self.vocabulary.keys()
         # Get Default Method
         self.comp = self.compare_strict if strict else self.compare_normal
         self.symbols_table = dict(zip(u"éàèùâêîôûç", "eaeuaeiouc"))
 
-    def convert_for_verbs(self):
-        if 'word' in self.option:
-            return
-
-        # Fix the issue with muptiple keys
-        res = {
-            self.vocabulary[k][w]: k + '.\n' + w + ' ... '
-            for k in self.vocabulary for w in self.vocabulary[k]
-        }
-        self.vocabulary = res
-
     def read_file(self, filename, chapter):
         with open(filename) as f:
             data = json.load(f)
 
-        self.vocabulary = {}
+        vocabulary = {}
 
         for c in data:
             if chapter in c:
-                self.vocabulary.update(data[c][self.vtype])
+                vocabulary.update(data[c][self.vtype])
 
-        self.convert_for_verbs()
+        if 'word' in self.option:
+            return vocabulary
+
+        # Fix the issue with muptiple keys
+        verbs = {
+            vocabulary[k][w]: k + '.\n' + w + ' ... '
+            for k in vocabulary for w in vocabulary[k]
+        }
+        return verbs
 
     def test_dictionary(self, wdict):
         weak_words = {}
