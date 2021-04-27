@@ -3,6 +3,7 @@ import pytest
 import tempfile
 
 from elan.words import WordsChecker
+from unittest.mock import patch
 
 
 @pytest.fixture
@@ -11,17 +12,16 @@ def infile():
         "Chapter1": {
             "words": {
                 "aaa": "xxx",
-                "bbb": "yyy"
             }
         }
     }
     with tempfile.NamedTemporaryFile() as tmp:
-        with open(tmp, 'w') as outfile:
+        with open(tmp.name, 'w') as outfile:
             json.dump(data, outfile)
-        yield tmp
+        yield tmp.name
 
 
-@pytest.mark.skip("Fix the test logic")
-def test_checks_words(self):
-    checker = WordsChecker(self.file, "Chapter1", {"word": ""})
+@patch("elan.words.input", return_value="aaa")
+def test_checks_words(input, infile):
+    checker = WordsChecker(infile, "Chapter1", {"word": ""})
     checker.test_words()
