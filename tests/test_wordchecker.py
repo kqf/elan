@@ -1,30 +1,27 @@
-import os
 import json
-import unittest
 import pytest
+import tempfile
+
 from elan.words import WordsChecker
+from unittest.mock import patch
 
 
-class TestWordsChecker(unittest.TestCase):
-
-    def setUp(self):
-        self.file = 'testfile.json'
-        data = {
-            "Chapter1": {
-                "words": {
-                    "aaa": "xxx",
-                    "bbb": "yyy"
-                }
+@pytest.fixture
+def infile():
+    data = {
+        "Chapter1": {
+            "words": {
+                "aaa": "xxx",
             }
         }
-
-        with open(self.file, 'w') as outfile:
+    }
+    with tempfile.NamedTemporaryFile() as tmp:
+        with open(tmp.name, 'w') as outfile:
             json.dump(data, outfile)
+        yield tmp.name
 
-    @pytest.mark.skip("Fix the test logic")
-    def test_checks_words(self):
-        checker = WordsChecker(self.file, "Chapter1", {"word": ""})
-        checker.test_words()
 
-    def tearDown(self):
-        os.remove(self.file)
+@patch("elan.words.input", return_value="aaa")
+def test_checks_words(input, infile):
+    checker = WordsChecker(infile, "Chapter1", {"word": ""})
+    checker.test_words()
