@@ -8,15 +8,10 @@ class WordsChecker(object):
         self.vocabulary = []
         self.vtype = 'words' if 'word' in self.option else 'verbs'
         self.read_file(filename, chapter)
-        # For interactive mode
-        # TODO: try to avoid this
         self.stack = self.vocabulary.keys()
         # Get Default Method
         self.comp = self.compare_strict if strict else self.compare_normal
-
         self.symbols_table = dict(zip(u"éàèùâêîôûç", "eaeuaeiouc"))
-        # self.symbols_table = dict(zip(map(ord, u"éàèùâêîôûç"), "eaeuaeiouc"))
-        print(self.symbols_table)
 
     def convert_for_verbs(self):
         if 'word' in self.option:
@@ -27,15 +22,6 @@ class WordsChecker(object):
             self.vocabulary[k][w]: k + '.\n' + w + ' ... '
             for k in self.vocabulary for w in self.vocabulary[k]
         }
-
-        # This is a version to debug
-        # res = {}
-        # for k in self.vocabulary:
-        #   print k
-        #   for w in self.vocabulary[k]:
-        #       print self.vocabulary[k][w]
-        #       res.update({self.vocabulary[k][w]: k  + '.\n' + w + ' ... ' })
-
         self.vocabulary = res
 
     def read_file(self, filename, chapter):
@@ -100,8 +86,6 @@ class WordsChecker(object):
             a.set("Congrats, you've finished it!")
             c.set("Bye!!")
             return
-
-        # print self.stack
 
         foreign, native = self.stack[0], self.vocabulary[self.stack[0]]
         q.set(native)
