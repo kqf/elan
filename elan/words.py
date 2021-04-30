@@ -1,7 +1,7 @@
 import json
 
 
-def read_file(self, filename, chapter, vtype, option):
+def read_file(filename, chapter, vtype, option):
     with open(filename) as f:
         data = json.load(f)
 
