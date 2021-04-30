@@ -33,7 +33,7 @@ class WordsChecker(object):
         self.comp = self.compare_strict if strict else self.compare_normal
         self.symbols_table = dict(zip(u"éàèùâêîôûç", "eaeuaeiouc"))
 
-    def test_dictionary(self, wdict):
+    def check_dictionary(self, wdict):
         weak_words = {}
         for foreign, native in wdict.items():
             suggestion = input(f'Type in translation for:\n{native}')
@@ -41,10 +41,10 @@ class WordsChecker(object):
                 weak_words[foreign] = native
         return weak_words
 
-    def test_words(self):
+    def check(self):
         test_words = self.vocabulary
         while test_words:
-            test_words = self.test_dictionary(test_words)
+            test_words = self.check_dictionary(test_words)
         # if weak_words: print 'List ouf your weak words:'
         # for k in weak_words: print k
         print('Congrats! Your training is over')

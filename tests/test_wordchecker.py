@@ -24,4 +24,4 @@ def infile():
 @patch("elan.words.input", return_value="aaa")
 def test_checks_words(input, infile):
     checker = WordsChecker(infile, "Chapter1", {"word": ""})
-    checker.test_words()
+    checker.check()
