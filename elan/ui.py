@@ -1,6 +1,10 @@
+try:
+    from tkinter import Tk, StringVar, N, W, E, S
+    from tkinter import ttk
+except ModuleNotFoundError:
+    raise ModuleNotFoundError("Please install tkinter in your system")
+
 from words import WordsChecker
-from tkinter import Tk, StringVar, N, W, E, S
-from tkinter import ttk
 
 
 def gui(infile, chapter, option):
