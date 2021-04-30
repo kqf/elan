@@ -1,36 +1,37 @@
 import json
 
 
+def read_file(self, filename, chapter, vtype, option):
+    with open(filename) as f:
+        data = json.load(f)
+
+    vocabulary = {}
+
+    for c in data:
+        if chapter in c:
+            vocabulary.update(data[c][vtype])
+
+    if 'word' in option:
+        return vocabulary
+
+    # Fix the issue with muptiple keys
+    verbs = {
+        vocabulary[k][w]: k + '.\n' + w + ' ... '
+        for k in vocabulary for w in vocabulary[k]
+    }
+    return verbs
+
+
 class WordsChecker(object):
     def __init__(self, filename, chapter, option, strict=False):
         super(WordsChecker, self).__init__()
         self.option = option
         self.vtype = 'words' if 'word' in self.option else 'verbs'
-        self.vocabulary = self.read_file(filename, chapter)
+        self.vocabulary = read_file(filename, chapter, self.vtype, option)
         self.stack = self.vocabulary.keys()
         # Get Default Method
         self.comp = self.compare_strict if strict else self.compare_normal
         self.symbols_table = dict(zip(u"éàèùâêîôûç", "eaeuaeiouc"))
-
-    def read_file(self, filename, chapter):
-        with open(filename) as f:
-            data = json.load(f)
-
-        vocabulary = {}
-
-        for c in data:
-            if chapter in c:
-                vocabulary.update(data[c][self.vtype])
-
-        if 'word' in self.option:
-            return vocabulary
-
-        # Fix the issue with muptiple keys
-        verbs = {
-            vocabulary[k][w]: k + '.\n' + w + ' ... '
-            for k in vocabulary for w in vocabulary[k]
-        }
-        return verbs
 
     def test_dictionary(self, wdict):
         weak_words = {}
@@ -44,7 +45,6 @@ class WordsChecker(object):
         test_words = self.vocabulary
         while test_words:
             test_words = self.test_dictionary(test_words)
-
         # if weak_words: print 'List ouf your weak words:'
         # for k in weak_words: print k
         print('Congrats! Your training is over')
