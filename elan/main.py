@@ -13,8 +13,8 @@ def main(infile, mode, lesson, objective):
         gui(infile, lesson, objective)
         return
 
-    w = WordsChecker(infile, lesson)
-    w.test_words()
+    w = WordsChecker(infile, lesson, objective)
+    w.check()
 
 
 if __name__ == '__main__':
