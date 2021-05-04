@@ -42,11 +42,9 @@ class WordsChecker(object):
         return weak_words
 
     def check(self, option):
-        self.vocabulary = read_file(self.filename, self.chapter, option)
-        self.stack = self.vocabulary.keys()
-        test_words = self.vocabulary
-        while test_words:
-            test_words = self.check_dictionary(test_words)
+        vocabulary = read_file(self.filename, self.chapter, option)
+        while vocabulary:
+            vocabulary = self.check_dictionary(vocabulary)
         # if weak_words: print 'List ouf your weak words:'
         # for k in weak_words: print k
         print('Congrats! Your training is over')
@@ -63,28 +61,28 @@ class WordsChecker(object):
     def compare_strict(self, foreign, translation):
         return foreign == translation
 
-    def interactive(self, q, a, c, s):
-        if not self.vocabulary:
-            return
+    def interactive(self, q, a, c, s, option):
+        vocabulary = read_file(self.filename, self.chapter, option)
+        stack = vocabulary.keys()
 
-        foreign, native = self.stack[0], self.vocabulary[self.stack[0]]
+        foreign, native = stack[0], self.vocabulary[stack[0]]
 
         suggestion = a.get()
         if not self.comp(foreign, suggestion):
             c.set(foreign)
             s.set(suggestion)
-            self.stack.append(foreign)
+            stack.append(foreign)
         else:
-            self.stack.pop(0)
+            stack.pop(0)
             c.set('')
             s.set('')
 
-        if not self.stack:
+        if not stack:
             q.set("That's all")
             a.set("Congrats, you've finished it!")
             c.set("Bye!!")
             return
 
-        foreign, native = self.stack[0], self.vocabulary[self.stack[0]]
+        foreign, native = stack[0], self.vocabulary[stack[0]]
         q.set(native)
         a.set('')
