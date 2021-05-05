@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Form Example{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Hello</a>
+        </div>    
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" action="">
+            {{ form.translation.label }} {{ form.translation(size=16) }}
+            {% for error in form.translation.errors %}
+                {{ error }}
+            {% endfor %}
+            <br>
+            {{ form.submit() }}
+            {{ form.hidden_tag() }}
+        </form>
+        {% if translation %}
+            <h1>Correct, {{ translation }}!</h1>
+        {% endif %}
+    </div>
+{% endblock %}
