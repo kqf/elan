@@ -1,2 +1,5 @@
 pytest
 click
+flask
+Flask-Bootstrap
+Flask-WTF
