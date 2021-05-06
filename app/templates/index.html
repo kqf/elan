@@ -5,14 +5,15 @@
 {% block navbar %}
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Hello</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Translate</a>
         </div>    
     </nav>
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <form method="POST" action="">
+        <h2>Please translate the following {{ original }}</h2>
+        <form method="POST" action="" text-align="center">
             {{ form.translation.label }} {{ form.translation(size=16) }}
             {% for error in form.translation.errors %}
                 {{ error }}
@@ -21,8 +22,8 @@
             {{ form.submit() }}
             {{ form.hidden_tag() }}
         </form>
-        {% if translation %}
-            <h1>Correct, {{ translation }}!</h1>
+        {% if correct %}
+            <h2>Correct!</h2>
         {% endif %}
     </div>
 {% endblock %}
