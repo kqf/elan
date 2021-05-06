@@ -22,10 +22,8 @@
             {{ form.submit() }}
             {{ form.hidden_tag() }}
         </form>
-        {% if translation %}
-            <h2>Correct, {{ translation }}!</h2>
-        {% else %}
-            <h2>Type your answer!</h2>
+        {% if correct %}
+            <h2>Correct!</h2>
         {% endif %}
     </div>
 {% endblock %}
