@@ -17,12 +17,18 @@ class AnswerForm(Form):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    original = None
     translation = None
     form = AnswerForm()
     if form.validate_on_submit():
         translation = form.translation.data
         form.translation.data = ''
-    return render_template('index.html', form=form, translation=translation)
+    return render_template(
+        'index.html',
+        form=form,
+        translation=translation,
+        original=original,
+    )
 
 
 if __name__ == '__main__':
