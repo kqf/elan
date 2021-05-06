@@ -18,7 +18,7 @@ class AnswerForm(Form):
 def index():
     vocab = {"test": "test"}
     translation = None
-    form = AnswerForm()
+    form = AnswerForm(form_type="inline")
     for original, correct in vocab.items():
         while translation == correct:
             if form.validate_on_submit():
