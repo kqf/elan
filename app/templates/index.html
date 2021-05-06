@@ -14,7 +14,7 @@
     <div class="container">
         <h2>Please translate the following {{ original }}</h2>
         <form method="POST" action="" text-align="center">
-            {{ form.translation.label }} {{ form.translation(size=16) }}
+            {{ form.translation.label }} {{ form.translation(size=45) }}
             {% for error in form.translation.errors %}
                 {{ error }}
             {% endfor %}
