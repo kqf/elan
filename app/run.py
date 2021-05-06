@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import StringField, SubmitField
-from wtforms.validators import Required, Length
+from wtforms.validators import Required
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_KEY'
@@ -10,8 +10,7 @@ bootstrap = Bootstrap(app)
 
 
 class AnswerForm(Form):
-    translation = StringField('',
-                              validators=[Required(), Length(1, 16)])
+    translation = StringField('', validators=[Required()])
     submit = SubmitField('submit')
 
 
@@ -19,7 +18,7 @@ class AnswerForm(Form):
 def index():
     vocab = {"test": "test"}
     translation = None
-    form = AnswerForm()
+    form = AnswerForm(form_type="inline")
     for original, correct in vocab.items():
         while translation == correct:
             if form.validate_on_submit():
