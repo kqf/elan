@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session
 from flask_bootstrap import Bootstrap
+from flask_session import Session
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -7,8 +8,10 @@ from wtforms.validators import Required
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_KEY'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 bootstrap = Bootstrap(app)
+Session(app)
 
 
 class AnswerForm(FlaskForm):
