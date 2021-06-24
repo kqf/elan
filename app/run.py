@@ -16,7 +16,12 @@ class AnswerForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    vocab = {"this is a test message": "test"}
+    vocab = {
+        "this is a first message": "first",
+        "this is a second message": "second",
+        "this is a third message": "third",
+    }
+
     translation = None
     form = AnswerForm(form_type="inline")
     for original, correct in vocab.items():
@@ -24,6 +29,7 @@ def index():
             if form.validate_on_submit():
                 translation = form.translation.data
                 form.translation.data = ''
+                del vocab[original]
 
             render_template(
                 'index.html',
