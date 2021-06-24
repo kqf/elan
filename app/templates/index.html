@@ -10,10 +10,24 @@
     </nav>
 {% endblock %}
 
+
+{% block styles %}
+{{super()}}
+    <link href="{{url_for('static', filename='styles/index.css')}}"
+          rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h2>Please translate the following {{ original }}</h2>
-        <form method="POST" action="" text-align="center">
+    <div class="col-md-4 col-md-offset-4 custom-container container">
+        <h2>
+            Please translate the following
+            <h2 class="custom-phrase">
+                <strong>
+                    {{ original }}
+                </strong>
+            </h2>
+        </h2>
+        <form method="POST" action="">
             {{ form.translation.label }} {{ form.translation(size=45) }}
             {% for error in form.translation.errors %}
                 {{ error }}
