@@ -1,0 +1,11 @@
+.custom-container {
+  background-color: yellow;
+  border: 5px solid #FFFF00;
+  text-align: center;
+}
+
+.custom-phrase {
+  background-color: green;
+  border: 5px solid #FFFF00;
+  text-align: center;
+}
