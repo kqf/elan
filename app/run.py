@@ -31,13 +31,13 @@ class UploadForm(FlaskForm):
 def index():
     upload = UploadForm()
 
-    # if upload.file.data:
-    #     path = os.path.join(app.static_folder, upload.file.data)
-    #     print(path)
-    #     with open(path, "w") as f:
-    #         upload.file.save(f)
-    #         print(f.readlines())
-    print(upload.file.data)
+    if upload.file.data:
+        tasks = []
+        for line in upload.file.data.readlines():
+            print(type(line))
+            original, expected = line.decode("utf-8").split("|")
+            tasks.append((original.strip(), expected.strip()))
+            session["tasks"] = tasks
 
     if "tasks" not in session:
         session["tasks"] = []
