@@ -1,3 +1,4 @@
 *.egg*
 *.pyc
 .python-version
+flask_session

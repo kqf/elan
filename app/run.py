@@ -29,43 +29,25 @@ def index():
             ("this is a fourth message", "fourth"),
         ]
 
+    form = None
     translation = None
-    form = AnswerForm(form_type="inline")
-    print(session["tasks"])
+    original = None
+    correct = None
 
-    if len(session["tasks"]) == 0:
-        return render_template(
-            'index.html',
-            form=form,
-            translation=translation,
-            original="You are done",
-        )
+    if len(session["tasks"]) > 0:
+        form = AnswerForm(form_type="inline")
+        original, expected = next(iter(session["tasks"]))
+        correct = form.translation.data == expected
 
-    original, correct = next(iter(session["tasks"]))
-
-    if form.translation.data is None:
-        return render_template(
-            'index.html',
-            form=form,
-            translation=translation,
-            original=original,
-        )
-
-    print(correct)
-
-    if form.validate_on_submit() and form.translation.data == correct:
-        translation = form.translation.data
-        form.translation.data = None
+    if correct:
         session["tasks"].pop(0)
-        original, correct = next(iter(session["tasks"]))
-        print(session["tasks"])
-        print("After pop", correct)
 
     return render_template(
         'index.html',
         form=form,
         translation=translation,
         original=original,
+        correct=correct,
     )
 
 
