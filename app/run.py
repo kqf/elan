@@ -32,6 +32,7 @@ def index():
     form = None
     translation = None
     original = None
+    correct = None
 
     if len(session["tasks"]) > 0:
         form = AnswerForm(form_type="inline")
