@@ -29,6 +29,14 @@ def index():
             ("this is a fourth message", "fourth"),
         ]
 
+    if len(session["tasks"]) == 0:
+        return render_template(
+            'index.html',
+            form=None,
+            translation=None,
+            original=None,
+        )
+
     translation = None
     form = AnswerForm(form_type="inline")
     print(session["tasks"])
