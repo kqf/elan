@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template, session
 from flask_bootstrap import Bootstrap
 from flask_session import Session
@@ -18,7 +17,8 @@ Session(app)
 
 
 class AnswerForm(FlaskForm):
-    translation = StringField('', validators=[Required()])
+    translation = StringField('', validators=[Required()],
+                              render_kw={'autofocus': True})
     submit = SubmitField('submit')
 
 
@@ -54,6 +54,8 @@ def index():
 
     if correct:
         session["tasks"].pop(0)
+        prompt.translation.render_kw = {'disabled': 'disabled'}
+        prompt.submit.render_kw = {'autofocus': 'True'}
 
     return render_template(
         'index.html',
