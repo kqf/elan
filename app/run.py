@@ -34,7 +34,6 @@ def index():
     if upload.file.data:
         tasks = []
         for line in upload.file.data.readlines():
-            print(type(line))
             original, expected = line.decode("utf-8").split("|")
             tasks.append((original.strip(), expected.strip()))
             session["tasks"] = tasks
@@ -56,10 +55,6 @@ def index():
         session["tasks"].pop(0)
         prompt.translation.render_kw = {'disabled': 'disabled'}
         prompt.submit.render_kw = {'autofocus': 'True'}
-        prompt.submit.name = "continue"
-        print(dir(prompt.submit.label.text))
-        print(type(prompt.submit.label.text))
-        print(prompt.submit.label.text)
         prompt.submit.label.text = 'continue'
 
     return render_template(
