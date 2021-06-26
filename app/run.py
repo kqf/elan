@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template, session
 from flask_bootstrap import Bootstrap
 from flask_session import Session
