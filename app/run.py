@@ -56,6 +56,11 @@ def index():
         session["tasks"].pop(0)
         prompt.translation.render_kw = {'disabled': 'disabled'}
         prompt.submit.render_kw = {'autofocus': 'True'}
+        prompt.submit.name = "continue"
+        print(dir(prompt.submit.label.text))
+        print(type(prompt.submit.label.text))
+        print(prompt.submit.label.text)
+        prompt.submit.label.text = 'continue'
 
     return render_template(
         'index.html',
