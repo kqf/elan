@@ -2,11 +2,7 @@ from flask import Flask, render_template, session
 from flask_bootstrap import Bootstrap
 from flask_session import Session
 
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
-
-from wtforms import StringField, SubmitField
-from wtforms.validators import Required
+from app.main.forms import UploadForm, AnswerForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_KEY'
@@ -14,17 +10,6 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 bootstrap = Bootstrap(app)
 Session(app)
-
-
-class AnswerForm(FlaskForm):
-    translation = StringField('', validators=[Required()],
-                              render_kw={'autofocus': True})
-    submit = SubmitField('submit')
-
-
-class UploadForm(FlaskForm):
-    file = FileField('Consider uploading a new file')
-    upload = SubmitField('Upload')
 
 
 @app.route('/', methods=['GET', 'POST'])
