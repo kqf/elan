@@ -1,56 +1,28 @@
-from flask import Flask, render_template, session
+from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_session import Session
 
-from app.main.forms import UploadForm, AnswerForm
+from app.main.routes import main as main_bp
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SECRET_KEY'
-app.config['SESSION_TYPE'] = 'filesystem'
-
-bootstrap = Bootstrap(app)
-Session(app)
+bootstrap = Bootstrap()
+session = Session()
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    upload = UploadForm()
+def build_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'SECRET_KEY'
+    app.config['SESSION_TYPE'] = 'filesystem'
 
-    if upload.file.data:
-        tasks = []
-        for line in upload.file.data.readlines():
-            original, expected = line.decode("utf-8").split("|")
-            tasks.append((original.strip(), expected.strip()))
-            session["tasks"] = tasks
+    bootstrap.init_app(app)
+    session.init_app(app)
+    app.register_blueprint(main_bp)
+    return app
 
-    if "tasks" not in session:
-        session["tasks"] = []
 
-    prompt = None
-    translation = None
-    original = None
-    correct = None
-
-    if len(session["tasks"]) > 0:
-        prompt = AnswerForm(form_type="inline")
-        original, expected = next(iter(session["tasks"]))
-        correct = prompt.translation.data == expected
-
-    if correct:
-        session["tasks"].pop(0)
-        prompt.translation.render_kw = {'disabled': 'disabled'}
-        prompt.submit.render_kw = {'autofocus': 'True'}
-        prompt.submit.label.text = 'continue'
-
-    return render_template(
-        'index.html',
-        prompt=prompt,
-        translation=translation,
-        original=original,
-        correct=correct,
-        upload=upload,
-    )
+def main():
+    app = build_app()
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
