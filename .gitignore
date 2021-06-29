@@ -3,3 +3,4 @@
 .python-version
 flask_session
 *.txt
+*.sqlite3
