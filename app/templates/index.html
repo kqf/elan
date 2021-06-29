@@ -1,24 +1,8 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
 
 {% block title %}Improve your skills{% endblock %}
 
-{% block navbar %}
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Translate</a>
-        </div>    
-    </nav>
-{% endblock %}
-
-
-{% block styles %}
-{{super()}}
-    <link href="{{url_for('static', filename='styles/index.css')}}"
-          rel="stylesheet">
-{% endblock %}
-
-{% block content %}
+{% block page_content %}
     <div class="col-md-4 col-md-offset-4 custom-container container">
         {% if prompt is not none %}
             <h2>
