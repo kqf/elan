@@ -1,0 +1,32 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Improve your skills{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+            Translate
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{{ url_for('main.login') }}">Login</a>
+                </li>
+            </ul>
+        </div>    
+    </nav>
+{% endblock %}
+
+
+{% block styles %}
+{{super()}}
+    <link href="{{url_for('static', filename='styles/index.css')}}"
+          rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock %}
