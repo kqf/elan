@@ -8,7 +8,6 @@ from app.main.forms import UploadForm, AnswerForm, LoginForm
 from app.models import User
 
 
-
 @main.route('/', methods=['GET', 'POST'])
 def index():
     upload = UploadForm()
