@@ -20,6 +20,7 @@ def build_app():
     bootstrap.init_app(app)
     session.init_app(app)
     app.register_blueprint(main_bp)
+    db.init_app(app)
     return app
 
 
