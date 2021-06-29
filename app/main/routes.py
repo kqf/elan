@@ -1,5 +1,10 @@
 from flask import Blueprint, render_template, session
-from app.main.forms import UploadForm, AnswerForm
+from flask import redirect, url_for, request
+
+from flask_login import login_user
+
+from app.main.forms import UploadForm, AnswerForm, LoginForm
+# from app.models import User
 
 main = Blueprint("main", __name__)
 
@@ -42,3 +47,15 @@ def index():
         correct=correct,
         upload=upload,
     )
+
+
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.verify_password(form.password.data):
+            return redirect(url_for('main.login', **request.args))
+        login_user(user, form.remember_me.data)
+        return redirect(request.args.get('next') or url_for('main.index'))
+    return render_template('login.html', form=form)
