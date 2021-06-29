@@ -1,12 +1,12 @@
-from flask import Blueprint, render_template, session
+from flask import render_template, session
 from flask import redirect, url_for, request
 
 from flask_login import login_user
 
+from app.main import main
 from app.main.forms import UploadForm, AnswerForm, LoginForm
-# from app.models import User
+from app.models import User
 
-main = Blueprint("main", __name__)
 
 
 @main.route('/', methods=['GET', 'POST'])
