@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 from app.main.routes import main as main_bp
+from app.models import User
 
 bootstrap = Bootstrap()
 session = Session()
@@ -24,6 +25,10 @@ def build_app():
 
 def main():
     app = build_app()
+    with app.app_context():
+        db.create_all()
+        if User.query.filter_by(username='john').first() is None:
+            User.register('bob', 'lol')
     app.run(debug=True)
 
 
