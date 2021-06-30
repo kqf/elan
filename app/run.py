@@ -1,4 +1,4 @@
-from app.main.config import build_app
+from app.main.config import build_app, db
 
 
 def main():
