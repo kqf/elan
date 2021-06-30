@@ -5,11 +5,11 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 
 
+from app import db
 from app.main.routes import main as main_bp
 
 bootstrap = Bootstrap()
 session = Session()
-db = SQLAlchemy()
 
 
 def build_app():
