@@ -1,7 +1,7 @@
 from flask import render_template, session
 from flask import redirect, url_for, request
 
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 from app.main import main
 from app.main.forms import UploadForm, AnswerForm, LoginForm
@@ -9,6 +9,7 @@ from app.models import User
 
 
 @main.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
     upload = UploadForm()
 
@@ -61,6 +62,7 @@ def login():
 
 
 @main.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('main.index'))

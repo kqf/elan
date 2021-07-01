@@ -3,7 +3,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_session import Session
 
-from app import db
+from app import db, lm
 from app.main.routes import main as main_bp
 
 bootstrap = Bootstrap()
@@ -21,5 +21,7 @@ def build_app():
     bootstrap.init_app(app)
     session.init_app(app)
     db.init_app(app)
+    lm.init_app(app)
+
     app.register_blueprint(main_bp)
     return app
