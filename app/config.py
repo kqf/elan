@@ -2,15 +2,12 @@ import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_session import Session
-from flask_login import LoginManager
 
-from app import db
+from app import db, lm
 from app.main.routes import main as main_bp
 
 bootstrap = Bootstrap()
 session = Session()
-lm = LoginManager()
-lm.login_view = 'main.login'
 
 
 def build_app():
