@@ -5,3 +5,4 @@ Flask-Bootstrap
 Flask-WTF
 flask-login
 Flask-SQLAlchemy
+flask-session
