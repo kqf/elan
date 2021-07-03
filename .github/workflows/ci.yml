@@ -24,7 +24,7 @@ jobs:
       run: |
         sudo apt-get install python-tk -y
         python -m pip install --upgrade pip
-        pip install flake8 pytest
+        pip install flake8 pytest pytest-cov
         pip install -r requirements.txt
         pip install -e .
     - name: Test
