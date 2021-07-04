@@ -7,21 +7,23 @@ from app.models import User
 
 
 @pytest.fixture
-def context():
+def app():
     app = build_app()
     app_ctx = app.app_context()
     app_ctx.push()
-    client = app.test_client(use_cookies=True)
     db.create_all()
     User.register('john', 'cat')
-    yield app, client
+    yield app
     db.drop_all()
     app_ctx.pop()
 
 
-def test_login(context):
-    app, client = context
+@pytest.fixture
+def client(app):
+    return app.test_client(use_cookies=True)
 
+
+def test_login(app, client):
     r = client.get('/login')
     assert r.status_code == 200
     assert '<h1>Login</h1>' in r.get_data(as_text=True)
@@ -36,4 +38,3 @@ def test_login(context):
     )
     assert r.status_code == 200
     assert '<h1>Login</h1>' in r.get_data(as_text=True)
-    print(r.get_data())
