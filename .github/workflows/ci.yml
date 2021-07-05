@@ -28,7 +28,7 @@ jobs:
         pip install -e .
     - name: Test
       run: |
-        pytest --cov=elan tests/
+        pytest --cov=app tests/
     - name: Static checks
       run: |
         mypy --ignore-missing-imports .
