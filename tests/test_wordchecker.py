@@ -2,7 +2,7 @@ import json
 import pytest
 import tempfile
 
-from elan.words import WordsChecker
+from legacy.words import WordsChecker
 from unittest.mock import patch
 
 
@@ -21,7 +21,7 @@ def infile():
         yield tmp.name
 
 
-@patch("elan.words.input", return_value="aaa")
+@patch("legacy.words.input", return_value="aaa")
 def test_checks_words(input, infile):
     checker = WordsChecker(infile, "Chapter1", {"word": ""})
     checker.check("words")
