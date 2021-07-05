@@ -1,5 +1,5 @@
 import click
-from elan.words import WordsChecker
+from legacy.words import WordsChecker
 
 
 @click.command()
