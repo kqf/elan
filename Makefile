@@ -1,5 +1,5 @@
 all:
-	python app/run.py
+	elan
 
 clean:
 	rm -rf flask_session
