@@ -1,9 +1,13 @@
+import click
+
 from app import db
 from app.config import build_app
 from app.models import User
 
 
-def main():
+@click.command()
+@click.option("--infile", type=click.Path(exists=True))
+def main(infile):
     app = build_app()
     with app.app_context():
         db.create_all()
