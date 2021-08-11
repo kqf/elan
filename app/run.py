@@ -3,7 +3,7 @@ from app.config import build_app
 from app.models import User
 
 
-def main(filename):
+def main():
     app = build_app()
     with app.app_context():
         db.create_all()
