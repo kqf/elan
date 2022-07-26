@@ -1,7 +1,7 @@
 from __future__ import annotations
 from crypt import methods
 
-from flask import Response, jsonify, request
+from flask import Response, jsonify, request, url_for
 from flask_login import UserMixin
 from traitlets import ValidateHandler
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
         return '<User {0}>'.format(self.username)
 
     def url(self) -> str:
-        return "template"
+        return url_for("main.user", id=self.id, _external=True)
 
     def export(self) -> dict[str, str]:
         return {
