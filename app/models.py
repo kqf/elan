@@ -1,6 +1,7 @@
 from __future__ import annotations
+from crypt import methods
 
-from flask import jsonify
+from flask import Response, jsonify, request
 from flask_login import UserMixin
 from traitlets import ValidateHandler
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -26,11 +27,12 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     @staticmethod
-    def register(username, password):
+    def register(username, password) -> User:
         user = User(username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
+        return user
 
     def __repr__(self):
         return '<User {0}>'.format(self.username)
@@ -48,7 +50,11 @@ class User(UserMixin, db.Model):
         if "name" not in data:
             raise ValidationError(f"Input has no 'name' field. Got {data}")
 
+        if "password" not in data:
+            raise ValidationError(f"Input has no 'password' field. Got {data}")
+
         self.name = data["name"]
+        self.set_password(data["password"])
         return self
 
 
@@ -58,5 +64,19 @@ def load_user(id):  # sourcery skip: instance-method-first-arg-name
 
 
 @main.route("/users/", methods=["GET"])
-def get_users():
+def users() -> Response:
     return jsonify({"users": [u.url() for u in User.query.all()]})
+
+
+@main.route("/users/<int:id>", methods=["GET"])
+def user(id: int) -> Response:
+    return jsonify(User.query.get_or_404(id).export())
+
+
+@main.route("/users/", methods=["POST"])
+def create():
+    user = User()
+    user.fromdict(request.json)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({}), 201, {"Location": user.url()}
