@@ -1,9 +1,16 @@
+from __future__ import annotations
+
 from flask import jsonify
 from flask_login import UserMixin
+from traitlets import ValidateHandler
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
 from app.main import main
+
+
+class ValidationError(ValueError):
+    ...
 
 
 class User(UserMixin, db.Model):
@@ -28,8 +35,21 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {0}>'.format(self.username)
 
-    def url(self):
+    def url(self) -> str:
         return "template"
+
+    def export(self) -> dict[str, str]:
+        return {
+            "name": self.username,
+            "url": self.url(),
+        }
+
+    def fromdict(self, data: dict[str, str]) -> User:
+        if "name" not in data:
+            raise ValidationError(f"Input has no 'name' field. Got {data}")
+
+        self.name = data["name"]
+        return self
 
 
 @lm.user_loader
