@@ -34,3 +34,22 @@ def test_creates_a_user(client):
     })
     assert response.data == b'{}\n'
     assert response.status_code == 201
+
+    # Check it does have an effect
+    user = User.query.get(2)
+    assert user.username == "Bob"
+    assert user.verify_password('Lol')
+
+
+def test_updates_a_user(client):
+    response = client.put("/users/1", json={
+        "name": "Bob",
+        "password": "Lol"
+    })
+    assert response.data == b'{}\n'
+    assert response.status_code == 200
+
+    # Check it does have an effect
+    user = User.query.get(1)
+    assert user.username == "Bob"
+    assert user.verify_password('Lol')

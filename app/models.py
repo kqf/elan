@@ -53,7 +53,7 @@ class User(UserMixin, db.Model):
         if "password" not in data:
             raise ValidationError(f"Input has no 'password' field. Got {data}")
 
-        self.name = data["name"]
+        self.username = data["name"]
         self.set_password(data["password"])
         return self
 
@@ -74,9 +74,18 @@ def user(id: int) -> Response:
 
 
 @main.route("/users/", methods=["POST"])
-def create():
+def create() -> tuple[Response, int, dict[str, str]]:
     user = User()
     user.fromdict(request.json)
     db.session.add(user)
     db.session.commit()
     return jsonify({}), 201, {"Location": user.url()}
+
+
+@main.route("/users/<int:id>", methods=["PUT"])
+def update(id: int) -> Response:
+    user = User.query.get_or_404(id)
+    user.fromdict(request.json)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({})
