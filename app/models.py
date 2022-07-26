@@ -1,8 +1,9 @@
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import jsonify
 from flask_login import UserMixin
-
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
+from app.main import main
 
 
 class User(UserMixin, db.Model):
@@ -31,3 +32,8 @@ class User(UserMixin, db.Model):
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+@main.route("/users/", methods=["GET"])
+def get_users():
+    return jsonify({"users": [u.url() for u in User.query.all()]})
