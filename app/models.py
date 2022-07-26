@@ -28,9 +28,12 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {0}>'.format(self.username)
 
+    def url(self):
+        return "template"
+
 
 @lm.user_loader
-def load_user(id):
+def load_user(id):  # sourcery skip: instance-method-first-arg-name
     return User.query.get(int(id))
 
 

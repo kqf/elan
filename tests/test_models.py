@@ -15,3 +15,9 @@ def test_registration(client):
     assert u is not None
     assert u.verify_password('lol')
     assert not u.verify_password('rolf')
+
+
+def test_retrieves_users(client):
+    response = client.get("/users", follow_redirects=True)
+    assert response.data == b'{"users":["template"]}\n'
+    assert response.status_code == 200
