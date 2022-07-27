@@ -3,7 +3,6 @@ from crypt import methods
 
 from flask import Response, jsonify, request, url_for
 from flask_login import UserMixin
-from traitlets import ValidateHandler
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
