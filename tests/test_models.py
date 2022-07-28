@@ -1,4 +1,3 @@
-import pytest
 from app.models import User
 
 
@@ -25,7 +24,8 @@ def test_retrieves_users(client):
 
 def test_retrieves_a_user(client):
     response = client.get("/users/1", follow_redirects=True)
-    assert response.data == b'{"name":"john","url":"http://localhost/users/1"}\n'
+    expected = b'{"name":"john","url":"http://localhost/users/1"}\n'
+    assert response.data == expected
     assert response.status_code == 200
 
 

@@ -1,6 +1,5 @@
 
 import pytest
-import flask_login
 
 from app import db
 from app.config import build_app
