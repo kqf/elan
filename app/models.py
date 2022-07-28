@@ -1,6 +1,6 @@
 from __future__ import annotations
 from crypt import methods
-from typing import Any, Optional
+from typing import Any
 
 from flask import Response, jsonify, request, url_for
 from flask_login import UserMixin
@@ -46,7 +46,7 @@ class User(UserMixin, db.Model):
             "url": self.url(),
         }
 
-    def fromdict(self, data: Optional[Any]) -> User:
+    def fromdict(self, data: dict[str, str] | Any) -> User:
         if "name" not in data:
             raise ValidationError(f"Input has no 'name' field. Got {data}")
 
