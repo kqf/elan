@@ -1,14 +1,12 @@
-from flask import render_template, session
-from flask import redirect, url_for, request
-
-from flask_login import login_user, logout_user, login_required
+from flask import redirect, render_template, request, session, url_for
+from flask_login import login_required, login_user, logout_user
 
 from app.main import main
-from app.main.forms import UploadForm, AnswerForm, LoginForm
+from app.main.forms import AnswerForm, LoginForm, UploadForm
 from app.models import User
 
 
-@main.route('/', methods=['GET', 'POST'])
+@main.route("/", methods=["GET", "POST"])
 @login_required
 def index():
     upload = UploadForm()
@@ -35,12 +33,12 @@ def index():
 
     if correct:
         session["tasks"].pop(0)
-        prompt.translation.render_kw = {'disabled': 'disabled'}
-        prompt.submit.render_kw = {'autofocus': 'True'}
-        prompt.submit.label.text = 'continue'
+        prompt.translation.render_kw = {"disabled": "disabled"}
+        prompt.submit.render_kw = {"autofocus": "True"}
+        prompt.submit.label.text = "continue"
 
     return render_template(
-        'index.html',
+        "index.html",
         prompt=prompt,
         translation=translation,
         original=original,
@@ -49,20 +47,20 @@ def index():
     )
 
 
-@main.route('/login', methods=['GET', 'POST'])
+@main.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.verify_password(form.password.data):
-            return redirect(url_for('main.login', **request.args))
+            return redirect(url_for("main.login", **request.args))
         login_user(user, form.remember_me.data)
-        return redirect(request.args.get('next') or url_for('main.index'))
-    return render_template('login.html', form=form)
+        return redirect(request.args.get("next") or url_for("main.index"))
+    return render_template("login.html", form=form)
 
 
-@main.route('/logout')
+@main.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))

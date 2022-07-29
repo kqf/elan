@@ -1,9 +1,10 @@
 import json
-import pytest
 import tempfile
+from unittest.mock import patch
+
+import pytest
 
 from legacy.words import WordsChecker
-from unittest.mock import patch
 
 
 @pytest.fixture
@@ -16,7 +17,7 @@ def infile():
         }
     }
     with tempfile.NamedTemporaryFile() as tmp:
-        with open(tmp.name, 'w') as outfile:
+        with open(tmp.name, "w") as outfile:
             json.dump(data, outfile)
         yield tmp.name
 
