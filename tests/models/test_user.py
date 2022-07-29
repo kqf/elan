@@ -1,4 +1,4 @@
-from app.models import User
+from app.models.user import User
 
 
 def test_password():
