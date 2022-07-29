@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Any
 
 from flask import Response, jsonify, request, url_for
@@ -14,7 +15,7 @@ class ValidationError(ValueError):
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)
     password_hash = db.Column(db.String(64))
@@ -34,7 +35,7 @@ class User(UserMixin, db.Model):
         return user
 
     def __repr__(self):
-        return '<User {0}>'.format(self.username)
+        return "<User {0}>".format(self.username)
 
     def url(self) -> str:
         return url_for("main.user", id=self.id, _external=True)

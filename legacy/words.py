@@ -11,19 +11,20 @@ def read_file(filename, chapter, vtype):
         if chapter in c:
             vocabulary.update(data[c][vtype])
 
-    if 'words' in vtype:
+    if "words" in vtype:
         return vocabulary
 
     # Fix the issue with muptiple keys
     verbs = {
-        vocabulary[k][w]: k + '.\n' + w + ' ... '
-        for k in vocabulary for w in vocabulary[k]
+        vocabulary[k][w]: k + ".\n" + w + " ... "
+        for k in vocabulary
+        for w in vocabulary[k]
     }
     return verbs
 
 
 class WordsChecker(object):
-    _char_mapper = dict(zip(u"éàèùâêîôûç", "eaeuaeiouc"))
+    _char_mapper = dict(zip("éàèùâêîôûç", "eaeuaeiouc"))
 
     def __init__(self, filename, chapter, option, strict=False):
         super(WordsChecker, self).__init__()
@@ -36,7 +37,7 @@ class WordsChecker(object):
     def check_dictionary(self, wdict):
         weak_words = {}
         for foreign, native in wdict.items():
-            suggestion = input(f'Type in translation for:\n{native}')
+            suggestion = input(f"Type in translation for:\n{native}")
             if suggestion != foreign:
                 weak_words[foreign] = native
         return weak_words
@@ -47,13 +48,13 @@ class WordsChecker(object):
             vocabulary = self.check_dictionary(vocabulary)
         # if weak_words: print 'List ouf your weak words:'
         # for k in weak_words: print k
-        print('Congrats! Your training is over')
+        print("Congrats! Your training is over")
 
     def compare_normal(self, foreign, translation):
         # zip(u"éàèùâêîôûç", "eaeuaeiouc")
 
-        fr = (u"".join(foreign)).translate(self._char_mapper)
-        tr = (u"".join(translation)).translate(self._char_mapper)
+        fr = ("".join(foreign)).translate(self._char_mapper)
+        tr = ("".join(translation)).translate(self._char_mapper)
 
         print(tr, fr)
         return fr.lower() == tr.lower()
@@ -74,8 +75,8 @@ class WordsChecker(object):
             stack.append(foreign)
         else:
             stack.pop(0)
-            c.set('')
-            s.set('')
+            c.set("")
+            s.set("")
 
         if not stack:
             q.set("That's all")
@@ -85,4 +86,4 @@ class WordsChecker(object):
 
         foreign, native = stack[0], self.vocabulary[stack[0]]
         q.set(native)
-        a.set('')
+        a.set("")

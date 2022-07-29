@@ -1,4 +1,5 @@
 import click
+
 from legacy.words import WordsChecker
 
 
@@ -11,5 +12,5 @@ def main(infile, mode, lesson, objective):
     w.check(objective)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

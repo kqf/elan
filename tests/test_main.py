@@ -1,13 +1,12 @@
-
-import pytest
 import flask_login
+import pytest
 
 from app.models import User
 
 
 @pytest.fixture
 def test_user():
-    return User.query.filter_by(username='john').first()
+    return User.query.filter_by(username="john").first()
 
 
 @pytest.fixture
@@ -17,5 +16,5 @@ def logged_in_user(request, test_user):
 
 
 def test_index(client, logged_in_user):
-    r = client.get('/', follow_redirects=True)
+    r = client.get("/", follow_redirects=True)
     print(r.get_data(as_text=True))

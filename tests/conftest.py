@@ -1,4 +1,3 @@
-
 import pytest
 
 from app import db
@@ -12,7 +11,7 @@ def app():
     app_ctx = app.app_context()
     app_ctx.push()
     db.create_all()
-    User.register('john', 'cat')
+    User.register("john", "cat")
     with app.test_request_context():
         yield app
     db.drop_all()
