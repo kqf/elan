@@ -2,7 +2,7 @@ import pytest
 
 from app import db
 from app.config import build_app
-from app.models import User
+from app.models.user import User
 
 
 @pytest.fixture
