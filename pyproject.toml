@@ -1,3 +1,17 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "elan"
+version = "0.0.1"
+
+[project.scripts]
+elan = "app.config:main"
+
+[tool.setuptools.packages]
+find = {}
+
 [tool.isort]
 line_length = 79
 skip_glob = [".git", ".idea", ".vscode", "logs/"]
