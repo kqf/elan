@@ -14,7 +14,7 @@ class Pair(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     iffield = db.Column(db.String(), index=True)
     offield = db.Column(db.String(), index=True)
-    __table_args__ = (db.UniqueConstraint("iffiled", "offield"),)
+    # __table_args__ = (db.UniqueConstraint("iffiled", "offield"),)
 
     def url(self) -> str:
         return url_for("main.pair", id=self.id, _external=True)
@@ -28,10 +28,10 @@ class Pair(db.Model):
 
 
 @main.route("/pairs/", methods=["POST"])
-def create() -> tuple[Response, int, dict[str, str]]:
+def create_pair() -> tuple[Response, int, dict[str, str]]:
     data: dict[str, str] | Any = request.json
 
-    if "iffiled" not in data:
+    if "iffield" not in data:
         raise ValidationError(f"Input has no 'iffiled' field. Got {data}")
 
     if "offield" not in data:
@@ -44,7 +44,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
 
 
 @main.route("/pairs/<int:id>", methods=["PUT"])
-def update(id: int) -> Response:
+def update_pair(id: int) -> Response:
     pair: Pair = Pair.query.get_or_404(id)
 
     data: dict[str, str] | Any = request.json
