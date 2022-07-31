@@ -27,7 +27,7 @@ class Pair(db.Model):
         }
 
 
-@main.route("/pair/", methods=["POST"])
+@main.route("/pairs/", methods=["POST"])
 def create() -> tuple[Response, int, dict[str, str]]:
     data: dict[str, str] | Any = request.json
 
@@ -43,7 +43,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
     return jsonify({}), 201, {"Location": pair.url()}
 
 
-@main.route("/pair/<int:id>", methods=["PUT"])
+@main.route("/pairs/<int:id>", methods=["PUT"])
 def update(id: int) -> Response:
     pair: Pair = Pair.query.get_or_404(id)
 
@@ -63,6 +63,6 @@ def update(id: int) -> Response:
     return jsonify({})
 
 
-@main.route("/pair/<int:id>", methods=["GET"])
+@main.route("/pairs/<int:id>", methods=["GET"])
 def pair(id) -> Response:
     return jsonify(Pair.query.get_or_404(id).export())
