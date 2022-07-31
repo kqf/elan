@@ -8,10 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
 from app.main import main
-
-
-class ValidationError(ValueError):
-    ...
+from app.models.exception import ValidationError
 
 
 class User(UserMixin, db.Model):
