@@ -6,7 +6,7 @@ from flask import Response, jsonify, request, url_for
 
 from app import db
 from app.main import main
-from app.models.exception import ValidationError, requires_fields
+from app.models.exception import requires_fields
 
 
 class Pair(db.Model):
@@ -38,17 +38,11 @@ def create_pair() -> tuple[Response, int, dict[str, str]]:
 
 
 @main.route("/pairs/<int:id>", methods=["PUT"])
+@requires_fields("iffield", "offield")
 def update_pair(id: int) -> Response:
     pair: Pair = Pair.query.get_or_404(id)
 
     data: dict[str, str] | Any = request.json
-
-    if "iffield" not in data:
-        raise ValidationError(f"Input has no 'iffield' field. Got {data}")
-
-    if "offield" not in data:
-        raise ValidationError(f"Input has no 'offield' field. Got {data}")
-
     pair.iffield = data["iffield"]
     pair.offield = data["offield"]
 
