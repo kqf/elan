@@ -31,22 +31,15 @@ def test_retrieves_a_user(client, example):
 
 
 @pytest.mark.skip
-def test_retrieves_users(client, example):
-    response = client.get("/pairs", follow_redirects=True)
-    assert response.data == b'{"pairs":["http://localhost/pairs/1"]}\n'
-    assert response.status_code == 200
-
-
-@pytest.mark.skip
-def test_creates_a_user(client):
-    response = client.post("/pairs/", json={"name": "Bob", "password": "Lol"})
+def test_creates_a_user(client, example):
+    response = client.post("/pairs/", json=example)
     assert response.data == b"{}\n"
     assert response.status_code == 201
 
     # Check it does have an effect
-    user = Pair.query.get(2)
-    assert user.username == "Bob"
-    assert user.verify_password("Lol")
+    pair = Pair.query.get(2)
+    assert pair.username == "Bob"
+    assert pair.verify_password("Lol")
 
 
 @pytest.mark.skip
@@ -56,6 +49,6 @@ def test_updates_a_user(client):
     assert response.status_code == 200
 
     # Check it does have an effect
-    user = Pair.query.get(1)
-    assert user.username == "Bob"
-    assert user.verify_password("Lol")
+    pair = Pair.query.get(1)
+    assert pair.username == "Bob"
+    assert pair.verify_password("Lol")
