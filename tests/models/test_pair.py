@@ -50,13 +50,12 @@ def test_creates_a_pair(client, example, new_example):
     assert pair.offield == new_example["offield"]
 
 
-@pytest.mark.skip
-def test_updates_a_pair(client):
-    response = client.put("/pairs/1", json={"name": "Bob", "password": "Lol"})
+def test_updates_a_pair(client, example, new_example):
+    response = client.put("/pairs/1", json=new_example)
     assert response.data == b"{}\n"
     assert response.status_code == 200
 
     # Check it does have an effect
     pair = Pair.query.get(1)
-    assert pair.iffield == example["iffield"]
-    assert pair.offield == example["offield"]
+    assert pair.iffield == new_example["iffield"]
+    assert pair.offield == new_example["offield"]
