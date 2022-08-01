@@ -1,6 +1,13 @@
+import json
+
 import pytest
 
 from app.models.pair import Pair
+
+
+def to_response(data: dict) -> bytes:
+    dumped = json.dumps(data, indent=None, separators=(",", ":"))
+    return f"{dumped}\n".encode("utf-8")
 
 
 @pytest.fixture
@@ -8,6 +15,7 @@ def example(client):
     data = {
         "iffield": "la vache",
         "offield": "the cow",
+        "url": "http://localhost/pairs/1",
     }
     response = client.post("/pairs/", json=data)
     assert response.data == b"{}\n"
@@ -18,7 +26,7 @@ def example(client):
 def test_retrieves_a_user(client, example):
     response = client.get("/pairs/1", follow_redirects=True)
     # expected = b'{"name":"john","url":"http://localhost/pairs/1"}\n'
-    # assert response.data == data
+    assert response.data == to_response(example)
     assert response.status_code == 200
 
 
