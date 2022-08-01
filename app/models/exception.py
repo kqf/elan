@@ -8,7 +8,7 @@ class ValidationError(ValueError):
     ...
 
 
-def response_requires_fields(*fields):
+def requires_fields(*fields):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(*args, **kwargs):
