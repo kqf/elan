@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
 from app.main import main
-from app.models.exception import ValidationError
+from app.models.exception import requires_fields
 
 
 class User(UserMixin, db.Model):
@@ -44,12 +44,6 @@ class User(UserMixin, db.Model):
         }
 
     def fromdict(self, data: dict[str, str] | Any) -> User:
-        if "name" not in data:
-            raise ValidationError(f"Input has no 'name' field. Got {data}")
-
-        if "password" not in data:
-            raise ValidationError(f"Input has no 'password' field. Got {data}")
-
         self.username = data["name"]
         self.set_password(data["password"])
         return self
@@ -71,6 +65,7 @@ def user(id: int) -> Response:
 
 
 @main.route("/users/", methods=["POST"])
+@requires_fields("name", "password")
 def create() -> tuple[Response, int, dict[str, str]]:
     user = User()
     user.fromdict(request.json)
@@ -80,6 +75,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
 
 
 @main.route("/users/<int:id>", methods=["PUT"])
+@requires_fields("name", "password")
 def update(id: int) -> Response:
     user = User.query.get_or_404(id)
     user.fromdict(request.json)
