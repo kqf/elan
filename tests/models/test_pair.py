@@ -30,16 +30,15 @@ def test_retrieves_a_user(client, example):
     assert response.status_code == 200
 
 
-@pytest.mark.skip
 def test_creates_a_user(client, example):
     response = client.post("/pairs/", json=example)
     assert response.data == b"{}\n"
     assert response.status_code == 201
 
     # Check it does have an effect
-    pair = Pair.query.get(2)
-    assert pair.username == "Bob"
-    assert pair.verify_password("Lol")
+    pair: Pair = Pair.query.get(2)
+    assert pair.iffield == example["iffield"]
+    assert pair.offield == example["offield"]
 
 
 @pytest.mark.skip
