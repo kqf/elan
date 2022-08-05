@@ -10,7 +10,7 @@ class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     pairs = db.relationship(
-        "Pair", backref="Lesson", lazy="dynamic", cascade="all"
+        "Pair", backref="Lesson", lazy="dynamic", cascade="all, delete-orphan"
     )
 
     def url(self) -> str:
