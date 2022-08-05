@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from flask import url_for
+from flask import Response, jsonify, url_for
 
 from app import db
+from app.main import main
 
 
 class Lesson(db.Model):
@@ -22,3 +23,9 @@ class Lesson(db.Model):
             "pairs": "pairs/url",
             "url": self.url(),
         }
+        
+
+@main.route("/lesson/<int:id>", methods=["GET"])
+def lesson(id) -> Response:
+    return jsonify(Lesson.query.get_or_404(id).export())
+
