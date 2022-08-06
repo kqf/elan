@@ -15,7 +15,7 @@ class Lesson(db.Model):
     )
 
     def url(self) -> str:
-        return url_for("main.lesson", id=self.id, _external=True)
+        return url_for("main.lessons", id=self.id, _external=True)
 
     def export(self) -> dict[str, str]:
         return {
