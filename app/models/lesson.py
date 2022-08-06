@@ -19,7 +19,7 @@ class Lesson(db.Model):
     )
 
     def url(self) -> str:
-        return url_for("main.lessons", id=self.id, _external=True)
+        return url_for("main.lesson", id=self.id, _external=True)
 
     def export(self) -> dict[str, str]:
         return {
@@ -29,24 +29,25 @@ class Lesson(db.Model):
         }
 
 
+@main.route("/lessons/", methods=["POST"])
+@requires_fields("pairs", "title")
+def build_lesson() -> tuple[Response, int, dict[str, str]]:
+    data: dict[str, str | list[dict[str, str]]] | Any = request.json
+    # First create the container
+    lesson = Lesson(title=data["title"])
+    db.session.add(lesson)
+    db.session.commit()
+
+    pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
+    # Then create the content
+    for pdata in pairs:
+        pair = Pair(lesson_id=lesson.id, **pdata)
+        db.session.add(pair)
+        db.session.commit()
+
+    return jsonify({}), 201, {"Location": lesson.url()}
+
+
 @main.route("/lessons/<int:id>", methods=["GET"])
 def lesson(id) -> Response:
     return jsonify(Lesson.query.get_or_404(id).export())
-
-
-@main.route("/lessons/<int:id>", methods=["POST"])
-@requires_fields("data")
-def build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
-    data: dict[str, str] | Any = request.json
-    # First create the container
-    lesson = Lesson(id=id)
-    db.add(lesson)
-    db.commit()
-
-    # Then create the content
-    for pid, pdata in enumerate(data["pairs"]):
-        pair = Pair(id=pid, lesson=id, **pdata)
-        db.add(pair)
-        db.commit()
-
-    return jsonify({}), 201, {"Location": lesson.url()}
