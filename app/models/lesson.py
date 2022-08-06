@@ -23,9 +23,8 @@ class Lesson(db.Model):
             "pairs": "pairs/url",
             "url": self.url(),
         }
-        
 
-@main.route("/lesson/<int:id>", methods=["GET"])
+
+@main.route("/lessons/<int:id>", methods=["GET"])
 def lesson(id) -> Response:
     return jsonify(Lesson.query.get_or_404(id).export())
-
