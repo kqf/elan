@@ -14,6 +14,7 @@ class Pair(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     iffield = db.Column(db.String(), index=True)
     offield = db.Column(db.String(), index=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), index=True)
     # __table_args__ = (db.UniqueConstraint("iffield", "offield"),)
 
     def url(self) -> str:
