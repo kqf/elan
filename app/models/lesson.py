@@ -24,7 +24,7 @@ class Lesson(db.Model):
     def export(self) -> dict[str, str]:
         return {
             "title": self.title,
-            "pairs": "pairs/url",
+            "pairs": url_for("main.lesson_data", id=self.id, _external=True),
             "url": self.url(),
         }
 
