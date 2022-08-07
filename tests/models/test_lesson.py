@@ -25,7 +25,6 @@ def example(client):
     yield data
 
 
-@pytest.mark.skip
 def test_retrieves_a_lesson(client, example):
     response = client.get("/lessons/1", follow_redirects=True)
     assert response.status_code == 200
