@@ -24,7 +24,7 @@ class Lesson(db.Model):
     def export(self) -> dict[str, str]:
         return {
             "title": self.title,
-            "pairs": "pairs/url",
+            "pairs": url_for("main.lesson_data", id=self.id, _external=True),
             "url": self.url(),
         }
 
@@ -51,3 +51,9 @@ def build_lesson() -> tuple[Response, int, dict[str, str]]:
 @main.route("/lessons/<int:id>", methods=["GET"])
 def lesson(id) -> Response:
     return jsonify(Lesson.query.get_or_404(id).export())
+
+
+@main.route("/lessons/<int:id>/data", methods=["GET"])
+def lesson_data(id: int) -> Response:
+    lesson = Lesson.query.get_or_404(id)
+    return jsonify([pair.url() for pair in lesson.pairs.all()])
