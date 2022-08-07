@@ -20,7 +20,7 @@ def example(client):
         ],
     }
     response = client.post("/lessons/", json=data)
-    assert response.data == b"{}\n"
+    assert response.json == {}
     assert response.status_code == 201
     yield data
 
@@ -28,3 +28,11 @@ def example(client):
 def test_retrieves_a_lesson(client, example):
     response = client.get("/lessons/1", follow_redirects=True)
     assert response.status_code == 200
+
+
+def test_retrieves_lesson_data(client, example):
+    response = client.get("/lessons/1/data", follow_redirects=True)
+    assert response.json == [
+        "http://localhost/pairs/1",
+        "http://localhost/pairs/2",
+    ]
