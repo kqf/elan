@@ -9,6 +9,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app import db, lm
 from app.main import main
 from app.models.exception import requires_fields
+from app.models.lesson import Lesson
+from app.models.pair import Pair
 
 
 class User(UserMixin, db.Model):
@@ -85,7 +87,28 @@ def update(id: int) -> Response:
     return jsonify({})
 
 
-@main.route("/customers/<int:id>/orders/", methods=["GET"])
+@main.route("/users/<int:id>/lessons/", methods=["GET"])
 def users_lessons(id: int) -> Response:
     user = User.query.get_or_404(id)
     return jsonify({"orders": [lesson.url() for lesson in user.lessons.all()]})
+
+
+@main.route("/users/<int:id>/lessons/", methods=["POST"])
+@requires_fields("pairs", "title")
+def user_build_lesson() -> tuple[Response, int, dict[str, str]]:
+    user = User.query.get_or_404(id)
+    data: dict[str, str | list[dict[str, str]]] | Any = request.json
+    # First create the container
+    lesson = Lesson(user=user, title=data["title"])
+    db.session.add(lesson)
+    db.session.commit()
+
+    pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
+    # Then create the content
+    for pdata in pairs:
+        pair = Pair(lesson=lesson, **pdata)
+        db.session.add(pair)
+        db.session.commit()
+
+    return jsonify({}), 201, {"Location": lesson.url()}
+
