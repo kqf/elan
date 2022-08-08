@@ -83,3 +83,9 @@ def update(id: int) -> Response:
     db.session.add(user)
     db.session.commit()
     return jsonify({})
+
+
+@main.route("/customers/<int:id>/orders/", methods=["GET"])
+def users_lessons(id: int) -> Response:
+    user = User.query.get_or_404(id)
+    return jsonify({"orders": [lesson.url() for lesson in user.lessons.all()]})
