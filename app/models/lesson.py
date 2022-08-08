@@ -14,6 +14,7 @@ class Lesson(db.Model):
     __tablename__ = "lessons"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)
     pairs = db.relationship(
         "Pair", backref="Lesson", lazy="dynamic", cascade="all, delete-orphan"
     )
