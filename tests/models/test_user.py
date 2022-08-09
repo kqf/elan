@@ -18,20 +18,20 @@ def test_registration(client):
 
 def test_retrieves_users(client):
     response = client.get("/users", follow_redirects=True)
-    assert response.data == b'{"users":["http://localhost/users/1"]}\n'
+    assert response.data == {"users": ["http://localhost/users/1"]}
     assert response.status_code == 200
 
 
 def test_retrieves_a_user(client):
     response = client.get("/users/1", follow_redirects=True)
-    expected = b'{"name":"john","url":"http://localhost/users/1"}\n'
+    expected = {"name": "john", "url": "http://localhost/users/1"}
     assert response.data == expected
     assert response.status_code == 200
 
 
 def test_creates_a_user(client):
     response = client.post("/users/", json={"name": "Bob", "password": "Lol"})
-    assert response.data == b"{}\n"
+    assert response.data == {}
     assert response.status_code == 201
 
     # Check it does have an effect
@@ -42,7 +42,7 @@ def test_creates_a_user(client):
 
 def test_updates_a_user(client):
     response = client.put("/users/1", json={"name": "Bob", "password": "Lol"})
-    assert response.data == b"{}\n"
+    assert response.data == {}
     assert response.status_code == 200
 
     # Check it does have an effect
