@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)
     password_hash = db.Column(db.String(64))
-    orders = db.relationship("Lesson", backref="user", lazy="dynamic")
+    lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -90,12 +90,14 @@ def update(id: int) -> Response:
 @main.route("/users/<int:id>/lessons/", methods=["GET"])
 def users_lessons(id: int) -> Response:
     user = User.query.get_or_404(id)
-    return jsonify({"orders": [lesson.url() for lesson in user.lessons.all()]})
+    return jsonify(
+        {"lessons": [lesson.url() for lesson in user.lessons.all()]}
+    )
 
 
 @main.route("/users/<int:id>/lessons/", methods=["POST"])
 @requires_fields("pairs", "title")
-def user_build_lesson() -> tuple[Response, int, dict[str, str]]:
+def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
     user = User.query.get_or_404(id)
     data: dict[str, str | list[dict[str, str]]] | Any = request.json
     # First create the container
@@ -106,7 +108,7 @@ def user_build_lesson() -> tuple[Response, int, dict[str, str]]:
     pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
     # Then create the content
     for pdata in pairs:
-        pair = Pair(lesson=lesson, **pdata)
+        pair = Pair(lesson_id=lesson.id, **pdata)
         db.session.add(pair)
         db.session.commit()
 

@@ -49,3 +49,32 @@ def test_updates_a_user(client):
     user = User.query.get(1)
     assert user.username == "Bob"
     assert user.verify_password("Lol")
+
+
+def test_creates_a_lesson(client):
+    User.register("bob", "lol")
+    response = client.post(
+        "/users/1/lessons",
+        json={
+            "title": "lesson 1",
+            "pairs": [
+                {
+                    "iffield": "la vache",
+                    "offield": "the cow",
+                },
+                {
+                    "iffield": "le monde",
+                    "offield": "the world",
+                },
+            ],
+        },
+        follow_redirects=True,
+    )
+    # assert response.json == {}
+    assert response.status_code == 201
+
+    # Check it does have an effect
+    user = User.query.get(1)
+    lessons = list(user.lessons.all())
+    assert len(lessons) == 1
+    assert lessons[0].title == "lesson 1"
