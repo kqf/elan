@@ -111,4 +111,3 @@ def user_build_lesson() -> tuple[Response, int, dict[str, str]]:
         db.session.commit()
 
     return jsonify({}), 201, {"Location": lesson.url()}
-
