@@ -19,10 +19,12 @@ def example(client):
         },
     ]
     db.session.add(lesson)
+    db.session.commit()
+
     pairs = [Pair(lesson_id=lesson.id, **p) for p in data]
     for p in pairs:
         db.session.add(p)
-    db.session.commit()
+        db.session.commit()
     return pairs
 
 
