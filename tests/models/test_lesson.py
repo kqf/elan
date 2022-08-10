@@ -19,10 +19,12 @@ def example(client):
         },
     ]
     db.session.add(lesson)
+    db.session.commit()
+
     pairs = [Pair(lesson_id=lesson.id, **p) for p in data]
     for p in pairs:
         db.session.add(p)
-    db.session.commit()
+        db.session.commit()
     return pairs
 
 
@@ -31,7 +33,6 @@ def test_retrieves_a_lesson(client, example):
     assert response.status_code == 200
 
 
-@pytest.mark.skip
 def test_retrieves_lesson_data(client, example):
     response = client.get("/lessons/1/data", follow_redirects=True)
     assert response.json == [
