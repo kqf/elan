@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from flask import Response, jsonify, request, url_for
+from flask import Response, jsonify, url_for
 
 from app import db
 from app.main import main
