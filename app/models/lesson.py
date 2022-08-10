@@ -1,13 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
-
-from flask import Response, jsonify, request, url_for
+from flask import Response, jsonify, url_for
 
 from app import db
 from app.main import main
-from app.models.exception import requires_fields
-from app.models.pair import Pair
 
 
 class Lesson(db.Model):
@@ -28,25 +24,6 @@ class Lesson(db.Model):
             "pairs": url_for("main.lesson_data", id=self.id, _external=True),
             "url": self.url(),
         }
-
-
-@main.route("/lessons/", methods=["POST"])
-@requires_fields("pairs", "title")
-def build_lesson() -> tuple[Response, int, dict[str, str]]:
-    data: dict[str, str | list[dict[str, str]]] | Any = request.json
-    # First create the container
-    lesson = Lesson(title=data["title"])
-    db.session.add(lesson)
-    db.session.commit()
-
-    pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
-    # Then create the content
-    for pdata in pairs:
-        pair = Pair(lesson_id=lesson.id, **pdata)
-        db.session.add(pair)
-        db.session.commit()
-
-    return jsonify({}), 201, {"Location": lesson.url()}
 
 
 @main.route("/lessons/<int:id>", methods=["GET"])
