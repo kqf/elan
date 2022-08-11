@@ -27,6 +27,10 @@ class Token(db.Model):
             days=current_app.config["REFRESH_TOKEN_DAYS"]
         )
 
+    def expire(self):
+        self.access_expiration = datetime.now(timezone.utc)
+        self.refresh_expiration = datetime.now(timezone.utc)
+
     @staticmethod
     def clean():
         """Remove any tokens that have been expired for more than a day."""
