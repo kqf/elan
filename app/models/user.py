@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)
     password_hash = db.Column(db.String(64))
+    tokens = db.relationship('Token', back_populates='user', lazy='noload')
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
     def set_password(self, password):
