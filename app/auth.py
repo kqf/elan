@@ -1,5 +1,3 @@
-from typing import Optional
-
 from flask import current_app
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
@@ -11,20 +9,18 @@ token_auth = HTTPTokenAuth()
 
 
 @basic_auth.verify_password
-def verify_password(username, password) -> Optional[User]:
-    if not username or not password:
-        return None
-    user = db.session.scalar(User.select().filter_by(username=username))
-    if user is None:
-        user = db.session.scalar(User.select().filter_by(email=username))
-    return user if user and user.verify_password(password) else None
+def verify_password(username, password):
+    if username and password:
+        user = db.session.scalar(User.select().filter_by(username=username))
+        if user is None:
+            user = db.session.scalar(User.select().filter_by(email=username))
+        if user and user.verify_password(password):
+            return user
 
 
 @token_auth.verify_token
 def verify_token(access_token):
     if current_app.config["DISABLE_AUTH"]:
-        user = db.session.get(User, 1)
-        user.ping()
-        return user
+        return db.session.get(User, 1)
     if access_token:
         return User.verify_access_token(access_token)
