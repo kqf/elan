@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import datetime
+from time import time
 from typing import Any
 
-from flask import Response, jsonify, request, url_for
+import jwt
+from flask import Response, current_app, jsonify, request, url_for
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -11,6 +14,7 @@ from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
 from app.models.pair import Pair
+from app.models.token import Token
 
 
 class User(UserMixin, db.Model):
@@ -18,6 +22,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)
     password_hash = db.Column(db.String(64))
+    tokens = db.relationship("Token", back_populates="user", lazy="noload")
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
     def set_password(self, password):
@@ -50,6 +55,52 @@ class User(UserMixin, db.Model):
         self.username = data["name"]
         self.set_password(data["password"])
         return self
+
+    @staticmethod
+    def verify_access_token(access_token, refresh_token=None):
+        if token := db.session.scalar(
+            Token.select().filter_by(access_token=access_token)
+        ):
+            if token.access_expiration > datetime.utcnow():
+                return token.user
+
+    @staticmethod
+    def verify_refresh_token(refresh_token, access_token):
+        if token := db.session.scalar(
+            Token.select().filter_by(
+                refresh_token=refresh_token, access_token=access_token
+            )
+        ):
+            if token.refresh_expiration > datetime.utcnow():
+                return token
+
+            # Revoke all tokens for the user that tried illegal action
+            db.session.execute(Token.delete().where(Token.user == token.user))
+            db.session.commit()
+
+    @staticmethod
+    def generate_reset_token():
+        return jwt.encode(
+            {
+                "exp": time() + current_app.config["RESET_TOKEN_MINUTES"] * 60,
+            },
+            current_app.config["SECRET_KEY"],
+            algorithm="HS256",
+        )
+
+    @staticmethod
+    def verify_reset_token(reset_token):
+        try:
+            data = jwt.decode(
+                reset_token,
+                current_app.config["SECRET_KEY"],
+                algorithms=["HS256"],
+            )
+        except jwt.PyJWTError:
+            return
+        return db.session.scalar(
+            User.select().filter_by(email=data["reset_email"])
+        )
 
 
 @lm.user_loader
