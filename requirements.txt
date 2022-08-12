@@ -5,5 +5,7 @@ Flask-Bootstrap
 Flask-WTF
 flask-login
 Flask-SQLAlchemy
+Flask-HTTPAuth
 flask-session
+pyjwt
 gunicorn
