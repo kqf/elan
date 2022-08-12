@@ -6,4 +6,5 @@ Flask-WTF
 flask-login
 Flask-SQLAlchemy
 flask-session
+pyjwt
 gunicorn
