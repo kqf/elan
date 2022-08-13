@@ -5,11 +5,13 @@ from time import time
 from typing import Any
 
 import jwt
+from apifairy import authenticate
 from flask import Response, current_app, jsonify, request, url_for
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
+from app.auth import token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
@@ -109,16 +111,19 @@ def load_user(id):  # sourcery skip: instance-method-first-arg-name
 
 
 @main.route("/users/", methods=["GET"])
+@authenticate(token_auth)
 def users() -> Response:
     return jsonify({"users": [u.url() for u in User.query.all()]})
 
 
 @main.route("/users/<int:id>", methods=["GET"])
+@authenticate(token_auth)
 def user(id: int) -> Response:
     return jsonify(User.query.get_or_404(id).export())
 
 
 @main.route("/users/", methods=["POST"])
+@authenticate(token_auth)
 @requires_fields("name", "password")
 def create() -> tuple[Response, int, dict[str, str]]:
     user = User()
@@ -129,6 +134,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
 
 
 @main.route("/users/<int:id>", methods=["PUT"])
+@authenticate(token_auth)
 @requires_fields("name", "password")
 def update(id: int) -> Response:
     user = User.query.get_or_404(id)
@@ -139,6 +145,7 @@ def update(id: int) -> Response:
 
 
 @main.route("/users/<int:id>/lessons/", methods=["GET"])
+@authenticate(token_auth)
 def users_lessons(id: int) -> Response:
     user = User.query.get_or_404(id)
     return jsonify(
@@ -147,6 +154,7 @@ def users_lessons(id: int) -> Response:
 
 
 @main.route("/users/<int:id>/lessons/", methods=["POST"])
+@authenticate(token_auth)
 @requires_fields("pairs", "title")
 def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
     user = User.query.get_or_404(id)
