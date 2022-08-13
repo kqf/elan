@@ -9,3 +9,4 @@ Flask-HTTPAuth
 flask-session
 pyjwt
 gunicorn
+apifairy
