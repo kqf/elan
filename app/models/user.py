@@ -12,6 +12,7 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
+from app.auth import token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
