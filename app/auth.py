@@ -1,10 +1,7 @@
-from apifairy import authenticate
 from flask import current_app
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
 from app.config import db
-from app.main import main
-from app.models.token import Token
 from app.models.user import User
 
 basic_auth = HTTPBasicAuth()
@@ -27,21 +24,3 @@ def verify_token(access_token):
         return db.session.get(User, 1)
     if access_token:
         return User.verify_access_token(access_token)
-
-
-@main.route("/tokens", methods=["POST"])
-@authenticate(basic_auth)
-def new():
-    user = basic_auth.current_user()
-    token = user.generate_auth_token()
-    db.session.add(token)
-    Token.clean()  # keep token table clean of old tokens
-    db.session.commit()
-    return (
-        {
-            "access_token": token.access_token,
-            "refresh_token": token.refresh_token,
-        },
-        200,
-        {},
-    )

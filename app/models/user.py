@@ -7,16 +7,19 @@ from typing import Any
 import jwt
 from apifairy import authenticate
 from flask import Response, current_app, jsonify, request, url_for
+from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
-from app.auth import token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
 from app.models.pair import Pair
 from app.models.token import Token
+
+basic_auth = HTTPBasicAuth()
+token_auth = HTTPTokenAuth()
 
 
 class User(UserMixin, db.Model):
@@ -172,3 +175,39 @@ def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
         db.session.commit()
 
     return jsonify({}), 201, {"Location": lesson.url()}
+
+
+@main.route("/tokens", methods=["POST"])
+@authenticate(basic_auth)
+def new():
+    user = basic_auth.current_user()
+    token = user.generate_auth_token()
+    db.session.add(token)
+    Token.clean()  # keep token table clean of old tokens
+    db.session.commit()
+    return (
+        {
+            "access_token": token.access_token,
+            "refresh_token": token.refresh_token,
+        },
+        200,
+        {},
+    )
+
+
+@basic_auth.verify_password
+def verify_password(username, password):
+    if username and password:
+        user = db.session.scalar(User.select().filter_by(username=username))
+        if user is None:
+            user = db.session.scalar(User.select().filter_by(email=username))
+        if user and user.verify_password(password):
+            return user
+
+
+@token_auth.verify_token
+def verify_token(access_token):
+    if current_app.config["DISABLE_AUTH"]:
+        return db.session.get(User, 1)
+    if access_token:
+        return User.verify_access_token(access_token)
