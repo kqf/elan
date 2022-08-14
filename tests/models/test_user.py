@@ -1,23 +1,19 @@
+import pytest
+
 from app.models.user import User
 
 
-def test_password():
+@pytest.fixture
+def user():
     u = User(username="bob")
     u.set_password("lol")
     assert u.verify_password("lol")
     assert not u.verify_password("rolf")
+    return "bob", "lol"
 
 
-def test_registration(client):
-    User.register("bob", "lol")
-    u = User.query.filter_by(username="bob").first()
-    assert u is not None
-    assert u.verify_password("lol")
-    assert not u.verify_password("rolf")
-
-
-def test_retrieves_users(client):
-    response = client.get("/users", follow_redirects=True)
+def test_retrieves_users(client, user):
+    response = client.get("/users", auth=user, follow_redirects=True)
     assert response.json == {"users": ["http://localhost/users/1"]}
     assert response.status_code == 200
 
