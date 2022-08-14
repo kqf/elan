@@ -20,6 +20,7 @@ def build_app():
         os.path.dirname(__file__), "../data-dev.sqlite3"
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+    app.config["DISABLE_AUTH"] = False
 
     bootstrap.init_app(app)
     session.init_app(app)
