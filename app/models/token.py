@@ -31,10 +31,18 @@ class Token(db.Model):
         self.access_expiration = datetime.now(timezone.utc)
         self.refresh_expiration = datetime.now(timezone.utc)
 
+    @property
+    def ref_exp(self):
+        return self.refresh_expiration.replace(tzinfo=timezone.utc)
+
+    @property
+    def acc_exp(self):
+        return self.refresh_expiration.replace(tzinfo=timezone.utc)
+
     @staticmethod
     def clean():
         """Remove any tokens that have been expired for more than a day."""
         yesterday = datetime.now(timezone.utc) - timedelta(days=1)
         db.session.execute(
-            Token.delete().where(Token.refresh_expiration < yesterday)
+            Token.query.filter(Token.refresh_expiration < yesterday).delete()
         )

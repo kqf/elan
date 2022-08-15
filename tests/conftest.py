@@ -6,12 +6,17 @@ from app.models.user import User
 
 
 @pytest.fixture
-def app():
+def user():
+    return "john", "cat"
+
+
+@pytest.fixture
+def app(user):
     app = build_app()
     app_ctx = app.app_context()
     app_ctx.push()
     db.create_all()
-    User.register("john", "cat")
+    User.register(*user)
     with app.test_request_context():
         yield app
     db.drop_all()
