@@ -3,10 +3,16 @@ import pytest
 from app.models.user import User
 
 
-def test_retrieves_users(client, user):
-    response = client.get("/users", auth=user, follow_redirects=True)
-    print(response.json)
-    # assert response.json == {"users": ["http://localhost/users/1"]}
+@pytest.fixture
+def header(client, user):
+    response = client.post("/tokens", auth=user, follow_redirects=True)
+    token = response.json["auth_token"]
+    return {"Authorization": f"Bearer {token}x"}
+
+
+def test_retrieves_users(client, header):
+    response = client.get("/users", header=header, follow_redirects=True)
+    assert response.json == {"users": ["http://localhost/users/1"]}
     assert response.status_code == 200
 
 
