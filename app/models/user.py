@@ -64,22 +64,22 @@ class User(UserMixin, db.Model):
     @staticmethod
     def verify_access_token(access_token, refresh_token=None):
         if token := db.session.scalar(
-            Token.select().filter_by(access_token=access_token)
+            Token.query.filter_by(access_token=access_token)
         ):
-            if token.access_expiration > datetime.utcnow():
+            if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
                 return token.user
 
     @staticmethod
     def verify_refresh_token(refresh_token, access_token):
         if token := db.session.scalar(
-            Token.select().filter_by(
+            Token.query.filter_by(
                 refresh_token=refresh_token, access_token=access_token
             )
         ):
-            if token.refresh_expiration > datetime.utcnow():
+            if token.refresh_expiration > datetime.datetime.now(
+                datetime.timezone.utc
+            ):
                 return token
-
-            # Revoke all tokens for the user that tried illegal action
             db.session.execute(Token.delete().where(Token.user == token.user))
             db.session.commit()
 
@@ -104,7 +104,7 @@ class User(UserMixin, db.Model):
         except jwt.PyJWTError:
             return
         return db.session.scalar(
-            User.select().filter_by(email=data["reset_email"])
+            User.query.filter_by(email=data["reset_email"])
         )
 
 
@@ -177,14 +177,19 @@ def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
     return jsonify({}), 201, {"Location": lesson.url()}
 
 
+def generate_auth_token(user: User) -> Token:
+    token = Token(user=user)
+    token.generate()
+    return token
+
+
 @main.route("/tokens", methods=["POST"])
 @authenticate(basic_auth)
 def new():
-    user = basic_auth.current_user()
-    token = user.generate_auth_token()
+    token = generate_auth_token(basic_auth.current_user())
     db.session.add(token)
-    Token.clean()  # keep token table clean of old tokens
     db.session.commit()
+    # Token.clean()  # keep token table clean of old tokens
     return (
         {
             "access_token": token.access_token,
@@ -198,9 +203,9 @@ def new():
 @basic_auth.verify_password
 def verify_password(username, password):
     if username and password:
-        user = db.session.scalar(User.select().filter_by(username=username))
+        user = db.session.scalar(User.query.filter_by(username=username))
         if user is None:
-            user = db.session.scalar(User.select().filter_by(email=username))
+            user = db.session.scalar(User.query.filter_by(email=username))
         if user and user.verify_password(password):
             return user
 
