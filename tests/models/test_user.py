@@ -6,12 +6,12 @@ from app.models.user import User
 @pytest.fixture
 def header(client, user):
     response = client.post("/tokens", auth=user, follow_redirects=True)
-    token = response.json["auth_token"]
-    return {"Authorization": f"Bearer {token}x"}
+    token = response.json["access_token"]
+    return {"Authorization": f"Bearer {token}"}
 
 
 def test_retrieves_users(client, header):
-    response = client.get("/users", header=header, follow_redirects=True)
+    response = client.get("/users", headers=header, follow_redirects=True)
     assert response.json == {"users": ["http://localhost/users/1"]}
     assert response.status_code == 200
 

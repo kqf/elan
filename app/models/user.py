@@ -66,7 +66,7 @@ class User(UserMixin, db.Model):
         if token := db.session.scalar(
             Token.query.filter_by(access_token=access_token)
         ):
-            if token.access_expiration > datetime.utcnow():
+            if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
                 return token.user
 
     @staticmethod
@@ -76,10 +76,10 @@ class User(UserMixin, db.Model):
                 refresh_token=refresh_token, access_token=access_token
             )
         ):
-            if token.refresh_expiration > datetime.utcnow():
+            if token.refresh_expiration > datetime.datetime.now(
+                datetime.timezone.utc
+            ):
                 return token
-
-            # Revoke all tokens for the user that tried illegal action
             db.session.execute(Token.delete().where(Token.user == token.user))
             db.session.commit()
 
@@ -188,8 +188,8 @@ def generate_auth_token(user: User) -> Token:
 def new():
     token = generate_auth_token(basic_auth.current_user())
     db.session.add(token)
-    Token.clean()  # keep token table clean of old tokens
     db.session.commit()
+    # Token.clean()  # keep token table clean of old tokens
     return (
         {
             "access_token": token.access_token,
