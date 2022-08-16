@@ -131,7 +131,7 @@ def user(id: int) -> Response:
 @authenticate(token_auth)
 @requires_fields("name", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User(email=request.json["email"])
+    user = User(email=request.json["email"])  # type: ignore
     user.fromdict(request.json)
     db.session.add(user)
     db.session.commit()
