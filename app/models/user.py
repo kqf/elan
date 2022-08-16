@@ -128,9 +128,9 @@ def user(id: int) -> Response:
 
 @main.route("/users/", methods=["POST"])
 @authenticate(token_auth)
-@requires_fields("name", "password")
+@requires_fields("name", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User()
+    user = User(email=request.json["email"])
     user.fromdict(request.json)
     db.session.add(user)
     db.session.commit()
