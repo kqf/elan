@@ -21,6 +21,8 @@ def build_app():
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["DISABLE_AUTH"] = False
+    app.config["ACCESS_TOKEN_MINUTES"] = 90
+    app.config["REFRESH_TOKEN_DAYS"] = 180
 
     bootstrap.init_app(app)
     session.init_app(app)
