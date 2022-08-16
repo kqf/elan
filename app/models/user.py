@@ -5,6 +5,7 @@ from time import time
 from typing import Any
 
 import jwt
+import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Response, current_app, jsonify, request, url_for
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
@@ -130,7 +131,7 @@ def user(id: int) -> Response:
 @authenticate(token_auth)
 @requires_fields("name", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User(email=request.json["email"])
+    user = User(email=request.json["email"])  # type: ignore
     user.fromdict(request.json)
     db.session.add(user)
     db.session.commit()
@@ -204,9 +205,14 @@ def new():
 @basic_auth.verify_password
 def verify_password(username, password):
     if username and password:
-        user = db.session.scalar(User.query.filter_by(username=username))
-        if user is None:
-            user = db.session.scalar(User.query.filter_by(email=username))
+        user = db.session.scalar(
+            User.query.filter(
+                sqla.or_(
+                    User.username.like(username),
+                    User.email.like(username),
+                )
+            )
+        )
         if user and user.verify_password(password):
             return user
 
