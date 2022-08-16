@@ -38,8 +38,8 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     @staticmethod
-    def register(username, password) -> User:
-        user = User(username=username)
+    def register(username, password, email) -> User:
+        user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
