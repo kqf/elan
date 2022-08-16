@@ -26,6 +26,7 @@ class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(64))
     tokens = db.relationship("Token", back_populates="user", lazy="noload")
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
@@ -37,8 +38,8 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     @staticmethod
-    def register(username, password) -> User:
-        user = User(username=username)
+    def register(username, password, email) -> User:
+        user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
@@ -127,9 +128,9 @@ def user(id: int) -> Response:
 
 @main.route("/users/", methods=["POST"])
 @authenticate(token_auth)
-@requires_fields("name", "password")
+@requires_fields("name", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User()
+    user = User(email=request.json["email"])
     user.fromdict(request.json)
     db.session.add(user)
     db.session.commit()
