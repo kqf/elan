@@ -1,6 +1,6 @@
 import pytest
 
-from app.models.user import User
+import app.models.user as users
 
 
 @pytest.fixture
@@ -37,9 +37,9 @@ def test_creates_a_user(client, headers):
     assert response.status_code == 201
 
     # Check it does have an effect
-    user = User.query.get(2)
+    user = users.User.query.get(2)
     assert user.username == "Bob"
-    assert user.verify_password("Lol")
+    assert users.password_is_correct(user, "Lol")
 
 
 def test_updates_a_user(client, headers):
@@ -50,9 +50,9 @@ def test_updates_a_user(client, headers):
     assert response.status_code == 200
 
     # Check it does have an effect
-    user = User.query.get(1)
+    user = users.User.query.get(1)
     assert user.username == "Bob"
-    assert user.verify_password("Lol")
+    assert users.password_is_correct(user, "Lol")
 
 
 def test_creates_a_lesson(client, headers):
@@ -78,7 +78,7 @@ def test_creates_a_lesson(client, headers):
     assert response.status_code == 201
 
     # Check it does have an effect
-    user = User.query.get(1)
+    user = users.User.query.get(1)
     lessons = list(user.lessons.all())
     assert len(lessons) == 1
     assert lessons[0].title == "lesson 1"
