@@ -3,9 +3,9 @@ import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 
+import app.models.user as users
 from app import db, lm
 from app.main.routes import main as main_bp
-from app.models.user import User
 from flask_session import Session
 
 bootstrap = Bootstrap()
@@ -38,8 +38,8 @@ def main():
     app = build_app()
     with app.app_context():
         db.create_all()
-        if User.query.filter_by(username="bob").first() is None:
-            User.register("bob", "lol")
+        if users.User.query.filter_by(username="bob").first() is None:
+            users.register("bob", "lol")
     app.run(debug=True)
 
 
