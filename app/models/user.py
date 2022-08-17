@@ -23,6 +23,14 @@ basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth()
 
 
+def register(username: str, password: str, email: str) -> User:
+    user = User(username=username, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -37,14 +45,6 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-    @staticmethod
-    def register(username, password, email) -> User:
-        user = User(username=username, email=email)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-        return user
 
     def __repr__(self):
         return "<User {0}>".format(self.username)

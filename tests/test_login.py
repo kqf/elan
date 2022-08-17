@@ -1,8 +1,8 @@
 import pytest
 
+import app.models.user as users
 from app import db
 from app.config import build_app
-from app.models.user import User
 
 
 @pytest.fixture
@@ -11,7 +11,7 @@ def app():
     app_ctx = app.app_context()
     app_ctx.push()
     db.create_all()
-    User.register("john", "cat", email="john@example.com")
+    users.register("john", "cat", email="john@example.com")
     yield app
     db.drop_all()
     app_ctx.pop()
