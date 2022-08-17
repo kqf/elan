@@ -10,6 +10,7 @@ from apifairy import authenticate
 from flask import Response, current_app, jsonify, request, url_for
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
@@ -23,7 +24,7 @@ basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth()
 
 
-def register(username: str, password: str, email: str) -> User:
+def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
     user = User(username=username, email=email)
     user.set_password(password)
     db.session.add(user)
