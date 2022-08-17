@@ -18,7 +18,7 @@ def test_retrieves_users(client, headers):
 
 def test_retrieves_a_user(client, headers):
     response = client.get("/users/1", headers=headers, follow_redirects=True)
-    expected = {"name": "john", "url": "http://localhost/users/1"}
+    expected = {"username": "john", "url": "http://localhost/users/1"}
     assert response.json == expected
     assert response.status_code == 200
 
@@ -28,7 +28,7 @@ def test_creates_a_user(client, headers):
         "/users/",
         headers=headers,
         json={
-            "name": "Bob",
+            "username": "Bob",
             "password": "Lol",
             "email": "bob@example.com",
         },
@@ -44,7 +44,13 @@ def test_creates_a_user(client, headers):
 
 def test_updates_a_user(client, headers):
     response = client.put(
-        "/users/1", headers=headers, json={"name": "Bob", "password": "Lol"}
+        "/users/1",
+        headers=headers,
+        json={
+            "username": "Bob",
+            "password": "Lol",
+            "email": "bob@example.com",
+        },
     )
     assert response.json == {}
     assert response.status_code == 200

@@ -27,7 +27,17 @@ token_auth = HTTPTokenAuth()
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
     user = User(username=username, email=email)
     user.password_hash = generate_password_hash(password)
+    db.session.add(user)
+    db.session.commit()
+    return user
 
+
+def edit(
+    db: SQLAlchemy, user: User, username: str, password: str, email: str
+) -> User:
+    user.username = username
+    user.email = email
+    user.password_hash = generate_password_hash(password)
     db.session.add(user)
     db.session.commit()
     return user
@@ -54,14 +64,9 @@ class User(UserMixin, db.Model):
 
     def export(self) -> dict[str, str]:
         return {
-            "name": self.username,
+            "username": self.username,
             "url": self.url(),
         }
-
-    def fromdict(self, data: dict[str, str] | Any) -> User:
-        self.username = data["name"]
-        self.set_password(data["password"])
-        return self
 
     @staticmethod
     def verify_access_token(access_token, refresh_token=None):
@@ -129,23 +134,17 @@ def user(id: int) -> Response:
 
 @main.route("/users/", methods=["POST"])
 @authenticate(token_auth)
-@requires_fields("name", "password", "email")
+@requires_fields("username", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User(email=request.json["email"])  # type: ignore
-    user.fromdict(request.json)
-    db.session.add(user)
-    db.session.commit()
+    user = register(db, **request.json)  # type: ignore
     return jsonify({}), 201, {"Location": user.url()}
 
 
 @main.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
-@requires_fields("name", "password")
+@requires_fields("username", "password", "email")
 def update(id: int) -> Response:
-    user = User.query.get_or_404(id)
-    user.fromdict(request.json)
-    db.session.add(user)
-    db.session.commit()
+    edit(db, User.query.get_or_404(id), **request.json)  # type: ignore
     return jsonify({})
 
 
