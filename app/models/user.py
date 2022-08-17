@@ -26,10 +26,15 @@ token_auth = HTTPTokenAuth()
 
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
     user = User(username=username, email=email)
-    user.set_password(password)
+    user.password_hash = generate_password_hash(password)
+
     db.session.add(user)
     db.session.commit()
     return user
+
+
+def password_is_correct(user: User, password: str) -> bool:
+    return check_password_hash(user.password_hash, password)
 
 
 class User(UserMixin, db.Model):
@@ -40,12 +45,6 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(64))
     tokens = db.relationship("Token", back_populates="user", lazy="noload")
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return "<User {0}>".format(self.username)
@@ -214,7 +213,7 @@ def verify_password(username, password):
                 )
             )
         )
-        if user and user.verify_password(password):
+        if user and password_is_correct(user, password):
             return user
 
 
