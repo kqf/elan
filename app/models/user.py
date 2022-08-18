@@ -26,10 +26,25 @@ token_auth = HTTPTokenAuth()
 
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
     user = User(username=username, email=email)
-    user.set_password(password)
+    user.password_hash = generate_password_hash(password)
     db.session.add(user)
     db.session.commit()
     return user
+
+
+def edit(
+    db: SQLAlchemy, user: User, username: str, password: str, email: str
+) -> User:
+    user.username = username
+    user.email = email
+    user.password_hash = generate_password_hash(password)
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+
+def password_is_correct(user: User, password: str) -> bool:
+    return check_password_hash(user.password_hash, password)
 
 
 class User(UserMixin, db.Model):
@@ -41,12 +56,6 @@ class User(UserMixin, db.Model):
     tokens = db.relationship("Token", back_populates="user", lazy="noload")
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
     def __repr__(self):
         return "<User {0}>".format(self.username)
 
@@ -55,14 +64,9 @@ class User(UserMixin, db.Model):
 
     def export(self) -> dict[str, str]:
         return {
-            "name": self.username,
+            "username": self.username,
             "url": self.url(),
         }
-
-    def fromdict(self, data: dict[str, str] | Any) -> User:
-        self.username = data["name"]
-        self.set_password(data["password"])
-        return self
 
     @staticmethod
     def verify_access_token(access_token, refresh_token=None):
@@ -130,23 +134,17 @@ def user(id: int) -> Response:
 
 @main.route("/users/", methods=["POST"])
 @authenticate(token_auth)
-@requires_fields("name", "password", "email")
+@requires_fields("username", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
-    user = User(email=request.json["email"])  # type: ignore
-    user.fromdict(request.json)
-    db.session.add(user)
-    db.session.commit()
+    user = register(db, **request.json)  # type: ignore
     return jsonify({}), 201, {"Location": user.url()}
 
 
 @main.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
-@requires_fields("name", "password")
+@requires_fields("username", "password", "email")
 def update(id: int) -> Response:
-    user = User.query.get_or_404(id)
-    user.fromdict(request.json)
-    db.session.add(user)
-    db.session.commit()
+    edit(db, User.query.get_or_404(id), **request.json)  # type: ignore
     return jsonify({})
 
 
@@ -214,7 +212,7 @@ def verify_password(username, password):
                 )
             )
         )
-        if user and user.verify_password(password):
+        if user and password_is_correct(user, password):
             return user
 
 
