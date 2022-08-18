@@ -47,6 +47,14 @@ def password_is_correct(user: User, password: str) -> bool:
     return check_password_hash(user.password_hash, password)
 
 
+def verify_access_token(db: SQLAlchemy, access_token, refresh_token=None):
+    if token := db.session.scalar(
+        Token.query.filter_by(access_token=access_token)
+    ):
+        if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
+            return token.user
+
+
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -67,28 +75,6 @@ class User(UserMixin, db.Model):
             "username": self.username,
             "url": self.url(),
         }
-
-    @staticmethod
-    def verify_access_token(access_token, refresh_token=None):
-        if token := db.session.scalar(
-            Token.query.filter_by(access_token=access_token)
-        ):
-            if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
-                return token.user
-
-    @staticmethod
-    def verify_refresh_token(refresh_token, access_token):
-        if token := db.session.scalar(
-            Token.query.filter_by(
-                refresh_token=refresh_token, access_token=access_token
-            )
-        ):
-            if token.refresh_expiration > datetime.datetime.now(
-                datetime.timezone.utc
-            ):
-                return token
-            db.session.execute(Token.delete().where(Token.user == token.user))
-            db.session.commit()
 
     @staticmethod
     def generate_reset_token():
@@ -221,4 +207,4 @@ def verify_token(access_token):
     if current_app.config["DISABLE_AUTH"]:
         return db.session.get(User, 1)
     if access_token:
-        return User.verify_access_token(access_token)
+        return verify_access_token(db, access_token)
