@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import datetime
-from time import time
 from typing import Any
 
-import jwt
 import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Response, current_app, jsonify, request, url_for
@@ -75,30 +73,6 @@ class User(UserMixin, db.Model):
             "username": self.username,
             "url": self.url(),
         }
-
-    @staticmethod
-    def generate_reset_token():
-        return jwt.encode(
-            {
-                "exp": time() + current_app.config["RESET_TOKEN_MINUTES"] * 60,
-            },
-            current_app.config["SECRET_KEY"],
-            algorithm="HS256",
-        )
-
-    @staticmethod
-    def verify_reset_token(reset_token):
-        try:
-            data = jwt.decode(
-                reset_token,
-                current_app.config["SECRET_KEY"],
-                algorithms=["HS256"],
-            )
-        except jwt.PyJWTError:
-            return
-        return db.session.scalar(
-            User.query.filter_by(email=data["reset_email"])
-        )
 
 
 @lm.user_loader
