@@ -55,20 +55,6 @@ def verify_access_token(db: SQLAlchemy, access_token, refresh_token=None):
             return token.user
 
 
-def verify_refresh_token(db: SQLAlchemy, refresh_token, access_token):
-    if token := db.session.scalar(
-        Token.query.filter_by(
-            refresh_token=refresh_token, access_token=access_token
-        )
-    ):
-        if token.refresh_expiration > datetime.datetime.now(
-            datetime.timezone.utc
-        ):
-            return token
-        db.session.execute(Token.delete().where(Token.user == token.user))
-        db.session.commit()
-
-
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
