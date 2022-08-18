@@ -221,4 +221,4 @@ def verify_token(access_token):
     if current_app.config["DISABLE_AUTH"]:
         return db.session.get(User, 1)
     if access_token:
-        return User.verify_access_token(access_token)
+        return verify_access_token(db, access_token)
