@@ -41,6 +41,13 @@ def edit(
     return user
 
 
+def export(user: User) -> dict[str, str]:
+    return {
+        "username": user.username,
+        "url": user.url(),
+    }
+
+
 def password_is_correct(user: User, password: str) -> bool:
     return check_password_hash(user.password_hash, password)
 
@@ -68,12 +75,6 @@ class User(UserMixin, db.Model):
     def url(self) -> str:
         return url_for("main.user", id=self.id, _external=True)
 
-    def export(self) -> dict[str, str]:
-        return {
-            "username": self.username,
-            "url": self.url(),
-        }
-
 
 @lm.user_loader
 def load_user(id):  # sourcery skip: instance-method-first-arg-name
@@ -89,7 +90,7 @@ def users() -> Response:
 @main.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 def user(id: int) -> Response:
-    return jsonify(User.query.get_or_404(id).export())
+    return jsonify(user(User.query.get_or_404(id)))
 
 
 @main.route("/users/", methods=["POST"])
