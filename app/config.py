@@ -20,7 +20,6 @@ def build_app():
         os.path.dirname(__file__), "../data-dev.sqlite3"
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-    app.config["DISABLE_AUTH"] = False
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
 
