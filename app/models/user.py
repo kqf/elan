@@ -69,9 +69,6 @@ class User(UserMixin, db.Model):
     tokens = db.relationship("Token", back_populates="user", lazy="noload")
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
-    def __repr__(self):
-        return "<User {0}>".format(self.username)
-
     def url(self) -> str:
         return url_for("main.user", id=self.id, _external=True)
 
