@@ -5,7 +5,7 @@ from typing import Any
 
 import sqlalchemy as sqla
 from apifairy import authenticate
-from flask import Response, current_app, jsonify, request, url_for
+from flask import Response, jsonify, request, url_for
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
@@ -178,7 +178,5 @@ def verify_password(username, password):
 
 @token_auth.verify_token
 def verify_token(access_token):
-    if current_app.config["DISABLE_AUTH"]:
-        return db.session.get(User, 1)
     if access_token:
         return verify_access_token(db, access_token)
