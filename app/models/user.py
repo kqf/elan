@@ -87,7 +87,7 @@ def users() -> Response:
 @main.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 def user(id: int) -> Response:
-    return jsonify(user(User.query.get_or_404(id)))
+    return jsonify(export(User.query.get_or_404(id)))
 
 
 @main.route("/users/", methods=["POST"])
