@@ -37,7 +37,7 @@ class Token(db.Model):
 
     @property
     def acc_exp(self):
-        return self.refresh_expiration.replace(tzinfo=timezone.utc)
+        return self.access_expiration.replace(tzinfo=timezone.utc)
 
     @staticmethod
     def clean():
