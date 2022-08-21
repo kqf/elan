@@ -53,9 +53,7 @@ def password_is_correct(user: User, password: str) -> bool:
 
 
 def verify_access_token(db: SQLAlchemy, access_token, refresh_token=None):
-    if token := db.session.scalar(
-        Token.query.filter_by(access_token=access_token)
-    ):
+    if token := db.session.scalar(Token.query.filter_by(token=access_token)):
         if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
             return token.user
 
@@ -151,8 +149,7 @@ def new():
     # Token.clean()  # keep token table clean of old tokens
     return (
         {
-            "access_token": token.token,
-            "refresh_token": token.refresh_token,
+            "token": token.token,
         },
         200,
         {},

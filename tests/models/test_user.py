@@ -6,7 +6,7 @@ import app.models.user as users
 @pytest.fixture
 def headers(client, user):
     response = client.post("/tokens", auth=user, follow_redirects=True)
-    token = response.json["access_token"]
+    token = response.json["token"]
     return {"Authorization": f"Bearer {token}"}
 
 
