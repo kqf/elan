@@ -151,7 +151,7 @@ def new():
     # Token.clean()  # keep token table clean of old tokens
     return (
         {
-            "access_token": token.access_token,
+            "access_token": token.token,
             "refresh_token": token.refresh_token,
         },
         200,
