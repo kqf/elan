@@ -22,18 +22,8 @@ class Token(db.Model):
             minutes=current_app.config["ACCESS_TOKEN_MINUTES"]
         )
 
-        self.refresh_token = secrets.token_urlsafe()
-        self.refresh_expiration = datetime.now(timezone.utc) + timedelta(
-            days=current_app.config["REFRESH_TOKEN_DAYS"]
-        )
-
     def expire(self):
         self.access_expiration = datetime.now(timezone.utc)
-        self.refresh_expiration = datetime.now(timezone.utc)
-
-    @property
-    def ref_exp(self):
-        return self.refresh_expiration.replace(tzinfo=timezone.utc)
 
     @property
     def acc_exp(self):
