@@ -11,8 +11,6 @@ class Token(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     access_token = db.Column(db.String(64), nullable=False, index=True)
     access_expiration = db.Column(db.DateTime, nullable=False)
-    refresh_token = db.Column(db.String(64), nullable=False, index=True)
-    refresh_expiration = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)
     user = db.relationship("User", back_populates="tokens")
 
@@ -34,5 +32,5 @@ class Token(db.Model):
         """Remove any tokens that have been expired for more than a day."""
         yesterday = datetime.now(timezone.utc) - timedelta(days=1)
         db.session.execute(
-            Token.query.filter(Token.refresh_expiration < yesterday).delete()
+            Token.query.filter(Token.access_expiration < yesterday).delete()
         )
