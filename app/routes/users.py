@@ -2,17 +2,15 @@ from __future__ import annotations
 
 from typing import Any
 
-import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Response, jsonify, request
 
 import app.models.user as users_
-from app import basic_auth, db, token_auth
+from app import db, token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
 from app.models.pair import Pair
-from app.models.token import Token
 
 
 @main.route("/users/", methods=["GET"])
@@ -73,46 +71,3 @@ def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
         db.session.commit()
 
     return jsonify({}), 201, {"Location": lesson.url()}
-
-
-def generate_auth_token(user: users_.User) -> Token:
-    token = Token(user=user)
-    token.generate()
-    return token
-
-
-@main.route("/tokens", methods=["POST"])
-@authenticate(basic_auth)
-def new():
-    token = generate_auth_token(basic_auth.current_user())
-    db.session.add(token)
-    db.session.commit()
-    # Token.clean()  # keep token table clean of old tokens
-    return (
-        {
-            "token": token.token,
-        },
-        200,
-        {},
-    )
-
-
-@basic_auth.verify_password
-def verify_password(username, password):
-    if username and password:
-        user = db.session.scalar(
-            users_.User.query.filter(
-                sqla.or_(
-                    users_.User.username.like(username),
-                    users_.User.email.like(username),
-                )
-            )
-        )
-        if user and users_.password_is_correct(user, password):
-            return user
-
-
-@token_auth.verify_token
-def verify_token(access_token):
-    if access_token:
-        return users_.verify_access_token(db, access_token)
