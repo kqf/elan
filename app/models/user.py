@@ -3,16 +3,12 @@ from __future__ import annotations
 import datetime
 
 from flask import url_for
-from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
 from app.models.token import Token
-
-basic_auth = HTTPBasicAuth()
-token_auth = HTTPTokenAuth()
 
 
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
