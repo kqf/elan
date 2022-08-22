@@ -8,6 +8,7 @@ from flask import Response, jsonify, request
 
 import app.models.user as users_
 from app import db
+from app.auth import basic_auth, token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
@@ -16,19 +17,19 @@ from app.models.token import Token
 
 
 @main.route("/users/", methods=["GET"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 def users() -> Response:
     return jsonify({"users": [u.url() for u in users_.User.query.all()]})
 
 
 @main.route("/users/<int:id>", methods=["GET"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 def user(id: int) -> Response:
     return jsonify(users_.export(users_.User.query.get_or_404(id)))
 
 
 @main.route("/users/", methods=["POST"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
     user = users_.register(db, **request.json)  # type: ignore
@@ -36,7 +37,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
 
 
 @main.route("/users/<int:id>", methods=["PUT"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def update(id: int) -> Response:
     users_.edit(
@@ -46,7 +47,7 @@ def update(id: int) -> Response:
 
 
 @main.route("/users/<int:id>/lessons/", methods=["GET"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 def users_lessons(id: int) -> Response:
     user = users_.User.query.get_or_404(id)
     return jsonify(
@@ -55,7 +56,7 @@ def users_lessons(id: int) -> Response:
 
 
 @main.route("/users/<int:id>/lessons/", methods=["POST"])
-@authenticate(users_.token_auth)
+@authenticate(token_auth)
 @requires_fields("pairs", "title")
 def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
     user = users_.User.query.get_or_404(id)
@@ -82,9 +83,9 @@ def generate_auth_token(user: users_.User) -> Token:
 
 
 @main.route("/tokens", methods=["POST"])
-@authenticate(users_.basic_auth)
+@authenticate(basic_auth)
 def new():
-    token = generate_auth_token(users_.basic_auth.current_user())
+    token = generate_auth_token(basic_auth.current_user())
     db.session.add(token)
     db.session.commit()
     # Token.clean()  # keep token table clean of old tokens
@@ -97,7 +98,7 @@ def new():
     )
 
 
-@users_.basic_auth.verify_password
+@basic_auth.verify_password
 def verify_password(username, password):
     if username and password:
         user = db.session.scalar(
@@ -112,7 +113,7 @@ def verify_password(username, password):
             return user
 
 
-@users_.token_auth.verify_token
+@token_auth.verify_token
 def verify_token(access_token):
     if access_token:
         return users_.verify_access_token(db, access_token)
