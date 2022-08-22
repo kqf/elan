@@ -7,8 +7,7 @@ from apifairy import authenticate
 from flask import Response, jsonify, request
 
 import app.models.user as users_
-from app import db
-from app.auth import basic_auth, token_auth
+from app import basic_auth, db, token_auth
 from app.main import main
 from app.models.exception import requires_fields
 from app.models.lesson import Lesson
