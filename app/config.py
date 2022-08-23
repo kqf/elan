@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_bootstrap import Bootstrap
 
-import app.models.user as users
+import app.models.models as users
 from app import db, lm
 from app.main.routes import main as main_bp
 from flask_session import Session

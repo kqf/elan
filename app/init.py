@@ -1,4 +1,4 @@
-import app.models.user as users
+import app.models.models as users
 from app import db
 
 preload_app = True
