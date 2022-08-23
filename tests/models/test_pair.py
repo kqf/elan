@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from app.models.pair import Pair
+from app.models.models import Pair
 
 
 def to_response(data: dict) -> bytes:

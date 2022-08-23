@@ -1,6 +1,6 @@
 import pytest
 
-import app.models.user as users
+import app.models.models as users
 from app import db
 from app.config import build_app
 
