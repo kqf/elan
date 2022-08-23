@@ -3,7 +3,7 @@ from __future__ import annotations
 import sqlalchemy as sqla
 from apifairy import authenticate
 
-import app.models.user as users_
+import app.models.models as users_
 from app import basic_auth, db, token_auth
 from app.main import main
 from app.models.token import Token

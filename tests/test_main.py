@@ -1,7 +1,7 @@
 import flask_login
 import pytest
 
-from app.models.user import User
+from app.models.models import User
 
 
 @pytest.fixture
