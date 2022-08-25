@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-import datetime
+import secrets
+from datetime import datetime, timedelta, timezone
 
-from flask import url_for
+from flask import current_app, url_for
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db, lm
-from app.models.token import Token
 
 
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
@@ -43,8 +43,38 @@ def password_is_correct(user: User, password: str) -> bool:
 
 def verify_access_token(db: SQLAlchemy, access_token, refresh_token=None):
     if token := db.session.scalar(Token.query.filter_by(token=access_token)):
-        if token.acc_exp > datetime.datetime.now(datetime.timezone.utc):
+        if token.acc_exp > datetime.now(timezone.utc):
             return token.user
+
+
+class Token(db.Model):
+    __tablename__ = "tokens"
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(64), nullable=False, index=True)
+    expiration = db.Column(db.DateTime, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)
+    user = db.relationship("User", back_populates="tokens")
+
+    def generate(self):
+        self.token = secrets.token_urlsafe()
+        self.expiration = datetime.now(timezone.utc) + timedelta(
+            minutes=current_app.config["ACCESS_TOKEN_MINUTES"]
+        )
+
+    def expire(self):
+        self.expiration = datetime.now(timezone.utc)
+
+    @property
+    def acc_exp(self):
+        return self.expiration.replace(tzinfo=timezone.utc)
+
+    @staticmethod
+    def clean():
+        """Remove any tokens that have been expired for more than a day."""
+        yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+        db.session.execute(
+            Token.query.filter(Token.expiration < yesterday).delete()
+        )
 
 
 class User(UserMixin, db.Model):
