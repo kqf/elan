@@ -6,7 +6,7 @@ from apifairy import authenticate
 import app.models.models as users_
 from app import basic_auth, db, token_auth
 from app.main import main
-from app.models.token import Token
+from app.models.models import Token
 
 
 def generate_auth_token(user: users_.User) -> Token:
