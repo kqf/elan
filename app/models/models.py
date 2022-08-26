@@ -4,7 +4,6 @@ import secrets
 from datetime import datetime, timedelta, timezone
 
 from flask import current_app, url_for
-from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -77,7 +76,7 @@ class Token(db.Model):
         )
 
 
-class User(UserMixin, db.Model):
+class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(16), index=True, unique=True)

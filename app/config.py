@@ -5,7 +5,8 @@ from flask_bootstrap import Bootstrap
 
 import app.models.models as users
 from app import db
-from app.main.routes import main as main_bp
+from app.main import main as main_bp
+
 from flask_session import Session
 
 bootstrap = Bootstrap()
