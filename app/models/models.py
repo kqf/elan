@@ -8,7 +8,7 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app import db, lm
+from app import db
 
 
 def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
@@ -127,8 +127,3 @@ class Pair(db.Model):
             "offield": self.offield,
             "url": self.url(),
         }
-
-
-@lm.user_loader
-def load_user(id):  # sourcery skip: instance-method-first-arg-name
-    return User.query.get(int(id))
