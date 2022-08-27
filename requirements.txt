@@ -1,8 +1,6 @@
 pytest
 click
 flask
-Flask-Bootstrap
-Flask-WTF
 flask-login
 Flask-SQLAlchemy
 Flask-HTTPAuth
