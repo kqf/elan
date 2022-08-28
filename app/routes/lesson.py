@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from flask import Response, jsonify
 
-from app.main import main
+from app import main
 from app.models.lesson import Lesson
 
 
