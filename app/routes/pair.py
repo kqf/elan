@@ -4,8 +4,7 @@ from typing import Any
 
 from flask import Response, jsonify, request
 
-from app import db
-from app.main import main
+from app import db, main
 from app.models.exception import requires_fields
 from app.models.pair import Pair
 
