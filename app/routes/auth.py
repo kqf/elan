@@ -4,8 +4,7 @@ import sqlalchemy as sqla
 from apifairy import authenticate
 
 import app.models.models as users_
-from app import basic_auth, db, token_auth
-from app.main import main
+from app import basic_auth, db, main, token_auth
 from app.models.models import Token
 
 
