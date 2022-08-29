@@ -1,14 +1,12 @@
 import os
 
 from flask import Flask
-from flask_bootstrap import Bootstrap
 
 import app.models.models as users
 from app import db
 from app import main as main_bp
 from flask_session import Session
 
-bootstrap = Bootstrap()
 session = Session()
 
 
@@ -23,7 +21,6 @@ def build_app():
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
 
-    bootstrap.init_app(app)
     session.init_app(app)
     db.init_app(app)
 
