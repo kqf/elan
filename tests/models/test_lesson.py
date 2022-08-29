@@ -1,7 +1,7 @@
 import pytest
 
 from app import db
-from app.models.lesson import Lesson  # noqa
+from app.models.models import Lesson  # noqa
 from app.models.pair import Pair
 
 
