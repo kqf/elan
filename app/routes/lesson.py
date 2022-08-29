@@ -3,7 +3,7 @@ from __future__ import annotations
 from flask import Response, jsonify
 
 from app import main
-from app.models.lesson import Lesson
+from app.models.models import Lesson
 
 
 @main.route("/lessons/<int:id>", methods=["GET"])
