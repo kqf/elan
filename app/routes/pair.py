@@ -6,7 +6,7 @@ from flask import Response, jsonify, request
 
 from app import db, main
 from app.models.exception import requires_fields
-from app.models.pair import Pair
+from app.models.models import Pair
 
 
 @main.route("/pairs/", methods=["POST"])
