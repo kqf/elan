@@ -1,8 +1,7 @@
 import pytest
 
 from app import db
-from app.models.models import Lesson  # noqa
-from app.models.pair import Pair
+from app.models.models import Lesson, Pair
 
 
 @pytest.fixture

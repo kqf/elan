@@ -8,8 +8,7 @@ from flask import Response, jsonify, request
 import app.models.models as users_
 from app import db, main, token_auth
 from app.models.exception import requires_fields
-from app.models.models import Lesson
-from app.models.pair import Pair
+from app.models.models import Lesson, Pair
 
 
 @main.route("/users/", methods=["GET"])
