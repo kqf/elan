@@ -4,7 +4,6 @@ from flask import Flask
 
 import app.models.models as users
 from app import db
-from app import main as main_bp
 from flask_session import Session
 
 session = Session()
@@ -24,7 +23,12 @@ def build_app():
     session.init_app(app)
     db.init_app(app)
 
-    app.register_blueprint(main_bp)
+    from app.routes.lesson import lessons
+
+    app.register_blueprint(lessons)
+    from app import main
+
+    app.register_blueprint(main)
     return app
 
 
