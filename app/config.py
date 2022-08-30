@@ -25,11 +25,10 @@ def build_app():
 
     from app.routes.lesson import lessons
     from app.routes.pair import pairs
-
     app.register_blueprint(lessons)
     app.register_blueprint(pairs)
+    
     from app import main
-
     app.register_blueprint(main)
     return app
 
