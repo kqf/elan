@@ -2,14 +2,16 @@ from __future__ import annotations
 
 from typing import Any
 
-from flask import Response, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 
-from app import db, main
+from app import db
 from app.models.exception import requires_fields
 from app.models.models import Pair
 
+pairs = Blueprint("pairs", __name__)
 
-@main.route("/pairs/", methods=["POST"])
+
+@pairs.route("/pairs/", methods=["POST"])
 @requires_fields("iffield", "offield")
 def create_pair() -> tuple[Response, int, dict[str, str]]:
     data: dict[str, str] | Any = request.json
@@ -19,7 +21,7 @@ def create_pair() -> tuple[Response, int, dict[str, str]]:
     return jsonify({}), 201, {"Location": pair.url()}
 
 
-@main.route("/pairs/<int:id>", methods=["PUT"])
+@pairs.route("/pairs/<int:id>", methods=["PUT"])
 @requires_fields("iffield", "offield")
 def update_pair(id: int) -> Response:
     pair: Pair = Pair.query.get_or_404(id)
@@ -33,6 +35,6 @@ def update_pair(id: int) -> Response:
     return jsonify({})
 
 
-@main.route("/pairs/<int:id>", methods=["GET"])
+@pairs.route("/pairs/<int:id>", methods=["GET"])
 def pair(id) -> Response:
     return jsonify(Pair.query.get_or_404(id).export())
