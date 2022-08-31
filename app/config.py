@@ -26,10 +26,12 @@ def build_app():
     from app.routes.auth import auths
     from app.routes.lesson import lessons
     from app.routes.pair import pairs
+    from app.routes.users import users
 
     app.register_blueprint(lessons)
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
+    app.register_blueprint(users)
 
     from app import main
 

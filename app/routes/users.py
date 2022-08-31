@@ -3,27 +3,29 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import authenticate
-from flask import Response, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 
 import app.models.models as users_
-from app import db, main, token_auth
+from app import db, token_auth
 from app.models.exception import requires_fields
 from app.models.models import Lesson, Pair
 
+users = Blueprint("users", __name__)
 
-@main.route("/users/", methods=["GET"])
+
+@users.route("/users/", methods=["GET"])
 @authenticate(token_auth)
-def users() -> Response:
+def uusers() -> Response:
     return jsonify({"users": [u.url() for u in users_.User.query.all()]})
 
 
-@main.route("/users/<int:id>", methods=["GET"])
+@users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 def user(id: int) -> Response:
     return jsonify(users_.export(users_.User.query.get_or_404(id)))
 
 
-@main.route("/users/", methods=["POST"])
+@users.route("/users/", methods=["POST"])
 @authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
@@ -31,7 +33,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
     return jsonify({}), 201, {"Location": user.url()}
 
 
-@main.route("/users/<int:id>", methods=["PUT"])
+@users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def update(id: int) -> Response:
@@ -41,7 +43,7 @@ def update(id: int) -> Response:
     return jsonify({})
 
 
-@main.route("/users/<int:id>/lessons/", methods=["GET"])
+@users.route("/users/<int:id>/lessons/", methods=["GET"])
 @authenticate(token_auth)
 def users_lessons(id: int) -> Response:
     user = users_.User.query.get_or_404(id)
@@ -50,7 +52,7 @@ def users_lessons(id: int) -> Response:
     )
 
 
-@main.route("/users/<int:id>/lessons/", methods=["POST"])
+@users.route("/users/<int:id>/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @requires_fields("pairs", "title")
 def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
