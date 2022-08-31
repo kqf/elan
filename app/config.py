@@ -23,12 +23,16 @@ def build_app():
     session.init_app(app)
     db.init_app(app)
 
+    from app.routes.auth import auths
     from app.routes.lesson import lessons
     from app.routes.pair import pairs
+
     app.register_blueprint(lessons)
     app.register_blueprint(pairs)
-    
+    app.register_blueprint(auths)
+
     from app import main
+
     app.register_blueprint(main)
     return app
 
