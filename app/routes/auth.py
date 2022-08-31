@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import sqlalchemy as sqla
 from apifairy import authenticate
+from flask import Blueprint
 
 import app.models.models as users_
-from app import basic_auth, db, main, token_auth
+from app import basic_auth, db, token_auth
 from app.models.models import Token
+
+auths = Blueprint("auths", __name__)
 
 
 def generate_auth_token(user: users_.User) -> Token:
@@ -14,7 +17,7 @@ def generate_auth_token(user: users_.User) -> Token:
     return token
 
 
-@main.route("/tokens", methods=["POST"])
+@auths.route("/tokens", methods=["POST"])
 @authenticate(basic_auth)
 def new():
     token = generate_auth_token(basic_auth.current_user())
