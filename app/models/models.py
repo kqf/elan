@@ -99,12 +99,14 @@ class Lesson(db.Model):
     )
 
     def url(self) -> str:
-        return url_for("main.lesson", id=self.id, _external=True)
+        return url_for("lessons.lesson", id=self.id, _external=True)
 
     def export(self) -> dict[str, str]:
         return {
             "title": self.title,
-            "pairs": url_for("main.lesson_data", id=self.id, _external=True),
+            "pairs": url_for(
+                "lessons.lesson_data", id=self.id, _external=True
+            ),
             "url": self.url(),
         }
 
