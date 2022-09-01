@@ -32,10 +32,6 @@ def build_app():
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
     app.register_blueprint(users)
-
-    from app import main
-
-    app.register_blueprint(main)
     return app
 
 
