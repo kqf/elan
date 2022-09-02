@@ -5,8 +5,8 @@ from typing import Any
 from flask import Blueprint, Response, jsonify, request
 
 from app import db
-from app.models.exception import requires_fields
 from app.models.models import Pair
+from app.routes.exception import requires_fields
 
 pairs = Blueprint("pairs", __name__)
 

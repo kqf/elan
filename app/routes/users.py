@@ -7,8 +7,8 @@ from flask import Blueprint, Response, jsonify, request
 
 import app.models.models as users_
 from app import db, token_auth
-from app.models.exception import requires_fields
 from app.models.models import Lesson, Pair
+from app.routes.exception import requires_fields
 
 users = Blueprint("users", __name__)
 
