@@ -86,7 +86,7 @@ class User(db.Model):
     lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
 
     def url(self) -> str:
-        return url_for("main.user", id=self.id, _external=True)
+        return url_for("users.user", id=self.id, _external=True)
 
 
 class Lesson(db.Model):
