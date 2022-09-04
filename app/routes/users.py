@@ -10,6 +10,7 @@ from app import db, token_auth
 from app.models.models import Lesson, Pair
 from app.routes.exception import requires_fields
 
+
 users = Blueprint("users", __name__)
 
 
@@ -48,7 +49,11 @@ def update(id: int) -> Response:
 def users_lessons(id: int) -> Response:
     user = users_.User.query.get_or_404(id)
     return jsonify(
-        {"lessons": [lesson.url() for lesson in user.lessons.all()]}
+        {
+            "lessons": [
+                url("lessons.lesson", lesson) for lesson in user.lessons.all()
+            ]
+        }
     )
 
 
