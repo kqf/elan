@@ -7,6 +7,7 @@ from flask import Blueprint, Response, jsonify, request
 from app import db
 from app.models.models import Pair
 from app.routes.exception import requires_fields
+from app.routes.url import url
 
 pairs = Blueprint("pairs", __name__)
 
@@ -18,7 +19,7 @@ def create_pair() -> tuple[Response, int, dict[str, str]]:
     pair = Pair(iffield=data["iffield"], offield=data["offield"])
     db.session.add(pair)
     db.session.commit()
-    return jsonify({}), 201, {"Location": pair.url()}
+    return jsonify({}), 201, {"Location": url("pairs.pair", pair)}
 
 
 @pairs.route("/pairs/<int:id>", methods=["PUT"])
@@ -37,4 +38,7 @@ def update_pair(id: int) -> Response:
 
 @pairs.route("/pairs/<int:id>", methods=["GET"])
 def pair(id) -> Response:
-    return jsonify(Pair.query.get_or_404(id).export())
+    pair = Pair.query.get_or_404(id)
+    metadata = pair.export()
+    metadata["url"] = url("pairs.pair", pair)
+    return jsonify(metadata)
