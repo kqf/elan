@@ -119,12 +119,8 @@ class Pair(db.Model):
     lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), index=True)
     # __table_args__ = (db.UniqueConstraint("iffield", "offield"),)
 
-    def url(self) -> str:
-        return url_for("pairs.pair", id=self.id, _external=True)
-
     def export(self) -> dict[str, str]:
         return {
             "iffield": self.iffield,
             "offield": self.offield,
-            "url": self.url(),
         }
