@@ -41,7 +41,7 @@ def test_retrieves_a_pair(client, example):
 
 def test_creates_a_pair(client, example, new_example):
     response = client.post("/pairs/", json=new_example)
-    assert response.data == {}
+    assert response.data == b"{}\n"
     assert response.status_code == 201
 
     # Check it does have an effect
