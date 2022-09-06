@@ -52,7 +52,7 @@ def test_creates_a_pair(client, example, new_example):
 
 def test_updates_a_pair(client, example, new_example):
     response = client.put("/pairs/1", json=new_example)
-    assert response.json == "{}\n"
+    assert response.json == {}
     assert response.status_code == 200
 
     # Check it does have an effect
