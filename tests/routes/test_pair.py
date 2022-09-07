@@ -28,7 +28,7 @@ def new_example():
 def test_retrieves_a_pair(client, example):
     response = client.get("/pairs/1", follow_redirects=True)
     # expected = b'{"name":"john","url":"http://localhost/pairs/1"}\n'
-    assert response.data == example
+    assert response.json == example
     assert response.status_code == 200
 
 
