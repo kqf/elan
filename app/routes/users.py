@@ -11,7 +11,6 @@ from app.models.models import Lesson, Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
 
-
 users = Blueprint("users", __name__)
 
 
