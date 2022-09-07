@@ -5,11 +5,6 @@ import pytest
 from app.models.models import Pair
 
 
-def to_response(data: dict) -> bytes:
-    dumped = json.dumps(data, indent=None, separators=(",", ":"))
-    return f"{dumped}\n".encode("utf-8")
-
-
 @pytest.fixture
 def example(client):
     data = {
