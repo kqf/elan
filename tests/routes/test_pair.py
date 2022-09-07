@@ -11,7 +11,7 @@ def example(client):
         "url": "http://localhost/pairs/1",
     }
     response = client.post("/pairs/", json=data)
-    assert response.data == b"{}\n"
+    assert response.json == {}
     assert response.status_code == 201
     yield data
 
