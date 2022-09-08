@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-import app.models.models as users
+import app.models as users
 from app import db
 from flask_session import Session
 
