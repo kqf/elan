@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from flask import Blueprint, Response, jsonify
 
-from app.models.models import Lesson
+from app.models import Lesson
 from app.routes.url import url
 
 lessons = Blueprint("lessons", __name__)

@@ -1,7 +1,7 @@
 import pytest
 
 from app import db
-from app.models.models import Lesson, Pair
+from app.models import Lesson, Pair
 
 
 @pytest.fixture

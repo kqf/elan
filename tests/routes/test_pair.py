@@ -1,6 +1,6 @@
 import pytest
 
-from app.models.models import Pair
+from app.models import Pair
 
 
 @pytest.fixture
