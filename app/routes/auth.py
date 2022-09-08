@@ -6,7 +6,7 @@ from flask import Blueprint
 
 import app.models.models as users_
 from app import basic_auth, db, token_auth
-from app.models.models import Token
+from app.models import Token
 
 auths = Blueprint("auths", __name__)
 
