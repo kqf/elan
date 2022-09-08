@@ -5,7 +5,7 @@ from typing import Any
 from flask import Blueprint, Response, jsonify, request
 
 from app import db
-from app.models.models import Pair
+from app.models import Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
 
