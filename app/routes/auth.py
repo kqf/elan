@@ -4,7 +4,7 @@ import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Blueprint
 
-import app.models.models as users_
+import app.models as users_
 from app import basic_auth, db, token_auth
 from app.models import Token
 

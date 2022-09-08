@@ -1,6 +1,6 @@
 import pytest
 
-import app.models.models as users
+import app.models as users
 
 
 @pytest.fixture
