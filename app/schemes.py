@@ -3,6 +3,7 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from app.models import Lesson, User
 
 
+
 class UserSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = User
