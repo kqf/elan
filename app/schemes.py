@@ -1,6 +1,6 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
-from app.models import Lesson, User
+from app.models import Lesson, Pair, User
 
 
 class UserSchema(SQLAlchemyAutoSchema):
@@ -13,5 +13,12 @@ class UserSchema(SQLAlchemyAutoSchema):
 class LessonSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Lesson
+        include_fk = True
+        load_instance = True
+
+
+class PairSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Pair
         include_fk = True
         load_instance = True
