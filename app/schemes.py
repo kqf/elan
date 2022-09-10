@@ -9,6 +9,9 @@ class UserSchema(SQLAlchemyAutoSchema):
         include_relationships = True
         load_instance = True
 
+    def jsonify(self, *args, **kwargs):
+        return self.dump(*args, **kwargs)
+
 
 class LessonSchema(SQLAlchemyAutoSchema):
     class Meta:

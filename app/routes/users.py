@@ -27,7 +27,7 @@ def uusers() -> Response:
 @authenticate(token_auth)
 @response(user_schema)
 def user(id: int) -> Response:
-    return jsonify(users_.export(users_.User.query.get_or_404(id)))
+    return users_.User.query.get_or_404(id)
 
 
 @users.route("/users/", methods=["POST"])
