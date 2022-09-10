@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 import app.models as users
-from app import db
+from app import db, ma
 from flask_session import Session
 
 session = Session()
@@ -22,6 +22,7 @@ def build_app():
 
     session.init_app(app)
     db.init_app(app)
+    ma.init_app(app)
 
     from app.routes.auth import auths
     from app.routes.lesson import lessons
