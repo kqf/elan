@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from apifairy import authenticate
+from apifairy import authenticate, response
 from flask import Blueprint, Response, jsonify, request
 
 import app.models as users_
@@ -10,8 +10,11 @@ from app import db, token_auth
 from app.models import Lesson, Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
+from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
+
+user_schema = UserSchema()
 
 
 @users.route("/users/", methods=["GET"])
@@ -22,6 +25,7 @@ def uusers() -> Response:
 
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
+@response(user_schema)
 def user(id: int) -> Response:
     return jsonify(users_.export(users_.User.query.get_or_404(id)))
 
