@@ -11,8 +11,8 @@ class UserSchema(SQLAlchemyAutoSchema, ma.SQLAlchemySchema):
 
     # id = ma.auto_field(dump_only=True)
     # url = ma.String(dump_only=True)
-    # username = ma.auto_field(required=True)
     # email = ma.auto_field(required=True)
+    password = ma.auto_field(required=True, load_only=True)
 
 
 class LessonSchema(SQLAlchemyAutoSchema):
