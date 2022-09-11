@@ -9,10 +9,13 @@ class UserSchema(SQLAlchemyAutoSchema, ma.SQLAlchemySchema):
         model = User
         ordered = True
 
-    # id = ma.auto_field(dump_only=True)
-    # url = ma.String(dump_only=True)
-    # email = ma.auto_field(required=True)
-    password = ma.auto_field(required=True, load_only=True)
+    id = ma.auto_field(dump_only=True)
+    url = ma.String(dump_only=True)
+    email = ma.auto_field(required=True)
+    password_hash = ma.auto_field(
+        required=True,
+        # load_only=True
+    )
 
 
 class LessonSchema(SQLAlchemyAutoSchema):
