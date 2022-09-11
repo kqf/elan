@@ -23,7 +23,7 @@ def test_retrieves_a_user(client, headers):
         assert response.json[k] == v
 
     # Why this doesn't work?
-    # assert 'password_hash' not in response.json
+    assert "password_hash" not in response.json
     assert response.status_code == 200
 
 
