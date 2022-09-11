@@ -13,10 +13,7 @@ class UserSchema(ma.SQLAlchemySchema):
     url = ma.String(dump_only=True)
     username = ma.auto_field(required=True)
     email = ma.auto_field(required=True)
-
-    def jsonify(self, *args, **kwargs):
-        return self.dump(*args, **kwargs)
-
+    
 
 class LessonSchema(SQLAlchemyAutoSchema):
     class Meta:
