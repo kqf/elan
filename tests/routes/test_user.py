@@ -18,8 +18,9 @@ def test_retrieves_users(client, headers):
 
 def test_retrieves_a_user(client, headers):
     response = client.get("/users/1", headers=headers, follow_redirects=True)
-    expected = {"username": "john", "url": "http://localhost/users/1"}
-    assert response.json == expected
+    expected = {"username": "john"}
+    for k, v in expected.items():
+        assert response.json[k] == v
     assert response.status_code == 200
 
 
@@ -33,7 +34,7 @@ def test_creates_a_user(client, headers):
             "email": "bob@example.com",
         },
     )
-    # assert response.json == {}
+    assert response.json == {}
     assert response.status_code == 201
 
     # Check it does have an effect
