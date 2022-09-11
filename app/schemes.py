@@ -13,7 +13,7 @@ class UserSchema(ma.SQLAlchemySchema):
     url = ma.String(dump_only=True)
     username = ma.auto_field(required=True)
     email = ma.auto_field(required=True)
-
+    
 
 class LessonSchema(SQLAlchemyAutoSchema):
     class Meta:
