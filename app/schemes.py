@@ -1,13 +1,18 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
+from app import ma
 from app.models import Lesson, Pair, User
 
 
-class UserSchema(SQLAlchemyAutoSchema):
+class UserSchema(ma.SQLAlchemySchema):
     class Meta:
         model = User
-        include_relationships = True
-        load_instance = True
+        ordered = True
+
+    id = ma.auto_field(dump_only=True)
+    url = ma.String(dump_only=True)
+    username = ma.auto_field(required=True)
+    email = ma.auto_field(required=True)
 
     def jsonify(self, *args, **kwargs):
         return self.dump(*args, **kwargs)
