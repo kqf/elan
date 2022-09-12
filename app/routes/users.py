@@ -2,19 +2,16 @@ from __future__ import annotations
 
 from typing import Any
 
-from apifairy import authenticate, response
-from flask import Blueprint, Response, jsonify, request
+from apifairy import authenticate
+from flask import Blueprint, Response, jsonify, request, url_for
 
 import app.models as users_
 from app import db, token_auth
 from app.models import Lesson, Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
-from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
-
-user_schema = UserSchema()
 
 
 @users.route("/users/", methods=["GET"])
@@ -25,9 +22,8 @@ def uusers() -> Response:
 
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
-@response(user_schema)
 def user(id: int) -> Response:
-    return users_.User.query.get_or_404(id)
+    return jsonify(users_.export(users_.User.query.get_or_404(id)))
 
 
 @users.route("/users/", methods=["POST"])
@@ -35,7 +31,11 @@ def user(id: int) -> Response:
 @requires_fields("username", "password", "email")
 def create() -> tuple[Response, int, dict[str, str]]:
     user = users_.register(db, **request.json)  # type: ignore
-    return jsonify({}), 201, {"Location": user.url()}
+    return (
+        jsonify({}),
+        201,
+        {"Location": url_for("users.user", follow_redirects=True)},
+    )
 
 
 @users.route("/users/<int:id>", methods=["PUT"])
