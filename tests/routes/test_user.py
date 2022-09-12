@@ -21,11 +21,6 @@ def test_retrieves_a_user(client, headers):
     expected = {"username": "john"}
     for k, v in expected.items():
         assert response.json[k] == v
-<<<<<<< HEAD
-
-    # Why this doesn't work?
-=======
->>>>>>> main
     assert "password_hash" not in response.json
     assert response.status_code == 200
 
