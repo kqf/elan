@@ -32,7 +32,7 @@ def edit(
 def export(user: User) -> dict[str, str]:
     return {
         "username": user.username,
-        "url": user.url(),
+        # "url": user.url(),
     }
 
 

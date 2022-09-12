@@ -34,7 +34,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
     return (
         jsonify({}),
         201,
-        {"Location": url_for("users.user", follow_redirects=True)},
+        {"Location": url_for("users.user", id=user.id, follow_redirects=True)},
     )
 
 
