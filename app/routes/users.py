@@ -13,7 +13,7 @@ from app.routes.url import url
 from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
-users_schema = UserSchema()
+user_schema = UserSchema()
 
 
 @users.route("/users/", methods=["GET"])
@@ -24,7 +24,7 @@ def uusers() -> Response:
 
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
-@response(users_schema)
+@response(user_schema)
 def user(id: int) -> Response:
     return users_.User.query.get_or_404(id)
 
