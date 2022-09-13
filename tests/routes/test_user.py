@@ -12,7 +12,9 @@ def headers(client, user):
 
 def test_retrieves_users(client, headers):
     response = client.get("/users", headers=headers, follow_redirects=True)
-    assert response.json == {"users": ["http://localhost/users/1"]}
+    assert response.json == [
+        {"email": "john@example.com", "id": 1, "username": "john"}
+    ]
     assert response.status_code == 200
 
 
