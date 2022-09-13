@@ -17,6 +17,7 @@ users_schema = UserSchema(many=True)
 user_schema = UserSchema()
 
 
+
 @users.route("/users/", methods=["GET"])
 @authenticate(token_auth)
 @response(users_schema)
