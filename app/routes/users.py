@@ -10,10 +10,10 @@ from app import db, token_auth
 from app.models import Lesson, Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
+from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
 users_schema = UserSchema()
-
 
 
 @users.route("/users/", methods=["GET"])
@@ -26,7 +26,7 @@ def uusers() -> Response:
 @authenticate(token_auth)
 @response(users_schema)
 def user(id: int) -> Response:
-    return jsonify(users_.export(users_.User.query.get_or_404(id)))
+    return users_.User.query.get_or_404(id)
 
 
 @users.route("/users/", methods=["POST"])
