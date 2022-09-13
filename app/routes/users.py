@@ -16,6 +16,7 @@ users = Blueprint("users", __name__)
 user_schema = UserSchema()
 
 
+
 @users.route("/users/", methods=["GET"])
 @authenticate(token_auth)
 def uusers() -> Response:
@@ -25,6 +26,7 @@ def uusers() -> Response:
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 @response(user_schema)
+
 def user(id: int) -> Response:
     return users_.User.query.get_or_404(id)
 
