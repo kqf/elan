@@ -1,10 +1,8 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-
 from app import ma
 from app.models import Lesson, Pair, User
 
 
-class UserSchema(SQLAlchemyAutoSchema, ma.SQLAlchemySchema):
+class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
         ordered = True
@@ -15,14 +13,14 @@ class UserSchema(SQLAlchemyAutoSchema, ma.SQLAlchemySchema):
     password_hash = ma.auto_field(required=True, load_only=True)
 
 
-class LessonSchema(SQLAlchemyAutoSchema):
+class LessonSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Lesson
         include_fk = True
         load_instance = True
 
 
-class PairSchema(SQLAlchemyAutoSchema):
+class PairSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Pair
         include_fk = True
