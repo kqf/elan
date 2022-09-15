@@ -25,3 +25,6 @@ class PairSchema(ma.SQLAlchemyAutoSchema):
         model = Pair
         include_fk = True
         load_instance = True
+
+    id = ma.auto_field(required=True, load_only=True)
+    lesson_id = ma.auto_field(required=True, load_only=True)
