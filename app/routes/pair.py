@@ -42,7 +42,4 @@ def update_pair(id: int) -> Response:
 @pairs.route("/pairs/<int:id>", methods=["GET"])
 @response(pair_schema)
 def pair(id) -> Response:
-    pair = Pair.query.get_or_404(id)
-    metadata = pair.export()
-    metadata["url"] = url("pairs.pair", pair)
-    return jsonify(metadata)
+    return Pair.query.get_or_404(id)
