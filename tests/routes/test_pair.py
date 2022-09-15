@@ -8,7 +8,6 @@ def example(client):
     data = {
         "iffield": "la vache",
         "offield": "the cow",
-        "url": "http://localhost/pairs/1",
     }
     response = client.post("/pairs/", json=data)
     assert response.json == {}
@@ -21,7 +20,6 @@ def new_example():
     return {
         "iffield": "une oiseau",
         "offield": "a bird",
-        "url": "http://localhost/pairs/2",
     }
 
 
