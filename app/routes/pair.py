@@ -2,14 +2,17 @@ from __future__ import annotations
 
 from typing import Any
 
+from apifairy import response
 from flask import Blueprint, Response, jsonify, request
 
 from app import db
 from app.models import Pair
 from app.routes.exception import requires_fields
 from app.routes.url import url
+from app.schemes import PairSchema
 
 pairs = Blueprint("pairs", __name__)
+pair_schema = PairSchema()
 
 
 @pairs.route("/pairs/", methods=["POST"])
@@ -37,6 +40,7 @@ def update_pair(id: int) -> Response:
 
 
 @pairs.route("/pairs/<int:id>", methods=["GET"])
+@response(pair_schema)
 def pair(id) -> Response:
     pair = Pair.query.get_or_404(id)
     metadata = pair.export()
