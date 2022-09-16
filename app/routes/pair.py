@@ -17,17 +17,17 @@ pair_schema = PairSchema()
 
 @pairs.route("/pairs/", methods=["POST"])
 @requires_fields("iffield", "offield")
-def create_pair() -> tuple[Response, int, dict[str, str]]:
+def create_pair() -> tuple[dict, int, dict[str, str]]:
     data: dict[str, str] | Any = request.json
     pair = Pair(iffield=data["iffield"], offield=data["offield"])
     db.session.add(pair)
     db.session.commit()
-    return jsonify({}), 201, {"Location": url("pairs.pair", pair)}
+    return {}, 201, {"Location": url("pairs.pair", pair)}
 
 
 @pairs.route("/pairs/<int:id>", methods=["PUT"])
 @requires_fields("iffield", "offield")
-def update_pair(id: int) -> Response:
+def update_pair(id: int) -> dict:
     pair: Pair = Pair.query.get_or_404(id)
 
     data: dict[str, str] | Any = request.json
@@ -36,7 +36,7 @@ def update_pair(id: int) -> Response:
 
     db.session.add(pair)
     db.session.commit()
-    return jsonify({})
+    return {}
 
 
 @pairs.route("/pairs/<int:id>", methods=["GET"])
