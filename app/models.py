@@ -115,9 +115,3 @@ class Pair(db.Model):
     offield = db.Column(db.String(), index=True)
     lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), index=True)
     # __table_args__ = (db.UniqueConstraint("iffield", "offield"),)
-
-    def export(self) -> dict[str, str]:
-        return {
-            "iffield": self.iffield,
-            "offield": self.offield,
-        }
