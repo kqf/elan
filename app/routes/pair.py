@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import response
-from flask import Blueprint, Response, request
+from flask import Blueprint, request
 
 from app import db
 from app.models import Pair
