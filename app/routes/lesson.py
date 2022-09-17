@@ -1,16 +1,21 @@
 from __future__ import annotations
 
+from apifairy import response
 from flask import Blueprint, Response, jsonify
 
 from app.models import Lesson
 from app.routes.url import url
+from app.schemes import LessonSchema
 
 lessons = Blueprint("lessons", __name__)
 
+lesson_schema = LessonSchema()
+
 
 @lessons.route("/lessons/<int:id>", methods=["GET"])
+@response(lesson_schema)
 def lesson(id) -> Response:
-    return jsonify(Lesson.query.get_or_404(id).export())
+    return Lesson.query.get_or_404(id).export()
 
 
 @lessons.route("/lessons/<int:id>/data", methods=["GET"])
