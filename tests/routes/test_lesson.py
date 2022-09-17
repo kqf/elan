@@ -30,6 +30,7 @@ def example(client):
 def test_retrieves_a_lesson(client, example):
     response = client.get("/lessons/1", follow_redirects=True)
     assert response.status_code == 200
+    assert response.json == {"title": "lesson 1"}
 
 
 @pytest.mark.skip
