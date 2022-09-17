@@ -3,7 +3,8 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import response
-from flask import Blueprint, Response, request
+from flask import Blueprint, request
+
 
 from app import db
 from app.models import Pair
@@ -41,5 +42,5 @@ def update_pair(id: int) -> dict:
 
 @pairs.route("/pairs/<int:id>", methods=["GET"])
 @response(pair_schema)
-def pair(id) -> Response:
+def pair(id) -> Pair:
     return Pair.query.get_or_404(id)
