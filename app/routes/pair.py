@@ -41,5 +41,5 @@ def update_pair(id: int) -> dict:
 
 @pairs.route("/pairs/<int:id>", methods=["GET"])
 @response(pair_schema)
-def pair(id) -> Response:
+def pair(id) -> Pair:
     return Pair.query.get_or_404(id)
