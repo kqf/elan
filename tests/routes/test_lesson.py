@@ -5,9 +5,8 @@ from app.models import Lesson, Pair
 
 
 @pytest.fixture
-def example(client):
-    lesson = Lesson(title="lesson 1")
-    data = [
+def example_data():
+    return [
         {
             "iffield": "la vache",
             "offield": "the cow",
@@ -17,10 +16,15 @@ def example(client):
             "offield": "the world",
         },
     ]
+
+
+@pytest.fixture
+def example(client, example_data):
+    lesson = Lesson(title="lesson 1")
     db.session.add(lesson)
     db.session.commit()
 
-    pairs = [Pair(lesson_id=lesson.id, **p) for p in data]
+    pairs = [Pair(lesson_id=lesson.id, **p) for p in example_data]
     for p in pairs:
         db.session.add(p)
         db.session.commit()
@@ -34,9 +38,6 @@ def test_retrieves_a_lesson(client, example):
 
 
 @pytest.mark.skip
-def test_retrieves_lesson_data(client, example):
+def test_retrieves_lesson_data(client, example, example_data):
     response = client.get("/lessons/1/data", follow_redirects=True)
-    assert response.json == [
-        "http://localhost/pairs/1",
-        "http://localhost/pairs/2",
-    ]
+    assert response.json == example_data
