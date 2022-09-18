@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from apifairy import response
-from flask import Blueprint, Response, jsonify
+from flask import Blueprint, Response
 
 from app.models import Lesson
-from app.routes.url import url
 from app.schemes import LessonSchema, PairSchema
 
 lessons = Blueprint("lessons", __name__)
