@@ -5,7 +5,6 @@ from typing import Any
 from apifairy import response
 from flask import Blueprint, request
 
-
 from app import db
 from app.models import Pair
 from app.routes.exception import requires_fields
