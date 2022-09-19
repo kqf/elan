@@ -84,4 +84,4 @@ def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
         db.session.add(pair)
         db.session.commit()
 
-    return jsonify({}), 201, {"Location": lesson.url()}
+    return jsonify({}), 201, {"Location": url("lessons.lesson", lesson)}
