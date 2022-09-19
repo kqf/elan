@@ -6,12 +6,10 @@ from flask import Blueprint, Response
 from app.models import Lesson
 from app.schemes import LessonSchema, PairSchema
 
-
 lessons = Blueprint("lessons", __name__)
 
 lesson_schema = LessonSchema()
 pairs_schema = PairSchema(many=True)
-
 
 
 @lessons.route("/lessons/<int:id>", methods=["GET"])
