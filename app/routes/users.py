@@ -34,7 +34,7 @@ def user(id: int) -> Response:
 @users.route("/users/", methods=["POST"])
 @authenticate(token_auth)
 @requires_fields("username", "password", "email")
-def create() -> tuple[Response, int, dict[str, str]]:
+def create() -> tuple[dict, int, dict[str, str]]:
     user = users_.register(db, **request.json)  # type: ignore
     return (
         {},
@@ -46,7 +46,7 @@ def create() -> tuple[Response, int, dict[str, str]]:
 @users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
 @requires_fields("username", "password", "email")
-def update(id: int) -> Response:
+def update(id: int) -> dict:
     users_.edit(
         db, users_.User.query.get_or_404(id), **request.json
     )  # type: ignore
@@ -69,7 +69,7 @@ def users_lessons(id: int) -> Response:
 @users.route("/users/<int:id>/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @requires_fields("pairs", "title")
-def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
+def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
     user = users_.User.query.get_or_404(id)
     data: dict[str, str | list[dict[str, str]]] | Any = request.json
     # First create the container
