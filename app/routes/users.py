@@ -37,7 +37,7 @@ def user(id: int) -> Response:
 def create() -> tuple[Response, int, dict[str, str]]:
     user = users_.register(db, **request.json)  # type: ignore
     return (
-        jsonify({}),
+        {},
         201,
         {"Location": url_for("users.user", id=user.id, follow_redirects=True)},
     )
@@ -50,7 +50,7 @@ def update(id: int) -> Response:
     users_.edit(
         db, users_.User.query.get_or_404(id), **request.json
     )  # type: ignore
-    return jsonify({})
+    return {}
 
 
 @users.route("/users/<int:id>/lessons/", methods=["GET"])
@@ -84,4 +84,4 @@ def user_build_lesson(id: int) -> tuple[Response, int, dict[str, str]]:
         db.session.add(pair)
         db.session.commit()
 
-    return jsonify({}), 201, {"Location": url("lessons.lesson", lesson)}
+    return {}, 201, {"Location": url("lessons.lesson", lesson)}
