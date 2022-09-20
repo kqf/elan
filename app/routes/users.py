@@ -57,13 +57,11 @@ def update(id: int) -> dict:
 @authenticate(token_auth)
 def users_lessons(id: int) -> Response:
     user = users_.User.query.get_or_404(id)
-    return jsonify(
-        {
-            "lessons": [
-                url("lessons.lesson", lesson) for lesson in user.lessons.all()
-            ]
-        }
-    )
+    return {
+        "lessons": [
+            url("lessons.lesson", lesson) for lesson in user.lessons.all()
+        ]
+    }
 
 
 @users.route("/users/<int:id>/lessons/", methods=["POST"])
