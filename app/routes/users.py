@@ -55,7 +55,7 @@ def update(id: int) -> dict:
 
 @users.route("/users/<int:id>/lessons/", methods=["GET"])
 @authenticate(token_auth)
-def users_lessons(id: int) -> Response:
+def users_lessons(id: int) -> dict[str, list[str]]:
     user = users_.User.query.get_or_404(id)
     return {
         "lessons": [
