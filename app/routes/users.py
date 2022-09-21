@@ -82,4 +82,13 @@ def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
         db.session.add(pair)
         db.session.commit()
 
-    return {}, 201, {"Location": url("lessons.lesson", lesson)}
+    return (
+        {},
+        201,
+        {
+            "Location": url_for(
+                "lessons.lesson", id=lesson.id, follow_redirects=True
+            )
+        },
+    )
+
