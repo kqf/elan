@@ -91,3 +91,4 @@ def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
             )
         },
     )
+
