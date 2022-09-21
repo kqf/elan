@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import authenticate, response
-from flask import Blueprint, Response, jsonify, request, url_for
+from flask import Blueprint, Response, request, url_for
 
 import app.models as users_
 from app import db, token_auth
@@ -55,15 +55,13 @@ def update(id: int) -> dict:
 
 @users.route("/users/<int:id>/lessons/", methods=["GET"])
 @authenticate(token_auth)
-def users_lessons(id: int) -> Response:
+def users_lessons(id: int) -> dict[str, list[str]]:
     user = users_.User.query.get_or_404(id)
-    return jsonify(
-        {
-            "lessons": [
-                url("lessons.lesson", lesson) for lesson in user.lessons.all()
-            ]
-        }
-    )
+    return {
+        "lessons": [
+            url("lessons.lesson", lesson) for lesson in user.lessons.all()
+        ]
+    }
 
 
 @users.route("/users/<int:id>/lessons/", methods=["POST"])
