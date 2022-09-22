@@ -29,13 +29,6 @@ def edit(
     return user
 
 
-def export(user: User) -> dict[str, str]:
-    return {
-        "username": user.username,
-        # "url": user.url(),
-    }
-
-
 def password_is_correct(user: User, password: str) -> bool:
     return check_password_hash(user.password_hash, password)
 
