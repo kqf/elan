@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import authenticate, response
-from flask import Blueprint, Response, request, url_for
+from flask import Blueprint, request, url_for
 
 import app.models as users_
 from app import db, token_auth
