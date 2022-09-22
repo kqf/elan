@@ -20,14 +20,14 @@ user_schema = UserSchema()
 @users.route("/users/", methods=["GET"])
 @authenticate(token_auth)
 @response(users_schema)
-def uusers() -> Response:
+def uusers() -> users_.User:
     return users_.User.query.all()
 
 
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 @response(user_schema)
-def user(id: int) -> Response:
+def user(id: int) -> users_.User:
     return users_.User.query.get_or_404(id)
 
 
