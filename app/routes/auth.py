@@ -4,14 +4,13 @@ import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Blueprint
 
-import app.models as users_
 from app import basic_auth, db, token_auth
-from app.models import Token
+from app.models import Token, User
 
 auths = Blueprint("auths", __name__)
 
 
-def generate_auth_token(user: users_.User) -> Token:
+def generate_auth_token(user: User) -> Token:
     token = Token(user=user)
     token.generate()
     return token
@@ -37,10 +36,10 @@ def new():
 def verify_password(username, password):
     if username and password:
         user = db.session.scalar(
-            users_.User.query.filter(
+            User.query.filter(
                 sqla.or_(
-                    users_.User.username.like(username),
-                    users_.User.email.like(username),
+                    User.username.like(username),
+                    User.email.like(username),
                 )
             )
         )
