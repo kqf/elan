@@ -23,7 +23,6 @@ def uusers() -> User:
     return User.query.all()
 
 
-
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 @response(user_schema)
