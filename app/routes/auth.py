@@ -5,7 +5,7 @@ from apifairy import authenticate
 from flask import Blueprint
 
 from app import basic_auth, db, token_auth
-from app.models import Token, User
+from app.models import Token, User, password_is_correct, verify_access_token
 
 auths = Blueprint("auths", __name__)
 
@@ -43,11 +43,11 @@ def verify_password(username, password):
                 )
             )
         )
-        if user and users_.password_is_correct(user, password):
+        if user and password_is_correct(user, password):
             return user
 
 
 @token_auth.verify_token
 def verify_token(access_token):
     if access_token:
-        return users_.verify_access_token(db, access_token)
+        return verify_access_token(db, access_token)
