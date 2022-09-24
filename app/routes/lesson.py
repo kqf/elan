@@ -14,7 +14,7 @@ pairs_schema = PairSchema(many=True)
 
 @lessons.route("/lessons/<int:id>", methods=["GET"])
 @response(lesson_schema)
-def lesson(id) -> Lesson:
+def lesson(id) -> Response:
     return Lesson.query.get_or_404(id)
 
 
