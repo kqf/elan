@@ -1,3 +1,6 @@
+from importlib.metadata import requires
+from operator import truediv
+
 from app import ma
 from app.models import Lesson, Pair, User
 
@@ -18,6 +21,9 @@ class LessonSchema(ma.SQLAlchemyAutoSchema):
         model = Lesson
         include_fk = True
         load_instance = True
+
+    id = ma.auto_field(required=True, load_only=True)
+    user_id = ma.auto_field(required=False, load_only=True)
 
 
 class PairSchema(ma.SQLAlchemyAutoSchema):
