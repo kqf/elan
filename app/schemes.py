@@ -1,6 +1,3 @@
-from importlib.metadata import requires
-from operator import truediv
-
 from app import ma
 from app.models import Lesson, Pair, User
 
