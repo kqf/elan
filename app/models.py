@@ -3,7 +3,7 @@ from __future__ import annotations
 import secrets
 from datetime import datetime, timedelta, timezone
 
-from flask import current_app, url_for
+from flask import current_app
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -87,9 +87,6 @@ class Lesson(db.Model):
     pairs = db.relationship(
         "Pair", backref="Lesson", lazy="dynamic", cascade="all, delete-orphan"
     )
-
-    def url(self) -> str:
-        return url_for("lessons.lesson", id=self.id, _external=True)
 
 
 class Pair(db.Model):
