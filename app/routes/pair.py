@@ -8,7 +8,6 @@ from flask import Blueprint, request, url_for
 from app import db
 from app.models import Pair
 from app.routes.exception import requires_fields
-from app.routes.url import url
 from app.schemes import PairSchema
 
 pairs = Blueprint("pairs", __name__)
