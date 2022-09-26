@@ -56,7 +56,8 @@ def users_lessons(id: int) -> dict[str, list[str]]:
     user = User.query.get_or_404(id)
     return {
         "lessons": [
-            url("lessons.lesson", lesson) for lesson in user.lessons.all()
+            url_for("lessons.lesson", id=lesson.id, follow_redirects=True)
+            for lesson in user.lessons.all()
         ]
     }
 
