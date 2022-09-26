@@ -8,7 +8,6 @@ from flask import Blueprint, request, url_for
 from app import db, token_auth
 from app.models import Lesson, Pair, User, edit, register
 from app.routes.exception import requires_fields
-from app.routes.url import url
 from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
@@ -56,7 +55,8 @@ def users_lessons(id: int) -> dict[str, list[str]]:
     user = User.query.get_or_404(id)
     return {
         "lessons": [
-            url("lessons.lesson", lesson) for lesson in user.lessons.all()
+            url_for("lessons.lesson", id=lesson.id, follow_redirects=True)
+            for lesson in user.lessons.all()
         ]
     }
 
