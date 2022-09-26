@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from apifairy import response
-from flask import Blueprint, request
+from flask import Blueprint, request, url_for
 
 from app import db
 from app.models import Pair
@@ -22,7 +22,11 @@ def create_pair() -> tuple[dict, int, dict[str, str]]:
     pair = Pair(iffield=data["iffield"], offield=data["offield"])
     db.session.add(pair)
     db.session.commit()
-    return {}, 201, {"Location": url("pairs.pair", pair)}
+    return (
+        {},
+        201,
+        {"Location": url_for("pairs.pair", id=pair.id, follow_redirects=True)},
+    )
 
 
 @pairs.route("/pairs/<int:id>", methods=["PUT"])
