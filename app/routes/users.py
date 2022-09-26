@@ -8,7 +8,6 @@ from flask import Blueprint, request, url_for
 from app import db, token_auth
 from app.models import Lesson, Pair, User, edit, register
 from app.routes.exception import requires_fields
-from app.routes.url import url
 from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
