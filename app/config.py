@@ -42,7 +42,7 @@ def main():
     with app.app_context():
         db.create_all()
         if users.User.query.filter_by(username="bob").first() is None:
-            users.register(db, "bob", "lol")
+            users.register_user(db, "bob", "lol")
     app.run(debug=True)
 
 

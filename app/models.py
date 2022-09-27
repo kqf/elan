@@ -10,7 +10,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 
 
-def register(db: SQLAlchemy, username: str, password: str, email: str) -> User:
+def register_user(
+    db: SQLAlchemy, username: str, password: str, email: str
+) -> User:
     user = User(username=username, email=email)
     user.password_hash = generate_password_hash(password)
     db.session.add(user)
