@@ -6,7 +6,7 @@ from apifairy import authenticate, response
 from flask import Blueprint, request, url_for
 
 from app import db, token_auth
-from app.models import Lesson, Pair, User, edit, register_user
+from app.models import Lesson, Pair, User, edit_user, register_user
 from app.routes.exception import requires_fields
 from app.schemes import UserSchema
 
@@ -45,7 +45,7 @@ def create() -> tuple[dict, int, dict[str, str]]:
 @authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def update(id: int) -> dict:
-    edit(db, User.query.get_or_404(id), **request.json)  # type: ignore
+    edit_user(db, User.query.get_or_404(id), **request.json)  # type: ignore
     return {}
 
 

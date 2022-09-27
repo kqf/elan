@@ -23,7 +23,7 @@ def register_user(
     return user
 
 
-def edit(
+def edit_user(
     db: SQLAlchemy, user: User, username: str, password: str, email: str
 ) -> User:
     user.username = username
