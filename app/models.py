@@ -11,10 +11,7 @@ from app import db
 
 
 def register_user(
-    db: SQLAlchemy,
-    username: str,
-    password: str,
-    email: str,
+    db: SQLAlchemy, username: str, password: str, email: str
 ) -> User:
     user = User(username=username, email=email)
     user.password_hash = generate_password_hash(password)
