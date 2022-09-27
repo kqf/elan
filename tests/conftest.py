@@ -15,7 +15,7 @@ def app(user):
     app_ctx = app.app_context()
     app_ctx.push()
     db.create_all()
-    models.register(db, *user, email="john@example.com")
+    models.register_user(db, *user, email="john@example.com")
     with app.test_request_context():
         yield app
     db.drop_all()
