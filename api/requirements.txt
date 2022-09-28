@@ -1,0 +1,11 @@
+pytest
+click
+flask
+flask-login
+Flask-SQLAlchemy
+Flask-HTTPAuth
+flask-session
+pyjwt
+gunicorn
+apifairy
+marshmallow-sqlalchemy

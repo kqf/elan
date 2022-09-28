@@ -5,3 +5,5 @@ flask_session
 *.txt
 *.sqlite3
 .vscode/
+
+!requirements.txt
