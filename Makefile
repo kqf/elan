@@ -1,5 +1,5 @@
 all:
-	gunicorn 'app.config:build_app()'
+	gunicorn 'api.app.config:build_app()'
 
 clean:
 	rm -rf flask_session
