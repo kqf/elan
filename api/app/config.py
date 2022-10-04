@@ -1,10 +1,10 @@
 import os
 
 from flask import Flask
-from flask_session import Session
 
-import app.models as users
 from app import db, ma
+from app.models import User, register_user
+from flask_session import Session
 
 session = Session()
 
@@ -41,9 +41,10 @@ def main():
     app = build_app()
     with app.app_context():
         db.create_all()
-        if users.User.query.filter_by(username="bob").first() is None:
-            users.register_user(db, "bob", "lol")
-    app.run(debug=True)
+        if User.query.filter_by(username="bob").first() is None:
+            register_user(db, "bob", "lol", "bob@lol.com")
+    app.run()
+    return app
 
 
 if __name__ == "__main__":
