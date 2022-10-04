@@ -44,6 +44,7 @@ def main():
         if User.query.filter_by(username="bob").first() is None:
             register_user(db, "bob", "lol", "bob@lol.com")
     app.run()
+    return app
 
 
 if __name__ == "__main__":
