@@ -24,5 +24,4 @@ jobs:
         pytest --cov=app api/tests/
     - name: Pre-commit checks
       run: |
-        pre-commit run --all-files
-        cat /home/runner/work/elan/elan/api/app/config.py
+        pre-commit run --all-files || cat /home/runner/work/elan/elan/api/app/config.py
