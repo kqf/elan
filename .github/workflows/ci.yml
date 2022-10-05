@@ -25,3 +25,4 @@ jobs:
     - name: Pre-commit checks
       run: |
         pre-commit run --all-files
+        cat /home/runner/work/elan/elan/api/app/config.py
