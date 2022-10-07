@@ -15,6 +15,7 @@ repos:
       - id: isort
         name: isort (python)
         args: ["--profile", "black", "--line-length", "79"]
+        language_version: python3.10
 
 -   repo: https://github.com/psf/black
     rev: 22.8.0
