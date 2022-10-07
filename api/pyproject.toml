@@ -13,6 +13,8 @@ elan = "app.config:main"
 find = {}
 
 [tool.isort]
+profile = "black"
+line_length = 79
 skip_glob = [".git", ".idea", ".vscode", "logs/"]
 
 [tool.black]

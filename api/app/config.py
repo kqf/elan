@@ -1,10 +1,11 @@
-import os
+import os  # isort: skip
 
-from flask import Flask
+from flask import Flask  # isort: skip
 
-from app import db, ma
-from app.models import User, register_user
-from flask_session import Session
+from flask_session import Session  # isort: skip
+
+from app import db, ma  # isort: skip
+from app.models import User, register_user  # isort: skip
 
 session = Session()
 
