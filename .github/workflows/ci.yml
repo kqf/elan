@@ -24,4 +24,4 @@ jobs:
         pytest --cov=app api/tests/
     - name: Pre-commit checks
       run: |
-        cd api && pre-commit run --all-files
+        pre-commit run --all-files
