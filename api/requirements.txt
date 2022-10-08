@@ -1,6 +1,7 @@
 pytest
 click
 flask
+flask-cors
 flask-login
 Flask-SQLAlchemy
 Flask-HTTPAuth
