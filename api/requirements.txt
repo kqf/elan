@@ -9,3 +9,4 @@ pyjwt
 gunicorn
 apifairy
 marshmallow-sqlalchemy
+python-dotenv
