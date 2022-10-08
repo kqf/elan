@@ -3,6 +3,7 @@ import os  # isort: skip
 from flask import Flask  # isort: skip
 
 from flask_session import Session  # isort: skip
+from flask_cors import CORS
 
 from app import db, ma  # isort: skip
 from app.models import User, register_user  # isort: skip
@@ -34,6 +35,7 @@ def build_app():
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
     app.register_blueprint(users)
+    CORS(app)
     return app
 
 
