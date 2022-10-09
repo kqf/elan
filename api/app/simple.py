@@ -6,5 +6,5 @@ cors = CORS(app)
 
 
 @app.route("/test")
-def test() -> str:
-    return "Test"
+def test() -> dict[str, int]:
+    return {"mymessage": 123}
