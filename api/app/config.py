@@ -22,6 +22,7 @@ def build_app():
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
     app.config["CORS_HEADERS"] = "Content-Type"
+
     CORS(app)
 
     session.init_app(app)
