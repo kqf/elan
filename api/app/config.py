@@ -21,6 +21,8 @@ def build_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
+    app.config["CORS_HEADERS"] = "Content-Type"
+
     CORS(app)
 
     session.init_app(app)
@@ -46,6 +48,7 @@ def main():
         db.create_all()
         if User.query.filter_by(username="bob").first() is None:
             register_user(db, "bob", "lol", "bob@lol.com")
+    CORS(app)
     app.run()
     return app
 
