@@ -3,6 +3,7 @@ import os  # isort: skip
 from flask import Flask  # isort: skip
 
 from flask_session import Session  # isort: skip
+from flask_cors import CORS
 
 from app import db, ma  # isort: skip
 from app.models import User, register_user  # isort: skip
@@ -20,6 +21,7 @@ def build_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
+    CORS(app)
 
     session.init_app(app)
     db.init_app(app)
