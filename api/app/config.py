@@ -21,6 +21,7 @@ def build_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["ACCESS_TOKEN_MINUTES"] = 90
     app.config["REFRESH_TOKEN_DAYS"] = 180
+    CORS(app)
 
     session.init_app(app)
     db.init_app(app)
@@ -35,7 +36,6 @@ def build_app():
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
     app.register_blueprint(users)
-    CORS(app)
     return app
 
 
