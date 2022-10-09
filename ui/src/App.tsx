@@ -4,9 +4,9 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState(0)
   useEffect(() => {
-    fetch('/users').then(res => {
-      console.log(res)
-      return res.json
+    fetch('/test').then(res => {
+      console.log("feteched ->>>", res.json())
+      return [];
     }).then(data => {
       setUsers(data.length)
     })
