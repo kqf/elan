@@ -1,5 +1,6 @@
 import os
 
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -10,6 +11,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     os.path.dirname(__file__), "../data-dev.sqlite3"
 )
+
 
 
 @app.route("/test")
