@@ -11,7 +11,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     os.path.dirname(__file__), "../data-dev.sqlite3"
 )
 
-
 @app.route("/test")
 def test() -> dict[str, int]:
     return {"mymessage": 123}
