@@ -1,7 +1,7 @@
 import os
 
-from flask import Flask
-from flask_cors import CORS
+from flask import Flask  # isort: skip
+from flask_cors import CORS  # isort: skip
 
 app = Flask(__name__)
 cors = CORS(app)
