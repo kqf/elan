@@ -10,6 +10,9 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     os.path.dirname(__file__), "../data-dev.sqlite3"
 )
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+app.config["ACCESS_TOKEN_MINUTES"] = 90
+app.config["REFRESH_TOKEN_DAYS"] = 18
 
 
 @app.route("/test")
