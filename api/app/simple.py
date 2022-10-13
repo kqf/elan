@@ -1,4 +1,4 @@
-import os
+import os  # isort: skip
 
 from flask import Flask  # isort: skip
 from flask_cors import CORS  # isort: skip
