@@ -15,7 +15,6 @@ app.config["ACCESS_TOKEN_MINUTES"] = 90
 app.config["REFRESH_TOKEN_DAYS"] = 18
 
 
-
 @app.route("/test")
 def test() -> dict[str, int]:
     return {"mymessage": 123}
