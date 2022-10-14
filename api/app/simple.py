@@ -16,5 +16,5 @@ app.config["REFRESH_TOKEN_DAYS"] = 18
 
 
 @app.route("/test")
-def test() -> dict[str, int]:
-    return {"mymessage": 123}
+def test() -> dict[str, str]:
+    return {"mymessage": "Hello world"}
