@@ -5,10 +5,10 @@ function App() {
   const [users, setUsers] = useState(0)
   useEffect(() => {
     fetch('/test').then(res => {
-      console.log("feteched ->>>", res.json())
-      return [];
+      return res.json()
     }).then(data => {
-      setUsers(data.length)
+      console.log(data)
+      setUsers(data["payload"])
     })
   }, [])
   return (
