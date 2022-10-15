@@ -2,12 +2,14 @@ import os  # isort: skip
 
 from flask import Flask  # isort: skip
 from flask_cors import CORS  # isort: skip
-from app import db, ma  # isort: skip
+from app import db  # isort: skip
 
-from app.routes.auth import auths
-from app.routes.lesson import lessons
-from app.routes.pair import pairs
-from app.routes.users import users
+# from app import ma  # isort: skip
+
+# from app.routes.auth import auths
+# from app.routes.lesson import lessons
+# from app.routes.pair import pairs
+# from app.routes.users import users
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -20,13 +22,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["ACCESS_TOKEN_MINUTES"] = 90
 app.config["REFRESH_TOKEN_DAYS"] = 18
 db.init_app(app)
-db.init_app(ma)
+# db.init_app(ma)
 
 
-app.register_blueprint(lessons)
-app.register_blueprint(pairs)
-app.register_blueprint(auths)
-app.register_blueprint(users)
+# app.register_blueprint(lessons)
+# app.register_blueprint(pairs)
+# app.register_blueprint(auths)
+# app.register_blueprint(users)
 
 
 @app.route("/test")
