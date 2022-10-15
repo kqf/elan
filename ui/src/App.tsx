@@ -8,7 +8,7 @@ function App() {
       return res.json()
     }).then(data => {
       console.log(data)
-      setUsers(data["payload"])
+      setUsers(data["mymessage"])
     })
   }, [])
   return (
