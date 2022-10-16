@@ -6,10 +6,10 @@ from app import db  # isort: skip
 
 from app import ma  # isort: skip
 
-# from app.routes.auth import auths
-# from app.routes.lesson import lessons
-# from app.routes.pair import pairs
-# from app.routes.users import users
+from app.routes.auth import auths
+from app.routes.lesson import lessons
+from app.routes.pair import pairs
+from app.routes.users import users
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -26,10 +26,10 @@ db.init_app(db)
 ma.init_app(app)
 
 
-# app.register_blueprint(lessons)
-# app.register_blueprint(pairs)
-# app.register_blueprint(auths)
-# app.register_blueprint(users)
+app.register_blueprint(lessons)
+app.register_blueprint(pairs)
+app.register_blueprint(auths)
+app.register_blueprint(users)
 
 
 @app.route("/test")
