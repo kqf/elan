@@ -4,7 +4,7 @@ from flask import Flask  # isort: skip
 from flask_cors import CORS  # isort: skip
 from app import db  # isort: skip
 
-# from app import ma  # isort: skip
+from app import ma  # isort: skip
 
 # from app.routes.auth import auths
 # from app.routes.lesson import lessons
@@ -23,6 +23,7 @@ app.config["ACCESS_TOKEN_MINUTES"] = 90
 app.config["REFRESH_TOKEN_DAYS"] = 18
 db.init_app(app)
 db.init_app(db)
+ma.init_app(app)
 
 
 # app.register_blueprint(lessons)
