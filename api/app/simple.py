@@ -22,7 +22,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["ACCESS_TOKEN_MINUTES"] = 90
 app.config["REFRESH_TOKEN_DAYS"] = 18
 db.init_app(app)
-# db.init_app(ma)
+db.init_app(db)
 
 
 # app.register_blueprint(lessons)
