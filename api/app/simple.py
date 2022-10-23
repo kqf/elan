@@ -10,7 +10,6 @@ from app.routes.lesson import lessons
 from app.routes.pair import pairs
 from app.routes.users import users
 
-
 simple = Blueprint("simple", __name__)
 
 
