@@ -1,6 +1,6 @@
 import os  # isort: skip
 
-from flask import Flask  # isort: skip
+from flask import Blueprint, Flask  # isort: skip
 from flask_cors import CORS  # isort: skip
 from app import db  # isort: skip
 from app import ma  # isort: skip
@@ -11,7 +11,10 @@ from app.routes.pair import pairs
 from app.routes.users import users
 
 
-@app.route("/test")
+simple = Blueprint("simple", __name__)
+
+
+@simple.route("/test")
 def test() -> dict[str, str]:
     return {"mymessage": "Hello world"}
 
@@ -34,4 +37,5 @@ def main():
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
     app.register_blueprint(users)
+    app.register_blueprint(simple)
     return app
