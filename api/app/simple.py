@@ -20,7 +20,7 @@ def test() -> dict[str, str]:
 
 def main():
     app = Flask(__name__)
-    cors = CORS(app)
+    CORS(app)
     app.config["SECRET_KEY"] = "SECRET_KEY"
     app.config["SESSION_TYPE"] = "filesystem"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
