@@ -20,7 +20,7 @@ def build_app():
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     app.config["ACCESS_TOKEN_MINUTES"] = 90
-    app.config["REFRESH_TOKEN_DAYS"] = 180
+    # app.config["REFRESH_TOKEN_DAYS"] = 180
     CORS(app)
 
     session.init_app(app)
