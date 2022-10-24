@@ -11,3 +11,9 @@ gunicorn
 apifairy
 marshmallow-sqlalchemy
 python-dotenv
+
+# dev
+isort
+mypy
+black
+pre-commit
