@@ -18,7 +18,7 @@ def test() -> dict[str, str]:
     return {"mymessage": "Hello world"}
 
 
-def main():
+def build_app():
     app = Flask(__name__)
     CORS(app)
     app.config["SECRET_KEY"] = "SECRET_KEY"
@@ -38,3 +38,17 @@ def main():
     app.register_blueprint(users)
     app.register_blueprint(simple)
     return app
+
+
+def main():
+    app = build_app()
+    # with app.app_context():
+    #     db.create_all()
+    #     if User.query.filter_by(username="bob").first() is None:
+    #         register_user(db, "bob", "lol", "bob@lol.com")
+    app.run()
+    return app
+
+
+if __name__ == "__main__":
+    main()
