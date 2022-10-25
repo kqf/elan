@@ -1,6 +1,6 @@
 import os  # isort: skip
 
-from flask import Flask  # isort: skip
+from flask import Blueprint, Flask  # isort: skip
 
 from flask_session import Session  # isort: skip
 from flask_cors import CORS
@@ -9,6 +9,13 @@ from app import db, ma  # isort: skip
 from app.models import User, register_user  # isort: skip
 
 session = Session()
+
+debug = Blueprint("debug", __name__)
+
+
+@debug.route("/test")
+def test() -> dict[str, str]:
+    return {"payloads": "<---- Hello world ---->"}
 
 
 def build_app():
@@ -36,6 +43,7 @@ def build_app():
     app.register_blueprint(pairs)
     app.register_blueprint(auths)
     app.register_blueprint(users)
+    app.register_blueprint(debug)
     return app
 
 
