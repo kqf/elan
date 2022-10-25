@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState(0)
   useEffect(() => {
-    fetch('/test').then(res => {
+    fetch('/users').then(res => {
       return res.json()
     }).then(data => {
       console.log(data)
