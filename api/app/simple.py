@@ -10,12 +10,14 @@ from app.routes.lesson import lessons
 from app.routes.pair import pairs
 from app.routes.users import users
 
+from app.models import User, register_user  # isort: skip
+
 simple = Blueprint("simple", __name__)
 
 
 @simple.route("/test")
 def test() -> dict[str, str]:
-    return {"mymessage": "Hello world"}
+    return {"mymessage": "Hello world ---->"}
 
 
 def build_app():
@@ -42,10 +44,10 @@ def build_app():
 
 def main():
     app = build_app()
-    # with app.app_context():
-    #     db.create_all()
-    #     if User.query.filter_by(username="bob").first() is None:
-    #         register_user(db, "bob", "lol", "bob@lol.com")
+    with app.app_context():
+        db.create_all()
+        if User.query.filter_by(username="bob").first() is None:
+            register_user(db, "bob", "lol", "bob@lol.com")
     app.run()
     return app
 
