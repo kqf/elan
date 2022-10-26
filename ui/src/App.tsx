@@ -4,11 +4,11 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState(0)
   useEffect(() => {
-    fetch('/users').then(res => {
+    fetch('/test').then(res => {
       return res.json()
     }).then(data => {
       console.log(data)
-      setUsers(data["mymessage"])
+      setUsers(data["payloads"])
     })
   }, [])
   return (
