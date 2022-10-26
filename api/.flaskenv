@@ -1,1 +1,1 @@
-FLASK_APP=app.simple:main
+FLASK_APP=app.config:main
