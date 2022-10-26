@@ -1,8 +1,9 @@
 FROM python:3.10
 WORKDIR /app
 
-COPY api/requirements.txt api/app api/.flaskenv ./
+COPY api/* ./
 RUN pip install -r ./requirements.txt
+RUN pip install -e .
 ENV FLASK_ENV production
 
 EXPOSE 5000
