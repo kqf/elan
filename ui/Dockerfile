@@ -2,7 +2,7 @@
 FROM node:16-alpine as build-step
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY ./ui/package.json ./ui/yarn.lock ./
+COPY ./ui/package.json ./
 COPY ./ui/src ./src
 RUN npm install
 # Build step #2: build an nginx container
