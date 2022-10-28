@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: channel-api
+    command: gunicorn -b :5000 api:app
+    ports:
+      - 8080:80
