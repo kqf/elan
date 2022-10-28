@@ -5,7 +5,3 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY ./ui/package.json ./
 COPY ./ui/src ./src
 RUN npm install
-# Build step #2: build an nginx container
-FROM nginx:stable-alpine
-COPY --from=build-step /app/build /usr/share/nginx/html
-COPY deployment/nginx.default.conf /etc/nginx/conf.d/default.conf
