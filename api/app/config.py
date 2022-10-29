@@ -54,7 +54,6 @@ def main():
         db.create_all()
         if User.query.filter_by(username="bob").first() is None:
             register_user(db, "bob", "lol", "bob@lol.com")
-    app.run()
     return app
 
 
