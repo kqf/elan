@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "api": "cd ../api && flask run --no-debugger",
+    "api": "gunicorn -b :5050 'app.config:main()' --chdir ../api",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
