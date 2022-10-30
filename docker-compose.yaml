@@ -4,10 +4,13 @@ services:
       context: .
       dockerfile: api/Dockerfile
     image: react-flask-app-api
+    command: gunicorn -b :5050 'app.config:main()'
     ports:
       - 5050:5050
     networks:
       - elan-network
+    volumes:
+      - ./api:/app
 
 networks:
   elan-network:
