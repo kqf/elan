@@ -2,7 +2,7 @@
 FROM node:16-alpine as build-step
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY ./ui ./
+COPY ./ui .
 RUN npm install
 
 EXPOSE 3000
