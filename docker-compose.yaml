@@ -7,8 +7,6 @@ services:
     command: gunicorn -b :5050 'app.config:main()'
     ports:
       - 5050:5050
-    networks:
-      - elan-network
     volumes:
       - ./api:/app
 
@@ -20,15 +18,9 @@ services:
     command: npm run start
     ports:
       - 3000:3000
-    networks:
-      - elan-network
     volumes:
       - ./ui:/app
     depends_on:
       - elan-api
     links:
      - elan-api
-
-networks:
-  elan-network:
-    driver: bridge
