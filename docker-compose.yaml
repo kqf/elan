@@ -1,9 +1,17 @@
 services:
-  app:
-    build: .
-    container_name: channel-api
-    command: gunicorn -b :5000 api:app
+  elan-api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    image: react-flask-app-api
+    command: gunicorn -b :5050 'app.config:main()'
     ports:
-      - 8080:80
+      - 5050:5050
+    networks:
+      - elan-network
     volumes:
-      - ./:./app
+      - ./api:/app
+
+networks:
+  elan-network:
+    driver: bridge
