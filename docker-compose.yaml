@@ -7,11 +7,19 @@ services:
     command: gunicorn -b :5050 'app.config:main()'
     ports:
       - 5050:5050
-    networks:
-      - elan-network
     volumes:
       - ./api:/app
 
-networks:
-  elan-network:
-    driver: bridge
+  elan-ui:
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+    image: react-flask-app-ui
+    command: npm run start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./ui:/app
+    depends_on:
+      - elan-api
+
