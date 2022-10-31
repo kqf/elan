@@ -12,7 +12,10 @@ async function click() {
   if (!response.ok) {
     return response.status === 401 ? 'fail' : 'error';
   }
+  // @ts-ignore
   localStorage.setItem('accessToken', response.body.access_token);
+
+  // @ts-ignore
   console.log("Fetched the token ->", response.body.access_token);
 }
 
