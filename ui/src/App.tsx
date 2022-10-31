@@ -20,11 +20,11 @@ function App() {
       <header className="App-header">
         <p>Hello world</p>
         <p> {users}</p>
-      </header>
 
       <button onClick={click}>
-        Activate Lasers
-      </button>
+            Generate token
+          </button>
+      </header>
     </div>
   );
 }
