@@ -22,4 +22,3 @@ services:
       - ./ui:/app
     depends_on:
       - elan-api
-
