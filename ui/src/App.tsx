@@ -1,8 +1,19 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-function click() {
-  console.log("Clicked on event");
+async function click() {
+  const response = await fetch('/tokens',
+  {
+    headers: {
+      Authorization:  'Basic ' + btoa("bob:lol")
+    }
+  });
+
+  if (!response.ok) {
+    return response.status === 401 ? 'fail' : 'error';
+  }
+  localStorage.setItem('accessToken', response.body.access_token);
+  console.log("Fetched the token ->", response.body.access_token);
 }
 
 function App() {
