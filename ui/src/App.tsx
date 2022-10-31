@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+function click() {
+  console.log("Clicked on event");
+}
+
 function App() {
   const [users, setUsers] = useState(0)
   useEffect(() => {
@@ -16,6 +20,10 @@ function App() {
       <header className="App-header">
         <p>Hello world</p>
         <p> {users}</p>
+
+      <button onClick={click}>
+            Generate token
+          </button>
       </header>
     </div>
   );
