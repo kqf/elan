@@ -17,10 +17,10 @@ async function click() {
   var body = await response.json();
 
   // @ts-ignore
-  localStorage.setItem('accessToken', body.access_token);
+  localStorage.setItem('accessToken', body.token);
 
   // @ts-ignore
-  console.log("Fetched the token ->", body.access_token);
+  console.log("Fetched the token ->", body.token);
 }
 
 function App() {
