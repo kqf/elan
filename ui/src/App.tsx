@@ -4,8 +4,8 @@ import './App.css';
 async function click() {
   const response = await fetch('/tokens',
   {
+    method: "POST",
     headers: {
-      method: "POST",
       Authorization:  'Basic ' + btoa("bob:lol")
     }
   });
