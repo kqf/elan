@@ -5,6 +5,7 @@ async function click() {
   const response = await fetch('/tokens',
   {
     headers: {
+      method: "POST",
       Authorization:  'Basic ' + btoa("bob:lol")
     }
   });
