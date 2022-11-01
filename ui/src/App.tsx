@@ -13,11 +13,14 @@ async function click() {
   if (!response.ok) {
     return response.status === 401 ? 'fail' : 'error';
   }
-  // @ts-ignore
-  localStorage.setItem('accessToken', response.body.access_token);
+
+  var body = await response.json();
 
   // @ts-ignore
-  console.log("Fetched the token ->", response.body.access_token);
+  localStorage.setItem('accessToken', body.token);
+
+  // @ts-ignore
+  console.log("Fetched the token ->", body.token);
 }
 
 function App() {
