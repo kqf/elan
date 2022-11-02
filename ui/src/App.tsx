@@ -21,7 +21,7 @@ async function click() {
 
   // @ts-ignore
   console.log("Fetched the token ->", body.token);
-  const userResponse  = await fetch('/users', {
+  const userResponse  = await fetch('http://localhost:5050/users', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
