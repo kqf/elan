@@ -21,6 +21,17 @@ async function click() {
 
   // @ts-ignore
   console.log("Fetched the token ->", body.token);
+  const userResponse  = await fetch('/users', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+    },
+    credentials: 'omit',
+  });
+
+  var body = await userResponse.json();
+  console.log(body)
 }
 
 function App() {
