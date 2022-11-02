@@ -30,8 +30,8 @@ async function click() {
     credentials: 'omit',
   });
 
-  var body = await userResponse.json();
-  console.log(body)
+  var ubody = await userResponse.json();
+  console.log(ubody)
 }
 
 function App() {
