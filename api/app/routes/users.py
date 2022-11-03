@@ -17,7 +17,7 @@ user_schema = UserSchema()
 
 @users.route("/users/", methods=["GET"])
 # @authenticate(token_auth)
-# @response(users_schema)
+@response(users_schema)
 def uusers() -> User:
     return User.query.all()
 
