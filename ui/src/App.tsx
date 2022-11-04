@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 async function click() {
-  const response = await fetch('/tokens',
+  const response = await fetch('/users',
   {
     method: "POST",
     headers: {
@@ -22,7 +22,7 @@ async function click() {
   // @ts-ignore
   console.log("Fetched the token ->", body.token);
   const userResponse  = await fetch('http://localhost:5050/users', {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
