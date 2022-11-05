@@ -4,7 +4,7 @@ import './App.css';
 async function click() {
   const response = await fetch('/users',
   {
-    method: "POST",
+    method: "GET",
     headers: {
       Authorization:  'Basic ' + btoa("bob:lol")
     }
@@ -21,7 +21,7 @@ async function click() {
 
   // @ts-ignore
   console.log("Fetched the token ->", body.token);
-  const userResponse  = await fetch('http://localhost:5050/users', {
+  const userResponse  = await fetch('/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
