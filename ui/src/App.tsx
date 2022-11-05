@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 async function click() {
-  const response = await fetch('/users',
+  const response = await fetch('/tokens',
   {
     method: "GET",
     headers: {
