@@ -21,6 +21,10 @@ async function click() {
 
   // @ts-ignore
   console.log("Fetched the token ->", body.token);
+
+}
+
+async function users() {
   const userResponse  = await fetch('/users/', {
     method: 'GET',
     headers: {
@@ -29,7 +33,6 @@ async function click() {
     },
     credentials: 'omit',
   });
-
   var ubody = await userResponse.json();
   console.log(ubody)
 }
