@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-async function click() {
+async function authentificate() {
   const response = await fetch('/tokens',
   {
     method: "POST",
@@ -18,9 +18,9 @@ async function click() {
 
   // @ts-ignore
   localStorage.setItem('accessToken', body.token);
+}
 
-  // @ts-ignore
-  console.log("Fetched the token ->", body.token);
+async function updateUsers() {
   const userResponse  = await fetch('/users/', {
     method: 'GET',
     headers: {
@@ -29,13 +29,14 @@ async function click() {
     },
     credentials: 'omit',
   });
-
   var ubody = await userResponse.json();
   console.log(ubody)
 }
 
 function App() {
   const [users, setUsers] = useState(0)
+  authentificate()
+
   useEffect(() => {
     fetch('/test').then(res => {
       return res.json()
@@ -44,16 +45,15 @@ function App() {
       setUsers(data["payloads"])
     })
   }, [])
+
   return (
     <div className="App">
       <header className="App-header">
         <p>Hello world</p>
-        <p> {users}</p>
-
-      <button onClick={click}>
-            Generate token
-          </button>
-      </header>
+        <button onClick={updateUsers}>
+              Here is the list of users {users}
+            </button>
+        </header>
     </div>
   );
 }
