@@ -4,7 +4,7 @@ import './App.css';
 async function authentificate() {
   const response = await fetch('/tokens',
   {
-    method: "POST",
+    method: "GET",
     headers: {
       Authorization:  'Basic ' + btoa("bob:lol")
     }
@@ -20,6 +20,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
+
 async function updateUsers() {
   const userResponse  = await fetch('/users/', {
     method: 'GET',
@@ -29,6 +30,7 @@ async function updateUsers() {
     },
     credentials: 'omit',
   });
+
   var ubody = await userResponse.json();
   console.log(ubody)
 }
