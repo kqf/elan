@@ -20,9 +20,9 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-
 async function updateUsers() {
   const userResponse  = await fetch('/users/', {
+
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
