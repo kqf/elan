@@ -4,7 +4,7 @@ import './App.css';
 async function authentificate() {
   const response = await fetch('/tokens',
   {
-    method: "GET",
+    method: "POST",
     headers: {
       Authorization:  'Basic ' + btoa("bob:lol")
     }
