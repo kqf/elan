@@ -4,7 +4,7 @@ import './App.css';
 async function authentificate() {
   const response = await fetch('/tokens',
   {
-    method: "GET",
+    method: "POST",
     headers: {
       Authorization:  'Basic ' + btoa("bob:lol")
     }
@@ -37,7 +37,6 @@ async function updateUsers() {
 
 function App() {
   const [users, setUsers] = useState(0)
-  authentificate()
 
   useEffect(() => {
     fetch('/test').then(res => {
@@ -52,9 +51,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Hello world</p>
-        <button onClick={updateUsers}>
+          <button onClick={updateUsers}>
               Here is the list of users {users}
-            </button>
+          </button>
         </header>
     </div>
   );
