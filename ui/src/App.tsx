@@ -36,14 +36,14 @@ async function updateUsers() {
 }
 
 function App() {
-  const [users, setUsers] = useState(0)
+  const [users, setUsers] = useState("");
+  const [message, setMessage] = useState(0);
 
   useEffect(() => {
     fetch('/test').then(res => {
       return res.json()
     }).then(data => {
-      console.log(data)
-      setUsers(data["payloads"])
+      setMessage(data["payloads"])
     })
   }, [])
 
@@ -51,9 +51,15 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Hello world</p>
-          <button onClick={updateUsers}>
-              Here is the list of users {users}
+          Server response:
+          {message}
+          <button onClick={authentificate}>
+            Generate the token
           </button>
+          <button onClick={updateUsers}>
+              Get the list of users
+          </button>
+          {users}
         </header>
     </div>
   );
