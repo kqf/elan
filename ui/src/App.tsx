@@ -20,7 +20,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-async function updateUsers() {
+async function updateUsers(users: any) {
   const userResponse  = await fetch('/users/', {
 
     method: 'GET',
@@ -33,9 +33,10 @@ async function updateUsers() {
 
   var ubody = await userResponse.json();
   console.log(ubody)
+  users = ubody;
 }
 
-function StatusWidget(props: any) {
+function StatusWidget(props: {message: string, users: Array<any>}) {
   return (
     <div className="App">
       <header className="App-header">
@@ -45,7 +46,7 @@ function StatusWidget(props: any) {
           <button onClick={authentificate}>
             Generate the token
           </button>
-          <button onClick={updateUsers}>
+          <button onClick={() => {updateUsers(props.users)}}>
               Get the list of users
           </button>
           {props.users}
@@ -56,7 +57,8 @@ function StatusWidget(props: any) {
 
 function App() {
   const [users, setUsers] = useState("");
-  const [message, setMessage] = useState(0);
+  const [message, setMessage] = useState("");
+
 
   useEffect(() => {
     fetch('/test').then(res => {
@@ -65,7 +67,8 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={users}/>
+  return <StatusWidget message={message} users={[users]}/>
+
 }
 
 export default App;
