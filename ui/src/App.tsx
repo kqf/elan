@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+interface User{
+  email: string,
+  id: Number,
+  username: string,
+};
+
 async function authentificate() {
   const response = await fetch('/tokens',
   {
@@ -20,7 +26,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-async function updateUsers(users: any) {
+async function updateUsers(users: Array<User>) {
   const userResponse  = await fetch('/users/', {
 
     method: 'GET',
@@ -56,9 +62,7 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
 }
 
 function App() {
-  const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
-
 
   useEffect(() => {
     fetch('/test').then(res => {
@@ -67,7 +71,7 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[users]}/>
+  return <StatusWidget message={message} users={[]}/>
 
 }
 
