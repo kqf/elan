@@ -59,6 +59,7 @@ function App() {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
 
+
   useEffect(() => {
     fetch('/test').then(res => {
       return res.json()
@@ -67,6 +68,7 @@ function App() {
     })
   }, [])
   return <StatusWidget message={message} users={[users]}/>
+
 }
 
 export default App;
