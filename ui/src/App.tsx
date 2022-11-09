@@ -35,7 +35,7 @@ async function updateUsers() {
   console.log(ubody)
 }
 
-function StatusWidget(props: any) {
+function StatusWidget(props: {message: string, users: Array<any>}) {
   return (
     <div className="App">
       <header className="App-header">
@@ -56,7 +56,7 @@ function StatusWidget(props: any) {
 
 function App() {
   const [users, setUsers] = useState("");
-  const [message, setMessage] = useState(0);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     fetch('/test').then(res => {
@@ -65,7 +65,7 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={users}/>
+  return <StatusWidget message={message} users={[users]}/>
 }
 
 export default App;
