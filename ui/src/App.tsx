@@ -55,7 +55,9 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
           <button onClick={() => {updateUsers(props.users)}}>
               Get the list of users
           </button>
-          {props.users}
+          <div>
+            {props.users.map(user => <p>{user.username}</p>)}
+          </div>
         </header>
     </div>
   );
@@ -71,7 +73,7 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[]}/>
+  return <StatusWidget message={message} users={[{username: "LOL", id: -1, emai: "None"}]}/>
 
 }
 
