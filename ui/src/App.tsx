@@ -35,6 +35,25 @@ async function updateUsers() {
   console.log(ubody)
 }
 
+function StatusWidget(props: any) {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>Hello world</p>
+          Server response:
+          {props.message}
+          <button onClick={authentificate}>
+            Generate the token
+          </button>
+          <button onClick={updateUsers}>
+              Get the list of users
+          </button>
+          {props.users}
+        </header>
+    </div>
+  );
+}
+
 function App() {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState(0);
@@ -46,23 +65,7 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Hello world</p>
-          Server response:
-          {message}
-          <button onClick={authentificate}>
-            Generate the token
-          </button>
-          <button onClick={updateUsers}>
-              Get the list of users
-          </button>
-          {users}
-        </header>
-    </div>
-  );
+  return <StatusWidget message={message} users={users}/>
 }
 
 export default App;
