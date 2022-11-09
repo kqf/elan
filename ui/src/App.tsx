@@ -20,7 +20,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-async function updateUsers() {
+async function updateUsers(users: any) {
   const userResponse  = await fetch('/users/', {
 
     method: 'GET',
@@ -33,6 +33,7 @@ async function updateUsers() {
 
   var ubody = await userResponse.json();
   console.log(ubody)
+  users = ubody;
 }
 
 function StatusWidget(props: {message: string, users: Array<any>}) {
@@ -45,7 +46,7 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
           <button onClick={authentificate}>
             Generate the token
           </button>
-          <button onClick={updateUsers}>
+          <button onClick={() => {updateUsers(props.users)}}>
               Get the list of users
           </button>
           {props.users}
