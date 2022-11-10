@@ -26,7 +26,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-async function updateUsers(users: Array<User>) {
+async function updateUsers(setUsers: any) {
   const userResponse  = await fetch('/users/', {
 
     method: 'GET',
@@ -39,10 +39,11 @@ async function updateUsers(users: Array<User>) {
 
   var ubody = await userResponse.json();
   console.log(ubody)
-  users = ubody;
+  setUsers(ubody)
 }
 
 function StatusWidget(props: {message: string, users: Array<any>}) {
+  const [users, setUsers] = useState(props.users);
   return (
     <div className="App">
       <header className="App-header">
@@ -52,11 +53,11 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
           <button onClick={authentificate}>
             Generate the token
           </button>
-          <button onClick={() => {updateUsers(props.users)}}>
+          <button onClick={() => {updateUsers(setUsers)}}>
               Get the list of users
           </button>
           <div>
-            {props.users.map(user => <p>{user.username}</p>)}
+            {users.map(user => <p>{user.username}</p>)}
           </div>
         </header>
     </div>
@@ -73,7 +74,7 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[{username: "LOL", id: -1, emai: "None"}]}/>
+  return <StatusWidget message={message} users={[{username: "No user exist", id: -1, emai: "None"}]}/>
 
 }
 
