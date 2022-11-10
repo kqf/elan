@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-interface User{
+interface User {
   email: string,
   id: Number,
   username: string,
@@ -26,7 +26,7 @@ async function authentificate() {
   localStorage.setItem('accessToken', body.token);
 }
 
-async function updateUsers(setUsers: any) {
+async function updateUsers() {
   const userResponse  = await fetch('/users/', {
 
     method: 'GET',
@@ -37,9 +37,7 @@ async function updateUsers(setUsers: any) {
     credentials: 'omit',
   });
 
-  var ubody = await userResponse.json();
-  console.log(ubody)
-  setUsers(ubody)
+  return userResponse.json();
 }
 
 function StatusWidget(props: {message: string, users: Array<any>}) {
@@ -53,7 +51,7 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
           <button onClick={authentificate}>
             Generate the token
           </button>
-          <button onClick={() => {updateUsers(setUsers)}}>
+          <button onClick={() => {updateUsers().then(setUsers)}}>
               Get the list of users
           </button>
           <div>
