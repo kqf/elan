@@ -74,8 +74,9 @@ function App() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[{username: "No user exist", id: -1, emai: "None"}]}/>
-
+  return <StatusWidget message={message} users={[
+    {username: "No user exist", id: -1, emai: "None"}
+  ]}/>
 }
 
 export default App;
