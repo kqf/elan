@@ -40,7 +40,7 @@ interface User {
   username: string,
 };
 
-function StatusWidget(props: {message: string, users: Array<any>}) {
+function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   return (
     <div className="App">
