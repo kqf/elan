@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-interface User {
-  email: string,
-  id: Number,
-  username: string,
-};
-
 async function authentificate() {
   const response = await fetch('/tokens',
   {
@@ -40,7 +34,13 @@ async function updateUsers() {
   return userResponse.json();
 }
 
-function StatusWidget(props: {message: string, users: Array<any>}) {
+interface User {
+  email: string,
+  id: Number,
+  username: string,
+};
+
+function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   return (
     <div className="App">
