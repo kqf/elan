@@ -73,7 +73,7 @@ function App() {
     })
   }, [])
   return <StatusWidget message={message} users={[
-    {username: "No user exist", id: -1, emai: "None"}
+    {username: "No user exist", id: -1, email: "None"}
   ]}/>
 }
 
