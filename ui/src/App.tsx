@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-interface User {
-  email: string,
-  id: Number,
-  username: string,
-};
-
 async function authentificate() {
   const response = await fetch('/tokens',
   {
@@ -40,7 +34,13 @@ async function updateUsers() {
   return userResponse.json();
 }
 
-function StatusWidget(props: {message: string, users: Array<any>}) {
+interface User {
+  email: string,
+  id: Number,
+  username: string,
+};
+
+function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   return (
     <div className="App">
@@ -55,7 +55,7 @@ function StatusWidget(props: {message: string, users: Array<any>}) {
               Get the list of users
           </button>
           <div>
-            {users.map(user => <p>{user.username}</p>)}
+            {users.map(user => <p key={user.id.toString()}>{user.username}</p>)}
           </div>
         </header>
     </div>
@@ -73,7 +73,7 @@ function App() {
     })
   }, [])
   return <StatusWidget message={message} users={[
-    {username: "No user exist", id: -1, emai: "None"}
+    {username: "No user exist", id: -1, email: "None"}
   ]}/>
 }
 
