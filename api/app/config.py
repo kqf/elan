@@ -54,7 +54,7 @@ def main():
         db.create_all()
         for name in ["bob", "jack", "peter"]:
             if User.query.filter_by(username=name).first() is None:
-                register_user(db, name, "lol", f"{name}@lol.com")
+                register_user(db, name, name, f"{name}@lol.com")
     return app
 
 
