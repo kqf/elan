@@ -62,7 +62,7 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
   );
 }
 
-function authDemo() {
+function AuthDemo() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -77,4 +77,4 @@ function authDemo() {
   ]}/>
 }
 
-export default authDemo;
+export default AuthDemo;
