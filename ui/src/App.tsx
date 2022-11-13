@@ -2,7 +2,7 @@ import './App.css';
 import AuthDemo from './components/authDemo';
 
 function App() {
-  <AuthDemo />
+  return <AuthDemo />
 }
 
 export default App;
