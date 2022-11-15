@@ -47,7 +47,7 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
         <p>Hello world</p>
           Server response:
           {props.message}
-          <button onClick={authentificate}>
+          <button className="btn btn-secondary btn-sm" onClick={authentificate}>
             Generate the token
           </button>
           <button className="btn btn-secondary btn-sm" onClick={() => {updateUsers().then(setUsers)}}>
