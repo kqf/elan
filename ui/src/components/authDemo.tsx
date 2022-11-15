@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import 'src/App.css';
 
 async function authentificate() {
   const response = await fetch('/tokens',
