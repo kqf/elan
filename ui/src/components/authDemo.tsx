@@ -55,7 +55,9 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
               Get the list of users
           </button>
           <div>
-            {users.map(user => <p key={user.id.toString()}>{user.username}</p>)}
+            <ul>
+               {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
+            </ul>
           </div>
         </header>
     </div>
