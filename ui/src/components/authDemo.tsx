@@ -73,9 +73,7 @@ function AuthDemo() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[
-    {username: "No user exist", id: -1, email: "None"}
-  ]}/>
+  return <StatusWidget message={message} users={[]}/>
 }
 
 export default AuthDemo;
