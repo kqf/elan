@@ -54,6 +54,7 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
               Get the list of users
           </button>
           <div>
+            {users.length === 0 && <p> No users exist</p>}
             <ul>
                {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
             </ul>
@@ -73,9 +74,7 @@ function AuthDemo() {
       setMessage(data["payloads"])
     })
   }, [])
-  return <StatusWidget message={message} users={[
-    {username: "No user exist", id: -1, email: "None"}
-  ]}/>
+  return <StatusWidget message={message} users={[]}/>
 }
 
 export default AuthDemo;
