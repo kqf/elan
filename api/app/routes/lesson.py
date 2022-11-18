@@ -9,7 +9,14 @@ from app.schemes import LessonSchema, PairSchema
 lessons = Blueprint("lessons", __name__)
 
 lesson_schema = LessonSchema()
+lessons_schema = LessonSchema(many=True)
 pairs_schema = PairSchema(many=True)
+
+
+@lessons.route("/lessons/", methods=["GET"])
+@response(lessons_schema)
+def lessons_(id) -> Lesson:
+    return Lesson.query.all()
 
 
 @lessons.route("/lessons/<int:id>", methods=["GET"])
