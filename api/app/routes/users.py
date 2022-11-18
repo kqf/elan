@@ -23,7 +23,7 @@ def uusers() -> User:
 
 
 @users.route("/users/<int:id>", methods=["GET"])
-# @authenticate(token_auth)
+@authenticate(token_auth)
 @response(user_schema)
 def user(id: int) -> User:
     return User.query.get_or_404(id)
