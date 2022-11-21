@@ -41,6 +41,7 @@ interface User {
 
 function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -50,7 +51,10 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
           <button className="btn btn-secondary btn-sm" onClick={authentificate}>
             Generate the token
           </button>
-          <button className="btn btn-secondary btn-sm" onClick={() => {updateUsers().then(setUsers)}}>
+          <button className="btn btn-secondary btn-sm"
+                  disabled={localStorage.getItem('accessToken') == null}
+                  onClick={() => {updateUsers().then(setUsers)}}
+          >
               Get the list of users
           </button>
           <div>
