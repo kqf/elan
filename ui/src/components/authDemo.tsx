@@ -20,7 +20,7 @@ async function authentificate() {
 }
 
 async function updateUsers() {
-  const userResponse  = await fetch('/users', {
+  const userResponse  = await fetch('/users/', {
 
     method: 'GET',
     headers: {
