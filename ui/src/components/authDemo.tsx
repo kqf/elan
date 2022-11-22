@@ -43,11 +43,14 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   const [logged, checkLogged] = useState(false);
 
-  console.log(logged)
+  console.log(logged);
+  const success = props.message ? "success" : "danger";
+  const spanClasses = "badge badge-pill badge-" + success;
+  console.log(spanClasses);
   return (
     <div className="App">
       <header className="App-header">
-          <span className="badge badge-secondary badge-danger">
+          <span className={spanClasses}>
             {props.message}
           </span>
           <button className="btn btn-secondary btn-sm"
@@ -76,10 +79,10 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
 }
 
 function AuthDemo() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("Offline");
 
   useEffect(() => {
-    fetch('/test').then(res => {
+    fetch('/tiest').then(res => {
       return res.json()
     }).then(data => {
       setMessage(data["payloads"])
