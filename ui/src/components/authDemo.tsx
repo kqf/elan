@@ -82,7 +82,7 @@ function AuthDemo() {
   const [message, setMessage] = useState("Offline");
 
   useEffect(() => {
-    fetch('/tiest').then(res => {
+    fetch('/test').then(res => {
       return res.json()
     }).then(data => {
       setMessage(data["payloads"])
