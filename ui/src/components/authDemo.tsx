@@ -70,7 +70,7 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
                {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
             </ul>
           </div>
-        </header>
+      </header>
     </div>
   );
 }
