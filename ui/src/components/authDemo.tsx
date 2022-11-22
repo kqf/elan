@@ -43,10 +43,9 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   const [logged, checkLogged] = useState(false);
 
-  console.log(logged);
   const success = props.message ? "success" : "danger";
   const spanClasses = "badge badge-pill badge-" + success;
-  console.log(spanClasses);
+
   return (
     <div className="App">
       <header className="App-header">
