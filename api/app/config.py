@@ -15,7 +15,7 @@ debug = Blueprint("debug", __name__)
 
 @debug.route("/test")
 def test() -> dict[str, str]:
-    return {"payloads": "<---- Hello world ---->"}
+    return {"payloads": "Online"}
 
 
 def build_app():
