@@ -41,16 +41,27 @@ interface User {
 
 function StatusWidget(props: {message: string, users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
+  const [logged, checkLogged] = useState(false);
+
+  console.log(logged)
   return (
     <div className="App">
       <header className="App-header">
         <p>Hello world</p>
           Server response:
           {props.message}
-          <button className="btn btn-secondary btn-sm" onClick={authentificate}>
+          <button className="btn btn-secondary btn-sm"
+                  onClick={() => {
+                    authentificate().then(
+                      () => checkLogged(localStorage.getItem("accessToken") !== null)
+                  )}}
+          >
             Generate the token
           </button>
-          <button className="btn btn-secondary btn-sm" onClick={() => {updateUsers().then(setUsers)}}>
+          <button className="btn btn-secondary btn-sm"
+                  disabled={!logged}
+                  onClick={() => {updateUsers().then(setUsers)}}
+          >
               Get the list of users
           </button>
           <div>
