@@ -47,9 +47,9 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello world</p>
-          Server response:
-          {props.message}
+          <span className="badge badge-secondary badge-danger">
+            {props.message}
+          </span>
           <button className="btn btn-secondary btn-sm"
                   onClick={() => {
                     authentificate().then(
