@@ -50,7 +50,6 @@ function StatusBadge() {
     }).catch(res => {
       setMessage("Offline")
     })
-
   })
 
   const success = message === "Offline" ? "success" : "danger";
