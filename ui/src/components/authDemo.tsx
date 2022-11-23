@@ -39,19 +39,36 @@ interface User {
   username: string,
 };
 
-function StatusWidget(props: {message: string, users: Array<User>}) {
+function StatusBadge() {
+    const [message, setMessage] = useState("Offline");
+
+  useEffect(() => {
+    fetch('/test').then(res => {
+      return res.json()
+    }).then(data => {
+      setMessage("Online")
+    })
+  })
+
+  const success = message === "Offline" ? "success" : "danger";
+  const spanClasses = "badge badge-pill badge-" + success;
+
+  return (
+      <span className={spanClasses}>
+        {message}
+      </span>
+  )
+
+}
+
+function StatusWidget(props: {users: Array<User>}) {
   const [users, setUsers] = useState(props.users);
   const [logged, checkLogged] = useState(false);
-
-  const success = props.message ? "success" : "danger";
-  const spanClasses = "badge badge-pill badge-" + success;
 
   return (
     <div className="App">
       <header className="App-header">
-          <span className={spanClasses}>
-            {props.message}
-          </span>
+          <StatusBadge />
           <button className="btn btn-secondary btn-sm"
                   onClick={() => {
                     authentificate().then(
@@ -78,16 +95,7 @@ function StatusWidget(props: {message: string, users: Array<User>}) {
 }
 
 function AuthDemo() {
-  const [message, setMessage] = useState("Offline");
-
-  useEffect(() => {
-    fetch('/test').then(res => {
-      return res.json()
-    }).then(data => {
-      setMessage(data["payloads"])
-    })
-  }, [])
-  return <StatusWidget message={message} users={[]}/>
+  return <StatusWidget users={[]}/>
 }
 
 export default AuthDemo;
