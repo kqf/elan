@@ -47,8 +47,10 @@ function StatusBadge() {
       return res.json()
     }).then(data => {
       setMessage("Online")
-      console.log("Secondary widget <<<---")
+    }).catch(res => {
+      setMessage("Offline")
     })
+
   })
 
   const success = message === "Offline" ? "success" : "danger";
@@ -96,17 +98,6 @@ function StatusWidget(props: {users: Array<User>}) {
 }
 
 function AuthDemo() {
-  const [message, setMessage] = useState("Offline");
-
-  useEffect(() => {
-    fetch('/test').then(res => {
-      return res.json()
-    }).then(data => {
-      setMessage("Online")
-      console.log("Main widget ->")
-    })
-  })
-
   return <StatusWidget users={[]}/>
 }
 
