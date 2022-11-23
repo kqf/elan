@@ -40,13 +40,15 @@ interface User {
 };
 
 function StatusBadge() {
-    const [message, setMessage] = useState("Offline");
+  const [message, setMessage] = useState("Offline");
 
   useEffect(() => {
     fetch('/test').then(res => {
       return res.json()
     }).then(data => {
       setMessage("Online")
+      console.log("Secondary widget <<<---")
+
     })
   })
 
@@ -95,6 +97,17 @@ function StatusWidget(props: {users: Array<User>}) {
 }
 
 function AuthDemo() {
+  const [message, setMessage] = useState("Offline");
+
+  useEffect(() => {
+    fetch('/test').then(res => {
+      return res.json()
+    }).then(data => {
+      setMessage("Online")
+      console.log("Main widget ->")
+    })
+  })
+
   return <StatusWidget users={[]}/>
 }
 
