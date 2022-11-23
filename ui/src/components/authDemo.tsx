@@ -48,6 +48,7 @@ function StatusBadge() {
     }).then(data => {
       setMessage("Online")
       console.log("Secondary widget <<<---")
+
     })
   })
 
