@@ -64,7 +64,7 @@ function StatusBadge() {
 }
 
 function StatusWidget() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([] as Array<User>);
   const [logged, checkLogged] = useState(false);
 
   return (
