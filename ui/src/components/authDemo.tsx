@@ -97,7 +97,7 @@ function StatusWidget() {
 }
 
 function AuthDemo() {
-  return <StatusWidget users={[]}/>
+  return <StatusWidget/>
 }
 
 export default AuthDemo;
