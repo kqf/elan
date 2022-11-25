@@ -63,8 +63,8 @@ function StatusBadge() {
 
 }
 
-function StatusWidget(props: {users: Array<User>}) {
-  const [users, setUsers] = useState(props.users);
+function StatusWidget() {
+  const [users, setUsers] = useState([]);
   const [logged, checkLogged] = useState(false);
 
   return (
@@ -97,7 +97,7 @@ function StatusWidget(props: {users: Array<User>}) {
 }
 
 function AuthDemo() {
-  return <StatusWidget users={[]}/>
+  return <StatusWidget/>
 }
 
 export default AuthDemo;
