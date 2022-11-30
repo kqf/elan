@@ -68,8 +68,7 @@ function AuthDemo() {
   const [logged, checkLogged] = useState(false);
 
   return (
-    <div className="App">
-      <header className="App-header">
+      <div className="container">
           <StatusBadge />
           <button className="btn btn-secondary btn-sm"
                   onClick={() => {
@@ -91,8 +90,7 @@ function AuthDemo() {
                {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
             </ul>
           </div>
-      </header>
-    </div>
+      </div>
   );
 }
 
