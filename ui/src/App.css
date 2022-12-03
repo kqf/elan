@@ -32,7 +32,19 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.equal-height {
+  display: flex;
+}
+
+.equal-width {
+  flex: 1;
+  padding: 1em;
+  border: solid;
 }
