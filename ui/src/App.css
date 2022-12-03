@@ -45,6 +45,5 @@
 
 .equal-width {
   flex: 1;
-  padding: 1em;
-  border: solid;
+  /* border: solid; */
 }
