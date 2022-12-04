@@ -70,7 +70,7 @@ function AuthDemo() {
   return (
     <div className='span'>
 
-      <div className='row'>
+      <div className='row col-sm-3'>
           <StatusBadge />
       </div>
       <div className="row">
