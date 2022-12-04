@@ -68,9 +68,13 @@ function AuthDemo() {
   const [logged, checkLogged] = useState(false);
 
   return (
-      <div className="container">
+    <div className='span'>
+
+      <div className='row'>
           <StatusBadge />
-          <button className="btn btn-secondary btn-sm"
+      </div>
+      <div className="row">
+          <button className="btn btn-secondary btn-sm col-sm-3"
                   onClick={() => {
                     authentificate().then(
                       () => checkLogged(localStorage.getItem("accessToken") !== null)
@@ -78,18 +82,21 @@ function AuthDemo() {
           >
             Generate the token
           </button>
-          <button className="btn btn-secondary btn-sm"
-                  disabled={!logged}
-                  onClick={() => {updateUsers().then(setUsers)}}
-          >
-              Get the list of users
-          </button>
-          <div>
-            {users.length === 0 && <p> No users exist</p>}
-            <ul>
-               {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
-            </ul>
-          </div>
+      </div>
+        <div className='row'>
+            <button className="btn btn-secondary btn-sm col-sm-3"
+                    disabled={!logged}
+                    onClick={() => {updateUsers().then(setUsers)}}
+            >
+                Get the list of users
+            </button>
+            <div className="btn-sm">
+              {users.length === 0 && <p> No users exist</p>}
+              <ul>
+                {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
+              </ul>
+            </div>
+        </div>
       </div>
   );
 }
