@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-xs-6 equal-height equal-width">
+        <div className="col-xs-6 equal-width">
           <AppMenu />
         </div>
-        <div className="col-xs-6 equal-height equal-width">
+        <div className="col-xs-6 equal-width">
           <AuthDemo />
         </div>
       </div>
