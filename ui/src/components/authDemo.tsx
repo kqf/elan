@@ -90,10 +90,7 @@ function AuthDemo() {
             >
                 Get the list of users
             </button>
-
-        </div>
-        <div className='row'>
-            <div className="btn-sm col-sm-3 col-md-3">
+            <div className="btn-sm">
               {users.length === 0 && <p> No users exist</p>}
               <ul>
                 {users.map(user => <li key={user.id.toString()}>{user.username}</li>)}
