@@ -2,13 +2,13 @@ import { useState } from "react";
 
 function Counter() {
   const [counts, updateCounts] = useState(0);
+  const increment = () => {
+    updateCounts(counts + 1);
+  };
   return (
-    <div
-      onClick={() => {
-        updateCounts(counts + 1);
-      }}
-    >
-      Counts: {counts}
+    <div onClick={increment}>
+      <span>{counts}</span>
+      <button className="btn btn-secondary btn-sm">Increment</button>
     </div>
   );
 }
