@@ -1,5 +1,6 @@
+import Counters from "./coutners";
 function AppMenu() {
-  return <div> This is menu boilerplate </div>;
+  return <Counters />;
 }
 
 export default AppMenu;
