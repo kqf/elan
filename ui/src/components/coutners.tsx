@@ -9,6 +9,7 @@ function Counter(props: { value: number }) {
     <div onClick={increment}>
       <span>{counts}</span>
       <button className="btn btn-secondary btn-sm">Increment</button>
+      <button className="btn btn-danger btn-sm m-2">Delete</button>
     </div>
   );
 }
