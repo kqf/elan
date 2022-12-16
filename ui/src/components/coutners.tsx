@@ -22,7 +22,9 @@ function Counter(props: { value: number; onDelete: () => void }) {
         Decrement
       </button>
 
-      <button className="btn btn-danger btn-sm m-2">Delete</button>
+      <button className="btn btn-danger btn-sm m-2" onClick={props.onDelete}>
+        Delete
+      </button>
     </div>
   );
 }
