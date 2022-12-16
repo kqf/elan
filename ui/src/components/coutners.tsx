@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Counter(props: { value: number }) {
+function Counter(props: { value: number; onDelete: () => void }) {
   const [counts, updateCounts] = useState(props.value);
 
   const increment = () => {
@@ -43,10 +43,14 @@ function Counters() {
     },
   ] as Array<{ id: number; value: number }>);
 
+  const onDelete = (id: number) => () => {
+    updateCounters(counters.filter((counter) => counter.id !== id));
+  };
+
   return (
     <div>
       {counters.map((c) => (
-        <Counter key={c.id} value={c.value} />
+        <Counter key={c.id} value={c.value} onDelete={onDelete(c.id)} />
       ))}
     </div>
   );
