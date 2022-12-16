@@ -2,13 +2,25 @@ import { useState } from "react";
 
 function Counter(props: { value: number }) {
   const [counts, updateCounts] = useState(props.value);
+
   const increment = () => {
     updateCounts(counts + 1);
   };
+
+  const decrement = () => {
+    updateCounts(counts - 1);
+  };
+
   return (
-    <div onClick={increment}>
+    <div>
       <span>{counts}</span>
-      <button className="btn btn-secondary btn-sm">Increment</button>
+      <button className="btn btn-secondary btn-sm m-2" onClick={increment}>
+        Increment
+      </button>
+
+      <button className="btn btn-secondary btn-sm m-2" onClick={decrement}>
+        Delete
+      </button>
     </div>
   );
 }
