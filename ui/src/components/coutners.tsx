@@ -19,8 +19,10 @@ function Counter(props: { value: number }) {
       </button>
 
       <button className="btn btn-secondary btn-sm m-2" onClick={decrement}>
-        Delete
+        Decrement
       </button>
+
+      <button className="btn btn-danger btn-sm m-2">Delete</button>
     </div>
   );
 }
