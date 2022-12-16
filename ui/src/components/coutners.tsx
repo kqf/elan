@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function Counter() {
-  const [counts, updateCounts] = useState(0);
+function Counter(props: { value: number }) {
+  const [counts, updateCounts] = useState(props.value);
   const increment = () => {
     updateCounts(counts + 1);
   };
@@ -32,7 +32,7 @@ function Counters() {
   return (
     <div>
       {counters.map((c) => (
-        <Counter key={c.id} />
+        <Counter key={c.id} value={c.value} />
       ))}
     </div>
   );
