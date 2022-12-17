@@ -1,31 +1,27 @@
 import { useState } from "react";
 
 interface CounterProps {
-  value: number;
+  counts: number;
   onDelete: () => void;
   onIncrement: () => void;
   onDecrement: () => void;
 }
 
 function Counter(props: CounterProps) {
-  const [counts, updateCounts] = useState(props.value);
-
-  const increment = () => {
-    updateCounts(counts + 1);
-  };
-
-  const decrement = () => {
-    updateCounts(counts - 1);
-  };
-
   return (
     <div>
-      <span>{counts}</span>
-      <button className="btn btn-primary btn-sm m-2" onClick={increment}>
+      <span>{props.counts}</span>
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={props.onIncrement}
+      >
         Increment
       </button>
 
-      <button className="btn btn-primary btn-sm m-2" onClick={decrement}>
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={props.onDecrement}
+      >
         Decrement
       </button>
 
@@ -84,7 +80,7 @@ function Counters() {
       {counters.map((c) => (
         <Counter
           key={c.id}
-          value={c.value}
+          counts={c.value}
           onDelete={onDelete(c.id)}
           onIncrement={onIncrement(c)}
           onDecrement={onIncrement(c)}
