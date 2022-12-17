@@ -49,8 +49,13 @@ function Counters() {
     updateCounters(counters.filter((counter) => counter.id !== id));
   };
 
+  const onReset = () => {};
+
   return (
     <div>
+      <button className="btn btn-danger btn-sm m-2" onClick={onReset}>
+        Reset
+      </button>
       {counters.map((c) => (
         <Counter key={c.id} value={c.value} onDelete={onDelete(c.id)} />
       ))}
