@@ -69,11 +69,11 @@ function Counters() {
     );
   };
 
-  const onIncrement = (counter) => () => {
-    const counters = [...this.state.counters];
+  const onIncrement = (counter: CounterState) => () => {
+    const lcounters = [...counters];
     const idx = counters.indexOf(counter);
-    counters[idx] = { ...counter, value: counter.value + 1 };
-    updateCounters(counters);
+    lcounters[idx] = { ...counter, value: counter.value + 1 };
+    updateCounters(lcounters);
   };
 
   return (
@@ -82,7 +82,13 @@ function Counters() {
         Reset
       </button>
       {counters.map((c) => (
-        <Counter key={c.id} value={c.value} onDelete={onDelete(c.id)} />
+        <Counter
+          key={c.id}
+          value={c.value}
+          onDelete={onDelete(c.id)}
+          onIncrement={onIncrement(c)}
+          onDecrement={onIncrement(c)}
+        />
       ))}
     </div>
   );
