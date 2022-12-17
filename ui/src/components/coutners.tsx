@@ -1,24 +1,27 @@
 import { useState } from "react";
 
-function Counter(props: { value: number; onDelete: () => void }) {
-  const [counts, updateCounts] = useState(props.value);
+interface CounterProps {
+  counts: number;
+  onDelete: () => void;
+  onIncrement: () => void;
+  onDecrement: () => void;
+}
 
-  const increment = () => {
-    updateCounts(counts + 1);
-  };
-
-  const decrement = () => {
-    updateCounts(counts - 1);
-  };
-
+function Counter(props: CounterProps) {
   return (
     <div>
-      <span>{counts}</span>
-      <button className="btn btn-primary btn-sm m-2" onClick={increment}>
+      <span>{props.counts}</span>
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={props.onIncrement}
+      >
         Increment
       </button>
 
-      <button className="btn btn-primary btn-sm m-2" onClick={decrement}>
+      <button
+        className="btn btn-primary btn-sm m-2"
+        onClick={props.onDecrement}
+      >
         Decrement
       </button>
 
@@ -27,6 +30,11 @@ function Counter(props: { value: number; onDelete: () => void }) {
       </button>
     </div>
   );
+}
+
+interface CounterState {
+  id: number;
+  value: number;
 }
 
 function Counters() {
@@ -43,7 +51,7 @@ function Counters() {
       id: 3,
       value: 0,
     },
-  ] as Array<{ id: number; value: number }>);
+  ] as Array<CounterState>);
 
   const onDelete = (id: number) => () => {
     updateCounters(counters.filter((counter) => counter.id !== id));
@@ -51,10 +59,17 @@ function Counters() {
 
   const onReset = () => {
     updateCounters(
-      counters.map((counter) => {
+      counters.map((counter: CounterState) => {
         return { id: counter.id, value: 0 };
       })
     );
+  };
+
+  const onIncrement = (counter: CounterState) => () => {
+    const lcounters = [...counters];
+    const idx = counters.indexOf(counter);
+    lcounters[idx] = { ...counter, value: counter.value + 1 };
+    updateCounters(lcounters);
   };
 
   return (
@@ -63,7 +78,13 @@ function Counters() {
         Reset
       </button>
       {counters.map((c) => (
-        <Counter key={c.id} value={c.value} onDelete={onDelete(c.id)} />
+        <Counter
+          key={c.id}
+          counts={c.value}
+          onDelete={onDelete(c.id)}
+          onIncrement={onIncrement(c)}
+          onDecrement={onIncrement(c)}
+        />
       ))}
     </div>
   );
