@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-function Counter(props: { value: number; onDelete: () => void }) {
+interface CounterProps {
+  value: number;
+  onDelete: () => void;
+  onIncrement: () => void;
+  onDecrement: () => void;
+}
+
+function Counter(props: CounterProps) {
   const [counts, updateCounts] = useState(props.value);
 
   const increment = () => {
@@ -29,6 +36,11 @@ function Counter(props: { value: number; onDelete: () => void }) {
   );
 }
 
+interface CounterState {
+  id: number;
+  value: number;
+}
+
 function Counters() {
   const [counters, updateCounters] = useState([
     {
@@ -43,7 +55,7 @@ function Counters() {
       id: 3,
       value: 0,
     },
-  ] as Array<{ id: number; value: number }>);
+  ] as Array<CounterState>);
 
   const onDelete = (id: number) => () => {
     updateCounters(counters.filter((counter) => counter.id !== id));
@@ -51,10 +63,17 @@ function Counters() {
 
   const onReset = () => {
     updateCounters(
-      counters.map((counter) => {
+      counters.map((counter: CounterState) => {
         return { id: counter.id, value: 0 };
       })
     );
+  };
+
+  const onIncrement = (counter) => () => {
+    const counters = [...this.state.counters];
+    const idx = counters.indexOf(counter);
+    counters[idx] = { ...counter, value: counter.value + 1 };
+    updateCounters(counters);
   };
 
   return (
