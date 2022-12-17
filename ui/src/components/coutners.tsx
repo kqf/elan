@@ -14,11 +14,11 @@ function Counter(props: { value: number; onDelete: () => void }) {
   return (
     <div>
       <span>{counts}</span>
-      <button className="btn btn-secondary btn-sm m-2" onClick={increment}>
+      <button className="btn btn-primary btn-sm m-2" onClick={increment}>
         Increment
       </button>
 
-      <button className="btn btn-secondary btn-sm m-2" onClick={decrement}>
+      <button className="btn btn-primary btn-sm m-2" onClick={decrement}>
         Decrement
       </button>
 
@@ -49,11 +49,17 @@ function Counters() {
     updateCounters(counters.filter((counter) => counter.id !== id));
   };
 
-  const onReset = () => {};
+  const onReset = () => {
+    updateCounters(
+      counters.map((counter) => {
+        return { id: counter.id, value: 0 };
+      })
+    );
+  };
 
   return (
     <div>
-      <button className="btn btn-danger btn-sm m-2" onClick={onReset}>
+      <button className="btn btn-success btn-sm m-2" onClick={onReset}>
         Reset
       </button>
       {counters.map((c) => (
