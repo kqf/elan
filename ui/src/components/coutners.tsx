@@ -72,6 +72,13 @@ function Counters() {
     updateCounters(lcounters);
   };
 
+  const onDecrement = (counter: CounterState) => () => {
+    const lcounters = [...counters];
+    const idx = counters.indexOf(counter);
+    lcounters[idx] = { ...counter, value: counter.value - 1 };
+    updateCounters(lcounters);
+  };
+
   return (
     <div>
       <button className="btn btn-success btn-sm m-2" onClick={onReset}>
@@ -83,7 +90,7 @@ function Counters() {
           counts={c.value}
           onDelete={onDelete(c.id)}
           onIncrement={onIncrement(c)}
-          onDecrement={onIncrement(c)}
+          onDecrement={onDecrement(c)}
         />
       ))}
     </div>
