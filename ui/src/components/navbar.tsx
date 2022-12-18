@@ -1,5 +1,9 @@
 function NavBar() {
-  return <nav className="navbar navbar-light bg-light">Navbar</nav>;
+  return (
+    <nav className="navbar navbar-light bg-light">
+      <div>Navbar</div>
+    </nav>
+  );
 }
 
 export default NavBar;
