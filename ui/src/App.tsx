@@ -4,10 +4,12 @@ import "./App.css";
 
 import AuthDemo from "./components/authDemo";
 import AppMenu from "./components/menuComponent";
+import NavBar from "./components/navbar";
 
 function App() {
   return (
     <div className="container">
+      <NavBar />
       <div className="row">
         <div className="col-xs-6 equal-width">
           <AppMenu />
