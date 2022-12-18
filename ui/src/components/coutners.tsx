@@ -75,7 +75,7 @@ function Counters() {
   const onDecrement = (counter: CounterState) => () => {
     const lcounters = [...counters];
     const idx = counters.indexOf(counter);
-    lcounters[idx] = { ...counter, value: counter.value + 1 };
+    lcounters[idx] = { ...counter, value: counter.value - 1 };
     updateCounters(lcounters);
   };
 
