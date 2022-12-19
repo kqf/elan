@@ -25,7 +25,11 @@ function Counter(props: CounterProps) {
         Decrement
       </button>
 
-      <button className="btn btn-danger btn-sm m-2" onClick={props.onDelete}>
+      <button
+        className="btn btn-danger btn-sm m-2"
+        onClick={props.onDelete}
+        disabled={props.counts <= 0}
+      >
         Delete
       </button>
     </div>
