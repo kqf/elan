@@ -15,18 +15,19 @@ function Counter(props: CounterProps) {
         className="btn btn-primary btn-sm m-2"
         onClick={props.onIncrement}
       >
-        Increment
+        +
       </button>
 
       <button
         className="btn btn-primary btn-sm m-2"
         onClick={props.onDecrement}
+        disabled={props.counts <= 0}
       >
-        Decrement
+        -
       </button>
 
       <button className="btn btn-danger btn-sm m-2" onClick={props.onDelete}>
-        Delete
+        x
       </button>
     </div>
   );
