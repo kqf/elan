@@ -10,7 +10,9 @@ interface CounterProps {
 function Counter(props: CounterProps) {
   return (
     <div className="row">
-      <div className="col-1">{props.counts}</div>
+      <div className="col-1">
+        <span className="btn btn-warning btn-sm m-2">{props.counts}</span>
+      </div>
       <div className="col">
         <button className="btn btn-primary btn-sm" onClick={props.onIncrement}>
           +
