@@ -9,26 +9,27 @@ interface CounterProps {
 
 function Counter(props: CounterProps) {
   return (
-    <div>
-      <span>{props.counts}</span>
-      <button
-        className="btn btn-primary btn-sm m-2"
-        onClick={props.onIncrement}
-      >
-        +
-      </button>
+    <div className="row">
+      <div className="col-1">
+        <span className="btn btn-warning btn-sm m-2">{props.counts}</span>
+      </div>
+      <div className="col">
+        <button className="btn btn-primary btn-sm" onClick={props.onIncrement}>
+          +
+        </button>
 
-      <button
-        className="btn btn-primary btn-sm m-2"
-        onClick={props.onDecrement}
-        disabled={props.counts <= 0}
-      >
-        -
-      </button>
+        <button
+          className="btn btn-primary btn-sm m-2"
+          onClick={props.onDecrement}
+          disabled={props.counts <= 0}
+        >
+          -
+        </button>
 
-      <button className="btn btn-danger btn-sm m-2" onClick={props.onDelete}>
-        x
-      </button>
+        <button className="btn btn-danger btn-sm" onClick={props.onDelete}>
+          x
+        </button>
+      </div>
     </div>
   );
 }
