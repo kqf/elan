@@ -1,3 +1,14 @@
+const movies = ["1", "2", "3", "4"].map((i) => {
+  return {
+    _id: "1",
+    title: "Title 1",
+    genre: { _id: i, name: `name ${i}` },
+    numberInStock: i,
+    dailyRentalRate: 1.5,
+    publishDate: "2020-01-01",
+  };
+});
+
 function Movies() {
   return (
     <table className="table">
