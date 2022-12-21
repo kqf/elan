@@ -1,7 +1,7 @@
 const movies = ["1", "2", "3", "4"].map((i) => {
   return {
-    _id: "1",
-    title: "Title 1",
+    _id: i,
+    title: `Title ${i}`,
     genre: { _id: i, name: `name ${i}` },
     numberInStock: i,
     dailyRentalRate: 1.5,
@@ -9,7 +9,12 @@ const movies = ["1", "2", "3", "4"].map((i) => {
   };
 });
 
+function getMovies() {
+  return movies;
+}
+
 function Movies() {
+  const movies = getMovies();
   return (
     <table className="table">
       <thead>
@@ -21,12 +26,16 @@ function Movies() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>a</td>
-          <td>b</td>
-          <td>c</td>
-          <td>d</td>
-        </tr>
+        {movies.map((movie) => {
+          return (
+            <tr>
+              <td>{movie.title}</td>
+              <td>{movie.genre.name}</td>
+              <td>{movie.numberInStock}</td>
+              <td>{movie.dailyRentalRate}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
