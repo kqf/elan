@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 const movies = ["1", "2", "3", "4"].map((i) => {
   return {
     _id: i,
@@ -17,7 +18,6 @@ function getMovies() {
 
 function Movies() {
   const [movies, updateMovies] = useState(getMovies());
-
   return (
     <table className="table">
       <thead>
