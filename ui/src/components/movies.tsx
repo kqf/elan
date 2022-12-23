@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 interface Genre {
   _id: string;
   name: string;
@@ -22,7 +23,6 @@ function getMovies() {
 
 function Movies() {
   const [movies, updateMovies] = useState(getMovies());
-
   return (
     <table className="table">
       <thead>
