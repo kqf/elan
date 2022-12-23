@@ -6,7 +6,16 @@ interface Genre {
   name: string;
 }
 
-const movies = ["1", "2", "3", "4"].map((i) => {
+interface Movie {
+  _id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: string;
+  dailyRentalRate: number;
+  publishDate: string;
+}
+
+const movies: Array<Movie> = ["1", "2", "3", "4"].map((i) => {
   return {
     _id: i,
     title: `Title ${i}`,
