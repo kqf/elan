@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+interface Genre {
+  _id: string;
+  name: string;
+}
+
 const movies = ["1", "2", "3", "4"].map((i) => {
   return {
     _id: i,
