@@ -13,6 +13,7 @@ interface Movie {
   numberInStock: string;
   dailyRentalRate: number;
   publishDate: string;
+  liked: boolean;
 }
 
 const movies: Array<Movie> = ["1", "2", "3", "4"].map((i) => {
@@ -23,6 +24,7 @@ const movies: Array<Movie> = ["1", "2", "3", "4"].map((i) => {
     numberInStock: i,
     dailyRentalRate: 1.5,
     publishDate: "2020-01-01",
+    liked: false,
   };
 });
 
@@ -52,7 +54,7 @@ function Movies() {
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
               <td>
-                <Like />
+                <Like liked={movie.liked} />
               </td>
             </tr>
           );
