@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Like from "./like";
 
 interface Genre {
   _id: string;
@@ -39,6 +40,7 @@ function Movies() {
           <th>Genere</th>
           <th>Stock</th>
           <th>Rate</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +51,9 @@ function Movies() {
               <td>{movie.genre.name}</td>
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
+              <td>
+                <Like />
+              </td>
             </tr>
           );
         })}
