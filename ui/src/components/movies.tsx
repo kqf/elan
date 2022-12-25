@@ -51,7 +51,7 @@ function Movies() {
 
   const deleteMovie = (movie: Movie) => {
     return () => {
-      return movies.filter((m) => m !== movie);
+      updateMovies(movies.filter((m) => m !== movie));
     };
   };
   return (
@@ -62,6 +62,7 @@ function Movies() {
           <th>Genere</th>
           <th>Stock</th>
           <th>Rate</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -75,6 +76,9 @@ function Movies() {
               <td>{movie.dailyRentalRate}</td>
               <td>
                 <Like liked={movie.liked} onClick={likeForMovie(movie)} />
+              </td>
+              <td>
+                <button onClick={deleteMovie(movie)}>Delete</button>
               </td>
             </tr>
           );
