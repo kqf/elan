@@ -48,6 +48,12 @@ function Movies() {
       updateMovies(newstate);
     };
   };
+
+  const deleteMovie = (movie: Movie) => {
+    return () => {
+      return movies.filter((m) => m !== movie);
+    };
+  };
   return (
     <table className="table">
       <thead>
