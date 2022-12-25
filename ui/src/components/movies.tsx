@@ -78,7 +78,12 @@ function Movies() {
                 <Like liked={movie.liked} onClick={likeForMovie(movie)} />
               </td>
               <td>
-                <button onClick={deleteMovie(movie)}>Delete</button>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={deleteMovie(movie)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           );
