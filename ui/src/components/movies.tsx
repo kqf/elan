@@ -34,6 +34,20 @@ function getMovies() {
 
 function Movies() {
   const [movies, updateMovies] = useState(getMovies() as Array<Movie>);
+
+  const likeForMovie = (movie: Movie) => {
+    return () => {
+      const newstate = movies.map((query) => {
+        if (movie !== query) {
+          return movie;
+        }
+        let newquery = { ...movie };
+        newquery.liked = !newquery.liked;
+        return newquery;
+      });
+      updateMovies(newstate);
+    };
+  };
   return (
     <table className="table">
       <thead>
@@ -54,7 +68,7 @@ function Movies() {
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
               <td>
-                <Like liked={movie.liked} />
+                <Like liked={movie.liked} onClick={likeForMovie(movie)} />
               </td>
             </tr>
           );
