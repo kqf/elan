@@ -38,8 +38,8 @@ function Movies() {
   const likeForMovie = (movie: Movie) => {
     return () => {
       const newstate = movies.map((c) => {
-        if (movie !== c) {
-          return movie;
+        if (c !== movie) {
+          return c;
         }
         let newquery = { ...c };
         newquery.liked = !newquery.liked;
