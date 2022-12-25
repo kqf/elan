@@ -68,7 +68,7 @@ function Movies() {
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
               <td>
-                <Like liked={movie.liked} />
+                <Like liked={movie.liked} onClick={likeForMovie(movie)} />
               </td>
             </tr>
           );
