@@ -48,6 +48,12 @@ function Movies() {
       updateMovies(newstate);
     };
   };
+
+  const deleteMovie = (movie: Movie) => {
+    return () => {
+      updateMovies(movies.filter((m) => m !== movie));
+    };
+  };
   return (
     <table className="table">
       <thead>
@@ -56,6 +62,7 @@ function Movies() {
           <th>Genere</th>
           <th>Stock</th>
           <th>Rate</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -69,6 +76,14 @@ function Movies() {
               <td>{movie.dailyRentalRate}</td>
               <td>
                 <Like liked={movie.liked} onClick={likeForMovie(movie)} />
+              </td>
+              <td>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={deleteMovie(movie)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           );
