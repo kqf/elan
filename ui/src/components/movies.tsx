@@ -94,7 +94,7 @@ function Movies() {
           })}
         </tbody>
       </table>
-      <Pagination itemCount={movies.length} pageSize={4} onClick={switchPage} />
+      <Pagination itemCount={movies.length} pageSize={2} onClick={switchPage} />
     </Fragment>
   );
 }
