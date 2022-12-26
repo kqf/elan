@@ -55,6 +55,8 @@ function Movies() {
       updateMovies(movies.filter((m) => m !== movie));
     };
   };
+
+  const switchPage = (page: number) => {};
   return (
     <Fragment>
       <table className="table">
@@ -92,7 +94,7 @@ function Movies() {
           })}
         </tbody>
       </table>
-      <Pagination itemCount={movies.length} pageSize={4} />
+      <Pagination itemCount={movies.length} pageSize={4} onClick={switchPage} />
     </Fragment>
   );
 }
