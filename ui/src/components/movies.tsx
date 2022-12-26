@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Like from "./like";
+import Pagination from "./pagination";
 
 interface Genre {
   _id: string;
@@ -54,42 +55,47 @@ function Movies() {
       updateMovies(movies.filter((m) => m !== movie));
     };
   };
+
+  const switchPage = (page: number) => {};
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Genere</th>
-          <th>Stock</th>
-          <th>Rate</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {movies.map((movie) => {
-          return (
-            <tr>
-              <td>{movie.title}</td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
-              <td>
-                <Like liked={movie.liked} onClick={likeForMovie(movie)} />
-              </td>
-              <td>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={deleteMovie(movie)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <Fragment>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genere</th>
+            <th>Stock</th>
+            <th>Rate</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {movies.map((movie) => {
+            return (
+              <tr>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like liked={movie.liked} onClick={likeForMovie(movie)} />
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={deleteMovie(movie)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <Pagination itemCount={movies.length} pageSize={4} onClick={switchPage} />
+    </Fragment>
   );
 }
 
