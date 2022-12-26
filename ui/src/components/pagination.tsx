@@ -3,7 +3,17 @@ function Pagination(props: {
   pageSize: number;
   onClick: any;
 }) {
-  return <div></div>;
+  return (
+    <nav aria-label="Pagination">
+      <ul className="pagination">
+        <li className="page-item">
+          <a className="page-link" href="">
+            1
+          </a>
+        </li>
+      </ul>
+    </nav>
+  );
 }
 
 export default Pagination;
