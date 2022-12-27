@@ -62,7 +62,9 @@ function Movies() {
     };
   };
 
-  const switchPage = (page: number) => {};
+  const switchPage = (page: number) => {
+    console.log(page);
+  };
   return (
     <Fragment>
       <table className="table">
