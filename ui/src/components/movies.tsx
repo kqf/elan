@@ -102,7 +102,7 @@ function Movies() {
       </table>
       <Pagination
         itemCount={state.movies.length}
-        pageSize={2}
+        pageSize={state.pageSize}
         onClick={switchPage}
       />
     </Fragment>
