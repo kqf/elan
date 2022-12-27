@@ -37,6 +37,7 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     pageSize: 2,
+    currentPage: 0,
   });
 
   const likeForMovie = (movie: Movie) => {
@@ -105,6 +106,7 @@ function Movies() {
       <Pagination
         itemCount={state.movies.length}
         pageSize={state.pageSize}
+        currentPage={state.currentPage}
         onClick={switchPage}
       />
     </Fragment>
