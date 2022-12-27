@@ -64,7 +64,7 @@ function Movies() {
   };
 
   const switchPage = (page: number) => {
-    console.log(page);
+    updateState({ ...state, currentPage: page });
   };
   return (
     <Fragment>

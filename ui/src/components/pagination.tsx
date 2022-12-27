@@ -13,7 +13,12 @@ function Pagination(props: {
     <nav aria-label="Pagination">
       <ul className="pagination">
         {pages.map((page) => (
-          <li key={page} className="page-item">
+          <li
+            key={page}
+            className={
+              page === props.currentPage ? "page-item active" : "page-item"
+            }
+          >
             <a
               className="page-link"
               href=""
