@@ -34,11 +34,14 @@ function getMovies() {
 }
 
 function Movies() {
-  const [movies, updateMovies] = useState(getMovies() as Array<Movie>);
+  const [state, updateState] = useState({
+    movies: getMovies() as Array<Movie>,
+    pageSize: 2,
+  });
 
   const likeForMovie = (movie: Movie) => {
     return () => {
-      const newstate = movies.map((c) => {
+      const newstate = state.movies.map((c) => {
         if (c !== movie) {
           return c;
         }
@@ -46,13 +49,16 @@ function Movies() {
         newquery.liked = !newquery.liked;
         return newquery;
       });
-      updateMovies(newstate);
+      updateState({ ...state, movies: newstate });
     };
   };
 
   const deleteMovie = (movie: Movie) => {
     return () => {
-      updateMovies(movies.filter((m) => m !== movie));
+      updateState({
+        ...state,
+        movies: state.movies.filter((m) => m !== movie),
+      });
     };
   };
 
@@ -71,7 +77,7 @@ function Movies() {
           </tr>
         </thead>
         <tbody>
-          {movies.map((movie) => {
+          {state.movies.map((movie) => {
             return (
               <tr>
                 <td>{movie.title}</td>
@@ -94,7 +100,11 @@ function Movies() {
           })}
         </tbody>
       </table>
-      <Pagination itemCount={movies.length} pageSize={2} onClick={switchPage} />
+      <Pagination
+        itemCount={state.movies.length}
+        pageSize={state.pageSize}
+        onClick={switchPage}
+      />
     </Fragment>
   );
 }
