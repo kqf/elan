@@ -66,6 +66,7 @@ function Movies() {
 
   const switchPage = (page: number) => {
     updateState({ ...state, currentPage: page });
+    console.log("Current page", state.currentPage);
   };
 
   return (
@@ -84,7 +85,7 @@ function Movies() {
         <tbody>
           {state.movies.map((movie) => {
             return (
-              <tr>
+              <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
