@@ -65,9 +65,11 @@ function Movies() {
   };
 
   const switchPage = (page: number) => {
-    updateState({ ...state, currentPage: page });
-    console.log("Current page", state.currentPage);
+    console.log("Current page", state.currentPage, page);
+    updateState({ ...state, currentPage: 2 });
   };
+
+  console.log("Current page", state.currentPage);
 
   return (
     <Fragment>
