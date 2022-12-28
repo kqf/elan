@@ -20,7 +20,7 @@ interface Movie {
 
 const movies: Array<Movie> = _.range(0, 15).map((i) => {
   return {
-    _id: i,
+    _id: String(i),
     title: `Title ${i}`,
     genre: { _id: String(i), name: `name ${i}` },
     numberInStock: i,
