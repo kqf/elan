@@ -67,6 +67,7 @@ function Movies() {
   const switchPage = (page: number) => {
     updateState({ ...state, currentPage: page });
   };
+
   return (
     <Fragment>
       <table className="table">
