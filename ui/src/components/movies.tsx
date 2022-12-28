@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Fragment, useState } from "react";
 import Like from "./like";
 import Pagination from "./pagination";
@@ -11,17 +12,17 @@ interface Movie {
   _id: string;
   title: string;
   genre: Genre;
-  numberInStock: string;
+  numberInStock: number;
   dailyRentalRate: number;
   publishDate: string;
   liked: boolean;
 }
 
-const movies: Array<Movie> = ["1", "2", "3", "4"].map((i) => {
+const movies: Array<Movie> = _.range(0, 15).map((i) => {
   return {
-    _id: i,
+    _id: String(i),
     title: `Title ${i}`,
-    genre: { _id: i, name: `name ${i}` },
+    genre: { _id: String(i), name: `name ${i}` },
     numberInStock: i,
     dailyRentalRate: 1.5,
     publishDate: "2020-01-01",
@@ -37,7 +38,7 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     pageSize: 2,
-    currentPage: 0,
+    currentPage: 1,
   });
 
   const likeForMovie = (movie: Movie) => {
@@ -66,6 +67,7 @@ function Movies() {
   const switchPage = (page: number) => {
     updateState({ ...state, currentPage: page });
   };
+
   return (
     <Fragment>
       <table className="table">
