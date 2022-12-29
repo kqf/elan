@@ -66,7 +66,7 @@ function Movies() {
 
   const switchPage = (page: number) => {
     console.log("Current page", state.currentPage, page);
-    updateState({ ...state, currentPage: 2 });
+    // updateState({ movies: [], pageSize: 0, currentPage: page });
   };
 
   console.log("Current page", state.currentPage);
