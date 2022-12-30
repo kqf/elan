@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { Fragment, useState } from "react";
+import paginate from "../paginate";
 import Like from "./like";
 import Pagination from "./pagination";
 
@@ -37,7 +38,7 @@ function getMovies() {
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    pageSize: 2,
+    pageSize: 4,
     currentPage: 1,
   });
 
@@ -71,6 +72,8 @@ function Movies() {
 
   console.log("Current page", state.currentPage);
 
+  const paginated = paginate(state.movies, state.currentPage, state.pageSize);
+
   return (
     <Fragment>
       <table className="table">
@@ -85,7 +88,7 @@ function Movies() {
           </tr>
         </thead>
         <tbody>
-          {state.movies.map((movie) => {
+          {paginated.map((movie) => {
             return (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
