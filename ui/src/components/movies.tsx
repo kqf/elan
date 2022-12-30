@@ -66,11 +66,11 @@ function Movies() {
   };
 
   const switchPage = (page: number) => {
-    console.log("Current page", state.currentPage, page);
-    // updateState({ movies: [], pageSize: 0, currentPage: page });
+    updateState({
+      ...state,
+      currentPage: page,
+    });
   };
-
-  console.log("Current page", state.currentPage);
 
   const paginated = paginate(state.movies, state.currentPage, state.pageSize);
 
