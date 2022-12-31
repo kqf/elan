@@ -1,5 +1,5 @@
-function listGroup() {
+function ListGroup() {
   return <div>Test</div>;
 }
 
-export default listGroup;
+export default ListGroup;
