@@ -74,8 +74,6 @@ function Movies() {
 
   const paginated = paginate(state.movies, state.currentPage, state.pageSize);
 
-  const paginated = paginate(state.movies, state.currentPage, state.pageSize);
-
   return (
     <Fragment>
       <table className="table">
