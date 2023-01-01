@@ -78,7 +78,7 @@ function Movies() {
   return (
     <div className="row">
       <div className="col-2">
-        <ListGroup />
+        <ListGroup items={state.genres} />
       </div>
       <div className="col">
         <table className="table">
