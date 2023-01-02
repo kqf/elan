@@ -39,7 +39,7 @@ function getMovies() {
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    state: [],
+    genres: [],
     pageSize: 4,
     currentPage: 1,
   });
