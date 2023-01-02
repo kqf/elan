@@ -36,10 +36,14 @@ function getMovies() {
   return movies;
 }
 
+function getGenres() {
+  return movies.map((c) => c.genre);
+}
+
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    genres: [],
+    genres: getGenres() as Array<Genre>,
     pageSize: 4,
     currentPage: 1,
   });
