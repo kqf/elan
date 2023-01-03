@@ -83,7 +83,7 @@ function Movies() {
   return (
     <div className="row">
       <div className="col-2">
-        <ListGroup items={state.genres} />
+        <ListGroup items={state.genres.map((item) => item.name)} />
       </div>
       <div className="col">
         <table className="table">
