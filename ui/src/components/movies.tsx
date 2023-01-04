@@ -45,7 +45,7 @@ function getGenres() {
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    genres: getGenres() as Array<Genre>,
+    genres: getGenres() as Array<String>,
     pageSize: 4,
     currentPage: 1,
   });
@@ -85,7 +85,7 @@ function Movies() {
   return (
     <div className="row">
       <div className="col-2">
-        <ListGroup items={state.genres.map((item) => item.name)} />
+        <ListGroup items={state.genres.map((item) => item)} />
       </div>
       <div className="col">
         <table className="table">
