@@ -37,7 +37,8 @@ function getMovies() {
 }
 
 function getGenres() {
-  return movies.map((c) => c.genre);
+  // return movies.map((c) => c.genre);
+  return movies.filter((v, i, a) => a.indexOf(v) === i).map((c) => c.genre);
 }
 
 function Movies() {
