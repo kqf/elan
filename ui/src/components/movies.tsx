@@ -37,7 +37,7 @@ function getMovies() {
 }
 
 function getGenres() {
-  const genrelist = movies.map((c) => c.genre.name);
+  const genrelist = movies.map((c) => c.genre);
   const x = genrelist.filter((v, i, a) => a.indexOf(v) === i);
   return x;
 }
@@ -45,7 +45,7 @@ function getGenres() {
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    genres: getGenres() as Array<String>,
+    genres: getGenres() as Array<Genre>,
     pageSize: 4,
     currentPage: 1,
   });
