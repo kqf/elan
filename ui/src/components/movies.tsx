@@ -24,7 +24,7 @@ const movies: Array<Movie> = _.range(0, 15).map((i) => {
   return {
     _id: String(i),
     title: `Title ${i}`,
-    genre: { _id: String(i % 4), name: `name ${i % 4}` },
+    genre: { _id: String(i % 4), name: `Gnr ${i % 4}` },
     numberInStock: i,
     dailyRentalRate: 1.5,
     publishDate: "2020-01-01",
@@ -37,7 +37,7 @@ function getMovies() {
 }
 
 function getGenres() {
-  const genrelist = movies.map((c) => c.genre.name);
+  const genrelist = movies.map((c) => c.genre);
   const x = genrelist.filter((v, i, a) => a.indexOf(v) === i);
   return x;
 }
@@ -45,7 +45,7 @@ function getGenres() {
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    genres: getGenres() as Array<String>,
+    genres: getGenres() as Array<Genre>,
     pageSize: 4,
     currentPage: 1,
   });
