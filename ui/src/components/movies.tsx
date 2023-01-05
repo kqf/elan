@@ -24,7 +24,7 @@ const movies: Array<Movie> = _.range(0, 15).map((i) => {
   return {
     _id: String(i),
     title: `Title ${i}`,
-    genre: { _id: String(i % 4), name: `name ${i % 4}` },
+    genre: { _id: String(i % 4), name: `Gnr ${i % 4}` },
     numberInStock: i,
     dailyRentalRate: 1.5,
     publishDate: "2020-01-01",
