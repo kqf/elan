@@ -39,7 +39,7 @@ function getMovies() {
 function getGenres() {
   const genrelist = movies.map((c) => c.genre.name);
   const x = genrelist.filter((v, i, a) => a.indexOf(v) === i);
-  return movies.filter((v, i, a) => a.indexOf(v) === i).map((c) => c.genre);
+  return x;
 }
 
 function Movies() {
