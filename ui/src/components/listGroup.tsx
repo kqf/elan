@@ -1,4 +1,9 @@
-function ListGroup(props: { items: Array<{ name: String; _id: String }> }) {
+interface ListEntry {
+  name: String;
+  _id: String;
+}
+
+function ListGroup(props: { items: Array<ListEntry>; onClick: any }) {
   return (
     <ul className="list-group">
       {props.items.map((item, i) => (
