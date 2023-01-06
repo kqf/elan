@@ -1,6 +1,6 @@
 function ListGroup(props: { items: Array<{ name: String; _id: String }> }) {
   return (
-    <ul className="list-gorup">
+    <ul className="list-group">
       {props.items.map((item, i) => (
         <li key={i} className="list-group-item">
           {item.name}
