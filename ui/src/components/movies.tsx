@@ -81,10 +81,15 @@ function Movies() {
 
   const paginated = paginate(state.movies, state.currentPage, state.pageSize);
 
+  const handleGenreChange = () => {};
+
   return (
     <div className="row">
       <div className="col-3">
-        <ListGroup items={state.genres.map((item) => item)} />
+        <ListGroup
+          items={state.genres.map((item) => item)}
+          onClick={handleGenreChange}
+        />
       </div>
       <div className="col">
         <table className="table">
