@@ -95,6 +95,7 @@ function Movies() {
         <ListGroup
           items={state.genres.map((item) => item)}
           onClick={handleGenreChange}
+          selectedItem={state.selectedGenre}
         />
       </div>
       <div className="col">
