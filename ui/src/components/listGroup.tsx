@@ -7,7 +7,11 @@ function ListGroup(props: { items: Array<ListEntry>; onClick: any }) {
   return (
     <ul className="list-group">
       {props.items.map((item, i) => (
-        <li key={i} className="list-group-item">
+        <li
+          key={i}
+          className="list-group-item"
+          onClick={() => props.onClick(item)}
+        >
           {item.name}
         </li>
       ))}
