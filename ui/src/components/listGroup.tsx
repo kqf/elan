@@ -19,7 +19,7 @@ function ListGroup(props: {
               ? "list-group-item active"
               : "list-group-item"
           }
-          onClick={() => props.onClick(item.name)}
+          onClick={props.onClick(item.name)}
         >
           {item.name}
         </li>
