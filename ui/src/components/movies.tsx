@@ -45,6 +45,7 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     genres: getGenres() as Array<Genre>,
+    selectedGenre: "" as String,
     pageSize: 4,
     currentPage: 1,
   });
@@ -81,7 +82,12 @@ function Movies() {
 
   const paginated = paginate(state.movies, state.currentPage, state.pageSize);
 
-  const handleGenreChange = () => {};
+  const handleGenreChange = (genre: String) => {
+    updateState({
+      ...state,
+      selectedGenre: genre,
+    });
+  };
 
   return (
     <div className="row">
@@ -89,6 +95,7 @@ function Movies() {
         <ListGroup
           items={state.genres.map((item) => item)}
           onClick={handleGenreChange}
+          selectedItem={state.selectedGenre}
         />
       </div>
       <div className="col">
