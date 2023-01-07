@@ -3,11 +3,24 @@ interface ListEntry {
   _id: String;
 }
 
-function ListGroup(props: { items: Array<ListEntry>; onClick: any }) {
+function ListGroup(props: {
+  items: Array<ListEntry>;
+  onClick: any;
+  selectedItem: String;
+}) {
+  console.log(props.selectedItem);
   return (
     <ul className="list-group">
       {props.items.map((item, i) => (
-        <li key={i} className="list-group-item">
+        <li
+          key={i}
+          className={
+            item.name === props.selectedItem
+              ? "list-group-item active"
+              : "list-group-item"
+          }
+          onClick={() => props.onClick(item.name)}
+        >
           {item.name}
         </li>
       ))}
