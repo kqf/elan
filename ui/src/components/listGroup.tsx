@@ -5,7 +5,7 @@ interface ListEntry {
 
 function ListGroup(props: {
   items: Array<ListEntry>;
-  onClick: any;
+  onClick: (arg0: String) => () => void;
   selectedItem: String;
 }) {
   console.log(props.selectedItem);
