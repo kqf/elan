@@ -20,23 +20,22 @@ interface Movie {
   liked: boolean;
 }
 
-const movies: Array<Movie> = _.range(0, 15).map((i) => {
-  return {
-    _id: String(i),
-    title: `Title ${i}`,
-    genre: { _id: String(i % 4), name: `Gnr ${i % 4}` },
-    numberInStock: i,
-    dailyRentalRate: 1.5,
-    publishDate: "2020-01-01",
-    liked: false,
-  };
-});
-
 function getMovies() {
-  return movies;
+  return _.range(0, 15).map((i) => {
+    return {
+      _id: String(i),
+      title: `Title ${i}`,
+      genre: { _id: String(i % 4), name: `Gnr ${i % 4}` },
+      numberInStock: i,
+      dailyRentalRate: 1.5,
+      publishDate: "2020-01-01",
+      liked: false,
+    };
+  });
 }
 
 function getGenres() {
+  // const movies = getMovies();
   const genrelist = movies.map((c) => c.genre);
   return _.uniqBy(genrelist, "name");
 }
