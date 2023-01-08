@@ -137,7 +137,7 @@ function Movies() {
           </tbody>
         </table>
         <Pagination
-          itemCount={state.movies.length}
+          itemCount={filtered.length}
           pageSize={state.pageSize}
           currentPage={state.currentPage}
           onClick={switchPage}
