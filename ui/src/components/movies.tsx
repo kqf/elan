@@ -79,7 +79,10 @@ function Movies() {
     });
   };
 
-  const paginated = paginate(state.movies, state.currentPage, state.pageSize);
+  const filtered = state.movies.filter(
+    (movie) => state.selectedGenre === movie.genre.name
+  );
+  const paginated = paginate(filtered, state.currentPage, state.pageSize);
 
   const handleGenreChange = (genre: String) => () => {
     updateState({
