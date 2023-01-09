@@ -86,9 +86,11 @@ function Movies() {
   const paginated = paginate(filtered, state.currentPage, state.pageSize);
 
   const handleGenreChange = (genre: String) => () => {
+    const selectedGenre = genre !== state.selectedGenre ? genre : "";
+
     updateState({
       ...state,
-      selectedGenre: genre,
+      selectedGenre: selectedGenre,
     });
   };
 
