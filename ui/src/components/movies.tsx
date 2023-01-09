@@ -80,7 +80,8 @@ function Movies() {
   };
 
   const filtered = state.movies.filter(
-    (movie) => state.selectedGenre === movie.genre.name
+    (movie) =>
+      state.selectedGenre === movie.genre.name || state.selectedGenre === ""
   );
   const paginated = paginate(filtered, state.currentPage, state.pageSize);
 
