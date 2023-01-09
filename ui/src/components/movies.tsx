@@ -79,7 +79,11 @@ function Movies() {
     });
   };
 
-  const paginated = paginate(state.movies, state.currentPage, state.pageSize);
+  const filtered = state.movies.filter(
+    (movie) =>
+      state.selectedGenre === movie.genre.name || state.selectedGenre === ""
+  );
+  const paginated = paginate(filtered, state.currentPage, state.pageSize);
 
   const handleGenreChange = (genre: String) => () => {
     updateState({
@@ -134,7 +138,7 @@ function Movies() {
           </tbody>
         </table>
         <Pagination
-          itemCount={state.movies.length}
+          itemCount={filtered.length}
           pageSize={state.pageSize}
           currentPage={state.currentPage}
           onClick={switchPage}
