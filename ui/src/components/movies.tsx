@@ -79,12 +79,6 @@ function Movies() {
     });
   };
 
-  const filtered = state.movies.filter(
-    (movie) =>
-      state.selectedGenre === movie.genre.name || state.selectedGenre === ""
-  );
-  const paginated = paginate(filtered, state.currentPage, state.pageSize);
-
   const handleGenreChange = (genre: String) => () => {
     const selectedGenre = genre !== state.selectedGenre ? genre : "";
 
@@ -94,6 +88,12 @@ function Movies() {
       currentPage: 1,
     });
   };
+
+  const filtered = state.movies.filter(
+    (movie) =>
+      state.selectedGenre === movie.genre.name || state.selectedGenre === ""
+  );
+  const paginated = paginate(filtered, state.currentPage, state.pageSize);
 
   return (
     <div className="row">
