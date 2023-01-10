@@ -91,6 +91,7 @@ function Movies() {
     updateState({
       ...state,
       selectedGenre: selectedGenre,
+      currentPage: 1,
     });
   };
 
