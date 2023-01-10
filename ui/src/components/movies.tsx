@@ -72,7 +72,7 @@ function Movies() {
     };
   };
 
-  const switchPage = (page: number) => {
+  const switchPage = (page: number) => () => {
     updateState({
       ...state,
       currentPage: page,
