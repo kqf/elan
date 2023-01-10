@@ -4,7 +4,7 @@ function Pagination(props: {
   itemCount: number;
   pageSize: number;
   currentPage: number;
-  onClick: any;
+  onClick: (arg0: number) => () => void;
 }) {
   const pagesCount = props.itemCount / props.pageSize;
   const pages = _.range(1, pagesCount + 1);
