@@ -1,24 +1,9 @@
 import _ from "lodash";
 import { useState } from "react";
+import MovieTable, { Genre, Movie } from "../movieTable";
 import paginate from "../paginate";
-import Like from "./like";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
-
-interface Genre {
-  _id: string;
-  name: string;
-}
-
-interface Movie {
-  _id: string;
-  title: string;
-  genre: Genre;
-  numberInStock: number;
-  dailyRentalRate: number;
-  publishDate: string;
-  liked: boolean;
-}
 
 function getMovies() {
   return _.range(0, 15).map((i) => {
@@ -105,41 +90,11 @@ function Movies() {
         />
       </div>
       <div className="col">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Genere</th>
-              <th>Stock</th>
-              <th>Rate</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map((movie) => {
-              return (
-                <tr key={movie._id}>
-                  <td>{movie.title}</td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.numberInStock}</td>
-                  <td>{movie.dailyRentalRate}</td>
-                  <td>
-                    <Like liked={movie.liked} onClick={likeForMovie(movie)} />
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={deleteMovie(movie)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <MovieTable
+          movies={paginated}
+          likeForMovie={likeForMovie}
+          deleteMovie={deleteMovie}
+        />
         <Pagination
           itemCount={filtered.length}
           pageSize={state.pageSize}
