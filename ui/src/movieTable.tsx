@@ -17,8 +17,8 @@ export interface Movie {
 
 function MovieTable(props: {
   movies: Array<Movie>;
-  likeForMovie: any;
-  deleteMovie: any;
+  likeForMovie: (arg0: number) => () => void;
+  deleteMovie: (arg0: number) => () => void;
 }) {
   return (
     <table className="table">
