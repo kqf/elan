@@ -25,7 +25,7 @@ function getMovies() {
     return {
       _id: String(i),
       title: `Title ${i}`,
-      genre: { _id: String(i % 4), name: `Gnr ${i % 4}` },
+      genre: { _id: String(i % 4), name: `Genre ${i % 4}` },
       numberInStock: i,
       dailyRentalRate: 1.5,
       publishDate: "2020-01-01",
