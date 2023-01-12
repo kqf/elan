@@ -25,6 +25,11 @@ function getGenres() {
   return _.uniqBy(genrelist, "name");
 }
 
+interface SortingColumn {
+  column: String;
+  order: String;
+}
+
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
@@ -32,6 +37,7 @@ function Movies() {
     selectedGenre: "" as String,
     pageSize: 4,
     currentPage: 1,
+    sortColumn: { column: "title", order: "asc" } as SortingColumn,
   });
 
   const likeForMovie = (movie: Movie) => () => {
