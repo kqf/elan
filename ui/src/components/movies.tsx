@@ -9,7 +9,7 @@ function getMovies() {
   return _.range(0, 15).map((i) => {
     return {
       _id: String(i),
-      title: `Title ${i}`,
+      title: `Title ${15 - i}`,
       genre: { _id: String(i % 4), name: `Genre ${i % 4}` },
       numberInStock: i,
       dailyRentalRate: 1.5,
@@ -27,7 +27,7 @@ function getGenres() {
 
 interface SortingColumn {
   column: String;
-  order: String;
+  order: boolean | "asc" | "desc";
 }
 
 function Movies() {
@@ -84,7 +84,14 @@ function Movies() {
     (movie) =>
       state.selectedGenre === movie.genre.name || state.selectedGenre === ""
   );
-  const paginated = paginate(filtered, state.currentPage, state.pageSize);
+  const sorted: Array<Movie> = _.orderBy(
+    filtered as Array<Movie>,
+    state.sortColumn.column,
+    state.sortColumn.order
+  ) as Array<Movie>;
+  console.log(sorted);
+
+  const paginated = paginate(sorted, state.currentPage, state.pageSize);
 
   return (
     <div className="row">
