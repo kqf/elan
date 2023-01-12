@@ -70,7 +70,9 @@ function Movies() {
     });
   };
 
-  const handleSorting = (field: String) => () => {};
+  const handleSorting = (field: String) => () => {
+    console.log(field);
+  };
 
   const filtered = state.movies.filter(
     (movie) =>
