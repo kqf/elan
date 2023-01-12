@@ -70,6 +70,8 @@ function Movies() {
     });
   };
 
+  const handleSorting = (field: String) => () => {};
+
   const filtered = state.movies.filter(
     (movie) =>
       state.selectedGenre === movie.genre.name || state.selectedGenre === ""
@@ -90,6 +92,7 @@ function Movies() {
           movies={paginated}
           likeForMovie={likeForMovie}
           deleteMovie={deleteMovie}
+          sortBy={handleSorting}
         />
         <Pagination
           itemCount={filtered.length}
