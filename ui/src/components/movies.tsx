@@ -34,27 +34,23 @@ function Movies() {
     currentPage: 1,
   });
 
-  const likeForMovie = (movie: Movie) => {
-    return () => {
-      const newstate = state.movies.map((c) => {
-        if (c !== movie) {
-          return c;
-        }
-        let newquery = { ...c };
-        newquery.liked = !newquery.liked;
-        return newquery;
-      });
-      updateState({ ...state, movies: newstate });
-    };
+  const likeForMovie = (movie: Movie) => () => {
+    const newstate = state.movies.map((c) => {
+      if (c !== movie) {
+        return c;
+      }
+      let newquery = { ...c };
+      newquery.liked = !newquery.liked;
+      return newquery;
+    });
+    updateState({ ...state, movies: newstate });
   };
 
-  const deleteMovie = (movie: Movie) => {
-    return () => {
-      updateState({
-        ...state,
-        movies: state.movies.filter((m) => m !== movie),
-      });
-    };
+  const deleteMovie = (movie: Movie) => () => {
+    updateState({
+      ...state,
+      movies: state.movies.filter((m) => m !== movie),
+    });
   };
 
   const switchPage = (page: number) => () => {
