@@ -19,15 +19,16 @@ function MovieTable(props: {
   movies: Array<Movie>;
   likeForMovie: (arg0: Movie) => () => void;
   deleteMovie: (arg0: Movie) => () => void;
+  sortBy: (arg0: String) => () => void;
 }) {
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Genere</th>
-          <th>Stock</th>
-          <th>Rate</th>
+          <th onClick={props.sortBy("title")}>Title</th>
+          <th onClick={props.sortBy("genre")}>Genere</th>
+          <th onClick={props.sortBy("stock")}>Stock</th>
+          <th onClick={props.sortBy("rate")}>Rate</th>
           <th></th>
           <th></th>
         </tr>
