@@ -27,8 +27,8 @@ function MovieTable(props: {
         <tr>
           <th onClick={props.sortBy("title")}>Title</th>
           <th onClick={props.sortBy("genre.name")}>Genere</th>
-          <th onClick={props.sortBy("stock")}>Stock</th>
-          <th onClick={props.sortBy("rate")}>Rate</th>
+          <th onClick={props.sortBy("numberInStock")}>Stock</th>
+          <th onClick={props.sortBy("dailyRentalRate")}>Rate</th>
           <th></th>
           <th></th>
         </tr>
