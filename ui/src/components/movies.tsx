@@ -77,7 +77,22 @@ function Movies() {
   };
 
   const handleSorting = (field: String) => () => {
-    console.log(field);
+    let order = "asc" as "asc" | "desc";
+    if (state.sortColumn.column === field && state.sortColumn.order === "asc") {
+      order = "desc";
+    }
+    if (
+      state.sortColumn.column === field &&
+      state.sortColumn.order === "desc"
+    ) {
+      order = "asc";
+    }
+    console.log("Before", field, state.sortColumn);
+    updateState({
+      ...state,
+      sortColumn: { column: field, order: order },
+    });
+    console.log("After", field, state.sortColumn);
   };
 
   const filtered = state.movies.filter(
