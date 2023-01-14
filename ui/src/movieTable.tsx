@@ -39,14 +39,27 @@ function MovieTable(props: {
     props.onSort({ column: field, order: order });
   };
 
+  const renderSortIcon = (field: String) => {
+    if (field !== props.sortingBy.column) return null;
+    if (props.sortingBy.order === "asc")
+      return <i className="fa fa-sort-asc" />;
+    return <i className="fa fa-sort-desc" />;
+  };
+
   return (
     <table className="table">
       <thead>
         <tr>
-          <th onClick={sortBy("title")}>Title</th>
-          <th onClick={sortBy("genre.name")}>Genere</th>
-          <th onClick={sortBy("numberInStock")}>Stock</th>
-          <th onClick={sortBy("dailyRentalRate")}>Rate</th>
+          <th onClick={sortBy("title")}>Title {renderSortIcon("title")}</th>
+          <th onClick={sortBy("genre.name")}>
+            Genere {renderSortIcon("genre.name")}
+          </th>
+          <th onClick={sortBy("numberInStock")}>
+            Stock {renderSortIcon("numberInStock")}
+          </th>
+          <th onClick={sortBy("dailyRentalRate")}>
+            Rate {renderSortIcon("dailyRentalRate")}
+          </th>
           <th></th>
           <th></th>
         </tr>
