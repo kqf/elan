@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useState } from "react";
-import MovieTable, { Genre, Movie } from "../movieTable";
+import MovieTable, { Genre, Movie, SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
@@ -23,11 +23,6 @@ function getGenres() {
   const movies = getMovies();
   const genrelist = movies.map((c) => c.genre);
   return _.uniqBy(genrelist, "name");
-}
-
-interface SortingColumn {
-  column: String;
-  order: boolean | "asc" | "desc";
 }
 
 function Movies() {
@@ -76,23 +71,11 @@ function Movies() {
     });
   };
 
-  const handleSorting = (field: String) => () => {
-    let order = "asc" as "asc" | "desc";
-    if (state.sortColumn.column === field && state.sortColumn.order === "asc") {
-      order = "desc";
-    }
-    if (
-      state.sortColumn.column === field &&
-      state.sortColumn.order === "desc"
-    ) {
-      order = "asc";
-    }
-    console.log("Before", field, state.sortColumn);
+  const handleSorting = (column: SortingColumn) => {
     updateState({
       ...state,
-      sortColumn: { column: field, order: order },
+      sortColumn: column,
     });
-    console.log("After", field, state.sortColumn);
   };
 
   const filtered = state.movies.filter(
@@ -122,7 +105,8 @@ function Movies() {
           movies={paginated}
           likeForMovie={likeForMovie}
           deleteMovie={deleteMovie}
-          sortBy={handleSorting}
+          onSort={handleSorting}
+          sortingBy={state.sortColumn}
         />
         <Pagination
           itemCount={filtered.length}
