@@ -87,7 +87,6 @@ function Movies() {
     state.sortColumn.column,
     state.sortColumn.order
   ) as Array<Movie>;
-  console.log(sorted);
 
   const paginated = paginate(sorted, state.currentPage, state.pageSize);
 
