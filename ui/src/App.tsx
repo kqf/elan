@@ -6,7 +6,7 @@ import AuthDemo from "./components/authDemo";
 import AppMenu from "./components/menuComponent";
 import Movies from "./components/movies";
 
-function App() {
+function Onepager() {
   return (
     <div className="row">
       <div className="col-xs-6 equal-width">
@@ -18,6 +18,10 @@ function App() {
       </div>
     </div>
   );
+}
+
+function App() {
+  return <Onepager />;
 }
 
 export default App;
