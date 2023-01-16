@@ -17,7 +17,6 @@ function App() {
           <Route path="/products" component={"Products"} />
           <Route path="/posts" component={"Posts"} />
         </div>
-
         <div className="row">
           <div className="col-xs-6 equal-width">
             <AppMenu />
