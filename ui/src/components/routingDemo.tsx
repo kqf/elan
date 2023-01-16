@@ -36,11 +36,11 @@ function SinglePageApp() {
         </nav>
         <div className="content">
           <Routes>
+            <Route path="/" element={<Movies />} />
             <Route path="/products" element={<Products />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
-            <Route path="/" element={<Movies />} />
           </Routes>
         </div>
       </div>
