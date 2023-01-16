@@ -5,6 +5,7 @@ import "./App.css";
 import AuthDemo from "./components/authDemo";
 import AppMenu from "./components/menuComponent";
 import Movies from "./components/movies";
+import SinglePageApp from "./components/routingDemo";
 
 function Onepager() {
   return (
@@ -21,7 +22,7 @@ function Onepager() {
 }
 
 function App() {
-  return <Onepager />;
+  return <SinglePageApp />;
 }
 
 export default App;
