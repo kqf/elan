@@ -39,8 +39,15 @@ function Posts(props: any) {
 
   return (
     <div>
-      This post was written in {params.year}.{" "}
-      {params.id === undefined ? "" : `This post the post number ${params.id}`}
+      <ul>
+        {_.range(10).map((year) => {
+          return (
+            <li key={year}>
+              <Link to={`/posts/${year}`}> Year {year} </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
