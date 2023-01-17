@@ -1,3 +1,4 @@
+import _ from "lodash";
 import {
   BrowserRouter,
   Link,
@@ -20,7 +21,22 @@ type PostsParams = {
 
 function Posts(props: any) {
   const params = useParams<PostsParams>();
-  if (params.year === undefined) return <div>There are many posts here.</div>;
+  if (params.id !== undefined) return <div>This is a post {params.id}</div>;
+  if (params.year !== undefined)
+    return (
+      <div>
+        <ul>
+          {_.range(+params.year).map((i) => {
+            return (
+              <li key={i}>
+                <Link to={`/posts/${params.year}/${i}`}> Posts {i} </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+
   return (
     <div>
       This post was written in {params.year}.{" "}
