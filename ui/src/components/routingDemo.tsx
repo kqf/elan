@@ -21,7 +21,12 @@ type PostsParams = {
 function Posts(props: any) {
   const params = useParams<PostsParams>();
   if (params.year === undefined) return <div>There are many posts here.</div>;
-  return <div>This post was written in {params.year}. </div>;
+  return (
+    <div>
+      This post was written in {params.year}.{" "}
+      {params.id === undefined ? "" : `This post the post number ${params.id}`}
+    </div>
+  );
 }
 
 function SinglePageApp() {
