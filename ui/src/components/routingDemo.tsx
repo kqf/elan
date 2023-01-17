@@ -1,4 +1,10 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
@@ -7,8 +13,20 @@ function Products(props: any) {
   return <div>These are the products</div>;
 }
 
+type PostsParams = {
+  id: string;
+  year: string;
+};
+
 function Posts(props: any) {
-  return <div>These are the posts</div>;
+  const params = useParams<PostsParams>();
+  if (params.year === undefined) return <div>There are many posts here.</div>;
+  return (
+    <div>
+      This post was written in {params.year}.{" "}
+      {params.id === undefined ? "" : `This post the post number ${params.id}`}
+    </div>
+  );
 }
 
 function SinglePageApp() {
@@ -38,7 +56,7 @@ function SinglePageApp() {
           <Routes>
             <Route path="/" element={<Movies />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
           </Routes>
