@@ -74,6 +74,14 @@ function Posts(props: any) {
   );
 }
 
+function NotFound() {
+  return (
+    <div>
+      <h1>Not found</h1>
+    </div>
+  );
+}
+
 function SinglePageApp() {
   return (
     <BrowserRouter>
@@ -104,6 +112,7 @@ function SinglePageApp() {
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
+            <Route path="/not-found" element={<NotFound />} />
           </Routes>
         </div>
       </div>
