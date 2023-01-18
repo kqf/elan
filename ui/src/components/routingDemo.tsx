@@ -5,6 +5,7 @@ import {
   Route,
   Routes,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
@@ -19,7 +20,7 @@ type PostsParams = {
   year: string;
 };
 
-function Posts(props: any) {
+function RawPosts(props: any) {
   const params = useParams<PostsParams>();
   if (params.id !== undefined) return <div>This is a post {params.id}</div>;
   if (params.year !== undefined)
@@ -48,6 +49,27 @@ function Posts(props: any) {
           );
         })}
       </ul>
+    </div>
+  );
+}
+
+function Posts(props: any) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const author = searchParams.get("author");
+  const language = searchParams.get("language");
+  let explanation = null;
+  if (author !== null) {
+    explanation = (
+      <div>
+        The author {author} {language !== null ? `written in ${language}` : ""}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <RawPosts />
+      {explanation}
     </div>
   );
 }
