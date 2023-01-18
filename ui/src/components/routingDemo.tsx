@@ -2,6 +2,7 @@ import _ from "lodash";
 import {
   BrowserRouter,
   Link,
+  Navigate,
   Route,
   Routes,
   useParams,
@@ -74,6 +75,14 @@ function Posts(props: any) {
   );
 }
 
+function NotFound() {
+  return (
+    <div>
+      <h1>Not found</h1>
+    </div>
+  );
+}
+
 function SinglePageApp() {
   return (
     <BrowserRouter>
@@ -104,6 +113,8 @@ function SinglePageApp() {
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>
         </div>
       </div>
