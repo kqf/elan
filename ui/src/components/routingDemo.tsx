@@ -12,6 +12,7 @@ import {
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
+import NavBar from "./navbar";
 
 function Products(props: any) {
   return <div>These are the products</div>;
@@ -100,6 +101,7 @@ function NotFound() {
 function SinglePageApp() {
   return (
     <BrowserRouter>
+      <NavBar />
       <div>
         <nav>
           <ul>
