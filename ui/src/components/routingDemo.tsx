@@ -5,6 +5,7 @@ import {
   Navigate,
   Route,
   Routes,
+  useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
@@ -21,9 +22,22 @@ type PostsParams = {
   year: string;
 };
 
+function PostDetails(props: { id: String }) {
+  const navigate = useNavigate();
+  const handleSave = () => {
+    navigate("/posts", { replace: true });
+  };
+  return (
+    <div>
+      <h1>This is a post {props.id}</h1>
+      <button onClick={handleSave}>Add to read</button>
+    </div>
+  );
+}
+
 function RawPosts(props: any) {
   const params = useParams<PostsParams>();
-  if (params.id !== undefined) return <div>This is a post {params.id}</div>;
+  if (params.id !== undefined) return <PostDetails id={params.id} />;
   if (params.year !== undefined)
     return (
       <div>
