@@ -15,7 +15,6 @@ import Movies from "./movies";
 function SideBar() {
   return (
     <div>
-      <h1>These are products types</h1>
       <ul>
         <li>
           <Link to="/products/old">Old</Link>
@@ -37,8 +36,10 @@ function Products(props: any) {
     <div>
       <h1>These are the product options</h1>
       <SideBar />
-      <Route path="/products/old" element={<Product state={"old"} />} />
-      <Route path="/products/new" element={<Product state={"new"} />} />
+      <Routes>
+        <Route path="old" element={<Product state={"old"} />} />
+        <Route path="new" element={<Product state={"new"} />} />
+      </Routes>
     </div>
   );
 }
@@ -82,7 +83,7 @@ function RawPosts(props: any) {
 }
 
 function Posts(props: any) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const author = searchParams.get("author");
   const language = searchParams.get("language");
   let explanation = null;
@@ -136,7 +137,7 @@ function SinglePageApp() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
