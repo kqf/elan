@@ -6,14 +6,40 @@ import {
   Route,
   Routes,
   useParams,
-  useSearchParams,
 } from "react-router-dom";
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
 
+function SideBar() {
+  return (
+    <div>
+      <h1>These are products types</h1>
+      <ul>
+        <li>
+          <Link to="/products/old">Old</Link>
+        </li>
+        <li>
+          <Link to="/products/new">New</Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function Product(props: { state: string }) {
+  return <h2>This is {props.state} section</h2>;
+}
+
 function Products(props: any) {
-  return <div>These are the products</div>;
+  return (
+    <div>
+      <h1>These are the product options</h1>
+      <SideBar />
+      <Route path="/products/old" element={<Product state={"old"} />} />
+      <Route path="/products/new" element={<Product state={"new"} />} />
+    </div>
+  );
 }
 
 type PostsParams = {
