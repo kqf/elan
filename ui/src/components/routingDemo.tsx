@@ -5,6 +5,7 @@ import {
   Navigate,
   Route,
   Routes,
+  useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
@@ -22,7 +23,10 @@ type PostsParams = {
 };
 
 function PostDetails(props: { id: String }) {
-  const handleSave = () => {};
+  const navigate = useNavigate();
+  const handleSave = () => {
+    navigate("/posts", { replace: true });
+  };
   return (
     <div>
       <h1>This is a post {props.id}</h1>
