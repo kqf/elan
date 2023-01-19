@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
