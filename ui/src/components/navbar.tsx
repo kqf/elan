@@ -6,6 +6,9 @@ function NavBar() {
       <NavLink className="navbar-brand" to="/">
         MyApp
       </NavLink>
+      <button className="navbar-toggler">
+        <span className="navbar-toggler-icon"></span>
+      </button>
       <div className="navbar-nav">
         <NavLink className="nav-item nav-link" to="/">
           Home
