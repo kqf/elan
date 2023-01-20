@@ -103,25 +103,6 @@ function SinglePageApp() {
     <BrowserRouter>
       <NavBar />
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/calc">Calculator</Link>
-            </li>
-            <li>
-              <Link to="/products">Products</Link>
-            </li>
-            <li>
-              <Link to="/posts">Posts</Link>
-            </li>
-            <li>
-              <Link to="/auth">Auth</Link>
-            </li>
-          </ul>
-        </nav>
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
