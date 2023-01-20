@@ -14,8 +14,37 @@ import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
 
+
+function SideBar() {
+  return (
+    <div>
+      <ul>
+        <li>
+          <Link to="/products/old">Old</Link>
+        </li>
+        <li>
+          <Link to="/products/new">New</Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function Product(props: { state: string }) {
+  return <h2>This is {props.state} section</h2>;
+}
+
 function Products(props: any) {
-  return <div>These are the products</div>;
+  return (
+    <div>
+      <h1>These are the product options</h1>
+      <SideBar />
+      <Routes>
+        <Route path="old" element={<Product state={"old"} />} />
+        <Route path="new" element={<Product state={"new"} />} />
+      </Routes>
+    </div>
+  );
 }
 
 type PostsParams = {
@@ -70,7 +99,7 @@ function RawPosts(props: any) {
 }
 
 function Posts(props: any) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const author = searchParams.get("author");
   const language = searchParams.get("language");
   let explanation = null;
@@ -106,7 +135,7 @@ function SinglePageApp() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
