@@ -12,6 +12,7 @@ import {
 import AuthDemo from "./authDemo";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
+import NavBar from "./navbar";
 
 function SideBar() {
   return (
@@ -128,6 +129,7 @@ function NotFound() {
 function SinglePageApp() {
   return (
     <BrowserRouter>
+      <NavBar />
       <div>
         <nav>
           <ul>
