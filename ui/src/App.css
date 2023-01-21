@@ -39,3 +39,7 @@
   flex: 1;
   /* border: solid; */
 }
+
+.navbar {
+  margin-bottom: 2%;
+}
