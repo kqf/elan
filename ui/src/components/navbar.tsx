@@ -9,7 +9,8 @@ function NavBar() {
       <button className="navbar-toggler">
         <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse">
+
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <NavLink className="nav-item nav-link" to="/">
             Home
