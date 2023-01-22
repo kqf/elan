@@ -14,7 +14,6 @@ import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
 
-
 function SideBar() {
   return (
     <div>
@@ -135,6 +134,7 @@ function SinglePageApp() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
+            <Route path="/movies/:id?" element={<Movies />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
