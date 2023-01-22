@@ -126,6 +126,21 @@ function NotFound() {
   );
 }
 
+type MovieParams = {
+  id: string;
+};
+
+function MovieComponent() {
+  const params = useParams<MovieParams>();
+  if (params.id !== undefined) return <PostDetails id={params.id} />;
+
+  return (
+    <div>
+      <h1>This is movie {params.id}</h1>
+    </div>
+  );
+}
+
 function SinglePageApp() {
   return (
     <BrowserRouter>
@@ -134,7 +149,7 @@ function SinglePageApp() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
-            <Route path="/movies/:id?" element={<Movies />} />
+            <Route path="/movies/:id?" element={<MovieComponent />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
