@@ -132,8 +132,6 @@ type MovieParams = {
 
 function MovieComponent() {
   const params = useParams<MovieParams>();
-  if (params.id !== undefined) return <PostDetails id={params.id} />;
-
   return (
     <div>
       <h1>This is movie {params.id}</h1>
