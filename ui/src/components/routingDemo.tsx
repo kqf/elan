@@ -135,6 +135,7 @@ function MovieComponent() {
   return (
     <div>
       <h1>This is movie {params.id}</h1>
+      <button className="btn btn-primary">Save</button>
     </div>
   );
 }
