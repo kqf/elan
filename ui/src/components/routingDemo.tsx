@@ -147,6 +147,7 @@ function SinglePageApp() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Movies />} />
+            <Route path="/movies/" element={<Movies />} />
             <Route path="/movies/:id?" element={<MovieComponent />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
