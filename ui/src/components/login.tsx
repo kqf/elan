@@ -11,6 +11,7 @@ function LoginForm() {
           <label htmlFor="password">Password</label>
           <input id="username" className="form-control" type="text"></input>
         </div>
+        <button className="btn btn-primary">Login</button>
       </form>
     </div>
   );
