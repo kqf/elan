@@ -10,6 +10,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import AuthDemo from "./authDemo";
+import LoginForm from "./login";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
@@ -160,6 +161,7 @@ function SinglePageApp() {
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>
