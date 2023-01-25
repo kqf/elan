@@ -1,5 +1,5 @@
 function LoginForm() {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventEvent();
     console.log("Handling submission");
   };
