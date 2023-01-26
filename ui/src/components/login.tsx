@@ -1,5 +1,6 @@
 interface FormElements extends HTMLFormControlsCollection {
-  usernameInput: HTMLInputElement;
+  username: HTMLInputElement;
+  password: HTMLInputElement;
 }
 
 interface UsernameFormElement extends HTMLFormElement {
@@ -9,7 +10,9 @@ interface UsernameFormElement extends HTMLFormElement {
 function LoginForm() {
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
-    console.log("Handling submission");
+    console.log(
+      `Handling submission ~> ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
+    );
   };
   return (
     <div>
@@ -21,7 +24,7 @@ function LoginForm() {
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input id="username" className="form-control" type="text"></input>
+          <input id="password" className="form-control" type="text"></input>
         </div>
         <button className="btn btn-primary">Login</button>
       </form>
