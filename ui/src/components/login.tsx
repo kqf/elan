@@ -1,5 +1,13 @@
+interface FormElements extends HTMLFormControlsCollection {
+  usernameInput: HTMLInputElement;
+}
+
+interface UsernameFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
 function LoginForm() {
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     e.preventEvent();
     console.log("Handling submission");
   };
