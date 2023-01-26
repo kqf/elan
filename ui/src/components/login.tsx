@@ -10,7 +10,9 @@ interface UsernameFormElement extends HTMLFormElement {
 function LoginForm() {
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
-    console.log("Handling submission");
+    console.log(
+      `Handling submission ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
+    );
   };
   return (
     <div>
