@@ -1,5 +1,6 @@
 interface FormElements extends HTMLFormControlsCollection {
-  usernameInput: HTMLInputElement;
+  username: HTMLInputElement;
+  password: HTMLInputElement;
 }
 
 interface UsernameFormElement extends HTMLFormElement {
@@ -21,7 +22,7 @@ function LoginForm() {
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input id="username" className="form-control" type="text"></input>
+          <input id="password" className="form-control" type="text"></input>
         </div>
         <button className="btn btn-primary">Login</button>
       </form>
