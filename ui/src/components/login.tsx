@@ -38,7 +38,12 @@ function LoginForm() {
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input id="password" className="form-control" type="text"></input>
+          <input
+            value={state.password}
+            id="password"
+            className="form-control"
+            type="text"
+          ></input>
         </div>
         <button className="btn btn-primary">Login</button>
       </form>
