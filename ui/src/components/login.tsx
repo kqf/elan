@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
@@ -14,6 +16,12 @@ function LoginForm() {
       `Handling submission ~> ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
     );
   };
+
+  const [state, updatesState] = useState({
+    username: "Defaut User",
+    password: "Default password",
+  });
+
   return (
     <div>
       <h1>Login</h1>
@@ -22,6 +30,7 @@ function LoginForm() {
           <label htmlFor="username">Username</label>
           <input
             autoFocus
+            value={state.username}
             id="username"
             className="form-control"
             type="text"
