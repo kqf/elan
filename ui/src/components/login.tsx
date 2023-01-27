@@ -24,11 +24,10 @@ function LoginForm() {
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    console.log(`Handling chang ~> ${event.currentTarget.value}`);
-    const newstate = {
+    updatesState({
       ...state,
       username: event.currentTarget.value,
-    };
+    });
   };
 
   return (
