@@ -20,7 +20,12 @@ function LoginForm() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
-          <input id="username" className="form-control" type="text"></input>
+          <input
+            autoFocus
+            id="username"
+            className="form-control"
+            type="text"
+          ></input>
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
