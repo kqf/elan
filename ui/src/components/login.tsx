@@ -22,6 +22,14 @@ function LoginForm() {
     password: "Default password",
   });
 
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    updatesState({
+      ...state,
+      username: event.currentTarget.value,
+    });
+  };
+
   return (
     <div>
       <h1>Login</h1>
@@ -31,6 +39,7 @@ function LoginForm() {
           <input
             autoFocus
             value={state.username}
+            onChange={handleChange}
             id="username"
             className="form-control"
             type="text"
