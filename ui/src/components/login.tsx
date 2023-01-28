@@ -24,12 +24,9 @@ function LoginForm() {
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    console.log(
-      `This is change ~~ ${event.currentTarget.name}: ${event.currentTarget.value}`
-    );
     updatesState({
       ...state,
-      [event.currentTarget.name]: event.currentTarget.value,
+      [event.currentTarget.id]: event.currentTarget.value,
     });
   };
 
@@ -44,7 +41,6 @@ function LoginForm() {
             value={state.username}
             onChange={handleChange}
             id="username"
-            name="username"
             className="form-control"
             type="text"
           ></input>
@@ -55,7 +51,6 @@ function LoginForm() {
             value={state.password}
             onChange={handleChange}
             id="password"
-            name="password"
             className="form-control"
             type="text"
           ></input>
