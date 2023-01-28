@@ -26,7 +26,7 @@ function LoginForm() {
     event.preventDefault();
     updatesState({
       ...state,
-      username: event.currentTarget.value,
+      [event.currentTarget.id]: event.currentTarget.value,
     });
   };
 
@@ -49,6 +49,7 @@ function LoginForm() {
           <label htmlFor="password">Password</label>
           <input
             value={state.password}
+            onChange={handleChange}
             id="password"
             className="form-control"
             type="text"
