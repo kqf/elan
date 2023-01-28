@@ -9,6 +9,27 @@ interface UsernameFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
+function LoginField(props: {
+  name: string;
+  label: string;
+  value: string;
+  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <div className="form-group">
+      <label htmlFor={props.name}>{props.label}</label>
+      <input
+        autoFocus
+        value={props.value}
+        onChange={props.onChange}
+        id={props.name}
+        className="form-control"
+        type="text"
+      ></input>
+    </div>
+  );
+}
+
 function LoginForm() {
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
@@ -34,27 +55,12 @@ function LoginForm() {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            autoFocus
-            value={state.username}
-            onChange={handleChange}
-            id="username"
-            className="form-control"
-            type="text"
-          ></input>
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            value={state.password}
-            onChange={handleChange}
-            id="password"
-            className="form-control"
-            type="text"
-          ></input>
-        </div>
+        <LoginField
+          name="username"
+          label="Username"
+          value={state.username}
+          onChange={handleChange}
+        />
         <button className="btn btn-primary">Login</button>
       </form>
     </div>
