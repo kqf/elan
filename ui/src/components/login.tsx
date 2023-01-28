@@ -61,6 +61,12 @@ function LoginForm() {
           value={state.username}
           onChange={handleChange}
         />
+        <LoginField
+          name="password"
+          label="Password"
+          value={state.password}
+          onChange={handleChange}
+        />
         <button className="btn btn-primary">Login</button>
       </form>
     </div>
