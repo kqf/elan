@@ -33,6 +33,15 @@ function LoginField(props: {
 }
 
 function LoginForm() {
+  const [state, setState] = useState({
+    username: "Defaut User",
+    password: "Default password",
+    errors: {
+      username: "",
+      password: "",
+    },
+  });
+
   const validate = (username: string, password: string) => {
     return {
       username: username.length === 0 ? "Username can't be empty" : "",
@@ -45,20 +54,18 @@ function LoginForm() {
     console.log(
       `Handling submission ~> ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
     );
+    setState({
+      ...state,
+      errors: validate(
+        event.currentTarget.elements.username.value,
+        event.currentTarget.elements.password.value
+      ),
+    });
   };
-
-  const [state, updatesState] = useState({
-    username: "Defaut User",
-    password: "Default password",
-    errors: {
-      username: "",
-      password: "",
-    },
-  });
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    updatesState({
+    setState({
       ...state,
       [event.currentTarget.id]: event.currentTarget.value,
     });
