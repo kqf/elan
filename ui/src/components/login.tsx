@@ -33,6 +33,13 @@ function LoginField(props: {
 }
 
 function LoginForm() {
+  const validate = (username: string, password: string) => {
+    return {
+      username: username.length === 0 ? "Username can't be empty" : "",
+      password: password.length === 0 ? "Password can't be empty" : "",
+    };
+  };
+
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
     console.log(
