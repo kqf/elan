@@ -44,22 +44,27 @@ function LoginForm() {
 
   const validate = (username: string, password: string) => {
     return {
-      username: username.length === 0 ? "Username can't be empty" : "",
-      password: password.length === 0 ? "Password can't be empty" : "",
+      status: username.length && password.length,
+      errors: {
+        username: username.length === 0 ? "Username can't be empty" : "",
+        password: password.length === 0 ? "Password can't be empty" : "",
+      },
     };
   };
 
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
-    console.log(
-      `Handling submission ~> ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
+
+    const { status, errors } = validate(
+      event.currentTarget.elements.username.value,
+      event.currentTarget.elements.password.value
     );
+
+    if (!status) return;
+
     setState({
       ...state,
-      errors: validate(
-        event.currentTarget.elements.username.value,
-        event.currentTarget.elements.password.value
-      ),
+      errors: errors,
     });
   };
 
