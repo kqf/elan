@@ -12,6 +12,7 @@ interface UsernameFormElement extends HTMLFormElement {
 function LoginField(props: {
   name: string;
   label: string;
+  error: string;
   value: string;
   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }) {
@@ -26,6 +27,7 @@ function LoginField(props: {
         className="form-control"
         type="text"
       ></input>
+      {props.error && <div className="alert alert-danger">{props.error}</div>}
     </div>
   );
 }
