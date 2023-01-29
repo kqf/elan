@@ -43,6 +43,10 @@ function LoginForm() {
   const [state, updatesState] = useState({
     username: "Defaut User",
     password: "Default password",
+    errors: {
+      username: "",
+      password: "",
+    },
   });
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -62,12 +66,14 @@ function LoginForm() {
           label="Username"
           value={state.username}
           onChange={handleChange}
+          error={state.errors.username}
         />
         <LoginField
           name="password"
           label="Password"
           value={state.password}
           onChange={handleChange}
+          error={state.errors.password}
         />
         <button className="btn btn-primary">Login</button>
       </form>
