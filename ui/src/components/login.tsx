@@ -49,11 +49,21 @@ function LoginForm() {
     },
   });
 
+  const validateProperty = (value: string) => {
+    if (value === "") return "Must not be empty";
+    if (value.length > 20) return "Too long, must be less than 20 characters";
+    return "";
+  };
+
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
     updatesState({
       ...state,
       [event.currentTarget.id]: event.currentTarget.value,
+      errors: {
+        ...state.errors,
+        [event.currentTarget.id]: event.currentTarget.value,
+      },
     });
   };
 
