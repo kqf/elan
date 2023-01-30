@@ -42,6 +42,12 @@ function LoginForm() {
     },
   });
 
+  const validateProperty = (value: string) => {
+    if (value === "") return "Must not be empty";
+    if (value.length > 20) return "Too long, must be less than 20 characters";
+    return "";
+  };
+
   const validate = (username: string, password: string) => {
     return {
       status: username.length && password.length,
@@ -73,6 +79,10 @@ function LoginForm() {
     setState({
       ...state,
       [event.currentTarget.id]: event.currentTarget.value,
+      errors: {
+        ...state.errors,
+        [event.currentTarget.id]: validateProperty(event.currentTarget.value),
+      },
     });
   };
 
