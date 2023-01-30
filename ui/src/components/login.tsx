@@ -62,7 +62,7 @@ function LoginForm() {
       [event.currentTarget.id]: event.currentTarget.value,
       errors: {
         ...state.errors,
-        [event.currentTarget.id]: event.currentTarget.value,
+        [event.currentTarget.id]: validateProperty(event.currentTarget.value),
       },
     });
   };
