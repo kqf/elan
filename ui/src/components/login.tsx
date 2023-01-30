@@ -33,14 +33,7 @@ function LoginField(props: {
 }
 
 function LoginForm() {
-  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
-    event.preventDefault();
-    console.log(
-      `Handling submission ~> ${event.currentTarget.elements.username.value} ${event.currentTarget.elements.password.value}`
-    );
-  };
-
-  const [state, updatesState] = useState({
+  const [state, setState] = useState({
     username: "Defaut User",
     password: "Default password",
     errors: {
@@ -55,9 +48,35 @@ function LoginForm() {
     return "";
   };
 
+  const validate = (username: string, password: string) => {
+    return {
+      status: username.length && password.length,
+      errors: {
+        username: username.length === 0 ? "Username can't be empty" : "",
+        password: password.length === 0 ? "Password can't be empty" : "",
+      },
+    };
+  };
+
+  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
+    event.preventDefault();
+
+    const { status, errors } = validate(
+      event.currentTarget.elements.username.value,
+      event.currentTarget.elements.password.value
+    );
+
+    if (!status) return;
+
+    setState({
+      ...state,
+      errors: errors,
+    });
+  };
+
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    updatesState({
+    setState({
       ...state,
       [event.currentTarget.id]: event.currentTarget.value,
       errors: {
