@@ -34,8 +34,10 @@ function LoginField(props: {
 
 function LoginForm() {
   const [state, setState] = useState({
-    username: "Defaut User",
-    password: "Default password",
+    account: {
+      username: "Defaut User",
+      password: "Default password",
+    },
     errors: {
       username: "",
       password: "",
@@ -78,7 +80,10 @@ function LoginForm() {
     event.preventDefault();
     setState({
       ...state,
-      [event.currentTarget.id]: event.currentTarget.value,
+      account: {
+        ...state.account,
+        [event.currentTarget.id]: event.currentTarget.value,
+      },
       errors: {
         ...state.errors,
         [event.currentTarget.id]: validateProperty(event.currentTarget.value),
@@ -93,14 +98,14 @@ function LoginForm() {
         <LoginField
           name="username"
           label="Username"
-          value={state.username}
+          value={state.account.username}
           onChange={handleChange}
           error={state.errors.username}
         />
         <LoginField
           name="password"
           label="Password"
-          value={state.password}
+          value={state.account.password}
           onChange={handleChange}
           error={state.errors.password}
         />
