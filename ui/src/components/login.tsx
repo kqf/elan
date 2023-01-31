@@ -1,4 +1,5 @@
 import { useState } from "react";
+var Joi = require("joi-browser");
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -43,6 +44,11 @@ function LoginForm() {
       password: "",
     },
   });
+
+  const schema = {
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+  };
 
   const validateProperty = (value: string) => {
     if (value === "") return "Must not be empty";
