@@ -69,6 +69,9 @@ function LoginForm() {
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
 
+    const result = Joi.validate(state.account, schema);
+    console.log(result);
+
     const { status, errors } = validate(
       event.currentTarget.elements.username.value,
       event.currentTarget.elements.password.value
