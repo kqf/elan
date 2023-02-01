@@ -1,5 +1,4 @@
 import { useState } from "react";
-var Joi = require("joi-browser");
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
@@ -45,11 +44,6 @@ function LoginForm() {
     },
   });
 
-  const schema = {
-    username: Joi.string().required(),
-    password: Joi.string().required(),
-  };
-
   const validateProperty = (value: string) => {
     if (value === "") return "Must not be empty";
     if (value.length > 20) return "Too long, must be less than 20 characters";
@@ -68,9 +62,6 @@ function LoginForm() {
 
   const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
     event.preventDefault();
-
-    const result = Joi.validate(state.account, schema);
-    console.log(result);
 
     const { status, errors } = validate(
       event.currentTarget.elements.username.value,
