@@ -109,7 +109,14 @@ function LoginForm() {
           onChange={handleChange}
           error={state.errors.password}
         />
-        <button className="btn btn-primary">Login</button>
+        <button
+          active={
+            validate(state.account.username, state.account.password).status
+          }
+          className="btn btn-primary"
+        >
+          Login
+        </button>
       </form>
     </div>
   );
