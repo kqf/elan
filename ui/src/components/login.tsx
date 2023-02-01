@@ -52,7 +52,7 @@ function LoginForm() {
 
   const validate = (username: string, password: string) => {
     return {
-      status: username.length && password.length,
+      status: username.length > 0 && password.length > 0,
       errors: {
         username: username.length === 0 ? "Username can't be empty" : "",
         password: password.length === 0 ? "Password can't be empty" : "",
@@ -109,7 +109,14 @@ function LoginForm() {
           onChange={handleChange}
           error={state.errors.password}
         />
-        <button className="btn btn-primary">Login</button>
+        <button
+          disabled={
+            !validate(state.account.username, state.account.password).status
+          }
+          className="btn btn-primary"
+        >
+          Login
+        </button>
       </form>
     </div>
   );
