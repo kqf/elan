@@ -53,12 +53,13 @@ function RegisterForm() {
     return "";
   };
 
-  const validate = (username: string, password: string) => {
+  const validate = (username: string, password: string, email: string) => {
     return {
       status: username.length > 0 && password.length > 0,
       errors: {
         username: username.length === 0 ? "Username can't be empty" : "",
         password: password.length === 0 ? "Password can't be empty" : "",
+        email: email.length === 0 ? "Password can't be empty" : "",
       },
     };
   };
@@ -68,7 +69,8 @@ function RegisterForm() {
 
     const { status, errors } = validate(
       event.currentTarget.elements.username.value,
-      event.currentTarget.elements.password.value
+      event.currentTarget.elements.password.value,
+      event.currentTarget.elements.email.value
     );
 
     if (!status) return;
