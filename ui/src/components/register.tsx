@@ -36,12 +36,14 @@ function LoginField(props: {
 function RegisterForm() {
   const [state, setState] = useState({
     account: {
-      username: "Defaut User",
+      username: "John Doe",
       password: "Default password",
+      email: "joe.doe@gmail.om",
     },
     errors: {
       username: "",
       password: "",
+      email: "",
     },
   });
 
