@@ -96,8 +96,8 @@ function RegisterForm() {
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <LoginField
-          name="username"
-          label="Username"
+          name="email"
+          label="E-mail"
           value={state.account.username}
           onChange={handleChange}
           error={state.errors.username}
@@ -108,6 +108,13 @@ function RegisterForm() {
           value={state.account.password}
           onChange={handleChange}
           error={state.errors.password}
+        />
+        <LoginField
+          name="username"
+          label="Username"
+          value={state.account.username}
+          onChange={handleChange}
+          error={state.errors.username}
         />
         <button
           disabled={
