@@ -123,7 +123,11 @@ function RegisterForm() {
         />
         <button
           disabled={
-            !validate(state.account.username, state.account.password).status
+            !validate(
+              state.account.username,
+              state.account.password,
+              state.account.email
+            ).status
           }
           className="btn btn-primary"
         >
