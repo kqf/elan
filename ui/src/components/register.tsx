@@ -3,6 +3,7 @@ import { useState } from "react";
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
+  email: HTMLInputElement;
 }
 
 interface UsernameFormElement extends HTMLFormElement {
