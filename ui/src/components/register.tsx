@@ -103,9 +103,9 @@ function RegisterForm() {
         <LoginField
           name="email"
           label="E-mail"
-          value={state.account.username}
+          value={state.account.email}
           onChange={handleChange}
-          error={state.errors.username}
+          error={state.errors.email}
         />
         <LoginField
           name="password"
