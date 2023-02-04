@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
+}
+interface LoginElements {
+  username: string;
+  password: string;
 }
 
 interface UsernameFormElement extends HTMLFormElement {
@@ -44,6 +49,19 @@ function LoginForm() {
     },
   });
 
+  const { register, handleSubmit } = useForm<FormElements>();
+  const onSubmit: SubmitHandler<FormElements> = (data: FormElements) => {
+    setState({
+      ...state,
+      account: {
+        ...state.account,
+        username: data.username.value,
+        password: data.password.value,
+      },
+    });
+    console.log(state);
+  };
+
   const validateProperty = (value: string) => {
     if (value === "") return "Must not be empty";
     if (value.length > 20) return "Too long, must be less than 20 characters";
@@ -58,22 +76,6 @@ function LoginForm() {
         password: password.length === 0 ? "Password can't be empty" : "",
       },
     };
-  };
-
-  const handleSubmit = (event: React.FormEvent<UsernameFormElement>) => {
-    event.preventDefault();
-
-    const { status, errors } = validate(
-      event.currentTarget.elements.username.value,
-      event.currentTarget.elements.password.value
-    );
-
-    if (!status) return;
-
-    setState({
-      ...state,
-      errors: errors,
-    });
   };
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -94,7 +96,7 @@ function LoginForm() {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <LoginField
           name="username"
           label="Username"
