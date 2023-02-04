@@ -5,14 +5,6 @@ interface FormElements extends HTMLFormControlsCollection {
   username: HTMLInputElement;
   password: HTMLInputElement;
 }
-interface LoginElements {
-  username: string;
-  password: string;
-}
-
-interface UsernameFormElement extends HTMLFormElement {
-  readonly elements: FormElements;
-}
 
 function LoginField(props: {
   name: string;
@@ -51,6 +43,7 @@ function LoginForm() {
 
   const { register, handleSubmit } = useForm<FormElements>();
   const onSubmit: SubmitHandler<FormElements> = (data: FormElements) => {
+    console.log(data);
     setState({
       ...state,
       account: {
@@ -59,7 +52,6 @@ function LoginForm() {
         password: data.password.value,
       },
     });
-    console.log(state);
   };
 
   const validateProperty = (value: string) => {
