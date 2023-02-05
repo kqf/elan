@@ -24,6 +24,7 @@ function LoginField(props: {
         id={props.name}
         className="form-control"
         type="text"
+        {...register(props.name)}
       ></input>
       {props.error && <div className="alert alert-danger">{props.error}</div>}
     </div>
