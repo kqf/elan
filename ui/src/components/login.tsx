@@ -12,6 +12,7 @@ function LoginField(props: {
   error: string;
   value: string;
   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  register: any;
 }) {
   return (
     <div className="form-group">
@@ -95,6 +96,7 @@ function LoginForm() {
           value={state.account.username}
           onChange={handleChange}
           error={state.errors.username}
+          register={register}
         />
         <LoginField
           name="password"
@@ -102,6 +104,7 @@ function LoginForm() {
           value={state.account.password}
           onChange={handleChange}
           error={state.errors.password}
+          register={register}
         />
         <button
           disabled={
