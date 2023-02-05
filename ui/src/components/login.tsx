@@ -12,7 +12,7 @@ function LoginField(props: {
   error: string;
   value: string;
   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
-  register: (name: string) => any;
+  register: any;
 }) {
   return (
     <div className="form-group">
