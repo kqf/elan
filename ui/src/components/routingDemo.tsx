@@ -15,6 +15,7 @@ import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
 import RegisterForm from "./register";
+import ReloginForm from "./relogin";
 
 function SideBar() {
   return (
@@ -163,6 +164,7 @@ function SinglePageApp() {
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/relogin" element={<ReloginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
