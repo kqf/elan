@@ -1,4 +1,9 @@
-import { useForm, Resolver } from "react-hook-form";
+import {
+  useForm,
+  Resolver,
+  UseFormRegister,
+  FieldErrors,
+} from "react-hook-form";
 
 type FormValues = {
   firstName: string;
@@ -19,6 +24,20 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
+function LoginField(props: {
+  name: "firstName" | "lastName";
+  placeholder: string;
+  register: UseFormRegister<FormValues>;
+  errors: FieldErrors<FormValues>;
+}) {
+  return (
+    <div>
+      <input {...props.register(props.name)} placeholder={props.placeholder} />
+      {props.errors?.firstName && <p>{props.errors.firstName.message}</p>}
+    </div>
+  );
+}
+
 function ReloginForm() {
   const {
     register,
@@ -29,9 +48,12 @@ function ReloginForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <input {...register("firstName")} placeholder="Bill" />
-      {errors?.firstName && <p>{errors.firstName.message}</p>}
-
+      <LoginField
+        name="firstName"
+        placeholder="Bob"
+        regiseter={register}
+        errors={errors}
+      />
       <input {...register("lastName")} placeholder="Luo" />
 
       <input type="submit" />
