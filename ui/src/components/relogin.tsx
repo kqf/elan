@@ -51,7 +51,7 @@ function ReloginForm() {
       <LoginField
         name="firstName"
         placeholder="Bob"
-        regiseter={register}
+        register={register}
         errors={errors}
       />
       <input {...register("lastName")} placeholder="Luo" />
