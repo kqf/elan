@@ -31,9 +31,18 @@ function LoginField(props: {
   errors: FieldErrors<FormValues>;
 }) {
   return (
-    <div>
-      <input {...props.register(props.name)} placeholder={props.placeholder} />
-      {props.errors?.firstName && <p>{props.errors.firstName.message}</p>}
+    <div className="form-group">
+      <label htmlFor={props.name}>{"Username"}</label>
+      <input
+        {...props.register(props.name)}
+        placeholder={props.placeholder}
+        className="form-control"
+      />
+      {props.errors?.firstName && (
+        <div className="alert alert-danger">
+          {props.errors.firstName.message}
+        </div>
+      )}
     </div>
   );
 }
@@ -47,17 +56,20 @@ function ReloginForm() {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <form onSubmit={onSubmit}>
-      <LoginField
-        name="firstName"
-        placeholder="Bob"
-        register={register}
-        errors={errors}
-      />
-      <input {...register("lastName")} placeholder="Luo" />
+    <div>
+      <h1>Re-login</h1>
+      <form onSubmit={onSubmit}>
+        <LoginField
+          name="firstName"
+          placeholder="Bob"
+          register={register}
+          errors={errors}
+        />
+        <input {...register("lastName")} placeholder="Luo" />
 
-      <input type="submit" />
-    </form>
+        <button className="btn btn-primary">Submit</button>
+      </form>
+    </div>
   );
 }
 
