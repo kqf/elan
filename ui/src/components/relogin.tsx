@@ -32,6 +32,7 @@ function LoginField(props: {
 }) {
   return (
     <div>
+      <label htmlFor={props.name}>{"Username"}</label>
       <input {...props.register(props.name)} placeholder={props.placeholder} />
       {props.errors?.firstName && <p>{props.errors.firstName.message}</p>}
     </div>
@@ -47,17 +48,20 @@ function ReloginForm() {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <form onSubmit={onSubmit}>
-      <LoginField
-        name="firstName"
-        placeholder="Bob"
-        register={register}
-        errors={errors}
-      />
-      <input {...register("lastName")} placeholder="Luo" />
+    <div>
+      <h1>Re-login</h1>
+      <form onSubmit={onSubmit}>
+        <LoginField
+          name="firstName"
+          placeholder="Bob"
+          register={register}
+          errors={errors}
+        />
+        <input {...register("lastName")} placeholder="Luo" />
 
-      <input type="submit" />
-    </form>
+        <input type="submit" />
+      </form>
+    </div>
   );
 }
 
