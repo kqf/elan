@@ -26,13 +26,14 @@ const resolver: Resolver<FormValues> = async (values) => {
 
 function LoginField(props: {
   name: "firstName" | "lastName";
+  label: string;
   placeholder: string;
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
 }) {
   return (
     <div className="form-group">
-      <label htmlFor={props.name}>{"Username"}</label>
+      <label htmlFor={props.name}>{props.label}</label>
       <input
         {...props.register(props.name)}
         placeholder={props.placeholder}
@@ -61,12 +62,18 @@ function ReloginForm() {
       <form onSubmit={onSubmit}>
         <LoginField
           name="firstName"
+          label={"Username"}
           placeholder="Bob"
           register={register}
           errors={errors}
         />
-        <input {...register("lastName")} placeholder="Luo" />
-
+        <LoginField
+          name="lastName"
+          label="Second Name"
+          placeholder="Bobby"
+          register={register}
+          errors={errors}
+        />
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
