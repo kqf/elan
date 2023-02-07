@@ -65,8 +65,12 @@ function ReloginForm() {
           register={register}
           errors={errors}
         />
-        <input {...register("lastName")} placeholder="Luo" />
-
+        <LoginField
+          name="lastName"
+          placeholder="Bobby"
+          register={register}
+          errors={errors}
+        />
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
