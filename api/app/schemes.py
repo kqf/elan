@@ -1,5 +1,5 @@
 from app import ma
-from app.models import Lesson, Pair, User
+from app.models import Lesson, Pair, Token, User
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
@@ -36,3 +36,8 @@ class PairSchema(ma.SQLAlchemyAutoSchema):
     id = ma.auto_field(required=True, load_only=True)
     lesson_id = ma.auto_field(required=True, load_only=True)
     lesson = ma.Nested("LessonSchema", exclude=("pairs",), load_only=True)
+
+
+class TokenSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Token
