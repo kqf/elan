@@ -5,7 +5,8 @@ from app.models import Lesson, Pair, User
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        only = ["id", "url", "email"]
+        include_fk = True
+        load_instance = True
 
     id = ma.auto_field(dump_only=True)
     url = ma.String(dump_only=True)
