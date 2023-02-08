@@ -5,13 +5,13 @@ from app.models import Lesson, Pair, User
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        # ordered = True
+        only = ["id", "url", "email"]
 
     id = ma.auto_field(dump_only=True)
     url = ma.String(dump_only=True)
     email = ma.auto_field(required=True)
     password_hash = ma.auto_field(required=True, load_only=True)
-    lessons = ma.Nested("LessonSchema", many=True, load_only=True)
+    # lessons = ma.Nested("LessonSchema", many=True, load_only=True)
 
 
 class LessonSchema(ma.SQLAlchemyAutoSchema):
