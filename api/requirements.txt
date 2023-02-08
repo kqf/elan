@@ -3,13 +3,13 @@ click
 flask
 flask-cors
 flask-login
-Flask-SQLAlchemy
+Flask-SQLAlchemy==3.0.3
 Flask-HTTPAuth
 flask-session
 pyjwt
 gunicorn
 apifairy
-marshmallow-sqlalchemy
+marshmallow-sqlalchemy==0.28.1
 python-dotenv
 
 # dev
