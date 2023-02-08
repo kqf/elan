@@ -11,7 +11,8 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     url = ma.String(dump_only=True)
     email = ma.auto_field(required=True)
     password_hash = ma.auto_field(required=True, load_only=True)
-    # lessons = ma.Nested("LessonSchema", many=True, load_only=True)
+    tokens = ma.auto_field(load_only=True)
+    lessons = ma.auto_field(load_only=True)
 
 
 class LessonSchema(ma.SQLAlchemyAutoSchema):
