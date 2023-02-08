@@ -11,6 +11,7 @@ gunicorn
 apifairy
 marshmallow-sqlalchemy
 python-dotenv
+SQLAlchemy==2.0.1  # https://github.com/marshmallow-code/marshmallow-sqlalchemy/issues/487
 
 # dev
 isort
