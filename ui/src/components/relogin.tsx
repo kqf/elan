@@ -18,7 +18,9 @@ function LoginField(props: {
       <label htmlFor={props.name}>{props.label}</label>
       <input
         id={props.name}
-        {...props.register(props.name, { required: true })}
+        {...props.register(props.name, {
+          required: `${props.name} is required`,
+        })}
         placeholder={props.placeholder}
         className="form-control"
       />
