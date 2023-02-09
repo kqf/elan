@@ -11,17 +11,30 @@ type FormValues = {
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
+  var errors = { };
+  // @ts-ignore
+  errors["firstName"] = !values.firstName
+    ? {
+        firstName: {
+          type: "required",
+          message: "username is required.",
+        },
+      }
+    : {};
+
+  // @ts-ignore
+  errors["lastName"] = !values.lastName
+    ? {
+        lastName: {
+          type: "required",
+          message: "username is required.",
+        },
+      }
+    : {};
+
   return {
     values: values.firstName ? values : {},
-    errors: !values.firstName
-      ? {
-          firstName: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : {},
-  };
+    errors: errors,
 };
 
 function LoginField(props: {
