@@ -31,6 +31,7 @@ function LoginField(props: {
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
 }) {
+  const errors = props.errors[props.name];
   return (
     <div className="form-group">
       <label htmlFor={props.name}>{props.label}</label>
@@ -39,11 +40,7 @@ function LoginField(props: {
         placeholder={props.placeholder}
         className="form-control"
       />
-      {props.errors?.firstName && (
-        <div className="alert alert-danger">
-          {props.errors.firstName.message}
-        </div>
-      )}
+      {errors && <div className="alert alert-danger">{errors.message}</div>}
     </div>
   );
 }
@@ -53,7 +50,7 @@ function ReloginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver });
+  } = useForm<FormValues>({ resolver, mode: "onChange" });
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
