@@ -38,11 +38,6 @@ function ReloginForm() {
   } = useForm<FormValues>({ mode: "onChange" });
   const onSubmit = handleSubmit((data) => console.log(data));
 
-  const disabledSubmit = () => {
-    console.log(Object.keys(errors));
-    return false;
-  };
-
   return (
     <div>
       <h1>Re-login</h1>
