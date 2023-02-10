@@ -50,13 +50,16 @@ function ReloginForm() {
             required: "Username is required",
           })}
         />
-        {/* <LoginField
-          name="lastName"
-          label="Second Name"
-          placeholder="Bobby"
-          register={register}
-          errors={errors}
-        /> */}
+        <LoginField
+          id={"lastName"}
+          label={"Username"}
+          // placeholder="Bob"
+          error={errors["lastName"]}
+          {...register("lastName", {
+            required: "Username is required",
+          })}
+        />
+
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
