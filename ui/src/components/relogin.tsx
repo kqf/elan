@@ -1,5 +1,10 @@
 import _ from "lodash";
-import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
+import {
+  useForm,
+  UseFormRegister,
+  FieldErrors,
+  FieldError,
+} from "react-hook-form";
 
 type FormValues = {
   firstName: string;
@@ -7,25 +12,19 @@ type FormValues = {
 };
 
 function LoginField(props: {
-  name: "firstName" | "lastName";
+  id: "firstName" | "lastName";
   label: string;
-  placeholder: string;
-  register: UseFormRegister<FormValues>;
-  errors: FieldErrors<FormValues>;
+  error?: FieldError;
+  inputs?: React.InputHTMLAttributes<HTMLInputElement>;
 }) {
-  const errors = props.errors[props.name];
+  console.log("this is field", props.error);
   return (
     <div className="form-group">
-      <label htmlFor={props.name}>{props.label}</label>
-      <input
-        id={props.name}
-        {...props.register(props.name, {
-          required: `${props.name} is required`,
-        })}
-        placeholder={props.placeholder}
-        className="form-control"
-      />
-      {errors && <div className="alert alert-danger">{errors.message}</div>}
+      <label htmlFor={props.id}>{props.label}</label>
+      <input className="form-control" {...props.inputs} />
+      {props.error && (
+        <div className="alert alert-danger">{props.error.message}</div>
+      )}
     </div>
   );
 }
@@ -43,19 +42,24 @@ function ReloginForm() {
       <h1>Re-login</h1>
       <form onSubmit={onSubmit}>
         <LoginField
-          name="firstName"
+          id={"firstName"}
           label={"Username"}
-          placeholder="Bob"
-          register={register}
-          errors={errors}
+          // placeholder="Bob"
+          error={errors["firstName"]}
+          {...register("firstName", {
+            required: "Username is required",
+          })}
         />
         <LoginField
-          name="lastName"
-          label="Second Name"
-          placeholder="Bobby"
-          register={register}
-          errors={errors}
+          id={"lastName"}
+          label={"Username"}
+          // placeholder="Bob"
+          error={errors["lastName"]}
+          {...register("lastName", {
+            required: "Username is required",
+          })}
         />
+
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
