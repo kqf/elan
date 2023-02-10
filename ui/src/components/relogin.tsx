@@ -37,6 +37,11 @@ function ReloginForm() {
   } = useForm<FormValues>({ mode: "onChange" });
   const onSubmit = handleSubmit((data) => console.log(data));
 
+  const disabledSubmit = () => {
+    console.log(errors);
+    return false;
+  };
+
   return (
     <div>
       <h1>Re-login</h1>
@@ -55,7 +60,9 @@ function ReloginForm() {
           register={register}
           errors={errors}
         />
-        <button className="btn btn-primary">Submit</button>
+        <button disabled={disabledSubmit()} className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
