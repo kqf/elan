@@ -1,40 +1,8 @@
-import {
-  useForm,
-  Resolver,
-  UseFormRegister,
-  FieldErrors,
-} from "react-hook-form";
+import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
 
 type FormValues = {
   firstName: string;
   lastName: string;
-};
-
-const resolver: Resolver<FormValues> = async (values) => {
-  var errors = { };
-  // @ts-ignore
-  errors["firstName"] = !values.firstName
-    ? {
-        firstName: {
-          type: "required",
-          message: "username is required.",
-        },
-      }
-    : {};
-
-  // @ts-ignore
-  errors["lastName"] = !values.lastName
-    ? {
-        lastName: {
-          type: "required",
-          message: "username is required.",
-        },
-      }
-    : {};
-
-  return {
-    values: values.firstName ? values : {},
-    errors: errors,
 };
 
 function LoginField(props: {
@@ -49,7 +17,10 @@ function LoginField(props: {
     <div className="form-group">
       <label htmlFor={props.name}>{props.label}</label>
       <input
-        {...props.register(props.name)}
+        id={props.name}
+        {...props.register(props.name, {
+          required: `${props.name} is required`,
+        })}
         placeholder={props.placeholder}
         className="form-control"
       />
@@ -63,7 +34,7 @@ function ReloginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver, mode: "onChange" });
+  } = useForm<FormValues>({ mode: "onChange" });
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
