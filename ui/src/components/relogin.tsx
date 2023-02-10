@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
 
 type FormValues = {
@@ -38,7 +39,7 @@ function ReloginForm() {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   const disabledSubmit = () => {
-    console.log(errors);
+    console.log(Object.keys(errors));
     return false;
   };
 
@@ -60,7 +61,7 @@ function ReloginForm() {
           register={register}
           errors={errors}
         />
-        <button disabled={disabledSubmit()} className="btn btn-primary">
+        <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
       </form>
