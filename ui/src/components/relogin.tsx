@@ -5,12 +5,12 @@ import {
 } from "react-hook-form";
 
 type FormValues = {
-  firstName: string;
-  lastName: string;
+  username: string;
+  password: string;
 };
 
 function LoginField(props: {
-  id: "firstName" | "lastName";
+  id: "username" | "password";
   label: string;
   error?: FieldError;
   inputs?: React.InputHTMLAttributes<HTMLInputElement>;
@@ -40,20 +40,20 @@ function ReloginForm() {
       <h1>Re-login</h1>
       <form onSubmit={onSubmit}>
         <LoginField
-          id={"firstName"}
+          id={"username"}
           label={"Username"}
           // placeholder="Bob"
-          error={errors["firstName"]}
-          {...register("firstName", {
+          error={errors["username"]}
+          {...register("username", {
             required: "Username is required",
           })}
         />
         <LoginField
-          id={"lastName"}
+          id={"password"}
           label={"Username"}
           // placeholder="Bob"
-          error={errors["lastName"]}
-          {...register("lastName", {
+          error={errors["password"]}
+          {...register("password", {
             required: "Username is required",
           })}
         />
