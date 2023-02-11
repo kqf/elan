@@ -50,7 +50,7 @@ function ReloginForm() {
         />
         <LoginField
           id={"password"}
-          label={"Username"}
+          label={"Password"}
           // placeholder="Bob"
           error={errors["password"]}
           {...register("password", {
