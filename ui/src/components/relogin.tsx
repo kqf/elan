@@ -1,8 +1,6 @@
 import _ from "lodash";
 import {
   useForm,
-  UseFormRegister,
-  FieldErrors,
   FieldError,
 } from "react-hook-form";
 
