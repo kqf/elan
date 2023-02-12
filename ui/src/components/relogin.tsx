@@ -7,10 +7,11 @@ import {
 type FormValues = {
   username: string;
   password: string;
+  email: string;
 };
 
 function LoginField(props: {
-  id: "username" | "password";
+  id: "username" | "password" | "email";
   label: string;
   error?: FieldError;
   inputs?: React.InputHTMLAttributes<HTMLInputElement>;
@@ -49,6 +50,16 @@ function ReloginForm() {
           })}
         />
         <LoginField
+          id={"email"}
+          label={"Email"}
+          // placeholder="Bob"
+          error={errors["email"]}
+          {...register("email", {
+            required: "Email is required",
+          })}
+        />
+        <LoginField
+
           id={"password"}
           label={"Password"}
           // placeholder="Bob"
