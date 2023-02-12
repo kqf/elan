@@ -7,7 +7,7 @@ import {
 type FormValues = {
   username: string;
   password: string;
- email: string;
+  email: string;
 };
 
 function LoginField(props: {
@@ -59,6 +59,7 @@ function ReloginForm() {
           })}
         />
         <LoginField
+
           id={"password"}
           label={"Password"}
           // placeholder="Bob"
