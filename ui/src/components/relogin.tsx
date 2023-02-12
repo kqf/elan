@@ -2,6 +2,7 @@ import _ from "lodash";
 import {
   useForm,
   FieldError,
+  UseFormRegisterReturn,
 } from "react-hook-form";
 
 type FormValues = {
@@ -11,15 +12,13 @@ type FormValues = {
 };
 
 function LoginField(props: {
-  id: "username" | "password" | "email";
   label: string;
   error?: FieldError;
-  inputs?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputs: UseFormRegisterReturn;
 }) {
-  console.log("this is field", props.error);
   return (
     <div className="form-group">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={props.inputs.name}>{props.label}</label>
       <input className="form-control" {...props.inputs} />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
@@ -41,30 +40,26 @@ function ReloginForm() {
       <h1>Re-login</h1>
       <form onSubmit={onSubmit}>
         <LoginField
-          id={"username"}
           label={"Username"}
-          // placeholder="Bob"
           error={errors["username"]}
-          {...register("username", {
+          inputs={register("username", {
             required: "Username is required",
           })}
         />
         <LoginField
-          id={"email"}
           label={"Email"}
           // placeholder="Bob"
           error={errors["email"]}
-          {...register("email", {
+          inputs={register("email", {
             required: "Email is required",
           })}
         />
         <LoginField
 
-          id={"password"}
           label={"Password"}
           // placeholder="Bob"
           error={errors["password"]}
-          {...register("password", {
+          inputs={register("password", {
             required: "Username is required",
           })}
         />
