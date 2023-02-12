@@ -40,7 +40,6 @@ function ReloginForm() {
       <h1>Re-login</h1>
       <form onSubmit={onSubmit}>
         <LoginField
-          id={"username"}
           label={"Username"}
           error={errors["username"]}
           inputs={register("username", {
@@ -48,7 +47,6 @@ function ReloginForm() {
           })}
         />
         <LoginField
-          id={"email"}
           label={"Email"}
           // placeholder="Bob"
           error={errors["email"]}
@@ -58,7 +56,6 @@ function ReloginForm() {
         />
         <LoginField
 
-          id={"password"}
           label={"Password"}
           // placeholder="Bob"
           error={errors["password"]}
