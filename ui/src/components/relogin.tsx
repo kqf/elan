@@ -13,17 +13,17 @@ type FormValues = {
 
 function LoginField(props: {
   label: string;
+  placeholder?: string;
   error?: FieldError;
   inputs: UseFormRegisterReturn;
 }) {
   return (
     <div className="form-group">
       <label htmlFor={props.inputs.name}>{props.label}</label>
-      <input className="form-control" {...props.inputs} />
+      <input className="form-control" {...props.inputs} placeholder={props.placeholder}/>
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )}
-    </div>
+      )} </div>
   );
 }
 
@@ -41,6 +41,7 @@ function ReloginForm() {
       <form onSubmit={onSubmit}>
         <LoginField
           label={"Username"}
+          placeholder="Bob"
           error={errors["username"]}
           inputs={register("username", {
             required: "Username is required",
@@ -48,16 +49,20 @@ function ReloginForm() {
         />
         <LoginField
           label={"Email"}
-          // placeholder="Bob"
+          placeholder="bob@example.com"
           error={errors["email"]}
           inputs={register("email", {
             required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Please provide a email address"
+            }
           })}
         />
         <LoginField
 
           label={"Password"}
-          // placeholder="Bob"
+          placeholder="querty"
           error={errors["password"]}
           inputs={register("password", {
             required: "Username is required",
