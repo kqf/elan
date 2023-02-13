@@ -65,7 +65,7 @@ function ReloginForm() {
           placeholder="querty"
           error={errors["password"]}
           inputs={register("password", {
-            required: "Username is required",
+            required: "Password is required",
           })}
         />
 
