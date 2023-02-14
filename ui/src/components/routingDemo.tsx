@@ -164,7 +164,6 @@ function SinglePageApp() {
             <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/relogin" element={<ReloginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
