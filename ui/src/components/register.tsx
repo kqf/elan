@@ -32,7 +32,7 @@ function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ mode: "onChange" });
+  } = useForm<RegisterFilds>({ mode: "onChange" });
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
