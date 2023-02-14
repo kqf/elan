@@ -27,7 +27,7 @@ function LoginField(props: {
   );
 }
 
-function ReloginForm() {
+function LoginForm() {
   const {
     register,
     handleSubmit,
@@ -77,4 +77,4 @@ function ReloginForm() {
   );
 }
 
-export default ReloginForm;
+export default LoginForm;
