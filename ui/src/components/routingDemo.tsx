@@ -10,12 +10,11 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import AuthDemo from "./authDemo";
-import LoginForm from "./login";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
 import RegisterForm from "./register";
-import ReloginForm from "./relogin";
+import LoginForm from "./login";
 
 function SideBar() {
   return (
