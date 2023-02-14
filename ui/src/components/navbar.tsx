@@ -36,11 +36,11 @@ function NavBar() {
           <NavLink className="nav-item nav-link" to="/auth">
             Auth
           </NavLink>
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
           <NavLink className="nav-item nav-link" to="/register">
             Register
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/relogin">
-            Re-login
           </NavLink>
         </div>
       </div>
