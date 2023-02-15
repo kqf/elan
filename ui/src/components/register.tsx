@@ -31,6 +31,7 @@ function RegistrationField(props: {
 function RegisterForm() {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFilds>({ mode: "onChange" });
@@ -77,6 +78,10 @@ function RegisterForm() {
           error={errors["confirm_password"]}
           inputs={register("confirm_password", {
             required: "Password is required",
+            validate: (val: string) => {
+              if (watch("password") !== val)
+                return "Passwords should match"
+            }
           })}
         />
 
