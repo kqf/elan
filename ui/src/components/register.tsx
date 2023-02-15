@@ -6,9 +6,10 @@ import {
 } from "react-hook-form";
 
 type RegisterFilds = {
+  email: string;
   username: string;
   password: string;
-  email: string;
+  confirm_password: string;
 };
 
 function RegistrationField(props: {
@@ -30,6 +31,7 @@ function RegistrationField(props: {
 function RegisterForm() {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFilds>({ mode: "onChange" });
@@ -66,6 +68,20 @@ function RegisterForm() {
           error={errors["password"]}
           inputs={register("password", {
             required: "Password is required",
+          })}
+        />
+
+        <RegistrationField
+
+          label={"Confirm password"}
+          placeholder="querty"
+          error={errors["confirm_password"]}
+          inputs={register("confirm_password", {
+            required: "Password is required",
+            validate: (val: string) => {
+              if (watch("password") !== val)
+                return "Passwords should match"
+            }
           })}
         />
 
