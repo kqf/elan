@@ -69,6 +69,16 @@ function RegisterForm() {
           })}
         />
 
+        <RegistrationField
+
+          label={"Password"}
+          placeholder="querty"
+          error={errors["password"]}
+          inputs={register("password", {
+            required: "Password is required",
+          })}
+        />
+
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
