@@ -6,9 +6,10 @@ import {
 } from "react-hook-form";
 
 type RegisterFilds = {
+  email: string;
   username: string;
   password: string;
-  email: string;
+  confirm_password: string;
 };
 
 function RegistrationField(props: {
@@ -71,10 +72,10 @@ function RegisterForm() {
 
         <RegistrationField
 
-          label={"Password"}
+          label={"Confirm password"}
           placeholder="querty"
-          error={errors["password"]}
-          inputs={register("password", {
+          error={errors["confirm_password"]}
+          inputs={register("confirm_password", {
             required: "Password is required",
           })}
         />
