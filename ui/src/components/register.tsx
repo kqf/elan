@@ -17,11 +17,12 @@ function RegistrationField(props: {
   placeholder?: string;
   error?: FieldError;
   inputs: UseFormRegisterReturn;
+  type?: string;
 }) {
   return (
     <div className="form-group">
       <label htmlFor={props.inputs.name}>{props.label}</label>
-      <input className="form-control" {...props.inputs} placeholder={props.placeholder}/>
+      <input className="form-control" {...props.inputs} placeholder={props.placeholder} type={props.type}/>
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
       )} </div>
@@ -62,9 +63,9 @@ function RegisterForm() {
           })}
         />
         <RegistrationField
-
           label={"Password"}
           placeholder="querty"
+          type="password"
           error={errors["password"]}
           inputs={register("password", {
             required: "Password is required",
@@ -75,6 +76,7 @@ function RegisterForm() {
 
           label={"Confirm password"}
           placeholder="querty"
+          type="password"
           error={errors["confirm_password"]}
           inputs={register("confirm_password", {
             required: "Password is required",
