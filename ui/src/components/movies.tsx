@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieTable, { Genre, Movie, SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
@@ -90,6 +91,8 @@ function Movies() {
 
   const paginated = paginate(sorted, state.currentPage, state.pageSize);
 
+  const navigate = useNavigate();
+
   return (
     <div className="row">
       <div className="col-3">
@@ -100,6 +103,15 @@ function Movies() {
         />
       </div>
       <div className="col">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            navigate("/movies/new");
+          }}
+        >
+          New Movie
+        </button>
+
         <MovieTable
           movies={paginated}
           likeForMovie={likeForMovie}
