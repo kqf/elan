@@ -60,7 +60,6 @@ function NewMovie() {
           })}
         />
         <ErrorField
-
           label={"Password"}
           placeholder="querty"
           error={errors["password"]}
