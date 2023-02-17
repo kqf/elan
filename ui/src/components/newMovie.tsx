@@ -11,7 +11,7 @@ type FormValues = {
   email: string;
 };
 
-function LoginField(props: {
+function ErrorField(props: {
   label: string;
   placeholder?: string;
   error?: FieldError;
@@ -39,7 +39,7 @@ function NewMovie() {
     <div>
       <h1>Re-login</h1>
       <form onSubmit={onSubmit}>
-        <LoginField
+        <ErrorField
           label={"Username"}
           placeholder="Bob"
           error={errors["username"]}
@@ -47,7 +47,7 @@ function NewMovie() {
             required: "Username is required",
           })}
         />
-        <LoginField
+        <ErrorField
           label={"Email"}
           placeholder="bob@example.com"
           error={errors["email"]}
@@ -59,7 +59,7 @@ function NewMovie() {
             }
           })}
         />
-        <LoginField
+        <ErrorField
 
           label={"Password"}
           placeholder="querty"
