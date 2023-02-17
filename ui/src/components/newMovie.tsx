@@ -44,27 +44,24 @@ function NewMovie() {
           placeholder="Bob"
           error={errors["name"]}
           inputs={register("name", {
-            required: "Username is required",
+            required: "Movie name is required",
           })}
         />
         <ErrorField
           label={"Email"}
           placeholder="bob@example.com"
-          error={errors["description"]}
+          error={errors["genre"]}
           inputs={register("genre", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please provide a email address"
+            required: "Genre is required",
             }
-          })}
+          )}
         />
         <ErrorField
           label={"Password"}
           placeholder="querty"
-          error={errors["genre"]}
+          error={errors["description"]}
           inputs={register("description", {
-            required: "Password is required",
+            required: "Description is required",
           })}
         />
 
