@@ -6,9 +6,9 @@ import {
 } from "react-hook-form";
 
 type FormValues = {
-  username: string;
-  password: string;
-  email: string;
+  name: string;
+  genre: string;
+  description: string;
 };
 
 function ErrorField(props: {
@@ -42,29 +42,26 @@ function NewMovie() {
         <ErrorField
           label={"Username"}
           placeholder="Bob"
-          error={errors["username"]}
-          inputs={register("username", {
-            required: "Username is required",
+          error={errors["name"]}
+          inputs={register("name", {
+            required: "Movie name is required",
           })}
         />
         <ErrorField
           label={"Email"}
           placeholder="bob@example.com"
-          error={errors["email"]}
-          inputs={register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please provide a email address"
+          error={errors["genre"]}
+          inputs={register("genre", {
+            required: "Genre is required",
             }
-          })}
+          )}
         />
         <ErrorField
           label={"Password"}
           placeholder="querty"
-          error={errors["password"]}
-          inputs={register("password", {
-            required: "Password is required",
+          error={errors["description"]}
+          inputs={register("description", {
+            required: "Description is required",
           })}
         />
 
