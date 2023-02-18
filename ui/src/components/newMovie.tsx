@@ -9,6 +9,7 @@ type FormValues = {
   name: string;
   genre: string;
   description: string;
+  stock: number;
 };
 
 function ErrorField(props: {
@@ -62,6 +63,15 @@ function NewMovie() {
           error={errors["description"]}
           inputs={register("description", {
             required: "Description is required",
+          })}
+        />
+
+        <ErrorField
+          label={"Number in stock"}
+          placeholder="1"
+          error={errors["stock"]}
+          inputs={register("stock", {
+            required: "Number in stock is required",
           })}
         />
 
