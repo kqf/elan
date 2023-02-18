@@ -40,7 +40,7 @@ function NewMovie() {
       <h1>Add a new movie</h1>
       <form onSubmit={onSubmit}>
         <ErrorField
-          label={"Username"}
+          label={"Movie Name"}
           placeholder="Bob"
           error={errors["name"]}
           inputs={register("name", {
@@ -48,7 +48,7 @@ function NewMovie() {
           })}
         />
         <ErrorField
-          label={"Email"}
+          label={"Genre"}
           placeholder="bob@example.com"
           error={errors["genre"]}
           inputs={register("genre", {
@@ -57,7 +57,7 @@ function NewMovie() {
           )}
         />
         <ErrorField
-          label={"Password"}
+          label={"Description"}
           placeholder="querty"
           error={errors["description"]}
           inputs={register("description", {
