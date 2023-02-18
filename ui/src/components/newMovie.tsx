@@ -41,14 +41,14 @@ function NewMovie() {
       <form onSubmit={onSubmit}>
         <ErrorField
           label={"Movie Name"}
-          placeholder="Bob"
+          placeholder="The shining"
           error={errors["name"]}
           inputs={register("name", {
             required: "Movie name is required",
           })}
         />
         <ErrorField
-          label={"Genre"}
+          label={"Horror"}
           placeholder="bob@example.com"
           error={errors["genre"]}
           inputs={register("genre", {
@@ -58,7 +58,7 @@ function NewMovie() {
         />
         <ErrorField
           label={"Description"}
-          placeholder="querty"
+          placeholder="A nice family movie"
           error={errors["description"]}
           inputs={register("description", {
             required: "Description is required",
