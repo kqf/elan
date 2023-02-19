@@ -10,6 +10,7 @@ type FormValues = {
   genre: string;
   description: string;
   stock: number;
+  rate: number;
 };
 
 function ErrorField(props: {
@@ -75,6 +76,19 @@ function NewMovie() {
             validate: (val: number) => {
               if(val < 0 || val >= 100)
                 return "Number in stock should be between 0, 100"
+            }
+          })}
+        />
+
+        <ErrorField
+          label={"Rate"}
+          placeholder="1"
+          error={errors["rate"]}
+          inputs={register("rate", {
+            required: "Number in stock is required",
+            validate: (val: number) => {
+              if(val < 0 || val >= 5)
+                return "Rate should be between 0, 5"
             }
           })}
         />
