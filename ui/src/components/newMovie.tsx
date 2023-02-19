@@ -72,6 +72,9 @@ function NewMovie() {
           error={errors["stock"]}
           inputs={register("stock", {
             required: "Number in stock is required",
+            validate: (val: number) => {
+              return val < 0  || val >= 100;
+            }
           })}
         />
 
