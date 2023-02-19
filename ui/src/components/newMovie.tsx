@@ -50,7 +50,7 @@ function NewMovie() {
           })}
         />
         <ErrorField
-          label={"Horror"}
+          label={"Genre"}
           placeholder="bob@example.com"
           error={errors["genre"]}
           inputs={register("genre", {
@@ -58,6 +58,12 @@ function NewMovie() {
             }
           )}
         />
+        <div className="form-group">
+          <label htmlFor="genre">Genre</label>
+          <select name="genre" id="genre" className="form-control" >
+            <option value="" />
+          </select>
+        </div>
         <ErrorField
           label={"Description"}
           placeholder="A nice family movie"
