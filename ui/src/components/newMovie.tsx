@@ -8,7 +8,6 @@ import {
 type FormValues = {
   name: string;
   genre: string;
-  description: string;
   stock: number;
   rate: number;
 };
@@ -57,20 +56,6 @@ function NewMovie() {
             required: "Genre is required",
             }
           )}
-        />
-        <div className="form-group">
-          <label htmlFor="genre">Genre</label>
-          <select name="genre" id="genre" className="form-control" >
-            <option value="" />
-          </select>
-        </div>
-        <ErrorField
-          label={"Description"}
-          placeholder="A nice family movie"
-          error={errors["description"]}
-          inputs={register("description", {
-            required: "Description is required",
-          })}
         />
 
         <ErrorField
