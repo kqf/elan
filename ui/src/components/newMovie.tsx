@@ -57,14 +57,6 @@ function NewMovie() {
             }
           )}
         />
-        <ErrorField
-          label={"Description"}
-          placeholder="A nice family movie"
-          error={errors["description"]}
-          inputs={register("description", {
-            required: "Description is required",
-          })}
-        />
 
         <ErrorField
           label={"Number in stock"}
