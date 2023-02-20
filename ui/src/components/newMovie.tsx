@@ -49,7 +49,7 @@ function NewMovie() {
           })}
         />
         <ErrorField
-          label={"Horror"}
+          label={"Genre"}
           placeholder="bob@example.com"
           error={errors["genre"]}
           inputs={register("genre", {
@@ -78,8 +78,8 @@ function NewMovie() {
           inputs={register("rate", {
             required: "Number in stock is required",
             validate: (val: number) => {
-              if(val < 0 || val >= 100)
-                return "Number in stock should be between 0, 100"
+              if(val < 0 || val >= 5)
+                return "Rate should be between 0, 5"
             }
           })}
         />
