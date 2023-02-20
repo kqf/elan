@@ -8,7 +8,6 @@ import {
 type FormValues = {
   name: string;
   genre: string;
-  description: string;
   stock: number;
   rate: number;
 };
