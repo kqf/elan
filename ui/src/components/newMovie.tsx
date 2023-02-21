@@ -4,6 +4,7 @@ import {
   FieldError,
   UseFormRegisterReturn,
 } from "react-hook-form";
+import { Movie } from "../movieTable";
 
 type FormValues = {
   name: string;
@@ -28,7 +29,7 @@ function ErrorField(props: {
   );
 }
 
-function NewMovie() {
+function NewMovie(props: {onSubmit: (movie: Movie) => void}) {
   const {
     register,
     handleSubmit,
