@@ -4,6 +4,7 @@ import {
   FieldError,
   UseFormRegisterReturn,
 } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import { Movie } from "../movieTable";
 
 type FormValues = {
@@ -29,12 +30,19 @@ function ErrorField(props: {
   );
 }
 
-function NewMovie(props: {onSubmit: (movie: Movie) => void}) {
+interface LocationState {
+  onSubmit: (movie: Movie) => void;
+}
+
+function NewMovie() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
+  const location = useLocation();
+  const props = location.state as LocationState;
+  console.log("Passed the props ~>", location)
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
