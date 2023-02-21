@@ -5,7 +5,6 @@ import {
   UseFormRegisterReturn,
 } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { Movie } from "../movieTable";
 
 type FormValues = {
   name: string;
@@ -42,7 +41,6 @@ function NewMovie() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
   const location = useLocation();
-  const props = location.state as LocationState;
   console.log("Passed the props ~>", location)
   const onSubmit = handleSubmit((data) => console.log(data));
 
