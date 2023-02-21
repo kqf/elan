@@ -32,6 +32,7 @@ function ErrorField(props: {
 
 interface LocationState {
   onSubmit: (movie: Movie) => void;
+  payload: string;
 }
 
 function NewMovie() {

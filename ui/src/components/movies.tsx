@@ -114,7 +114,7 @@ function Movies() {
                     movies: [...state.movies, movie],
                   });
                 },
-              payload: "Hello world",
+                payload: "Hello world",
               },
             });
           }}
