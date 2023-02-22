@@ -106,17 +106,7 @@ function Movies() {
         <button
           className="btn btn-primary"
           onClick={() => {
-            navigate("/movies/new", {
-              state: {
-                onSubmit: (movie: Movie) => {
-                  updateState({
-                    ...state,
-                    movies: [...state.movies, movie],
-                  });
-                },
-                payload: "Hello world",
-              },
-            });
+            navigate("/movies/new");
           }}
         >
           New Movie
