@@ -50,7 +50,7 @@ function NewMovie() {
         />
         <ErrorField
           label={"Genre"}
-          placeholder="bob@example.com"
+          placeholder="Horror"
           error={errors["genre"]}
           inputs={register("genre", {
             required: "Genre is required",
