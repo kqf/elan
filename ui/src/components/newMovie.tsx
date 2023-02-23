@@ -48,15 +48,13 @@ function NewMovie() {
             required: "Movie name is required",
           })}
         />
-        <ErrorField
-          label={"Genre"}
-          placeholder="Horror"
-          error={errors["genre"]}
-          inputs={register("genre", {
-            required: "Genre is required",
-            }
-          )}
-        />
+
+        <div className="form-group">
+          <label htmlFor="genre">Genre</label>
+          <select className="form-control" id="genre" {...register("genre")}>
+            <option value=" " />
+          </select>
+        </div>
 
         <ErrorField
           label={"Number in stock"}
