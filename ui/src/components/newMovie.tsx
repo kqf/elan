@@ -49,9 +49,12 @@ function NewMovie() {
           })}
         />
 
-        <select className="form-cotrol" >
-          <option value=" " />
-        </select>
+        <div className="form-group">
+          <label htmlFor="genre">Genre</label>
+          <select className="form-cotrol" >
+            <option value=" " />
+          </select>
+        </div>
 
         <ErrorField
           label={"Number in stock"}
