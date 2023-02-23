@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { getGenres, getMovies } from "../fakeBackend";
+import { getGenres, getMovies, Movie } from "../fakeBackend";
 
 type FormValues = {
   name: string;
@@ -40,18 +40,19 @@ function NewMovie() {
   const genres = getGenres();
   var movies = getMovies();
   const onSubmit = handleSubmit((data: FormValues) => {
-    const movie = {
-      _id: movies.length + 1,
+    const movie: Movie = {
+      _id: String(movies.length + 1),
       title: data.name,
-      genre: genres.find(g => g._id === data.genre),
+      genre: genres.find((g) => g._id === data.genre) || {_id: "-1", name: "Unknown"},
       numberInStock: data.stock,
       dailyRentalRate: data.rate,
       publishDate: "unknown",
       liked: false,
-    }
+    };
 
     // Calling the backend service
-    console.log(movie)
+    console.log(movie);
+    movies.push(movie);
   });
 
   return (
