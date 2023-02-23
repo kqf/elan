@@ -1,6 +1,21 @@
 import _ from "lodash";
 
-function getMovies() {
+export interface Genre {
+  _id: string;
+  name: string;
+}
+
+export interface Movie {
+  _id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: number;
+  dailyRentalRate: number;
+  publishDate: string;
+  liked: boolean;
+}
+
+export function getMovies() {
   return _.range(0, 15).map((i) => {
     return {
       _id: String(i),
@@ -14,7 +29,7 @@ function getMovies() {
   });
 }
 
-function getGenres() {
+export function getGenres() {
   const movies = getMovies();
   const genrelist = movies.map((c) => c.genre);
   return _.uniqBy(genrelist, "name");

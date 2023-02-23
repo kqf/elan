@@ -5,6 +5,20 @@ import MovieTable, { Genre, Movie, SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
+export interface Genre {
+  _id: string;
+  name: string;
+}
+
+export interface Movie {
+  _id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: number;
+  dailyRentalRate: number;
+  publishDate: string;
+  liked: boolean;
+}
 
 function getMovies() {
   return _.range(0, 15).map((i) => {
