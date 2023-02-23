@@ -1,20 +1,8 @@
 import { Link } from "react-router-dom";
 import Like from "./components/like";
+import { Movie } from "./fakeBackend";
 
-export interface Genre {
-  _id: string;
-  name: string;
-}
 
-export interface Movie {
-  _id: string;
-  title: string;
-  genre: Genre;
-  numberInStock: number;
-  dailyRentalRate: number;
-  publishDate: string;
-  liked: boolean;
-}
 
 export interface SortingColumn {
   column: String;
