@@ -51,7 +51,7 @@ function NewMovie() {
 
         <div className="form-group">
           <label htmlFor="genre">Genre</label>
-          <select className="form-cotrol" >
+          <select className="form-control" id="genre" {...register("genre")}>
             <option value=" " />
           </select>
         </div>
