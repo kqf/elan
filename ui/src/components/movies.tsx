@@ -82,10 +82,10 @@ function Movies() {
     });
   };
 
-  const handleSearch = (value: ChangeEventHandler<HTMLInputElement>) => {
+  const handleSearch = (value: any) => {
     updateState({
       ...state,
-      search: value.toString(),
+      search: value.target.value,
       selectedGenre: "",
     });
   };
@@ -138,6 +138,7 @@ function Movies() {
 
         <input
           className="form-control"
+          name="search"
           placeholder={"Search for movies ..."}
           onChange={handleSearch}
         />
