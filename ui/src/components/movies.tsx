@@ -32,11 +32,13 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     genres: getGenres() as Array<Genre>,
-    selectedGenre: "" as String,
+    search: "" as string,
+    selectedGenre: "" as string,
     pageSize: 4,
     currentPage: 1,
     sortColumn: { column: "title", order: "asc" } as SortingColumn,
   });
+  const navigate = useNavigate();
 
   const likeForMovie = (movie: Movie) => () => {
     const newstate = state.movies.map((c) => {
@@ -93,7 +95,6 @@ function Movies() {
 
   const paginated = paginate(sorted, state.currentPage, state.pageSize);
 
-  const navigate = useNavigate();
 
   return (
     <div className="row">
@@ -123,6 +124,12 @@ function Movies() {
         >
           New Movie
         </button>
+
+        <input
+          className="form-control"
+          placeholder={"Search for movies ..."}
+          onChange={handleSearch}
+        />
 
         <MovieTable
           movies={paginated}
