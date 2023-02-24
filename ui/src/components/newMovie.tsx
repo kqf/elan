@@ -1,9 +1,6 @@
 import _ from "lodash";
-import {
-  useForm,
-  FieldError,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { getGenres, getMovies, Movie } from "../fakeBackend";
 
 type FormValues = {
   name: string;
@@ -21,10 +18,15 @@ function ErrorField(props: {
   return (
     <div className="form-group">
       <label htmlFor={props.inputs.name}>{props.label}</label>
-      <input className="form-control" {...props.inputs} placeholder={props.placeholder}/>
+      <input
+        className="form-control"
+        {...props.inputs}
+        placeholder={props.placeholder}
+      />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )} </div>
+      )}{" "}
+    </div>
   );
 }
 
@@ -34,7 +36,24 @@ function NewMovie() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
-  const onSubmit = handleSubmit((data) => console.log(data));
+
+  const genres = getGenres();
+  var movies = getMovies();
+  const onSubmit = handleSubmit((data: FormValues) => {
+    const movie: Movie = {
+      _id: String(movies.length + 1),
+      title: data.name,
+      genre: genres.find((g) => g._id === data.genre) || {_id: "-1", name: "Unknown"},
+      numberInStock: data.stock,
+      dailyRentalRate: data.rate,
+      publishDate: "unknown",
+      liked: false,
+    };
+
+    // Calling the backend service
+    console.log(movie);
+    movies.push(movie);
+  });
 
   return (
     <div>
@@ -53,6 +72,11 @@ function NewMovie() {
           <label htmlFor="genre">Genre</label>
           <select className="form-control" id="genre" {...register("genre")}>
             <option value=" " />
+            {genres.map((option) => (
+              <option key={option._id} value={option._id}>
+                {option.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -63,9 +87,9 @@ function NewMovie() {
           inputs={register("stock", {
             required: "Number in stock is required",
             validate: (val: number) => {
-              if(val < 0 || val >= 100)
-                return "Number in stock should be between 0, 100"
-            }
+              if (val < 0 || val >= 100)
+                return "Number in stock should be between 0, 100";
+            },
           })}
         />
 
@@ -76,9 +100,8 @@ function NewMovie() {
           inputs={register("rate", {
             required: "Number in stock is required",
             validate: (val: number) => {
-              if(val < 0 || val >= 5)
-                return "Rate should be between 0, 5"
-            }
+              if (val < 0 || val >= 5) return "Rate should be between 0, 5";
+            },
           })}
         />
 
