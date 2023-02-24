@@ -56,7 +56,7 @@ function NewMovie() {
     // Calling the backend service
     console.log(movie);
     movies.push(movie);
-    navigate("/");
+    navigate("/", {replace: true});
   });
 
   return (
