@@ -1,12 +1,11 @@
 import _ from "lodash";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Genre, Movie } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
-
 
 function getMovies() {
   return _.range(0, 15).map((i) => {
@@ -32,11 +31,13 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     genres: getGenres() as Array<Genre>,
+    search: "" as string,
     selectedGenre: "" as String,
     pageSize: 4,
     currentPage: 1,
     sortColumn: { column: "title", order: "asc" } as SortingColumn,
   });
+  const navigate = useNavigate();
 
   const likeForMovie = (movie: Movie) => () => {
     const newstate = state.movies.map((c) => {
@@ -81,19 +82,30 @@ function Movies() {
     });
   };
 
-  const filtered = state.movies.filter(
+  const handleSearch = (value: any) => {
+    updateState({
+      ...state,
+      search: value.target.value,
+      selectedGenre: "",
+    });
+  };
+
+  const filteredByGenre = state.movies.filter(
     (movie) =>
       state.selectedGenre === movie.genre.name || state.selectedGenre === ""
   );
+  const filteredBySearch = filteredByGenre.filter(
+    (movie) =>
+      movie.title.toLowerCase().startsWith(state.search) || state.search === ""
+  );
+
   const sorted: Array<Movie> = _.orderBy(
-    filtered as Array<Movie>,
+    filteredBySearch as Array<Movie>,
     state.sortColumn.column,
     state.sortColumn.order
   ) as Array<Movie>;
 
   const paginated = paginate(sorted, state.currentPage, state.pageSize);
-
-  const navigate = useNavigate();
 
   return (
     <div className="row">
@@ -124,6 +136,13 @@ function Movies() {
           New Movie
         </button>
 
+        <input
+          className="form-control"
+          name="search"
+          placeholder={"Search for movies ..."}
+          onChange={handleSearch}
+        />
+
         <MovieTable
           movies={paginated}
           likeForMovie={likeForMovie}
@@ -132,7 +151,7 @@ function Movies() {
           sortingBy={state.sortColumn}
         />
         <Pagination
-          itemCount={filtered.length}
+          itemCount={filteredByGenre.length}
           pageSize={state.pageSize}
           currentPage={state.currentPage}
           onClick={switchPage}
