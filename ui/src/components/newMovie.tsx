@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { getGenres, getMovies, Movie } from "../fakeBackend";
 
 type FormValues = {
@@ -36,9 +37,11 @@ function NewMovie() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
+  const navigate = useNavigate();
 
   const genres = getGenres();
   var movies = getMovies();
+
   const onSubmit = handleSubmit((data: FormValues) => {
     const movie: Movie = {
       _id: String(movies.length + 1),
@@ -53,6 +56,7 @@ function NewMovie() {
     // Calling the backend service
     console.log(movie);
     movies.push(movie);
+    navigate("/");
   });
 
   return (
