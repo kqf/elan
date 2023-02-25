@@ -7,6 +7,14 @@ import paginate from "../paginate";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
 
+interface SearchElements extends HTMLFormControlsCollection {
+  search: HTMLInputElement;
+}
+
+interface SearchFormElement extends HTMLFormElement {
+  readonly elements: SearchElements;
+}
+
 function getMovies() {
   return _.range(0, 15).map((i) => {
     return {
@@ -82,10 +90,10 @@ function Movies() {
     });
   };
 
-  const handleSearch = (value: any) => {
+  const handleSearch = (event: React.FormEvent<SearchFormElement>) => {
     updateState({
       ...state,
-      search: value.target.value,
+      search: "",
       selectedGenre: "",
     });
   };
