@@ -93,7 +93,7 @@ function Movies() {
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     updateState({
       ...state,
-      search: "",
+      search: event.currentTarget.value,
       selectedGenre: "",
     });
   };
