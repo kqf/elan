@@ -1,19 +1,11 @@
 import _ from "lodash";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Genre, Movie } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
-
-interface SearchElements extends HTMLFormControlsCollection {
-  search: HTMLInputElement;
-}
-
-interface SearchFormElement extends HTMLFormElement {
-  readonly elements: SearchElements;
-}
 
 function getMovies() {
   return _.range(0, 15).map((i) => {
