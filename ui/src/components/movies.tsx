@@ -136,12 +136,14 @@ function Movies() {
           New Movie
         </button>
 
-        <input
-          className="form-control"
-          name="search"
-          placeholder={"Search for movies ..."}
-          onChange={handleSearch}
-        />
+        <div className="form-group">
+          <input
+            className="form-control"
+            name="search"
+            placeholder={"Search for movies ..."}
+            onChange={handleSearch}
+          />
+        </div>
 
         <MovieTable
           movies={paginated}
