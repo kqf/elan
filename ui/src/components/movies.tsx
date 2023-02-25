@@ -90,7 +90,7 @@ function Movies() {
     });
   };
 
-  const handleSearch = (event: React.FormEvent<SearchFormElement>) => {
+  const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     updateState({
       ...state,
       search: "",
