@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Genre, Movie } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
