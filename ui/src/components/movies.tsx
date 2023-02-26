@@ -79,6 +79,8 @@ function Movies() {
     updateState({
       ...state,
       sortColumn: column,
+      // This is needed to fix the issues with search
+      currentPage: 1,
     });
   };
 
