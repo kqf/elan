@@ -31,7 +31,7 @@ function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
     genres: getGenres() as Array<Genre>,
-    search: "" as string,
+    searchQuery: "" as string,
     selectedGenre: "" as String,
     pageSize: 4,
     currentPage: 1,
@@ -85,7 +85,7 @@ function Movies() {
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     updateState({
       ...state,
-      search: event.currentTarget.value,
+      searchQuery: event.currentTarget.value,
       selectedGenre: "",
     });
   };
@@ -96,7 +96,7 @@ function Movies() {
   );
   const filteredBySearch = filteredByGenre.filter(
     (movie) =>
-      movie.title.toLowerCase().startsWith(state.search) || state.search === ""
+      movie.title.toLowerCase().startsWith(state.searchQuery) || state.searchQuery === ""
   );
 
   const sorted: Array<Movie> = _.orderBy(
@@ -136,12 +136,14 @@ function Movies() {
           New Movie
         </button>
 
-        <input
-          className="form-control"
-          name="search"
-          placeholder={"Search for movies ..."}
-          onChange={handleSearch}
-        />
+        <div className="form-group">
+          <input
+            className="form-control"
+            name="search"
+            placeholder={"Search for movies ..."}
+            onChange={handleSearch}
+          />
+        </div>
 
         <MovieTable
           movies={paginated}
