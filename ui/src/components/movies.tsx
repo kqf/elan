@@ -138,7 +138,7 @@ function Movies() {
 
         <div className="form-group">
           <input
-            className="form-control"
+            className="form-control my-3"
             name="search"
             placeholder={"Search for movies ..."}
             onChange={handleSearch}
