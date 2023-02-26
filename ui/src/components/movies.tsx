@@ -79,8 +79,6 @@ function Movies() {
     updateState({
       ...state,
       sortColumn: column,
-      // This is needed to fix the issues with search
-      currentPage: 1,
     });
   };
 
@@ -89,6 +87,8 @@ function Movies() {
       ...state,
       searchQuery: event.currentTarget.value,
       selectedGenre: "",
+      // This is needed to fix the issues with search
+      currentPage: 1,
     });
   };
 
