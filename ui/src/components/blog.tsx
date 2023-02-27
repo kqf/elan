@@ -1,7 +1,13 @@
+interface Post {
+    userId: number,
+    id: number,
+    title: string,
+    body: string,
+}
 
 
 function Posts(props: {
-    posts: Array<any>;
+    posts: Array<Post>;
   }) {
     return (
       <table className="table">
