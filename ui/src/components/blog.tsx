@@ -1,7 +1,16 @@
 
 function Blog () {
-    return <h1> Posts </h1>
-
-};
-
+  return (
+      <div className="col">
+        <button
+          className="btn btn-primary my-3"
+          onClick={() => {
+            console.log("Clicked")
+          }}
+        >
+          Add
+        </button>
+      </div>
+  );
+}
 export default Blog;
