@@ -16,6 +16,7 @@ import NavBar from "./navbar";
 import RegisterForm from "./register";
 import LoginForm from "./login";
 import NewMovie from "./newMovie";
+import Blog from "./blog";
 
 function SideBar() {
   return (
@@ -160,6 +161,7 @@ function SinglePageApp() {
             <Route path="/movies/" element={<Movies />} />
             <Route path="/movies/new" element={<NewMovie />} />
             <Route path="/movies/:id?" element={<MovieComponent />} />
+            <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/auth" element={<AuthDemo />} />
