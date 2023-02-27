@@ -33,6 +33,9 @@ function NavBar() {
           <NavLink className="nav-item nav-link" to="/posts">
             Posts
           </NavLink>
+          <NavLink className="nav-item nav-link" to="/blog">
+            Blog
+          </NavLink>
           <NavLink className="nav-item nav-link" to="/auth">
             Auth
           </NavLink>
