@@ -19,29 +19,27 @@ function Posts(props: {
           </tr>
         </thead>
         <tbody>
-          {/* {props.posts.map((movie) => {
+          {props.posts.map((post) => {
             return (
-              <tr key={movie._id}>
+              <tr key={post.id}>
+                <td>{post.title}</td>
                 <td>
-                  <Link to={`/posts/${movie._id}`}>{movie.title}</Link>
-                </td>
-                <td>{movie.genre.name}</td>
-                <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
-                <td>
-                  <Like liked={movie.liked} onClick={props.likeForMovie(movie)} />
+                  <button
+                    className="btn btn-primary btn-sm"
+                  >
+                    Update
+                  </button>
                 </td>
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={props.deleteMovie(movie)}
                   >
                     Delete
                   </button>
                 </td>
               </tr>
             );
-          })} */}
+          })}
         </tbody>
       </table>
     );
