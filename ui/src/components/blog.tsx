@@ -57,7 +57,7 @@ function Blog () {
         >
           Add
         </button>
-        <Posts posts={[]}/>
+        <Posts posts={[{id: 1, userId: 2, title: "title", body: "lol"}]}/>
       </div>
   );
 }
