@@ -1,3 +1,7 @@
+import axios from "axios";
+import { stat } from "fs";
+import { useEffect, useState } from "react";
+
 interface Post {
     userId: number,
     id: number,
@@ -7,8 +11,21 @@ interface Post {
 
 
 function Posts(props: {
-    posts: Array<Post>;
+    posts?: Array<Post>;
   }) {
+    const [state, setState] = useState({
+      posts: props.posts || []
+    });
+
+    useEffect(() => {
+      // Fetch the data
+      (async () => {
+        const posts = await axios.get("https://jsonplaceholder.typicode.com/posts");
+        console.log(posts);
+      })();
+
+    })
+
     return (
       <table className="table">
         <thead>
@@ -19,7 +36,7 @@ function Posts(props: {
           </tr>
         </thead>
         <tbody>
-          {props.posts.map((post) => {
+          {state.posts.map((post) => {
             return (
               <tr key={post.id}>
                 <td>{post.title}</td>
