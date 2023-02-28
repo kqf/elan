@@ -1,5 +1,4 @@
 import axios from "axios";
-import { stat } from "fs";
 import { useEffect, useState } from "react";
 
 interface Post {
@@ -20,8 +19,11 @@ function Posts(props: {
     useEffect(() => {
       // Fetch the data
       (async () => {
-        const posts = await axios.get("https://jsonplaceholder.typicode.com/posts");
-        console.log(posts);
+        const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+        setState({
+          ...state,
+          posts: response.data
+        });
       })();
 
     })
