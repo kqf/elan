@@ -9,26 +9,6 @@ interface Post {
 }
 
 function Posts(props: { posts?: Array<Post> }) {
-  const [state, setState] = useState({
-    posts: props.posts || [],
-  });
-
-  useEffect(() => {
-    // Fetch the data
-    (async () => {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      setState((s) => {
-        return {
-          ...state,
-          posts: response.data,
-        };
-      });
-    })();
-    // eslint-disable-next-line
-  }, []);
-
   const handleAdd = async () => {
     const { data: post } = await axios.post(
       "https://jsonplaceholder.typicode.com/posts",
@@ -66,6 +46,27 @@ function Posts(props: { posts?: Array<Post> }) {
 }
 
 function Blog() {
+  const [state, setState] = useState({
+    posts: [],
+  });
+
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      setState((s) => {
+        return {
+          ...state,
+          posts: response.data,
+        };
+      });
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+
   return (
     <div className="col">
       <button
