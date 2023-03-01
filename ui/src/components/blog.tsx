@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 interface Post {
     userId: number,
     id: number,
@@ -21,13 +20,13 @@ function Posts(props: {
       // Fetch the data
       (async () => {
         const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
-        setState({
+        setState(s => {return {
           ...state,
           posts: response.data
-        });
+        }});
       })();
-
-    })
+      // eslint-disable-next-line
+    }, [])
 
     return (
       <table className="table">
