@@ -8,15 +8,7 @@ interface Post {
   body: string;
 }
 
-function Posts(props: { posts?: Array<Post> }) {
-  const handleAdd = async () => {
-    const { data: post } = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      { title: "lol", body: "loool" }
-    );
-    setState({ ...state, posts: [post, ...state.posts] });
-  };
-
+function Posts(props: { posts: Array<Post> }) {
   return (
     <table className="table">
       <thead>
@@ -27,7 +19,7 @@ function Posts(props: { posts?: Array<Post> }) {
         </tr>
       </thead>
       <tbody>
-        {state.posts.map((post) => {
+        {props.posts.map((post) => {
           return (
             <tr key={post.id}>
               <td>{post.title}</td>
@@ -66,6 +58,14 @@ function Blog() {
     // eslint-disable-next-line
   }, []);
 
+  // const handleAdd = async () => {
+  //   const { data: post } = await axios.post(
+  //     "https://jsonplaceholder.typicode.com/posts",
+  //     { title: "lol", body: "loool" }
+  //   );
+  //   setState({ ...state, posts: [post as Post, ...state.posts] });
+  // };
+
 
   return (
     <div className="col">
@@ -77,7 +77,7 @@ function Blog() {
       >
         Add
       </button>
-      <Posts posts={[{ id: 1, userId: 2, title: "title", body: "lol" }]} />
+      <Posts posts={state.posts} />
     </div>
   );
 }
