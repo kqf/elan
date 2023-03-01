@@ -58,22 +58,23 @@ function Blog() {
     // eslint-disable-next-line
   }, []);
 
-  // const handleAdd = async () => {
-  //   const { data: post } = await axios.post(
-  //     "https://jsonplaceholder.typicode.com/posts",
-  //     { title: "lol", body: "loool" }
-  //   );
-  //   setState({ ...state, posts: [post as Post, ...state.posts] });
-  // };
-
+  const handleAdd = async () => {
+    const response = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      { title: "lol", body: "loool" }
+    );
+    setState({
+      ...state,
+      // @ts-ignore
+      posts: [response.data, ...state.posts],
+    });
+  };
 
   return (
     <div className="col">
       <button
         className="btn btn-primary my-3"
-        onClick={() => {
-          console.log("Clicked");
-        }}
+        onClick={handleAdd}
       >
         Add
       </button>
