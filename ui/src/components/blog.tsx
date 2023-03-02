@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const apiurl = "https://jsonplaceholder.typicode.com/posts";
+
 interface Post {
   userId: number;
   id: number;
@@ -53,9 +55,7 @@ function Blog() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      const response = await axios.get(apiurl);
       setState((s) => {
         return {
           ...state,
@@ -74,8 +74,19 @@ function Blog() {
   //   setState({ ...state, posts: [post as Post, ...state.posts] });
   // };
 
-  const handleUpdate = (post: Post) => () => {
-    console.log(post);
+  const handleUpdate = (post: Post) => async () => {
+    post.title = "UPDATED";
+    // alternative:
+    // const added = (await axios.patch(`${apiurl}/${post.id}`, {title: "updated"})).data;
+    const added = (await axios.put(`${apiurl}/${post.id}`, post)).data;
+    var posts = [...state.posts];
+    // @ts-ignore
+    posts[posts.indexOf[post]] = added;
+    console.log(added);
+    setState({
+      ...state,
+      posts: posts,
+    });
   };
 
   return (
