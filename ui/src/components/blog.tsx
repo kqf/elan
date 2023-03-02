@@ -8,7 +8,10 @@ interface Post {
   body: string;
 }
 
-function Posts(props: { posts: Array<Post> }) {
+function Posts(props: {
+  posts: Array<Post>;
+  onUpdate: (post: Post) => () => void;
+}) {
   return (
     <table className="table">
       <thead>
@@ -24,7 +27,12 @@ function Posts(props: { posts: Array<Post> }) {
             <tr key={post.id}>
               <td>{post.title}</td>
               <td>
-                <button className="btn btn-primary btn-sm">Update</button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={props.onUpdate(post)}
+                >
+                  Update
+                </button>
               </td>
               <td>
                 <button className="btn btn-danger btn-sm">Delete</button>
@@ -58,27 +66,29 @@ function Blog() {
     // eslint-disable-next-line
   }, []);
 
-  const handleAdd = async () => {
-    const response = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      { title: "Newly added", body: "***********" }
-    );
-    setState({
-      ...state,
-      // @ts-ignore
-      posts: [response.data, ...state.posts],
-    });
+  // const handleAdd = async () => {
+  //   const { data: post } = await axios.post(
+  //     "https://jsonplaceholder.typicode.com/posts",
+  //     { title: "lol", body: "loool" }
+  //   );
+  //   setState({ ...state, posts: [post as Post, ...state.posts] });
+  // };
+
+  const handleUpdate = (post: Post) => () => {
+    console.log(post);
   };
 
   return (
     <div className="col">
       <button
         className="btn btn-primary my-3"
-        onClick={handleAdd}
+        onClick={() => {
+          console.log("Clicked");
+        }}
       >
         Add
       </button>
-      <Posts posts={state.posts} />
+      <Posts posts={state.posts} onUpdate={handleUpdate} />
     </div>
   );
 }
