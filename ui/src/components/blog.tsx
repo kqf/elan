@@ -67,10 +67,10 @@ function Blog() {
   }, []);
 
   const handleAdd = async () => {
-    const { data: post } = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      { title: "ADDED", body: "NO BODY" }
-    );
+    const { data: post } = await axios.post(apiurl, {
+      title: "ADDED",
+      body: "NO BODY",
+    });
 
     setState({
       ...state,
