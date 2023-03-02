@@ -67,15 +67,17 @@ function Blog() {
   }, []);
 
   const handleAdd = async () => {
-    const { data: post } = await axios.post(apiurl, {
-      title: "ADDED",
-      body: "NO BODY",
-    });
+    const post = (
+      await axios.post(apiurl, {
+        title: "ADDED",
+        body: "NO BODY",
+      })
+    ).data;
 
     setState({
       ...state,
       // @ts-ignore
-      posts: [post as Post, ...state.posts],
+      posts: [post, ...state.posts],
     });
   };
 
