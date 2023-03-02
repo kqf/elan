@@ -61,7 +61,7 @@ function Blog() {
   const handleAdd = async () => {
     const response = await axios.post(
       "https://jsonplaceholder.typicode.com/posts",
-      { title: "lol", body: "loool" }
+      { title: "Newly added", body: "***********" }
     );
     setState({
       ...state,
