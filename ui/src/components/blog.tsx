@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const apiurl = "https://jsonplaceholder.typicode.com/posts";
+
 interface Post {
   userId: number;
   id: number;
@@ -8,7 +10,10 @@ interface Post {
   body: string;
 }
 
-function Posts(props: { posts: Array<Post> }) {
+function Posts(props: {
+  posts: Array<Post>;
+  onUpdate: (post: Post) => () => void;
+}) {
   return (
     <table className="table">
       <thead>
@@ -24,7 +29,12 @@ function Posts(props: { posts: Array<Post> }) {
             <tr key={post.id}>
               <td>{post.title}</td>
               <td>
-                <button className="btn btn-primary btn-sm">Update</button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={props.onUpdate(post)}
+                >
+                  Update
+                </button>
               </td>
               <td>
                 <button className="btn btn-danger btn-sm">Delete</button>
@@ -45,9 +55,7 @@ function Blog() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      const response = await axios.get(apiurl);
       setState((s) => {
         return {
           ...state,
@@ -58,15 +66,26 @@ function Blog() {
     // eslint-disable-next-line
   }, []);
 
-  const handleAdd = async () => {
-    const response = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      { title: "Newly added", body: "***********" }
-    );
+  // const handleAdd = async () => {
+  //   const { data: post } = await axios.post(
+  //     "https://jsonplaceholder.typicode.com/posts",
+  //     { title: "lol", body: "loool" }
+  //   );
+  //   setState({ ...state, posts: [post as Post, ...state.posts] });
+  // };
+
+  const handleUpdate = (post: Post) => async () => {
+    post.title = "UPDATED";
+    // alternative:
+    // const added = (await axios.patch(`${apiurl}/${post.id}`, {title: "updated"})).data;
+    const added = (await axios.put(`${apiurl}/${post.id}`, post)).data;
+    var posts = [...state.posts];
+    // @ts-ignore
+    posts[posts.indexOf[post]] = added;
+    console.log(added);
     setState({
       ...state,
-      // @ts-ignore
-      posts: [response.data, ...state.posts],
+      posts: posts,
     });
   };
 
@@ -74,11 +93,13 @@ function Blog() {
     <div className="col">
       <button
         className="btn btn-primary my-3"
-        onClick={handleAdd}
+        onClick={() => {
+          console.log("Clicked");
+        }}
       >
         Add
       </button>
-      <Posts posts={state.posts} />
+      <Posts posts={state.posts} onUpdate={handleUpdate} />
     </div>
   );
 }
