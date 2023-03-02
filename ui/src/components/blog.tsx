@@ -66,13 +66,18 @@ function Blog() {
     // eslint-disable-next-line
   }, []);
 
-  // const handleAdd = async () => {
-  //   const { data: post } = await axios.post(
-  //     "https://jsonplaceholder.typicode.com/posts",
-  //     { title: "lol", body: "loool" }
-  //   );
-  //   setState({ ...state, posts: [post as Post, ...state.posts] });
-  // };
+  const handleAdd = async () => {
+    const { data: post } = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      { title: "ADDED", body: "NO BODY" }
+    );
+
+    setState({
+      ...state,
+      // @ts-ignore
+      posts: [post as Post, ...state.posts],
+    });
+  };
 
   const handleUpdate = (post: Post) => async () => {
     post.title = "UPDATED";
@@ -91,12 +96,7 @@ function Blog() {
 
   return (
     <div className="col">
-      <button
-        className="btn btn-primary my-3"
-        onClick={() => {
-          console.log("Clicked");
-        }}
-      >
+      <button className="btn btn-primary my-3" onClick={handleAdd}>
         Add
       </button>
       <Posts posts={state.posts} onUpdate={handleUpdate} />
