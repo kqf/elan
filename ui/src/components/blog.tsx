@@ -82,7 +82,6 @@ function Blog() {
 
     setState({
       ...state,
-      // @ts-ignore
       posts: [post, ...state.posts],
     });
   };
@@ -90,11 +89,9 @@ function Blog() {
   const handleUpdate = (post: Post) => async () => {
     const originalPosts = state.posts;
     const updated = { ...post, title: "UPDATED" };
-    // @ts-ignore
     const posts = state.posts.map((p) => (p.id === post.id ? updated : p));
     setState({
       ...state,
-      // @ts-ignore
       posts: posts,
     });
 
