@@ -88,18 +88,27 @@ function Blog() {
   };
 
   const handleUpdate = (post: Post) => async () => {
-    post.title = "UPDATED";
-    // alternative:
-    // const added = (await axios.patch(`${apiurl}/${post.id}`, {title: "updated"})).data;
-    const added = (await axios.put(`${apiurl}/${post.id}`, post)).data;
-    var posts = [...state.posts];
+    const originalPosts = state.posts;
+    const updated = { ...post, title: "UPDATED" };
     // @ts-ignore
-    posts[posts.indexOf[post]] = added;
-    console.log(added);
+    const posts = state.posts.map((p) => (p.id === post.id ? updated : p));
     setState({
       ...state,
+      // @ts-ignore
       posts: posts,
     });
+
+    try {
+      // alternative:
+      // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
+      await axios.put(`${apiurl}/${post.id}`, updated);
+    } catch (ex) {
+      alert("Somethign went wrong, can't upate the server");
+      setState({
+        ...state,
+        posts: originalPosts,
+      });
+    }
   };
 
   const handleDelete = (post: Post) => async () => {
