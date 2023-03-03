@@ -88,14 +88,14 @@ function Blog() {
   };
 
   const handleUpdate = (post: Post) => async () => {
+    // const originalPosts = state.posts;
     post.title = "UPDATED";
     // alternative:
     // const added = (await axios.patch(`${apiurl}/${post.id}`, {title: "updated"})).data;
-    const added = (await axios.put(`${apiurl}/${post.id}`, post)).data;
+    const updated = (await axios.put(`${apiurl}/${post.id}`, post)).data;
     var posts = [...state.posts];
     // @ts-ignore
-    posts[posts.indexOf[post]] = added;
-    console.log(added);
+    posts[posts.indexOf[post]] = updated;
     setState({
       ...state,
       posts: posts,
