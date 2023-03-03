@@ -88,7 +88,7 @@ function Blog() {
   };
 
   const handleUpdate = (post: Post) => async () => {
-    // const originalPosts = state.posts;
+    const originalPosts = state.posts;
     const updated = { ...post, title: "UPDATED" };
     // @ts-ignore
     const posts = state.posts.map((p) => (p.id === post.id ? updated : p));
@@ -99,10 +99,15 @@ function Blog() {
     });
 
     try {
-    } catch (ex) {
       // alternative:
       // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
       await axios.put(`${apiurl}/${post.id}`, updated);
+    } catch (ex) {
+      alert("Somethign went wrong, can't upate the server");
+      setState({
+        ...state,
+        posts: originalPosts,
+      });
     }
   };
 
