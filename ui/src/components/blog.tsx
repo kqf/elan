@@ -54,7 +54,7 @@ function Posts(props: {
 }
 
 function Blog() {
-  const [state, setState] = useState({
+  const [state, setState] = useState<{ posts: Array<Post> }>({
     posts: [],
   });
 
@@ -115,7 +115,6 @@ function Blog() {
     await axios.delete(`${apiurl}/${post.id}`);
     setState({
       ...state,
-      // @ts-ignore
       posts: state.posts.filter((p) => p.id !== post.id),
     });
   };
