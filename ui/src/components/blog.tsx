@@ -89,20 +89,21 @@ function Blog() {
 
   const handleUpdate = (post: Post) => async () => {
     // const originalPosts = state.posts;
-    // alternative:
-    // const added = (await axios.patch(`${apiurl}/${post.id}`, {title: "updated"})).data;
-
-    const posts = state.posts.map((p) =>
-      // @ts-ignore
-      p.id === post.id ? { ...post, title: "UPDATED" } : p
-    );
+    const updated = { ...post, title: "UPDATED" };
+    // @ts-ignore
+    const posts = state.posts.map((p) => (p.id === post.id ? updated : p));
     setState({
       ...state,
       // @ts-ignore
       posts: posts,
     });
 
-    // await axios.put(`${apiurl}/${post.id}`, post);
+    try {
+    } catch (ex) {
+      // alternative:
+      // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
+      await axios.put(`${apiurl}/${post.id}`, updated);
+    }
   };
 
   const handleDelete = (post: Post) => async () => {
