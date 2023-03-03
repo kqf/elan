@@ -13,6 +13,7 @@ interface Post {
 function Posts(props: {
   posts: Array<Post>;
   onUpdate: (post: Post) => () => void;
+  onDelete: (post: Post) => () => void;
 }) {
   return (
     <table className="table">
@@ -37,7 +38,12 @@ function Posts(props: {
                 </button>
               </td>
               <td>
-                <button className="btn btn-danger btn-sm">Delete</button>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={props.onDelete(post)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           );
@@ -96,12 +102,25 @@ function Blog() {
     });
   };
 
+  const handleDelete = (post: Post) => async () => {
+    await axios.delete(`${apiurl}/${post.id}`);
+    setState({
+      ...state,
+      // @ts-ignore
+      posts: state.posts.filter((p) => p.id !== post.id),
+    });
+  };
+
   return (
     <div className="col">
       <button className="btn btn-primary my-3" onClick={handleAdd}>
         Add
       </button>
-      <Posts posts={state.posts} onUpdate={handleUpdate} />
+      <Posts
+        posts={state.posts}
+        onUpdate={handleUpdate}
+        onDelete={handleDelete}
+      />
     </div>
   );
 }
