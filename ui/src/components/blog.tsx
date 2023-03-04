@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const apiurl = "https://jsonplaceholder.typicode.com/posts";
+import config from "../config.json";
 
 interface Post {
   userId: number;
@@ -73,7 +72,7 @@ function Blog() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const response = await axios.get(apiurl);
+      const response = await axios.get(config.apiurl);
       setState((s) => {
         return {
           ...state,
@@ -86,7 +85,7 @@ function Blog() {
 
   const handleAdd = async () => {
     const post = (
-      await axios.post(apiurl, {
+      await axios.post(config.apiurl, {
         title: "ADDED",
         body: "NO BODY",
       })
@@ -109,8 +108,8 @@ function Blog() {
 
     try {
       // alternative:
-      // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
-      await axios.put(`${apiurl}/${post.id}`, updated);
+      // await axios.patch(`${config.apiurl}/${post.id}`, { title: "updated" });
+      await axios.put(`${config.apiurl}/${post.id}`, updated);
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
         if (ex.response && ex.response.status === 404) {
@@ -126,7 +125,7 @@ function Blog() {
   };
 
   const handleDelete = (post: Post) => async () => {
-    await axios.delete(`${apiurl}/${post.id}`);
+    await axios.delete(`${config.apiurl}/${post.id}`);
     setState({
       ...state,
       posts: state.posts.filter((p) => p.id !== post.id),
