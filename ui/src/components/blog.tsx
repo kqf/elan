@@ -10,6 +10,18 @@ interface Post {
   body: string;
 }
 
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.resonse.status < 500;
+
+  if (!expectedError) {
+    console.log("Logging the error", error);
+    alert("Unsexpected error");
+  }
+});
+
 function Posts(props: {
   posts: Array<Post>;
   onUpdate: (post: Post) => () => void;
@@ -100,7 +112,12 @@ function Blog() {
       // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
       await axios.put(`${apiurl}/${post.id}`, updated);
     } catch (ex) {
-      alert("Somethign went wrong, can't upate the server");
+      if (axios.isAxiosError(ex)) {
+        if (ex.response && ex.response.status === 404) {
+          alert("Somethign went wrong, can't upate the server");
+        }
+      }
+
       setState({
         ...state,
         posts: originalPosts,
