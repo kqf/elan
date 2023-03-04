@@ -10,6 +10,18 @@ interface Post {
   body: string;
 }
 
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.resonse.status < 500;
+
+  if (!expectedError) {
+    console.log("Logging the error", error);
+    alert("Unsexpected error");
+  }
+});
+
 function Posts(props: {
   posts: Array<Post>;
   onUpdate: (post: Post) => () => void;
