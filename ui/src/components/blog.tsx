@@ -54,7 +54,7 @@ function Posts(props: {
 }
 
 function Blog() {
-  const [state, setState] = useState({
+  const [state, setState] = useState<{ posts: Array<Post> }>({
     posts: [],
   });
 
@@ -82,7 +82,6 @@ function Blog() {
 
     setState({
       ...state,
-      // @ts-ignore
       posts: [post, ...state.posts],
     });
   };
@@ -90,11 +89,9 @@ function Blog() {
   const handleUpdate = (post: Post) => async () => {
     const originalPosts = state.posts;
     const updated = { ...post, title: "UPDATED" };
-    // @ts-ignore
     const posts = state.posts.map((p) => (p.id === post.id ? updated : p));
     setState({
       ...state,
-      // @ts-ignore
       posts: posts,
     });
 
@@ -115,7 +112,6 @@ function Blog() {
     await axios.delete(`${apiurl}/${post.id}`);
     setState({
       ...state,
-      // @ts-ignore
       posts: state.posts.filter((p) => p.id !== post.id),
     });
   };
