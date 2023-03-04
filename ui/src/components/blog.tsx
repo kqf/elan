@@ -112,7 +112,12 @@ function Blog() {
       // await axios.patch(`${apiurl}/${post.id}`, { title: "updated" });
       await axios.put(`${apiurl}/${post.id}`, updated);
     } catch (ex) {
-      alert("Somethign went wrong, can't upate the server");
+      if (axios.isAxiosError(ex)) {
+        if (ex.response && ex.response.status === 404) {
+          alert("Somethign went wrong, can't upate the server");
+        }
+      }
+
       setState({
         ...state,
         posts: originalPosts,
