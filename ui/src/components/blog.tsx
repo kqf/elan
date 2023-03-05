@@ -111,7 +111,7 @@ function Blog() {
     try {
       // alternative:
       // await axios.patch(`${config.apiurl}/${post.id}`, { title: "updated" });
-      await axios.put(`${config.apiurl}/x${post.id}`, updated);
+      await axios.put(`${config.apiurl}/${post.id}`, updated);
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
         if (ex.response && ex.response.status === 404) {
