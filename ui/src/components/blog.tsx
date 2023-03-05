@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import config from "../config.json";
 
 interface Post {
@@ -17,7 +19,7 @@ axios.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     console.log("Logging the error", error);
-    alert("Unsexpected error");
+    toast.error("Unsexpected error");
   }
 });
 
@@ -109,11 +111,11 @@ function Blog() {
     try {
       // alternative:
       // await axios.patch(`${config.apiurl}/${post.id}`, { title: "updated" });
-      await axios.put(`${config.apiurl}/${post.id}`, updated);
+      await axios.put(`${config.apiurl}/x${post.id}`, updated);
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
         if (ex.response && ex.response.status === 404) {
-          alert("Somethign went wrong, can't upate the server");
+          toast.error("Somethign went wrong, can't upate the server");
         }
       }
 
@@ -134,6 +136,7 @@ function Blog() {
 
   return (
     <div className="col">
+      <ToastContainer />
       <button className="btn btn-primary my-3" onClick={handleAdd}>
         Add
       </button>
