@@ -101,3 +101,31 @@ class Pair(db.Model):
     offield = db.Column(db.String(), index=True)
     lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), index=True)
     # __table_args__ = (db.UniqueConstraint("iffield", "offield"),)
+
+
+class Genre(db.Model):
+    __tablename__ = "genres"
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+        unique=True,
+        autoincrement=True,
+    )
+    name = db.Column(db.String)
+
+
+class Movie(db.Model):
+    __tablename__ = "movies"
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+        unique=True,
+        autoincrement=True,
+    )
+    title = db.Column(db.String)
+    genre_id = db.Column(db.Integer, db.ForeignKey("genres.id"))
+    genre = db.relationship("Genre")
+    numberInStock = db.Column(db.Integer)
+    dailyRentalRate = db.Column(db.Float)
+    publishDate = db.Column(db.String)
+    liked = db.Column(db.Boolean)
