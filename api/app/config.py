@@ -35,6 +35,7 @@ def build_app():
     ma.init_app(app)
 
     from app.routes.auth import auths
+    from app.routes.genres import genres
     from app.routes.lesson import lessons
     from app.routes.pair import pairs
     from app.routes.users import users
@@ -44,6 +45,7 @@ def build_app():
     app.register_blueprint(auths)
     app.register_blueprint(users)
     app.register_blueprint(debug)
+    app.register_blueprint(genres)
     return app
 
 
