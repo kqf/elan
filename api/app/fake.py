@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-from api.app.models import Genre, Movie
+from app.models import Genre, Movie
 
 
 def create_movies(db: SQLAlchemy) -> None:
