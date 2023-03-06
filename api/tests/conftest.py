@@ -2,6 +2,7 @@ import pytest
 
 from app import db, models
 from app.config import build_app
+from app.fake import create_movies
 
 
 @pytest.fixture
@@ -16,6 +17,7 @@ def app(user):
     app_ctx.push()
     db.create_all()
     models.register_user(db, *user, email="john@example.com")
+    create_movies(db)
     with app.test_request_context():
         yield app
     db.drop_all()
