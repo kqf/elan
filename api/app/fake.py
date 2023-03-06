@@ -1,7 +1,9 @@
+from flask_sqlalchemy import SQLAlchemy
+
 from api.app.models import Genre, Movie
 
 
-def create_movies(db):
+def create_movies(db: SQLAlchemy) -> None:
     genre1 = Genre(name="Action")
     genre2 = Genre(name="Comedy")
     genre3 = Genre(name="Drama")
