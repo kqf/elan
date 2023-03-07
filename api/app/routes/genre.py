@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from apifairy import response
-from flask import Blueprint
-
 from app.models import Genre
 from app.schemes import GenreSchema
+from flask import Blueprint
 
 genres = Blueprint("genres", __name__)
 genre_schema = GenreSchema()
@@ -17,7 +16,7 @@ def genre(id) -> Genre:
     return Genre.query.get_or_404(id)
 
 
-@genres.route("/lessons/", methods=["GET"])
+@genres.route("/genres/", methods=["GET"])
 @response(genres_schema)
-def lessons_() -> Genre:
+def genres_() -> Genre:
     return Genre.query.all()
