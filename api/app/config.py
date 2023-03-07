@@ -35,7 +35,7 @@ def build_app():
     ma.init_app(app)
 
     from app.routes.auth import auths
-    from app.routes.genres import genres
+    from app.routes.genre import genres
     from app.routes.lesson import lessons
     from app.routes.pair import pairs
     from app.routes.users import users
