@@ -17,8 +17,7 @@ def test_retrieves_a_genre(client, genres):
         assert response.status_code == 200
 
 
-def test_retrieves_genres(client):
+def test_retrieves_genres(client, genres):
     response = client.get("/genres/", follow_redirects=True)
-    print(response.json)
-    # assert response.json == {"id": 1, "name": "Action"}
+    assert response.json == genres
     assert response.status_code == 200
