@@ -71,9 +71,8 @@ _movies = [
 
 
 def create_movies(db: SQLAlchemy) -> None:
-    return
     unique_genres = {movie["genre"] for movie in _movies}
-    genres = {genre: Genre(name="genre") for genre in unique_genres}
+    genres = {genre: Genre(name=genre) for genre in unique_genres}
     print(genres)
     db.session.add_all(genres.values())
     db.session.commit()
