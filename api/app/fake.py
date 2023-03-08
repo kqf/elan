@@ -71,9 +71,8 @@ _movies = [
 
 
 def create_movies(db: SQLAlchemy) -> None:
-    unique_genres = {movie["genre"] for movie in _movies}
-    genres = {genre: Genre(name=genre) for genre in unique_genres}
-    print(genres)
+    unique_genres: set[str] = {str(movie["genre"]) for movie in _movies}
+    genres = {genre: Genre(name=genre) for genre in sorted(unique_genres)}
     db.session.add_all(genres.values())
     db.session.commit()
 
