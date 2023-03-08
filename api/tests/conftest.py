@@ -15,6 +15,7 @@ def app(user):
     app = build_app()
     app_ctx = app.app_context()
     app_ctx.push()
+    db.drop_all()
     db.create_all()
     models.register_user(db, *user, email="john@example.com")
     create_movies(db)
