@@ -1,5 +1,6 @@
-from app.models import Genre, Movie
 from flask_sqlalchemy import SQLAlchemy
+
+from app.models import Genre, Movie
 
 _movies = [
     {
