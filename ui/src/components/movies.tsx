@@ -1,7 +1,8 @@
+import axios from "axios";
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Genre, getGenres, getMovies, Movie } from "../fakeBackend";
+import { Genre, getMovies, Movie } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
@@ -10,7 +11,7 @@ import Pagination from "./pagination";
 function Movies() {
   const [state, updateState] = useState({
     movies: getMovies() as Array<Movie>,
-    genres: getGenres() as Array<Genre>,
+    genres: [] as Array<Genre>,
     searchQuery: "" as string,
     selectedGenre: "" as String,
     pageSize: 4,
@@ -18,6 +19,21 @@ function Movies() {
     sortColumn: { column: "title", order: "asc" } as SortingColumn,
   });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      const response = await axios.get("/genres/");
+      updateState((s) => {
+        console.log(response.data);
+        return {
+          ...state,
+          genres: response.data,
+        };
+      });
+    })();
+    // eslint-disable-next-line
+  }, []);
 
   const likeForMovie = (movie: Movie) => () => {
     const newstate = state.movies.map((c) => {
