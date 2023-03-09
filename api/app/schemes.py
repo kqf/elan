@@ -39,5 +39,7 @@ class GenreSchema(ma.SQLAlchemyAutoSchema):
 
 
 class MovieSchema(ma.SQLAlchemyAutoSchema):
+    genre = ma.Nested(GenreSchema)
+
     class Meta:
         model = Movie

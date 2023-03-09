@@ -39,6 +39,7 @@ def build_app():
     from app.routes.auth import auths
     from app.routes.genre import genres
     from app.routes.lesson import lessons
+    from app.routes.movie import movies
     from app.routes.pair import pairs
     from app.routes.users import users
 
@@ -48,6 +49,7 @@ def build_app():
     app.register_blueprint(users)
     app.register_blueprint(debug)
     app.register_blueprint(genres)
+    app.register_blueprint(movies)
     return app
 
 
