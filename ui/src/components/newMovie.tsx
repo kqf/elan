@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getGenres, getMovies, Movie } from "../fakeBackend";
 
@@ -44,9 +44,12 @@ function NewMovie() {
 
   const onSubmit = handleSubmit((data: FormValues) => {
     const movie: Movie = {
-      _id: String(movies.length + 1),
+      id: String(movies.length + 1),
       title: data.name,
-      genre: genres.find((g) => g._id === data.genre) || {_id: "-1", name: "Unknown"},
+      genre: genres.find((g) => g.id === data.genre) || {
+        id: "-1",
+        name: "Unknown",
+      },
       numberInStock: data.stock,
       dailyRentalRate: data.rate,
       publishDate: "unknown",
@@ -56,7 +59,7 @@ function NewMovie() {
     // Calling the backend service
     console.log(movie);
     movies.push(movie);
-    navigate("/", {replace: true});
+    navigate("/", { replace: true });
   });
 
   return (
@@ -77,7 +80,7 @@ function NewMovie() {
           <select className="form-control" id="genre" {...register("genre")}>
             <option value=" " />
             {genres.map((option) => (
-              <option key={option._id} value={option._id}>
+              <option key={option.id} value={option.id}>
                 {option.name}
               </option>
             ))}

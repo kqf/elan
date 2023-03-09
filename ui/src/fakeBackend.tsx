@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 export interface Genre {
-  _id: string;
+  id: string;
   name: string;
 }
 
@@ -20,7 +20,7 @@ export function getMovies() {
     return {
       id: String(i),
       title: `Title ${15 - i}`,
-      genre: { _id: String(i % 4), name: `Genre ${i % 4}` },
+      genre: { id: String(i % 4), name: `Genre ${i % 4}` },
       numberInStock: i,
       dailyRentalRate: 1.5,
       publishDate: "2020-01-01",
