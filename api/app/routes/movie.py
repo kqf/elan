@@ -1,23 +1,23 @@
 from __future__ import annotations
 
 from apifairy import response
+from app.models import Movie
+
+# from app.schemes mport MovieSchema
 from flask import Blueprint
 
-from app.models import Genre
-from app.schemes import GenreSchema
-
-genres = Blueprint("genres", __name__)
-genre_schema = GenreSchema()
-genres_schema = GenreSchema(many=True)
+movies = Blueprint("movies", __name__)
+movie_schema = MovieSchema()
+movies_schema = MovieSchema(many=True)
 
 
-@genres.route("/genres/<int:id>", methods=["GET"])
-@response(genre_schema)
-def genre(id) -> Genre:
-    return Genre.query.get_or_404(id)
+@movies.route("/movies/<int:id>", methods=["GET"])
+@response(movie_schema)
+def movie(id) -> Movie:
+    return movie.query.get_or_404(id)
 
 
-@genres.route("/genres/", methods=["GET"])
-@response(genres_schema)
-def genres_() -> Genre:
-    return Genre.query.all()
+@movies.route("/movies/", methods=["GET"])
+@response(movies_schema)
+def movies_() -> Movie:
+    return movie.query.all()
