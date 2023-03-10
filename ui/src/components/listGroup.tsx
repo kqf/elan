@@ -1,6 +1,6 @@
 interface ListEntry {
   name: String;
-  _id: String;
+  id: String;
 }
 
 function ListGroup(props: {

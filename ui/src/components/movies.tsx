@@ -2,7 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Genre, getMovies, Movie } from "../fakeBackend";
+import { Genre, Movie } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
@@ -10,7 +10,7 @@ import Pagination from "./pagination";
 
 function Movies() {
   const [state, updateState] = useState({
-    movies: getMovies() as Array<Movie>,
+    movies: [] as Array<Movie>,
     genres: [] as Array<Genre>,
     searchQuery: "" as string,
     selectedGenre: "" as String,
@@ -29,6 +29,21 @@ function Movies() {
         return {
           ...state,
           genres: response.data,
+        };
+      });
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      const response = await axios.get("/movies/");
+      updateState((s) => {
+        console.log(response.data);
+        return {
+          ...state,
+          movies: response.data,
         };
       });
     })();

@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import Like from "./components/like";
 import { Movie } from "./fakeBackend";
 
-
-
 export interface SortingColumn {
   column: String;
   order: boolean | "asc" | "desc";
@@ -56,9 +54,9 @@ function MovieTable(props: {
       <tbody>
         {props.movies.map((movie) => {
           return (
-            <tr key={movie._id}>
+            <tr key={movie.id}>
               <td>
-                <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
               </td>
               <td>{movie.genre.name}</td>
               <td>{movie.numberInStock}</td>

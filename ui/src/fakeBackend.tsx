@@ -1,12 +1,12 @@
 import _ from "lodash";
 
 export interface Genre {
-  _id: string;
+  id: string;
   name: string;
 }
 
 export interface Movie {
-  _id: string;
+  id: string;
   title: string;
   genre: Genre;
   numberInStock: number;
@@ -18,9 +18,9 @@ export interface Movie {
 export function getMovies() {
   return _.range(0, 15).map((i) => {
     return {
-      _id: String(i),
+      id: String(i),
       title: `Title ${15 - i}`,
-      genre: { _id: String(i % 4), name: `Genre ${i % 4}` },
+      genre: { id: String(i % 4), name: `Genre ${i % 4}` },
       numberInStock: i,
       dailyRentalRate: 1.5,
       publishDate: "2020-01-01",
