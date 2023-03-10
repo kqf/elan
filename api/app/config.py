@@ -57,6 +57,7 @@ def build_app():
 def main():
     app = build_app()
     with app.app_context():
+        db.drop_all()
         db.create_all()
         create_movies(db)
         for name in ["bob", "jack", "peter"]:
