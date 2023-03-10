@@ -23,27 +23,15 @@ function Movies() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const response = await axios.get("/genres/");
+      const genres = (await axios.get("/genres/")).data;
+      const movies = (await axios.get("/movies/")).data;
+      console.log(genres);
+      console.log(movies);
       updateState((s) => {
-        console.log(response.data);
         return {
           ...state,
-          genres: response.data,
-        };
-      });
-    })();
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    // Fetch the data
-    (async () => {
-      const response = await axios.get("/movies/");
-      updateState((s) => {
-        console.log(response.data);
-        return {
-          ...state,
-          movies: response.data,
+          genres: genres,
+          movies: movies,
         };
       });
     })();
