@@ -59,7 +59,7 @@ function NewMovie() {
     // eslint-disable-next-line
   }, []);
 
-  const onSubmit = handleSubmit((data: FormValues) => {
+  const onSubmit = handleSubmit(async (data: FormValues) => {
     const movie: Movie = {
       id: String(movies.length + 1),
       title: data.name,
