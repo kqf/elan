@@ -1,7 +1,9 @@
+import axios from "axios";
 import _ from "lodash";
+import { useEffect, useState } from "react";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { getGenres, getMovies, Movie } from "../fakeBackend";
+import { Genre, getMovies, Movie } from "../fakeBackend";
 
 type FormValues = {
   name: string;
@@ -38,9 +40,25 @@ function NewMovie() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
   const navigate = useNavigate();
+  const [state, updateState] = useState({
+    genres: [] as Array<Genre>,
+  });
 
-  const genres = getGenres();
   var movies = getMovies();
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      const genres = (await axios.get("/genres/")).data;
+      console.log(genres);
+      updateState((s) => {
+        return {
+          ...state,
+          genres: genres,
+        };
+      });
+    })();
+    // eslint-disable-next-line
+  }, []);
 
   const onSubmit = handleSubmit((data: FormValues) => {
     const movie: Movie = {
