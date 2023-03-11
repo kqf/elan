@@ -25,7 +25,7 @@ def movies_() -> Movie:
     return Movie.query.all()
 
 
-@movies.route("/movies/", methods=["GET"])
+@movies.route("/movies/", methods=["POST"])
 @response(movies_schema)
 @requires_fields(
     "title",
@@ -33,16 +33,15 @@ def movies_() -> Movie:
     "numberInStock",
     "dailyRentalRate",
     "publishDate",
-    "like",
+    "liked",
 )
 def add_movie() -> tuple[dict, int, dict[str, str]]:
     genre = Genre.query.get_or_404(request.json["genre_id"])  # type: ignore
     specs = dict(request.json)  # type: ignore
     specs["genre_id"] = genre.id
     movie = Movie(**specs)
-    db.session.add_all(movies)
+    db.session.add(movie)
     db.session.commit()
-
     return (
         {},
         201,

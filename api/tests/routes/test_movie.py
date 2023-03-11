@@ -28,3 +28,20 @@ def test_retrieves_movies(client, expected):
     assert len(response.json) == 8
     assert response.json[0] == expected
     assert response.status_code == 200
+
+
+def test_adds_a_movie(client, expected):
+    before = client.get("/movies/", follow_redirects=True).json
+    assert len(before) == 8
+    data = {
+        "title": "A fake title",
+        "genre_id": 1,
+        "numberInStock": 1,
+        "dailyRentalRate": 2,
+        "publishDate": "unknown",
+        "liked": False,
+    }
+    response = client.post("/movies/", json=data, follow_redirects=True)
+    assert response.status_code == 201
+    after = client.get("/movies/", follow_redirects=True).json
+    assert len(after) == 9
