@@ -43,7 +43,6 @@ function NewMovie() {
   const [state, updateState] = useState({
     genres: [] as Array<Genre>,
   });
-
   var movies = getMovies();
   useEffect(() => {
     // Fetch the data
@@ -64,7 +63,7 @@ function NewMovie() {
     const movie: Movie = {
       id: String(movies.length + 1),
       title: data.name,
-      genre: genres.find((g) => g.id === data.genre) || {
+      genre: state.genres.find((g) => g.id === data.genre) || {
         id: "-1",
         name: "Unknown",
       },
@@ -97,7 +96,7 @@ function NewMovie() {
           <label htmlFor="genre">Genre</label>
           <select className="form-control" id="genre" {...register("genre")}>
             <option value=" " />
-            {genres.map((option) => (
+            {state.genres.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
               </option>
