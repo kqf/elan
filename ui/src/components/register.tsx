@@ -1,9 +1,5 @@
 import _ from "lodash";
-import {
-  useForm,
-  FieldError,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 
 type RegisterFilds = {
   email: string;
@@ -22,10 +18,16 @@ function RegistrationField(props: {
   return (
     <div className="form-group">
       <label htmlFor={props.inputs.name}>{props.label}</label>
-      <input className="form-control" {...props.inputs} placeholder={props.placeholder} type={props.type}/>
+      <input
+        className="form-control"
+        {...props.inputs}
+        placeholder={props.placeholder}
+        type={props.type}
+      />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )} </div>
+      )}{" "}
+    </div>
   );
 }
 
@@ -58,8 +60,8 @@ function RegisterForm() {
             required: "Email is required",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please provide a email address"
-            }
+              message: "Please provide a email address",
+            },
           })}
         />
         <RegistrationField
@@ -73,7 +75,6 @@ function RegisterForm() {
         />
 
         <RegistrationField
-
           label={"Confirm password"}
           placeholder="querty"
           type="password"
@@ -81,9 +82,8 @@ function RegisterForm() {
           inputs={register("confirm_password", {
             required: "Password is required",
             validate: (val: string) => {
-              if (watch("password") !== val)
-                return "Passwords should match"
-            }
+              if (watch("password") !== val) return "Passwords should match";
+            },
           })}
         />
 
