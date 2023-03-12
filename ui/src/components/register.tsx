@@ -1,3 +1,4 @@
+import axios from "axios";
 import _ from "lodash";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 
@@ -38,7 +39,14 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFilds>({ mode: "onChange" });
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data: RegisterFilds) => {
+    const response = await axios.post("/users/", {
+      username: data.username,
+      password: data.password,
+      email: data.email,
+    });
+    console.log(response);
+  });
 
   return (
     <div>
