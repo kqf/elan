@@ -30,7 +30,6 @@ def user(id: int) -> User:
 
 
 @users.route("/users/", methods=["POST"])
-@authenticate(token_auth)
 @requires_fields("username", "password", "email")
 def create() -> tuple[dict, int, dict[str, str]]:
     user = register_user(db, **request.json)  # type: ignore
