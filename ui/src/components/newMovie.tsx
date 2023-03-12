@@ -3,7 +3,8 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Genre, getMovies, Movie } from "../fakeBackend";
+import { toast } from "react-toastify";
+import { Genre, getMovies } from "../fakeBackend";
 
 type FormValues = {
   name: string;
@@ -59,23 +60,25 @@ function NewMovie() {
     // eslint-disable-next-line
   }, []);
 
-  const onSubmit = handleSubmit((data: FormValues) => {
-    const movie: Movie = {
-      id: String(movies.length + 1),
-      title: data.name,
-      genre: state.genres.find((g) => g.id === data.genre) || {
-        id: "-1",
-        name: "Unknown",
-      },
-      numberInStock: data.stock,
-      dailyRentalRate: data.rate,
-      publishDate: "unknown",
-      liked: false,
-    };
+  const onSubmit = handleSubmit(async (data: FormValues) => {
+    try {
+      await axios.post("/movies/", {
+        title: data.name,
+        genre_id: data.genre,
+        numberInStock: data.stock,
+        dailyRentalRate: data.rate,
+        publishDate: "unknown",
+        liked: false,
+      });
+    } catch (ex) {
+      if (axios.isAxiosError(ex)) {
+        if (ex.response) {
+          console.log(ex.response);
+          toast.error("Somethign went wrong, can't upate the server");
+        }
+      }
+    }
 
-    // Calling the backend service
-    console.log(movie);
-    movies.push(movie);
     navigate("/", { replace: true });
   });
 
