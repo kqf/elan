@@ -14,7 +14,6 @@ function UserList() {
     // Fetch the data
     (async () => {
       const users = (await axios.get("/users/")).data;
-      console.log("~", users);
       updateState(users);
     })();
     // eslint-disable-next-line
