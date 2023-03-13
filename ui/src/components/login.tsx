@@ -1,3 +1,4 @@
+import axios from "axios";
 import _ from "lodash";
 import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
 
@@ -34,7 +35,15 @@ function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
+    const response = await axios.post("/tokens", {
+      headers: {
+        Authorization: "Basic " + btoa(`${data.username}:${data.password}`),
+      },
+    });
+    console.log(response.data);
+  });
 
   return (
     <div>
