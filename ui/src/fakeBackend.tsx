@@ -15,6 +15,12 @@ export interface Movie {
   liked: boolean;
 }
 
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+}
+
 export function getMovies() {
   return _.range(0, 15).map((i) => {
     return {
