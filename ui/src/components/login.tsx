@@ -43,6 +43,8 @@ function LoginForm() {
       },
     });
     console.log(response.data);
+    // @ts-ignore
+    localStorage.setItem("accessToken", response.data.token);
   });
 
   return (
