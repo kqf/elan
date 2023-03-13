@@ -23,7 +23,7 @@ function UserList() {
     <div>
       <ul className="list-group">
         {state.map((u) => {
-          return <li>{u.username}</li>;
+          return <li className="list-group-item">{u.username}</li>;
         })}
       </ul>
     </div>
