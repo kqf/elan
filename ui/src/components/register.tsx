@@ -1,6 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 type RegisterFilds = {
   email: string;
@@ -39,6 +40,7 @@ function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFilds>({ mode: "onChange" });
+  const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: RegisterFilds) => {
     const response = await axios.post("/users/", {
       username: data.username,
@@ -46,6 +48,7 @@ function RegisterForm() {
       email: data.email,
     });
     console.log(response);
+    navigate("/", { replace: true });
   });
 
   return (
