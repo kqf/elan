@@ -4,7 +4,7 @@ async function authentificate() {
   const response = await fetch("/tokens", {
     method: "POST",
     headers: {
-      Authorization: "Basic " + btoa("bob:lol"),
+      Authorization: "Basic " + btoa("bob:bob"),
     },
   });
 
