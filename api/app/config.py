@@ -62,7 +62,7 @@ def main():
         create_movies(db)
         for name in ["bob", "jack", "peter"]:
             if User.query.filter_by(username=name).first() is None:
-                register_user(db, name, name, f"{name}@lol.com")
+                register_user(db, name, name, f"{name}@example.com")
     return app
 
 
