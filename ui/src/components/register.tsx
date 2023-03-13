@@ -53,7 +53,7 @@ function RegisterForm() {
 
   return (
     <div>
-      <h1>Re-login</h1>
+      <h1>Register</h1>
       <form onSubmit={onSubmit}>
         <RegistrationField
           label={"Username"}
