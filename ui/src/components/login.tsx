@@ -1,9 +1,5 @@
 import _ from "lodash";
-import {
-  useForm,
-  FieldError,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { useForm, FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type FormValues = {
   username: string;
@@ -20,10 +16,15 @@ function LoginField(props: {
   return (
     <div className="form-group">
       <label htmlFor={props.inputs.name}>{props.label}</label>
-      <input className="form-control" {...props.inputs} placeholder={props.placeholder}/>
+      <input
+        className="form-control"
+        {...props.inputs}
+        placeholder={props.placeholder}
+      />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )} </div>
+      )}{" "}
+    </div>
   );
 }
 
@@ -37,7 +38,7 @@ function LoginForm() {
 
   return (
     <div>
-      <h1>Re-login</h1>
+      <h1>Login</h1>
       <form onSubmit={onSubmit}>
         <LoginField
           label={"Username"}
@@ -55,12 +56,11 @@ function LoginForm() {
             required: "Email is required",
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please provide a email address"
-            }
+              message: "Please provide a email address",
+            },
           })}
         />
         <LoginField
-
           label={"Password"}
           placeholder="querty"
           error={errors["password"]}
