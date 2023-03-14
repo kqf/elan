@@ -10,6 +10,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 
 
+def generate_auth_token(user: User) -> Token:
+    token = Token(user=user)
+    token.generate()
+    return token
+
+
 def register_user(
     db: SQLAlchemy,
     username: str,
@@ -19,6 +25,8 @@ def register_user(
     user = User(username=username, email=email)
     user.password_hash = generate_password_hash(password)
     db.session.add(user)
+    db.session.commit()
+    db.session.add(generate_auth_token(user))
     db.session.commit()
     return user
 
@@ -42,6 +50,7 @@ def verify_access_token(db: SQLAlchemy, access_token, refresh_token=None):
     if token := db.session.scalar(Token.query.filter_by(token=access_token)):
         if token.acc_exp > datetime.now(timezone.utc):
             return token.user
+    return False
 
 
 class Token(db.Model):
