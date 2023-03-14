@@ -1,3 +1,4 @@
+import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import {
@@ -158,15 +159,14 @@ function SinglePageApp() {
     // Fetch the data
     (async () => {
       if (localStorage.getItem("accessToken") === null) return;
-      const response = await fetch("/users/me/", {
-        method: "GET",
+      const response = await axios.get("/users/me/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           // Authorization: `Basic ${btoa("bob:bob")}`,
         },
       });
-      console.log(await response.json());
+      console.log(response);
       // setState((s) => {
       //   return {
       //     ...state,
