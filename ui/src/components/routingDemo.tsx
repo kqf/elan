@@ -1,4 +1,6 @@
+import axios from "axios";
 import _ from "lodash";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   Link,
@@ -9,14 +11,15 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import { User } from "../fakeBackend";
 import AuthDemo from "./authDemo";
+import Blog from "./blog";
+import LoginForm from "./login";
 import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
-import RegisterForm from "./register";
-import LoginForm from "./login";
 import NewMovie from "./newMovie";
-import Blog from "./blog";
+import RegisterForm from "./register";
 
 function SideBar() {
   return (
@@ -151,6 +154,22 @@ function MovieComponent() {
 }
 
 function SinglePageApp() {
+  const [state, setState] = useState<{ user?: User }>();
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      if (localStorage.getItem("accessToken") !== null) return;
+      const response = await axios.get("/users/me");
+      setState((s) => {
+        return {
+          ...state,
+          user: response.data,
+        };
+      });
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <BrowserRouter>
       <NavBar />
