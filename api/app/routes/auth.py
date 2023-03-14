@@ -5,15 +5,14 @@ from apifairy import authenticate
 from flask import Blueprint
 
 from app import basic_auth, db, token_auth
-from app.models import Token, User, password_is_correct, verify_access_token
+from app.models import (
+    User,
+    generate_auth_token,
+    password_is_correct,
+    verify_access_token,
+)
 
 auths = Blueprint("auths", __name__)
-
-
-def generate_auth_token(user: User) -> Token:
-    token = Token(user=user)
-    token.generate()
-    return token
 
 
 @auths.route("/tokens", methods=["POST"])
