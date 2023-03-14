@@ -158,8 +158,14 @@ function SinglePageApp() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      if (localStorage.getItem("accessToken") !== null) return;
-      const response = await axios.get("/users/me");
+      if (localStorage.getItem("accessToken") === null) return;
+      const response = await axios.get("/users/me/", {
+        headers: {
+          // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Basic ${btoa("bob:bob")}`,
+        },
+      });
+      console.log(response);
       setState((s) => {
         return {
           ...state,
