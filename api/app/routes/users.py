@@ -21,6 +21,13 @@ def uusers() -> User:
     return User.query.all()
 
 
+@users.route("/users/me/", methods=["GET"])
+@authenticate(token_auth)
+@response(user_schema)
+def me() -> User:
+    return token_auth.current_user()
+
+
 @users.route("/users/<int:id>", methods=["GET"])
 @authenticate(token_auth)
 @response(user_schema)
