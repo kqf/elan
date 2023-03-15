@@ -6,9 +6,9 @@ import sqlalchemy as sqla
 from apifairy import authenticate
 from flask import Blueprint
 
-from api.app.models import Token
 from app import basic_auth, db, token_auth
 from app.models import (
+    Token,
     User,
     generate_auth_token,
     password_is_correct,
