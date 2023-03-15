@@ -5,7 +5,6 @@ import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 type FormValues = {
   username: string;
   password: string;
-  email: string;
 };
 
 function LoginField(props: {
@@ -57,18 +56,6 @@ function LoginForm() {
           error={errors["username"]}
           inputs={register("username", {
             required: "Username is required",
-          })}
-        />
-        <LoginField
-          label={"Email"}
-          placeholder="bob@example.com"
-          error={errors["email"]}
-          inputs={register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please provide a email address",
-            },
           })}
         />
         <LoginField
