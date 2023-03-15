@@ -163,17 +163,16 @@ function SinglePageApp() {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          // Authorization: `Basic ${btoa("bob:bob")}`,
         },
       });
-      console.log(response);
-      // setState((s) => {
-      //   return {
-      //     ...state,
-      //     // @ts-ignore
-      //     user: await response.json(),
-      //   };
-      // });
+      console.log("My data ~>", response.data);
+      setState((s) => {
+        return {
+          ...state,
+          // @ts-ignore
+          user: response.data,
+        };
+      });
     })();
     // eslint-disable-next-line
   }, []);
