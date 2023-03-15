@@ -1,6 +1,8 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { User } from "../fakeBackend";
 
-function NavBar() {
+function NavBar(props: { user?: User }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <NavLink className="navbar-brand" to="/">
@@ -39,12 +41,21 @@ function NavBar() {
           <NavLink className="nav-item nav-link" to="/auth">
             Auth
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/login">
-            Login
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/register">
-            Register
-          </NavLink>
+          {!props.user && (
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/login">
+                Login
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/register">
+                Register
+              </NavLink>
+            </React.Fragment>
+          )}
+          {props.user && (
+            <NavLink className="nav-item nav-link" to="/">
+              {props.user.username}
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>
