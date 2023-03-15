@@ -179,7 +179,7 @@ function SinglePageApp() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar user={state?.user} />
       <div>
         <div className="content">
           <Routes>
