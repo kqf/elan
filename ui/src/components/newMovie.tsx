@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Genre } from "../fakeBackend";
+import { Genre } from "../schemes";
 
 type FormValues = {
   name: string;
