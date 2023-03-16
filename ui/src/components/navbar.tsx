@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import { User } from "../fakeBackend";
 
 function NavBar(props: { user?: User }) {
+  const handleLogOut = () => {
+    console.log("Removed the item");
+    localStorage.removeItem("accessToken");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <NavLink className="navbar-brand" to="/">
@@ -52,7 +56,11 @@ function NavBar(props: { user?: User }) {
             </React.Fragment>
           )}
           {props.user && (
-            <NavLink className="nav-item nav-link" to="/">
+            <NavLink
+              className="nav-item nav-link"
+              to="/"
+              onClick={handleLogOut}
+            >
               {props.user.username}
             </NavLink>
           )}
