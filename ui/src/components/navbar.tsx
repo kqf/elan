@@ -1,11 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { User } from "../fakeBackend";
 
 function NavBar(props: { user?: User }) {
+  const navigate = useNavigate();
   const handleLogOut = () => {
-    console.log("Removed the item");
     localStorage.removeItem("accessToken");
+    navigate("/", { replace: true });
+    window.location.reload();
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

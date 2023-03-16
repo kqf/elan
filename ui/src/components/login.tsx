@@ -1,6 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
   username: string;
@@ -34,6 +35,7 @@ function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
+  const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
     const response = await axios.get("/login", {
@@ -44,6 +46,8 @@ function LoginForm() {
     console.log(response.data);
     // @ts-ignore
     localStorage.setItem("accessToken", response.data.token);
+    navigate("/", { replace: true });
+    window.location.reload();
   });
 
   return (
