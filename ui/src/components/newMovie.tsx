@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Genre, getMovies } from "../fakeBackend";
+import { Genre } from "../fakeBackend";
 
 type FormValues = {
   name: string;
@@ -44,7 +44,6 @@ function NewMovie() {
   const [state, updateState] = useState({
     genres: [] as Array<Genre>,
   });
-  var movies = getMovies();
   useEffect(() => {
     // Fetch the data
     (async () => {
