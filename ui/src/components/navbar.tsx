@@ -58,10 +58,11 @@ function NavBar(props: { user?: User }) {
           {props.user && (
             <NavLink
               className="nav-item nav-link"
-              to="/"
+              to="/movies"
               onClick={handleLogOut}
             >
-              {props.user.username}
+              {props.user.username}{" "}
+              <i className="fa fa-sign-out" aria-hidden="true"></i>
             </NavLink>
           )}
         </div>
