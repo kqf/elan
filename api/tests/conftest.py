@@ -11,6 +11,13 @@ def user():
 
 
 @pytest.fixture
+def headers(client, user):
+    response = client.post("/tokens", auth=user, follow_redirects=True)
+    token = response.json["token"]
+    return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
 def app(user):
     app = build_app()
     app_ctx = app.app_context()
