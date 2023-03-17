@@ -52,5 +52,9 @@ def test_adds_a_movie(client, expected, headers):
         follow_redirects=True,
     )
     assert response.status_code == 201
-    after = client.get("/movies/", headers=headers, follow_redirects=True).json
+    after = client.get(
+        "/movies/",
+        headers=headers,
+        follow_redirects=True,
+    ).json
     assert len(after) == 9
