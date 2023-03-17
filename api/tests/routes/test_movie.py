@@ -17,21 +17,25 @@ def expected():
     }
 
 
-def test_retrieves_a_movie(client, expected):
-    response = client.get("/movies/1", follow_redirects=True)
+def test_retrieves_a_movie(client, expected, headers):
+    response = client.get("/movies/1", headers=headers, follow_redirects=True)
     assert response.json == expected
     assert response.status_code == 200
 
 
-def test_retrieves_movies(client, expected):
-    response = client.get("/movies/", follow_redirects=True)
+def test_retrieves_movies(client, expected, headers):
+    response = client.get("/movies/", headers=headers, follow_redirects=True)
     assert len(response.json) == 8
     assert response.json[0] == expected
     assert response.status_code == 200
 
 
-def test_adds_a_movie(client, expected):
-    before = client.get("/movies/", follow_redirects=True).json
+def test_adds_a_movie(client, expected, headers):
+    before = client.get(
+        "/movies/",
+        headers=headers,
+        follow_redirects=True,
+    ).json
     assert len(before) == 8
     data = {
         "title": "A fake title",
@@ -41,7 +45,16 @@ def test_adds_a_movie(client, expected):
         "publishDate": "unknown",
         "liked": False,
     }
-    response = client.post("/movies/", json=data, follow_redirects=True)
+    response = client.post(
+        "/movies/",
+        headers=headers,
+        json=data,
+        follow_redirects=True,
+    )
     assert response.status_code == 201
-    after = client.get("/movies/", follow_redirects=True).json
+    after = client.get(
+        "/movies/",
+        headers=headers,
+        follow_redirects=True,
+    ).json
     assert len(after) == 9
