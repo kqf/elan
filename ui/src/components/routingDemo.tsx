@@ -11,6 +11,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import tokenHeader from "../auth";
 import { User } from "../fakeBackend";
 import AuthDemo from "./authDemo";
 import Blog from "./blog";
@@ -158,14 +159,9 @@ function SinglePageApp() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      if (localStorage.getItem("accessToken") === null) return;
-      const response = await axios.get("/users/me/", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-      console.log("My data ~>", response.data);
+      const header = tokenHeader();
+      if (header === null) return;
+      const response = await axios.get("/users/me/", { headers: header });
       setState((s) => {
         return {
           ...state,
