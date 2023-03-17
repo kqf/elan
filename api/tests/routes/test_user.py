@@ -1,13 +1,4 @@
-import pytest
-
 import app.models as users
-
-
-@pytest.fixture
-def headers(client, user):
-    response = client.post("/tokens", auth=user, follow_redirects=True)
-    token = response.json["token"]
-    return {"Authorization": f"Bearer {token}"}
 
 
 def test_retrieves_users(client, headers):
