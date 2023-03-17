@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Like from "./components/like";
-import { Movie } from "./fakeBackend";
+import { Movie } from "./schemes";
 
 export interface SortingColumn {
   column: String;
