@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from apifairy import response
+from apifairy import authenticate, response
 from flask import Blueprint, request, url_for
 
-from app import db
+from app import db, token_auth
 from app.models import Genre, Movie
 from app.routes.exception import requires_fields
 from app.schemes import MovieSchema
@@ -14,18 +14,21 @@ movies_schema = MovieSchema(many=True)
 
 
 @movies.route("/movies/<int:id>", methods=["GET"])
+@authenticate(token_auth)
 @response(movie_schema)
 def movie(id) -> Movie:
     return Movie.query.get_or_404(id)
 
 
 @movies.route("/movies/", methods=["GET"])
+@authenticate(token_auth)
 @response(movies_schema)
 def movies_() -> Movie:
     return Movie.query.all()
 
 
 @movies.route("/movies/", methods=["POST"])
+@authenticate(token_auth)
 @response(movies_schema)
 @requires_fields(
     "title",
