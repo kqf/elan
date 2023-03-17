@@ -2,7 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Genre, Movie, User } from "../fakeBackend";
+import { Genre, Movie, User } from "../schemes";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import ListGroup from "./listGroup";
