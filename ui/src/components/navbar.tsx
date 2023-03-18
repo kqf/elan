@@ -50,10 +50,10 @@ function NavBar(props: { user?: User }) {
           {!props.user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/login">
-                Login
+                Sign in
               </NavLink>
               <NavLink className="nav-item nav-link" to="/register">
-                Register
+                Sign up
               </NavLink>
             </React.Fragment>
           )}
