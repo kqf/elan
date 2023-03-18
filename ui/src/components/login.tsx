@@ -46,7 +46,7 @@ function LoginForm() {
     console.log(response.data);
     // @ts-ignore
     localStorage.setItem("accessToken", response.data.token);
-    navigate("/", { replace: true });
+    navigate("/", { replace: false });
     window.location.reload();
   });
 

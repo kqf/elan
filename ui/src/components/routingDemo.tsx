@@ -154,8 +154,22 @@ function MovieComponent() {
   );
 }
 
+function Protect({
+  isAuthenticated,
+  children,
+}: {
+  isAuthenticated: any;
+  children: JSX.Element;
+}) {
+  if (isAuthenticated) {
+    return children;
+  } else {
+    return <Navigate to={{ pathname: "/login" }} />;
+  }
+}
+
 function SinglePageApp() {
-  const [state, setState] = useState<{ user?: User }>();
+  const [state, setState] = useState<{ user?: User }>({});
   useEffect(() => {
     // Fetch the data
     (async () => {
@@ -173,16 +187,24 @@ function SinglePageApp() {
     // eslint-disable-next-line
   }, []);
 
+  const protect = (x: JSX.Element) => {
+    return (
+      <Protect isAuthenticated={localStorage.getItem("accessToken")}>
+        {x}
+      </Protect>
+    );
+  };
+
   return (
     <BrowserRouter>
       <NavBar user={state?.user} />
       <div>
         <div className="content">
           <Routes>
-            <Route path="/" element={<Movies />} />
-            <Route path="/movies/" element={<Movies />} />
-            <Route path="/movies/new" element={<NewMovie />} />
-            <Route path="/movies/:id?" element={<MovieComponent />} />
+            <Route path="/" element={protect(<Movies />)}></Route>
+            <Route path="/movies/" element={protect(<Movies />)} />
+            <Route path="/movies/new" element={protect(<NewMovie />)} />
+            <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
