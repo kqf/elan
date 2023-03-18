@@ -3,9 +3,9 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import tokenHeader from "../auth";
-import { Genre, Movie, User } from "../fakeBackend";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
+import { Genre, Movie, User } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
 

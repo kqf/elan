@@ -12,7 +12,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import tokenHeader from "../auth";
-import { User } from "../fakeBackend";
+import { User } from "../schemes";
 import AuthDemo from "./authDemo";
 import Blog from "./blog";
 import LoginForm from "./login";
