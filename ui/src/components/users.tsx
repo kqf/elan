@@ -17,7 +17,11 @@ export default function UserList() {
     <div>
       <ul className="list-group">
         {state.map((u) => {
-          return <li className="list-group-item">{u.username}</li>;
+          return (
+            <li key={u.id} className="list-group-item">
+              {u.username}
+            </li>
+          );
         })}
       </ul>
     </div>
