@@ -21,6 +21,7 @@ import Movies from "./movies";
 import NavBar from "./navbar";
 import NewMovie from "./newMovie";
 import RegisterForm from "./register";
+import UserList from "./users";
 
 function SideBar() {
   return (
@@ -205,6 +206,7 @@ function SinglePageApp() {
             <Route path="/movies/" element={protect(<Movies />)} />
             <Route path="/movies/new" element={protect(<NewMovie />)} />
             <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
+            <Route path="/users" element={protect(<UserList />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />

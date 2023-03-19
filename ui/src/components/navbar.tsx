@@ -47,6 +47,11 @@ function NavBar(props: { user?: User }) {
           <NavLink className="nav-item nav-link" to="/auth">
             Auth
           </NavLink>
+          {props.user && (
+            <NavLink className="nav-item nav-link" to="/users">
+              Users
+            </NavLink>
+          )}
         </div>
       </div>
       <div className="navbar-nav">
