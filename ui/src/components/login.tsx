@@ -52,7 +52,7 @@ function LoginForm() {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Sign In</h1>
       <form onSubmit={onSubmit}>
         <LoginField
           label={"Username"}
