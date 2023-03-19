@@ -47,27 +47,29 @@ function NavBar(props: { user?: User }) {
           <NavLink className="nav-item nav-link" to="/auth">
             Auth
           </NavLink>
-          {!props.user && (
-            <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/login">
-                Sign in
-              </NavLink>
-              <NavLink className="nav-item nav-link" to="/register">
-                Sign up
-              </NavLink>
-            </React.Fragment>
-          )}
-          {props.user && (
-            <NavLink
-              className="nav-item nav-link"
-              to="/movies"
-              onClick={handleLogOut}
-            >
-              {props.user.username}{" "}
-              <i className="fa fa-sign-out" aria-hidden="true"></i>
-            </NavLink>
-          )}
         </div>
+      </div>
+      <div className="navbar-nav">
+        {!props.user && (
+          <React.Fragment>
+            <NavLink className="nav-item nav-link" to="/login">
+              Sign in
+            </NavLink>
+            <NavLink className="nav-item nav-link" to="/register">
+              Sign up
+            </NavLink>
+          </React.Fragment>
+        )}
+        {props.user && (
+          <NavLink
+            className="nav-item nav-link"
+            to="/movies"
+            onClick={handleLogOut}
+          >
+            {props.user.username}{" "}
+            <i className="fa fa-sign-out" aria-hidden="true"></i>
+          </NavLink>
+        )}
       </div>
     </nav>
   );
