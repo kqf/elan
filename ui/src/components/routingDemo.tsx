@@ -13,7 +13,6 @@ import {
 } from "react-router-dom";
 import tokenHeader from "../auth";
 import { User } from "../schemes";
-import AuthDemo from "./authDemo";
 import Blog from "./blog";
 import LoginForm from "./login";
 import AppMenu from "./menuComponent";
@@ -210,7 +209,6 @@ function SinglePageApp() {
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
-            <Route path="/auth" element={<AuthDemo />} />
             <Route path="/calc" element={<AppMenu />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
