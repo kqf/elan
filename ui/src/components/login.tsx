@@ -2,6 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type FormValues = {
   username: string;
@@ -47,8 +48,19 @@ function LoginForm() {
       localStorage.setItem("accessToken", response.data.token);
       navigate("/", { replace: true });
       window.location.reload();
-    } catch (error) {
-      console.log("Error occurred");
+    } catch (ex) {
+      if (!axios.isAxiosError(ex)) {
+        console.log("Unknown exception occurred");
+        console.log(ex);
+        return;
+      }
+      if (ex.response && ex.response.status === 401) {
+        console.log("Error ~~~>");
+      }
+      if (ex.response) {
+        console.log(ex.response);
+        toast.error("Somethign went wrong, can't upate the server");
+      }
     }
   });
 
