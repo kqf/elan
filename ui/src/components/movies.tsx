@@ -5,31 +5,9 @@ import { useNavigate } from "react-router-dom";
 import tokenHeader from "../auth";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
-import { Genre, Movie, User } from "../schemes";
+import { Genre, Movie } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
-
-function UserList() {
-  const [state, updateState] = useState([] as Array<User>);
-  useEffect(() => {
-    // Fetch the data
-    (async () => {
-      const users = (await axios.get("/users/")).data;
-      updateState(users);
-    })();
-    // eslint-disable-next-line
-  }, []);
-
-  return (
-    <div>
-      <ul className="list-group">
-        {state.map((u) => {
-          return <li className="list-group-item">{u.username}</li>;
-        })}
-      </ul>
-    </div>
-  );
-}
 
 function Movies() {
   const [state, updateState] = useState({
@@ -185,7 +163,6 @@ function Movies() {
           currentPage={state.currentPage}
           onClick={switchPage}
         />
-        <UserList />
       </div>
     </div>
   );
