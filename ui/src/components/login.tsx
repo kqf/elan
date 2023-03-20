@@ -2,7 +2,6 @@ import axios from "axios";
 import _ from "lodash";
 import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 type FormValues = {
   username: string;
@@ -34,38 +33,33 @@ function LoginForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await axios.get("/login", {
-        headers: {
-          Authorization: "Basic " + btoa(`${data.username}:${data.password}`),
+        auth: {
+          username: data.username,
+          password: data.password,
         },
       });
-      // @ts-ignore
+      // // @ts-ignore
       localStorage.setItem("accessToken", response.data.token);
       navigate("/", { replace: true });
       window.location.reload();
     } catch (ex) {
-      if (!axios.isAxiosError(ex)) {
-        console.log("Unknown exception occurred");
-        console.log(ex);
-        return;
-      }
-      if (ex.response && ex.response.status === 401) {
-        console.log("Error ~~~>");
-      }
-      if (ex.response) {
-        console.log(ex.response);
-        toast.error("Somethign went wrong, can't upate the server");
-      }
+      setError(
+        "root",
+        { type: "focus", message: "Wrong username or password" },
+        { shouldFocus: true }
+      );
     }
   });
 
   return (
-    <div>
+    <div className="container">
       <h1>Sign In</h1>
       <form onSubmit={onSubmit}>
         <LoginField
@@ -84,6 +78,12 @@ function LoginForm() {
             required: "Password is required",
           })}
         />
+
+        {errors.root && (
+          <div className="alert alert-danger">
+            {errors.root.message as string}
+          </div>
+        )}
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
