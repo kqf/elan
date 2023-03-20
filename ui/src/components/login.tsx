@@ -37,17 +37,19 @@ function LoginForm() {
   } = useForm<FormValues>({ mode: "onChange" });
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    const response = await axios.get("/login", {
-      headers: {
-        Authorization: "Basic " + btoa(`${data.username}:${data.password}`),
-      },
-    });
-    console.log(response.data);
-    // @ts-ignore
-    localStorage.setItem("accessToken", response.data.token);
-    navigate("/", { replace: true });
-    window.location.reload();
+    try {
+      const response = await axios.get("/login", {
+        headers: {
+          Authorization: "Basic " + btoa(`${data.username}:${data.password}`),
+        },
+      });
+      // @ts-ignore
+      localStorage.setItem("accessToken", response.data.token);
+      navigate("/", { replace: true });
+      window.location.reload();
+    } catch (error) {
+      console.log("Error occurred");
+    }
   });
 
   return (
