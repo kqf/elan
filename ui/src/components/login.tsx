@@ -33,25 +33,33 @@ function LoginForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    const response = await axios.get("/login", {
-      headers: {
-        Authorization: "Basic " + btoa(`${data.username}:${data.password}`),
-      },
-    });
-    console.log(response.data);
-    // @ts-ignore
-    localStorage.setItem("accessToken", response.data.token);
-    navigate("/", { replace: true });
-    window.location.reload();
+    try {
+      const response = await axios.get("/login", {
+        auth: {
+          username: data.username,
+          password: data.password,
+        },
+      });
+      // // @ts-ignore
+      localStorage.setItem("accessToken", response.data.token);
+      navigate("/", { replace: true });
+      window.location.reload();
+    } catch (ex) {
+      setError(
+        "root",
+        { type: "focus", message: "Wrong username or password" },
+        { shouldFocus: true }
+      );
+    }
   });
 
   return (
-    <div>
+    <div className="container">
       <h1>Sign In</h1>
       <form onSubmit={onSubmit}>
         <LoginField
@@ -70,6 +78,12 @@ function LoginForm() {
             required: "Password is required",
           })}
         />
+
+        {errors.root && (
+          <div className="alert alert-danger">
+            {errors.root.message as string}
+          </div>
+        )}
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
