@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-from app.models import Genre, Movie
+from app.models import Genre, Lesson, Movie, User
 
 _movies = [
     {
@@ -85,3 +85,18 @@ def create_movies(db: SQLAlchemy) -> None:
     movies = [Movie(**to_movie(movie)) for movie in _movies]
     db.session.add_all(movies)
     db.session.commit()
+
+
+def create_lessons(db: SQLAlchemy) -> None:
+    names = [
+        "Lesson 1",
+        "Lesson 2",
+        "Lesson 3",
+    ]
+    lessons = [Lesson(title=name) for name in names]
+    db.sessions.add_all(lessons)
+    db.commit()
+
+    for i, user in enumerate(User.query.all()):
+        user.lessons.extend(lessons[:i])
+        db.commit()

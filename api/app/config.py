@@ -5,7 +5,7 @@ from flask import Blueprint, Flask  # isort: skip
 from flask_session import Session  # isort: skip
 from flask_cors import CORS
 
-from app.fake import create_movies
+from app.fake import create_lessons, create_movies
 
 from app import db, ma  # isort: skip
 from app.models import User, register_user  # isort: skip
@@ -63,6 +63,7 @@ def main():
         for name in ["bob", "jack", "peter"]:
             if User.query.filter_by(username=name).first() is None:
                 register_user(db, name, name, f"{name}@example.com")
+        create_lessons(db)
     return app
 
 
