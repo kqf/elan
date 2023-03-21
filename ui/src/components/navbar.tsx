@@ -44,9 +44,6 @@ function NavBar(props: { user?: User }) {
           <NavLink className="nav-item nav-link" to="/blog">
             Blog
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/auth">
-            Auth
-          </NavLink>
           {props.user && (
             <NavLink className="nav-item nav-link" to="/users">
               Users
