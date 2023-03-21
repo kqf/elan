@@ -17,7 +17,7 @@ class LessonSchema(ma.SQLAlchemyAutoSchema):
         model = Lesson
 
     id = ma.auto_field(required=True, load_only=True)
-    user_id = ma.auto_field(required=False, load_only=True)
+    # user_id = ma.auto_field(required=False, load_only=True)
 
 
 class PairSchema(ma.SQLAlchemyAutoSchema):

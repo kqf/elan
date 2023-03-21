@@ -78,6 +78,6 @@ def test_creates_a_lesson(client, headers):
 
     # Check it does have an effect
     user = users.User.query.get(1)
-    lessons = list(user.lessons.all())
+    lessons = list(user.lessons)
     assert len(lessons) == 1
     assert lessons[0].title == "lesson 1"

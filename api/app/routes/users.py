@@ -73,7 +73,7 @@ def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
     user = User.query.get_or_404(id)
     data: dict[str, str | list[dict[str, str]]] | Any = request.json
     # First create the container
-    lesson = Lesson(user=user, title=data["title"])
+    lesson = Lesson(title=data["title"])
     db.session.add(lesson)
     db.session.commit()
 
@@ -84,6 +84,8 @@ def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
         db.session.add(pair)
         db.session.commit()
 
+    user.lessons.append(lesson)
+    db.session.commit()
     return (
         {},
         201,
