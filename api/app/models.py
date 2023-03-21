@@ -83,6 +83,20 @@ class Token(db.Model):
         )
 
 
+class UserLesson(db.Model):
+    __tablename__ = "user_lessons"
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("users.id"),
+        primary_key=True,
+    )
+    lesson_id = db.Column(
+        db.Integer,
+        db.ForeignKey("lessons.id"),
+        primary_key=True,
+    )
+
+
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -90,16 +104,27 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(64))
     tokens = db.relationship("Token", back_populates="user", lazy="noload")
-    lessons = db.relationship("Lesson", backref="user", lazy="dynamic")
+    lessons = db.relationship(
+        "Lesson",
+        secondary="user_lessons",
+        back_populates="users",
+    )
 
 
 class Lesson(db.Model):
     __tablename__ = "lessons"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)
+    users = db.relationship(
+        "User",
+        secondary="user_lessons",
+        back_populates="lessons",
+    )
     pairs = db.relationship(
-        "Pair", backref="Lesson", lazy="dynamic", cascade="all, delete-orphan"
+        "Pair",
+        backref="Lesson",
+        lazy="dynamic",
+        cascade="all, delete-orphan",
     )
 
 
