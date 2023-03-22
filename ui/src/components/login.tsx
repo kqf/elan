@@ -35,6 +35,7 @@ function LoginForm() {
     handleSubmit,
     setError,
     formState: { errors },
+    clearErrors,
   } = useForm<FormValues>({ mode: "onChange" });
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data) => {
@@ -68,6 +69,9 @@ function LoginForm() {
           error={errors["username"]}
           inputs={register("username", {
             required: "Username is required",
+            onChange: (e) => {
+              clearErrors();
+            },
           })}
         />
         <LoginField
@@ -76,6 +80,9 @@ function LoginForm() {
           error={errors["password"]}
           inputs={register("password", {
             required: "Password is required",
+            onChange: (e) => {
+              clearErrors();
+            },
           })}
         />
 
