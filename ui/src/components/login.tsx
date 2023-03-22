@@ -85,10 +85,7 @@ function LoginForm() {
           </div>
         )}
 
-        <button
-          disabled={!_.isEmpty(errors) && errors.root === undefined}
-          className="btn btn-primary"
-        >
+        <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
       </form>
