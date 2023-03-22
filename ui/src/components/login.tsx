@@ -52,8 +52,8 @@ function LoginForm() {
     } catch (ex) {
       setError(
         "root",
-        { type: "focus", message: "Wrong username or password" },
-        { shouldFocus: true }
+        { type: "focus", message: "Wrong username or password" }
+        // { shouldFocus: true }
       );
     }
   });
@@ -85,7 +85,10 @@ function LoginForm() {
           </div>
         )}
 
-        <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
+        <button
+          disabled={!_.isEmpty(errors) && errors.root === undefined}
+          className="btn btn-primary"
+        >
           Submit
         </button>
       </form>
