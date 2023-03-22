@@ -45,13 +45,15 @@ function NavBar(props: { user?: User }) {
             Blog
           </NavLink>
           {props.user && (
-            <NavLink className="nav-item nav-link" to="/users">
-              Users
-            </NavLink>
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/users">
+                Users
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/lessons">
+                Lessons
+              </NavLink>
+            </React.Fragment>
           )}
-          <NavLink className="nav-item nav-link" to="/lessons">
-            Lessons
-          </NavLink>
         </div>
       </div>
       <div className="navbar-nav">
