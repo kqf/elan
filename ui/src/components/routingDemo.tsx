@@ -207,7 +207,7 @@ function SinglePageApp() {
             <Route path="/movies/new" element={protect(<NewMovie />)} />
             <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
             <Route path="/users" element={protect(<UserList />)} />
-            <Route path="/lessons" element={<Lessons />} />
+            <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
