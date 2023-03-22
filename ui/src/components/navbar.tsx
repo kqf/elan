@@ -49,6 +49,9 @@ function NavBar(props: { user?: User }) {
               Users
             </NavLink>
           )}
+          <NavLink className="nav-item nav-link" to="/lessons">
+            Lessons
+          </NavLink>
         </div>
       </div>
       <div className="navbar-nav">

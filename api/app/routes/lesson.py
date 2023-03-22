@@ -15,7 +15,7 @@ pairs_schema = PairSchema(many=True)
 
 @lessons.route("/lessons/", methods=["GET"])
 @response(lessons_schema)
-def lessons_(id) -> Lesson:
+def lessons_() -> Lesson:
     return Lesson.query.all()
 
 
