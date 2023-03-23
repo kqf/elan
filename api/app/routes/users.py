@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-from typing import Any
-
 from apifairy import authenticate, response
 from flask import Blueprint, request, url_for
 
 from app import db, token_auth
-from app.models import Lesson, Pair, User, edit_user, register_user
+from app.models import User, edit_user, register_user
 from app.routes.exception import requires_fields
 from app.schemes import UserSchema
 
@@ -64,34 +62,3 @@ def users_lessons(id: int) -> dict[str, list[str]]:
             for lesson in user.lessons.all()
         ]
     }
-
-
-@users.route("/users/<int:id>/lessons/", methods=["POST"])
-@authenticate(token_auth)
-@requires_fields("pairs", "title")
-def user_build_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
-    user = User.query.get_or_404(id)
-    data: dict[str, str | list[dict[str, str]]] | Any = request.json
-    # First create the container
-    lesson = Lesson(title=data["title"])
-    db.session.add(lesson)
-    db.session.commit()
-
-    pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
-    # Then create the content
-    for pdata in pairs:
-        pair = Pair(lesson_id=lesson.id, **pdata)
-        db.session.add(pair)
-        db.session.commit()
-
-    user.lessons.append(lesson)
-    db.session.commit()
-    return (
-        {},
-        201,
-        {
-            "Location": url_for(
-                "lessons.lesson", id=lesson.id, follow_redirects=True
-            )
-        },
-    )
