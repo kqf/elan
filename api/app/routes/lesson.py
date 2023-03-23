@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from apifairy import authenticate, response
-from flask import Blueprint, Response
+from flask import Blueprint, Response, abort
 
 from app import token_auth
 from app.models import Lesson
@@ -26,6 +26,9 @@ def lessons_() -> Lesson:
 @authenticate(token_auth)
 @response(lesson_schema)
 def lesson(id) -> Lesson:
+    user = token_auth.current_user()
+    if id < 0 or id >= len(user.lessons):
+        abort(404)
     return Lesson.query.get_or_404(id)
 
 
