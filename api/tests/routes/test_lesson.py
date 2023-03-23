@@ -40,9 +40,3 @@ def test_retrieves_a_lesson(client, example, headers):
     response = client.get("/lessons/1", headers=headers, follow_redirects=True)
     assert response.status_code == 200
     assert response.json == {"title": "lesson 1"}
-
-
-@pytest.mark.skip
-def test_retrieves_lesson_data(client, example, example_data, headers):
-    response = client.get("/lessons/1/data", headers, follow_redirects=True)
-    assert response.json == example_data
