@@ -5,10 +5,9 @@ from typing import Any
 from apifairy import authenticate, response
 from flask import Blueprint, abort, request
 
-from api.app.models import Pair
-from api.app.routes.exception import requires_fields
 from app import db, token_auth
-from app.models import Lesson
+from app.models import Lesson, Pair
+from app.routes.exception import requires_fields
 from app.schemes import LessonSchema
 
 lessons = Blueprint("lessons", __name__)
