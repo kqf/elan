@@ -37,7 +37,7 @@ def lesson(id) -> Lesson:
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @requires_fields("pairs", "title")
-def create_lesson(id: int) -> tuple[dict, int, dict[str, str]]:
+def create_lesson() -> tuple[dict, int, dict[str, str]]:
     user = token_auth.current_user()
     data: dict[str, str | list[dict[str, str]]] | Any = request.json
     # First create the container
