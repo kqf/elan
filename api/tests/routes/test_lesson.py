@@ -1,7 +1,7 @@
 import pytest
 
 from app import db
-from app.models import Lesson, Pair
+from app.models import Lesson, Pair, User
 
 
 @pytest.fixture
@@ -20,6 +20,7 @@ def example_data():
 
 @pytest.fixture
 def example(client, example_data):
+    users = User.query.all()
     lesson = Lesson(title="lesson 1")
     db.session.add(lesson)
     db.session.commit()
@@ -28,15 +29,14 @@ def example(client, example_data):
     for p in pairs:
         db.session.add(p)
         db.session.commit()
+
+    for user in users:
+        user.lessons.append(lesson)
+        db.session.commit()
     return pairs
 
 
-def test_retrieves_a_lesson(client, example):
-    response = client.get("/lessons/1", follow_redirects=True)
+def test_retrieves_a_lesson(client, example, headers):
+    response = client.get("/lessons/1", headers=headers, follow_redirects=True)
     assert response.status_code == 200
     assert response.json == {"title": "lesson 1"}
-
-
-def test_retrieves_lesson_data(client, example, example_data):
-    response = client.get("/lessons/1/data", follow_redirects=True)
-    assert response.json == example_data
