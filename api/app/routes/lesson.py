@@ -27,9 +27,9 @@ def lessons_() -> Lesson:
 @response(lesson_schema)
 def lesson(id) -> Lesson:
     user = token_auth.current_user()
-    if id < 0 or id >= len(user.lessons):
+    if id < 1 or id > len(user.lessons):
         abort(404)
-    return Lesson.query.get_or_404(id)
+    return user.lessons[id - 1]
 
 
 @lessons.route("/lessons/<int:id>/data", methods=["GET"])
