@@ -48,8 +48,9 @@ def create_lesson() -> tuple[dict, int, dict[str, str]]:
     pairs: list[dict[str, str]] = data["pairs"]  # type: ignore
     # Then create the content
     for pdata in pairs:
-        pair = Pair(lesson_id=lesson.id, **pdata)
+        pair = Pair(**pdata)
         db.session.add(pair)
+        lesson.pairs.append(pair)
         db.session.commit()
 
     user.lessons.append(lesson)
