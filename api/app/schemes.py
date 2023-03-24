@@ -25,7 +25,7 @@ class PairSchema(ma.SQLAlchemyAutoSchema):
         model = Pair
 
     id = ma.auto_field(required=True, load_only=True)
-    lesson_id = ma.auto_field(required=True, load_only=True)
+    # lesson_id = ma.auto_field(required=True, load_only=True)
 
 
 class TokenSchema(ma.SQLAlchemyAutoSchema):
