@@ -97,6 +97,20 @@ class UserLesson(db.Model):
     )
 
 
+class LessonPair(db.Model):
+    __tablename__ = "lesson_pairs"
+    lesson_id = db.Column(
+        db.Integer,
+        db.ForeignKey("lessons.id"),
+        primary_key=True,
+    )
+    pair_id = db.Column(
+        db.Integer,
+        db.ForeignKey("pairs.id"),
+        primary_key=True,
+    )
+
+
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -122,9 +136,8 @@ class Lesson(db.Model):
     )
     pairs = db.relationship(
         "Pair",
-        backref="Lesson",
-        lazy="dynamic",
-        cascade="all, delete-orphan",
+        secondary="lesson_pairs",
+        back_populates="lessons",
     )
 
 
@@ -133,8 +146,11 @@ class Pair(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     iffield = db.Column(db.String(), index=True)
     offield = db.Column(db.String(), index=True)
-    lesson_id = db.Column(db.Integer, db.ForeignKey("lessons.id"), index=True)
-    # __table_args__ = (db.UniqueConstraint("iffield", "offield"),)
+    lessons = db.relationship(
+        "Lesson",
+        secondary="lesson_pairs",
+        back_populates="pairs",
+    )
 
 
 class Genre(db.Model):
