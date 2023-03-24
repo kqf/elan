@@ -25,9 +25,10 @@ def example(client, example_data):
     db.session.add(lesson)
     db.session.commit()
 
-    pairs = [Pair(lesson_id=lesson.id, **p) for p in example_data]
+    pairs = [Pair(**p) for p in example_data]
     for p in pairs:
         db.session.add(p)
+        lesson.pairs.append(p)
         db.session.commit()
 
     for user in users:
