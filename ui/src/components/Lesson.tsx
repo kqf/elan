@@ -9,6 +9,11 @@ type LessonParams = {
 
 export default function Lesson(props?: LessonParams) {
   const params = useParams<LessonParams>();
+
+  var lesson = params?.id;
+  if (lesson === undefined) {
+    lesson = props?.id;
+  }
   const navigate = useNavigate();
   const [state, updateState] = useState([] as Array<any>);
   useEffect(() => {
@@ -22,7 +27,7 @@ export default function Lesson(props?: LessonParams) {
       }
 
       const lessons = (
-        await axios.get(`/lessons/${props.id}`, { headers: header })
+        await axios.get(`/lessons/${lesson}`, { headers: header })
       ).data;
       console.log("fetched ~", lessons);
       updateState(lessons);
