@@ -1,6 +1,8 @@
+import itertools
+
 from flask_sqlalchemy import SQLAlchemy
 
-from app.models import Genre, Lesson, Movie, User
+from app.models import Genre, Lesson, Movie, Pair, User
 
 _movies = [
     {
@@ -99,4 +101,9 @@ def create_lessons(db: SQLAlchemy) -> None:
 
     for i, user in enumerate(User.query.all()):
         user.lessons.extend(lessons[:i])
+        db.session.commit()
+
+    for (i, lesson), j in itertools.product(enumerate(lessons), range(10)):
+        pair = Pair(iffield=f"Pair {j} from leson{i}", offield="test")
+        lesson.pairs.append(pair)
         db.session.commit()
