@@ -99,8 +99,8 @@ def create_lessons(db: SQLAlchemy) -> None:
     db.session.add_all(lessons)
     db.session.commit()
 
-    for i, user in enumerate(User.query.all()):
-        user.lessons.extend(lessons[:i])
+    for user in User.query.all():
+        user.lessons.extend(lessons)
         db.session.commit()
 
     for (i, lesson), j in itertools.product(enumerate(lessons), range(10)):
