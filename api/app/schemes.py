@@ -12,20 +12,23 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     password_hash = ma.auto_field(required=True, load_only=True)
 
 
+class PairSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Pair
+
+    id = ma.auto_field(required=True, load_only=True)
+    iffield = ma.auto_field(required=True)
+    offield = ma.auto_field(required=True)
+    # lesson_id = ma.auto_field(required=True, load_only=True)
+
+
 class LessonSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Lesson
 
     id = ma.auto_field(required=True, load_only=True)
     # user_id = ma.auto_field(required=False, load_only=True)
-
-
-class PairSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Pair
-
-    id = ma.auto_field(required=True, load_only=True)
-    # lesson_id = ma.auto_field(required=True, load_only=True)
+    lessons = ma.Nested(PairSchema, many=True, required=True)
 
 
 class TokenSchema(ma.SQLAlchemyAutoSchema):
