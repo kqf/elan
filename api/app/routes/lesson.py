@@ -51,6 +51,7 @@ def create_lesson() -> tuple[dict, int, dict[str, str]]:
         pair = Pair(**pdata)
         db.session.add(pair)
         lesson.pairs.append(pair)
+
         db.session.commit()
 
     user.lessons.append(lesson)
