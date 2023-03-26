@@ -14,7 +14,7 @@ import {
 import tokenHeader from "../auth";
 import { User } from "../schemes";
 import Blog from "./blog";
-import Lesson from "./Lesson";
+import LessonPage from "./Lesson";
 import Lessons from "./Lessons";
 import LoginForm from "./login";
 import AppMenu from "./menuComponent";
@@ -208,7 +208,7 @@ function SinglePageApp() {
             <Route path="/movies/new" element={protect(<NewMovie />)} />
             <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
             <Route path="/users" element={protect(<UserList />)} />
-            <Route path="/lesson/:id" element={protect(<Lesson />)} />
+            <Route path="/lesson/:id" element={protect(<LessonPage />)} />
             <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />

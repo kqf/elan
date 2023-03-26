@@ -7,7 +7,7 @@ type LessonParams = {
   id?: string;
 };
 
-export default function Lesson(props: LessonParams) {
+export default function LessonPage(props: LessonParams) {
   const params = useParams<LessonParams>();
 
   var lesson = params?.id;
