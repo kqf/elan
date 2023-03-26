@@ -40,7 +40,11 @@ def example(client, example_data):
 def test_retrieves_a_lesson(client, example, headers, example_data):
     response = client.get("/lessons/1", headers=headers, follow_redirects=True)
     assert response.status_code == 200
-    assert response.json == {"pairs": example_data, "title": "lesson 1"}
+    assert response.json == {
+        "id": 1,
+        "pairs": example_data,
+        "title": "lesson 1",
+    }
 
 
 def test_creates_a_lesson(client, headers):
