@@ -26,7 +26,7 @@ class LessonSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Lesson
 
-    id = ma.auto_field(required=True, load_only=True)
+    id = ma.auto_field(required=True)
     title = ma.auto_field(required=True)
     # user_id = ma.auto_field(required=False, load_only=True)
     pairs = ma.Nested(PairSchema, many=True, required=True)
