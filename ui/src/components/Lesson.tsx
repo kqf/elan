@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import tokenHeader from "../auth";
 
 type LessonParams = {
-  id: string;
+  id?: string;
 };
 
-export default function Lesson(props?: LessonParams) {
+export default function Lesson(props: LessonParams) {
   const params = useParams<LessonParams>();
 
   var lesson = params?.id;
