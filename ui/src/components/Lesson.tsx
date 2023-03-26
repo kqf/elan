@@ -7,6 +7,18 @@ type LessonParams = {
   id?: string;
 };
 
+interface Pair {
+  id: number;
+  iffield: string;
+  offield: string;
+}
+
+interface Lesson {
+  id: number;
+  title: string;
+  pairs: Array<Pair>;
+}
+
 export default function LessonPage(props: LessonParams) {
   const params = useParams<LessonParams>();
 
@@ -15,7 +27,7 @@ export default function LessonPage(props: LessonParams) {
     lesson = props?.id;
   }
   const navigate = useNavigate();
-  const [state, updateState] = useState([] as Array<any>);
+  const [state, updateState] = useState({} as Lesson);
   useEffect(() => {
     // Fetch the data
     (async () => {
@@ -26,6 +38,7 @@ export default function LessonPage(props: LessonParams) {
         return;
       }
 
+      console.log("Calling ->", `/lessons/${lesson}`);
       const lessons = (
         await axios.get(`/lessons/${lesson}`, { headers: header })
       ).data;
@@ -38,10 +51,10 @@ export default function LessonPage(props: LessonParams) {
   return (
     <div>
       <ul className="list-group">
-        {state.map((u) => {
+        {state.pairs?.map((u) => {
           return (
             <li key={u.id} className="list-group-item">
-              {u.title}
+              {u.iffield}
             </li>
           );
         })}
