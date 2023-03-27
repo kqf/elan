@@ -51,23 +51,25 @@ export default function LessonPage(props: LessonParams) {
   const sortBy = (name: string) => () => {};
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th onClick={sortBy("iffield")}>Source</th>
-          <th onClick={sortBy("offield")}>Target</th>
-        </tr>
-      </thead>
-      <tbody>
-        {state?.pairs.map((pair) => {
-          return (
-            <tr key={pair.id}>
-              <td>{pair.iffield}</td>
-              <td>{pair.offield}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    state.pairs && (
+      <table className="table">
+        <thead>
+          <tr>
+            <th onClick={sortBy("iffield")}>Source</th>
+            <th onClick={sortBy("offield")}>Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          {state?.pairs.map((pair) => {
+            return (
+              <tr key={pair.id}>
+                <td>{pair.iffield}</td>
+                <td>{pair.offield}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    )
   );
 }
