@@ -48,17 +48,26 @@ export default function LessonPage(props: LessonParams) {
     // eslint-disable-next-line
   }, []);
 
+  const sortBy = (name: string) => () => {};
+
   return (
-    <div>
-      <ul className="list-group">
-        {state.pairs?.map((u) => {
+    <table className="table">
+      <thead>
+        <tr>
+          <th onClick={sortBy("iffield")}>Source</th>
+          <th onClick={sortBy("offield")}>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        {state?.pairs.map((pair) => {
           return (
-            <li key={u.id} className="list-group-item">
-              {u.iffield}
-            </li>
+            <tr key={pair.id}>
+              <td>{pair.iffield}</td>
+              <td>{pair.offield}</td>
+            </tr>
           );
         })}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   );
 }
