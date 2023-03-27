@@ -52,24 +52,27 @@ export default function LessonPage(props: LessonParams) {
 
   return (
     state.pairs && (
-      <table className="table">
-        <thead>
-          <tr>
-            <th onClick={sortBy("iffield")}>Source</th>
-            <th onClick={sortBy("offield")}>Target</th>
-          </tr>
-        </thead>
-        <tbody>
-          {state?.pairs.map((pair) => {
-            return (
-              <tr key={pair.id}>
-                <td>{pair.iffield}</td>
-                <td>{pair.offield}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="row">
+        <h2>{state.title}</h2>
+        <table className="table">
+          <thead>
+            <tr>
+              <th onClick={sortBy("iffield")}>Source</th>
+              <th onClick={sortBy("offield")}>Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            {state.pairs.map((pair) => {
+              return (
+                <tr key={pair.id}>
+                  <td>{pair.iffield}</td>
+                  <td>{pair.offield}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     )
   );
 }
