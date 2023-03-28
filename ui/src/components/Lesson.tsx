@@ -62,7 +62,24 @@ export default function LessonPage(props: { lesson?: Lesson }) {
     // eslint-disable-next-line
   }, []);
 
-  const sortBy = (name: string) => () => {};
+  const sortBy = (name: string) => () => {
+    let order = "asc" as "asc" | "desc";
+    if (state.sort.column === name && state.sort.order === "asc") {
+      order = "desc";
+    }
+    if (state.sort.column === name && state.sort.order === "desc") {
+      order = "asc";
+    }
+
+    updateState({
+      ...state,
+      sort: {
+        column: name,
+        order: order,
+      },
+    });
+  };
+
   const sorted: Array<Pair> = _.orderBy(
     state.lesson?.pairs,
     state.sort.column,
