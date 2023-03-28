@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import tokenHeader from "../auth";
@@ -62,6 +63,11 @@ export default function LessonPage(props: { lesson?: Lesson }) {
   }, []);
 
   const sortBy = (name: string) => () => {};
+  const sorted: Array<Pair> = _.orderBy(
+    state.lesson?.pairs,
+    state.sort.column,
+    state.sort.order
+  );
 
   return (
     <React.Fragment>
@@ -76,7 +82,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
               </tr>
             </thead>
             <tbody>
-              {state.lesson.pairs.map((pair) => {
+              {sorted.map((pair) => {
                 return (
                   <tr key={pair.id}>
                     <td>{pair.iffield}</td>
