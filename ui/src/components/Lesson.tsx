@@ -23,12 +23,12 @@ interface LessonPageState {
   lesson?: Lesson;
 }
 
-export default function LessonPage(props: LessonParams) {
+export default function LessonPage(props: { lesson?: Lesson }) {
   const params = useParams<LessonParams>();
 
   var lessonId = params?.id;
   if (lessonId === undefined) {
-    lessonId = props?.id;
+    lessonId = props.lesson?.id.toString();
   }
   const navigate = useNavigate();
   const [state, updateState] = useState<LessonPageState>({});
