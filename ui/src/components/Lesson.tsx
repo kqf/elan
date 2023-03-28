@@ -21,6 +21,10 @@ interface Lesson {
 
 interface LessonPageState {
   lesson?: Lesson;
+  sort: {
+    column: string;
+    order: "asc" | "desc";
+  };
 }
 
 export default function LessonPage(props: { lesson?: Lesson }) {
@@ -31,7 +35,12 @@ export default function LessonPage(props: { lesson?: Lesson }) {
     lessonId = props.lesson?.id.toString();
   }
   const navigate = useNavigate();
-  const [state, updateState] = useState<LessonPageState>({});
+  const [state, updateState] = useState<LessonPageState>({
+    sort: {
+      column: "iffield",
+      order: "asc",
+    },
+  });
   useEffect(() => {
     // Fetch the data
     (async () => {
