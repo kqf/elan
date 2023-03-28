@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import tokenHeader from "../auth";
 
@@ -19,15 +19,19 @@ interface Lesson {
   pairs: Array<Pair>;
 }
 
+interface LessonPageState {
+  lesson?: Lesson;
+}
+
 export default function LessonPage(props: LessonParams) {
   const params = useParams<LessonParams>();
 
-  var lesson = params?.id;
-  if (lesson === undefined) {
-    lesson = props?.id;
+  var lessonId = params?.id;
+  if (lessonId === undefined) {
+    lessonId = props?.id;
   }
   const navigate = useNavigate();
-  const [state, updateState] = useState({} as Lesson);
+  const [state, updateState] = useState<LessonPageState>({});
   useEffect(() => {
     // Fetch the data
     (async () => {
@@ -38,12 +42,12 @@ export default function LessonPage(props: LessonParams) {
         return;
       }
 
-      console.log("Calling ->", `/lessons/${lesson}`);
-      const lessons = (
-        await axios.get(`/lessons/${lesson}`, { headers: header })
+      console.log("Calling ->", `/lessons/${lessonId}`);
+      const lesson = (
+        await axios.get(`/lessons/${lessonId}`, { headers: header })
       ).data;
-      console.log("fetched ~", lessons);
-      updateState(lessons);
+      console.log("fetched ~", lesson);
+      updateState({ ...state, lesson: lesson });
     })();
     // eslint-disable-next-line
   }, []);
@@ -51,28 +55,30 @@ export default function LessonPage(props: LessonParams) {
   const sortBy = (name: string) => () => {};
 
   return (
-    state.pairs && (
-      <div className="row">
-        <h2>{state.title}</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th onClick={sortBy("iffield")}>Source</th>
-              <th onClick={sortBy("offield")}>Target</th>
-            </tr>
-          </thead>
-          <tbody>
-            {state.pairs.map((pair) => {
-              return (
-                <tr key={pair.id}>
-                  <td>{pair.iffield}</td>
-                  <td>{pair.offield}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    )
+    <React.Fragment>
+      {state.lesson && (
+        <div className="row">
+          <h2>{state.lesson.title}</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th onClick={sortBy("iffield")}>Source</th>
+                <th onClick={sortBy("offield")}>Target</th>
+              </tr>
+            </thead>
+            <tbody>
+              {state.lesson.pairs.map((pair) => {
+                return (
+                  <tr key={pair.id}>
+                    <td>{pair.iffield}</td>
+                    <td>{pair.offield}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </React.Fragment>
   );
 }
