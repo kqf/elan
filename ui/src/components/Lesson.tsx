@@ -79,7 +79,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
       },
     });
   };
-
+  
   const sorted: Array<Pair> = _.orderBy(
     state.lesson?.pairs,
     state.sort.column,
