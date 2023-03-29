@@ -99,8 +99,12 @@ export default function LessonPage(props: { lesson?: Lesson }) {
           <table className="table">
             <thead>
               <tr>
-                <th onClick={sortBy("iffield")}>Source</th>
-                <th onClick={sortBy("offield")}>Target</th>
+                <th onClick={sortBy("iffield")}>
+                  Source {renderSortIcon("iffield")}
+                </th>
+                <th onClick={sortBy("offield")}>
+                  Target {renderSortIcon("offield")}
+                </th>
               </tr>
             </thead>
             <tbody>
