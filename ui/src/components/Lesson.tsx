@@ -79,7 +79,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
       },
     });
   };
-  const renderSortIcon = (field: String) => {
+  const renderSortIcon = (field: "iffield" | "offield") => {
     if (field !== state.sort.column) return null;
     if (state.sort.order === "asc") return <i className="fa fa-sort-asc" />;
     return <i className="fa fa-sort-desc" />;
