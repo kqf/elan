@@ -29,9 +29,6 @@ function NavBar(props: { user?: User }) {
 
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/">
-            Home
-          </NavLink>
           <NavLink className="nav-item nav-link" to="/calc">
             Calculator
           </NavLink>
