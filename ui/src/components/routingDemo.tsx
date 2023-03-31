@@ -17,7 +17,6 @@ import Blog from "./blog";
 import LessonPage from "./Lesson";
 import Lessons from "./Lessons";
 import LoginForm from "./login";
-import AppMenu from "./menuComponent";
 import Movies from "./movies";
 import NavBar from "./navbar";
 import NewMovie from "./newMovie";
@@ -213,7 +212,6 @@ function SinglePageApp() {
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/posts/:year?/:id?" element={<Posts />} />
-            <Route path="/calc" element={<AppMenu />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
