@@ -1,8 +1,7 @@
-import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import tokenHeader from "../auth";
+import http from "../auth";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
 import { Genre, Movie } from "../schemes";
@@ -24,10 +23,18 @@ function Movies() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const header = tokenHeader();
-      if (header === null) return;
-      const genres = (await axios.get("/genres/", { headers: header })).data;
-      const movies = (await axios.get("/movies/", { headers: header })).data;
+      const genres = (
+        await http.get("/genres/", () => {
+          navigate("/login");
+        })
+      )?.data;
+
+      const movies = (
+        await http.get("/movies/", () => {
+          navigate("/login");
+        })
+      )?.data;
+
       console.log(genres);
       console.log(movies);
       updateState((s) => {

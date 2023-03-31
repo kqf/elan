@@ -24,7 +24,7 @@ axios.interceptors.response.use(null, (error) => {
 async function get(url: string, redirect?: () => void) {
   const header = tokenHeader();
   if (header === null) {
-    redirect && redirect();
+    // redirect && redirect();
     return;
   }
 
