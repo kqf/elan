@@ -11,10 +11,9 @@ axios.interceptors.response.use(null, (error) => {
     error.resonse.status < 500;
 
   if (!expectedError) {
-    console.log("Logging the error", error);
     toast.error("Unexpected error");
   }
-}
+});
 
 export default function Lessons() {
   const navigate = useNavigate();
@@ -28,15 +27,9 @@ export default function Lessons() {
         return;
       }
 
-      try {
-        const lessons = (await axios.get("/lessons/", { headers: header }))
-          .data;
-        console.log("fetched ~", lessons);
-        updateState(lessons);
-      } catch (error) {
-        toast.error("Ooops, something went wrong.");
-        return;
-      }
+      const lessons = (await axios.get("/lessins/", { headers: header })).data;
+      console.log("fetched ~", lessons);
+      updateState(lessons);
     })();
     // eslint-disable-next-line
   }, []);
