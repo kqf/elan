@@ -1,4 +1,3 @@
-import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import {
@@ -11,7 +10,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import tokenHeader from "../auth";
+import http from "../auth";
 import { User } from "../schemes";
 import Blog from "./blog";
 import LessonPage from "./Lesson";
@@ -171,17 +170,20 @@ function Protect({
 
 function SinglePageApp() {
   const [state, setState] = useState<{ user?: User }>({});
+  const navigate = useNavigate();
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const header = tokenHeader();
-      if (header === null) return;
-      const response = await axios.get("/users/me/", { headers: header });
+      const user = (
+        await http.get("/user/me", () => {
+          navigate("/login");
+        })
+      )?.data;
       setState((s) => {
         return {
           ...state,
           // @ts-ignore
-          user: response.data,
+          user: user,
         };
       });
     })();

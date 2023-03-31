@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import tokenHeader from "../auth";
+import http from "../auth";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -21,15 +21,10 @@ export default function Lessons() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const header = tokenHeader();
-      if (header === null) {
+      const response = await http.get("/lessons/", () => {
         navigate("/login");
-        return;
-      }
-
-      const lessons = (await axios.get("/lessins/", { headers: header })).data;
-      console.log("fetched ~", lessons);
-      updateState(lessons);
+      });
+      updateState(response?.data);
     })();
     // eslint-disable-next-line
   }, []);

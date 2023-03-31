@@ -1,8 +1,7 @@
-import axios from "axios";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import tokenHeader from "../auth";
+import http from "../auth";
 
 type LessonParams = {
   id?: string;
@@ -45,19 +44,11 @@ export default function LessonPage(props: { lesson?: Lesson }) {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const header = tokenHeader();
-
-      if (header === null) {
+      const response = await http.get(`/lessons/${lessonId}`, () => {
         navigate("/login");
-        return;
-      }
+      });
 
-      console.log("Calling ->", `/lessons/${lessonId}`);
-      const lesson = (
-        await axios.get(`/lessons/${lessonId}`, { headers: header })
-      ).data;
-      console.log("fetched ~", lesson);
-      updateState({ ...state, lesson: lesson });
+      updateState({ ...state, lesson: response?.data });
     })();
     // eslint-disable-next-line
   }, []);
@@ -80,7 +71,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
     });
   };
 
-const renderSortIcon = (field: "iffield" | "offield") => {
+  const renderSortIcon = (field: "iffield" | "offield") => {
     if (field !== state.sort.column) return null;
     if (state.sort.order === "asc") return <i className="fa fa-sort-asc" />;
     return <i className="fa fa-sort-desc" />;
