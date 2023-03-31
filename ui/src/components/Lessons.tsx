@@ -1,7 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import tokenHeader from "../auth";
+
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.resonse.status < 500;
+
+  if (!expectedError) {
+    toast.error("Unexpected error");
+  }
+});
 
 export default function Lessons() {
   const navigate = useNavigate();
@@ -15,7 +27,7 @@ export default function Lessons() {
         return;
       }
 
-      const lessons = (await axios.get("/lessons/", { headers: header })).data;
+      const lessons = (await axios.get("/lessins/", { headers: header })).data;
       console.log("fetched ~", lessons);
       updateState(lessons);
     })();
@@ -24,6 +36,7 @@ export default function Lessons() {
 
   return (
     <div>
+      <ToastContainer />
       <ul className="list-group">
         {state.map((u) => {
           return (
