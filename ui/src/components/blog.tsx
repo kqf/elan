@@ -19,7 +19,7 @@ axios.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     console.log("Logging the error", error);
-    toast.error("Unsexpected error");
+    toast.error("Unexpected error");
   }
 });
 
