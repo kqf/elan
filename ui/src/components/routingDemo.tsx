@@ -170,15 +170,10 @@ function Protect({
 
 function SinglePageApp() {
   const [state, setState] = useState<{ user?: User }>({});
-  const navigate = useNavigate();
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const user = (
-        await http.get("/user/me", () => {
-          navigate("/login");
-        })
-      )?.data;
+      const user = (await http.get("/user/me", () => {}))?.data;
       setState((s) => {
         return {
           ...state,
