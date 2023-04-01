@@ -102,7 +102,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
             <tbody>
               {sorted.map((pair) => {
                 return (
-                  <tr key={pair.id}>
+                  <tr key={pair.iffield}>
                     <td>{pair.iffield}</td>
                     <td>{pair.offield}</td>
                   </tr>
