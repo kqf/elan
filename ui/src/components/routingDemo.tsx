@@ -173,7 +173,7 @@ function SinglePageApp() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const user = (await http.get("/users/me"))?.data;
+      const user = (await http.get("/users/me/"))?.data;
       setState((s) => {
         return {
           ...state,
