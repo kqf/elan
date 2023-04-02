@@ -10,6 +10,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import http from "../auth";
 import { User } from "../schemes";
 import Blog from "./blog";
@@ -196,6 +197,7 @@ function SinglePageApp() {
   return (
     <BrowserRouter>
       <NavBar user={state?.user} />
+      <ToastContainer />
       <div>
         <div className="content">
           <Routes>
