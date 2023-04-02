@@ -5,7 +5,6 @@ from flask import Blueprint, request, url_for
 
 from app import db, ma, token_auth
 from app.models import User, edit_user, register_user
-from app.routes.exception import requires_fields
 from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
@@ -52,7 +51,7 @@ def create() -> tuple[dict, int, dict[str, str]]:
 
 @users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
-@requires_fields("username", "password", "email")
+@body(RegisterSchema)
 def update(id: int) -> dict:
     edit_user(db, User.query.get_or_404(id), **request.json)  # type: ignore
     return {}
