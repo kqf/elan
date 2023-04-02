@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from apifairy import authenticate, response
+from apifairy import authenticate, body, response
 from flask import Blueprint, request, url_for
 
-from app import db, token_auth
+from app import db, ma, token_auth
 from app.models import User, edit_user, register_user
-from app.routes.exception import requires_fields
 from app.schemes import UserSchema
 
 users = Blueprint("users", __name__)
@@ -33,8 +32,14 @@ def user(id: int) -> User:
     return User.query.get_or_404(id)
 
 
+class RegisterSchema(ma.Schema):
+    username = ma.Str(required=True)
+    password = ma.Str(required=True)
+    email = ma.Str(required=True)
+
+
 @users.route("/users/", methods=["POST"])
-@requires_fields("username", "password", "email")
+@body(RegisterSchema)
 def create() -> tuple[dict, int, dict[str, str]]:
     user = register_user(db, **request.json)  # type: ignore
     return (
@@ -46,7 +51,7 @@ def create() -> tuple[dict, int, dict[str, str]]:
 
 @users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
-@requires_fields("username", "password", "email")
+@body(RegisterSchema)
 def update(id: int) -> dict:
     edit_user(db, User.query.get_or_404(id), **request.json)  # type: ignore
     return {}
