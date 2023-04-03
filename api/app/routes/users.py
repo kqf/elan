@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import Any
+
 from apifairy import authenticate, body, response
-from flask import Blueprint, request, url_for
+from flask import Blueprint, url_for
 
 from app import db, ma, token_auth
 from app.models import User, edit_user, register_user
@@ -40,8 +42,8 @@ class RegisterSchema(ma.Schema):
 
 @users.route("/users/", methods=["POST"])
 @body(RegisterSchema)
-def create() -> tuple[dict, int, dict[str, str]]:
-    user = register_user(db, **request.json)  # type: ignore
+def create(payload: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
+    user = register_user(db, **payload)
     return (
         {},
         201,
@@ -52,8 +54,8 @@ def create() -> tuple[dict, int, dict[str, str]]:
 @users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
 @body(RegisterSchema)
-def update(id: int) -> dict:
-    edit_user(db, User.query.get_or_404(id), **request.json)  # type: ignore
+def update(id: int, payload: dict[str, Any]) -> dict:
+    edit_user(db, User.query.get_or_404(id), **payload)
     return {}
 
 
