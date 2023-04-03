@@ -2,22 +2,25 @@ from __future__ import annotations
 
 from typing import Any
 
-from apifairy import response
-from flask import Blueprint, request, url_for
+from apifairy import body, response
+from flask import Blueprint, url_for
 
-from app import db
+from app import db, ma
 from app.models import Pair
-from app.routes.exception import requires_fields
 from app.schemes import PairSchema
 
 pairs = Blueprint("pairs", __name__)
 pair_schema = PairSchema()
 
 
+class PairInputs(ma.Schema):
+    iffield = ma.Str(required=True)
+    offield = ma.Str(required=True)
+
+
 @pairs.route("/pairs/", methods=["POST"])
-@requires_fields("iffield", "offield")
-def create_pair() -> tuple[dict, int, dict[str, str]]:
-    data: dict[str, str] | Any = request.json
+@body(PairInputs)
+def create_pair(data: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
     pair = Pair(iffield=data["iffield"], offield=data["offield"])
     db.session.add(pair)
     db.session.commit()
@@ -29,11 +32,9 @@ def create_pair() -> tuple[dict, int, dict[str, str]]:
 
 
 @pairs.route("/pairs/<int:id>", methods=["PUT"])
-@requires_fields("iffield", "offield")
-def update_pair(id: int) -> dict:
+@body(PairInputs)
+def update_pair(id: int, data: dict[str, Any]) -> dict:
     pair: Pair = Pair.query.get_or_404(id)
-
-    data: dict[str, str] | Any = request.json
     pair.iffield = data["iffield"]
     pair.offield = data["offield"]
 
