@@ -20,7 +20,7 @@ class PairFields(ma.Schema):
 
 
 @pairs.route("/pairs/", methods=["POST"])
-@body(pair_schema)
+@body(PairFields)
 def create_pair(data) -> tuple[dict, int, dict[str, str]]:
     pair = Pair(iffield=data["iffield"], offield=data["offield"])
     db.session.add(pair)
