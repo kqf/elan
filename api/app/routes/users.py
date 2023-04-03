@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from apifairy import authenticate, body, response
 from flask import Blueprint, request, url_for
 
@@ -40,8 +42,8 @@ class RegisterSchema(ma.Schema):
 
 @users.route("/users/", methods=["POST"])
 @body(RegisterSchema)
-def create() -> tuple[dict, int, dict[str, str]]:
-    user = register_user(db, **request.json)  # type: ignore
+def create(payload: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
+    user = register_user(db, **payload)
     return (
         {},
         201,
