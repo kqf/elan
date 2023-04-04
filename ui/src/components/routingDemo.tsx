@@ -154,7 +154,6 @@ function SinglePageApp() {
             <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
-            <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
