@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { useEffect, useState } from "react";
 import {
   BrowserRouter,
@@ -8,7 +7,6 @@ import {
   Routes,
   useNavigate,
   useParams,
-  useSearchParams,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import http from "../auth";
@@ -51,78 +49,6 @@ function Products(props: any) {
         <Route path="old" element={<Product state={"old"} />} />
         <Route path="new" element={<Product state={"new"} />} />
       </Routes>
-    </div>
-  );
-}
-
-type PostsParams = {
-  id: string;
-  year: string;
-};
-
-function PostDetails(props: { id: String }) {
-  const navigate = useNavigate();
-  const handleSave = () => {
-    navigate("/posts", { replace: true });
-  };
-  return (
-    <div>
-      <h1>This is a post {props.id}</h1>
-      <button onClick={handleSave}>Add to read</button>
-    </div>
-  );
-}
-
-function RawPosts(props: any) {
-  const params = useParams<PostsParams>();
-  if (params.id !== undefined) return <PostDetails id={params.id} />;
-  if (params.year !== undefined)
-    return (
-      <div>
-        <ul>
-          {_.range(+params.year).map((i) => {
-            return (
-              <li key={i}>
-                <Link to={`/posts/${params.year}/${i}`}> Posts {i} </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-
-  return (
-    <div>
-      <ul>
-        {_.range(10).map((year) => {
-          return (
-            <li key={year}>
-              <Link to={`/posts/${year}`}> Year {year} </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-function Posts(props: any) {
-  const [searchParams] = useSearchParams();
-  const author = searchParams.get("author");
-  const language = searchParams.get("language");
-  let explanation = null;
-  if (author !== null) {
-    explanation = (
-      <div>
-        The author {author} {language !== null ? `written in ${language}` : ""}
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <RawPosts />
-      {explanation}
     </div>
   );
 }
@@ -210,7 +136,6 @@ function SinglePageApp() {
             <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/products/*" element={<Products />} />
-            <Route path="/posts/:year?/:id?" element={<Posts />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
