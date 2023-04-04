@@ -32,9 +32,6 @@ function NavBar(props: { user?: User }) {
           <NavLink className="nav-item nav-link" to="/products">
             Products
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/posts">
-            Posts
-          </NavLink>
           <NavLink className="nav-item nav-link" to="/blog">
             Blog
           </NavLink>
