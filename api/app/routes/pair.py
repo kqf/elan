@@ -33,7 +33,7 @@ def create_pair(data: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
 
 @pairs.route("/pairs/<int:id>", methods=["PUT"])
 @body(PairInputs)
-def update_pair(id: int, data: dict[str, Any]) -> dict:
+def update_pair(data: dict[str, Any], id: int) -> dict:
     pair: Pair = Pair.query.get_or_404(id)
     pair.iffield = data["iffield"]
     pair.offield = data["offield"]

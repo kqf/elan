@@ -54,7 +54,7 @@ def create(payload: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
 @users.route("/users/<int:id>", methods=["PUT"])
 @authenticate(token_auth)
 @body(RegisterSchema)
-def update(id: int, payload: dict[str, Any]) -> dict:
+def update(payload: dict[str, Any], id: int) -> dict:
     edit_user(db, User.query.get_or_404(id), **payload)
     return {}
 
