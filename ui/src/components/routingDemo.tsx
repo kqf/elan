@@ -53,24 +53,6 @@ function Products(props: any) {
   );
 }
 
-type PostsParams = {
-  id: string;
-  year: string;
-};
-
-function PostDetails(props: { id: String }) {
-  const navigate = useNavigate();
-  const handleSave = () => {
-    navigate("/posts", { replace: true });
-  };
-  return (
-    <div>
-      <h1>This is a post {props.id}</h1>
-      <button onClick={handleSave}>Add to read</button>
-    </div>
-  );
-}
-
 function NotFound() {
   return (
     <div>
