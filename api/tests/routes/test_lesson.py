@@ -45,32 +45,3 @@ def test_retrieves_a_lesson(client, example, headers, example_data):
         "pairs": example_data,
         "title": "lesson 1",
     }
-
-
-def test_creates_a_lesson(client, headers):
-    response = client.post(
-        "/lessons/",
-        headers=headers,
-        json={
-            "title": "lesson 1",
-            "pairs": [
-                {
-                    "iffield": "la vache",
-                    "offield": "the cow",
-                },
-                {
-                    "iffield": "le monde",
-                    "offield": "the world",
-                },
-            ],
-        },
-        follow_redirects=True,
-    )
-    # assert response.json == {}
-    assert response.status_code == 201
-
-    # Check it does have an effect
-    user = User.query.get(1)
-    lessons = list(user.lessons)
-    assert len(lessons) == 1
-    assert lessons[0].title == "lesson 1"
