@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import Any
+
 from apifairy import authenticate, body, response
-from flask import Blueprint, request, url_for
+from flask import Blueprint, url_for
 
 from app import db, ma, token_auth
 from app.models import Genre, Movie
@@ -34,9 +36,9 @@ class InputMovieSchema(ma.Schema):
 @authenticate(token_auth)
 @response(movies_schema)
 @body(InputMovieSchema)
-def add_movie() -> tuple[dict, int, dict[str, str]]:
-    genre = Genre.query.get_or_404(request.json["genre_id"])  # type: ignore
-    specs = dict(request.json)  # type: ignore
+def add_movie(data: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
+    genre = Genre.query.get_or_404(data["genre_id"])
+    specs = dict(data)
     specs["genre_id"] = genre.id
     movie = Movie(**specs)
     db.session.add(movie)
