@@ -30,6 +30,11 @@ def movies_() -> Movie:
 
 class InputMovieSchema(ma.Schema):
     title = ma.Str(required=True)
+    genre_id = ma.Number(required=True)
+    numberInStock = ma.Number(required=True)
+    dailyRentalRate = ma.Number(required=True)
+    publishDate = ma.Str(required=True)
+    liked = ma.Boolean(required=True)
 
 
 @movies.route("/movies/", methods=["POST"])
