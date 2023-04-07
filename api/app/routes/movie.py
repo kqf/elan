@@ -33,7 +33,7 @@ class InputMovieSchema(ma.Schema):
     genre_id = ma.Number(required=True)
     numberInStock = ma.Number(required=True)
     dailyRentalRate = ma.Number(required=True)
-    publishDate = ma.Number(required=True)
+    publishDate = ma.Str(required=True)
     liked = ma.Boolean(required=True)
 
 
