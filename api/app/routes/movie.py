@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from apifairy import authenticate, response
-from flask import Blueprint, request, url_for
+from typing import Any
 
-from app import db, token_auth
+from apifairy import authenticate, body, response
+from flask import Blueprint, url_for
+
+from app import db, ma, token_auth
 from app.models import Genre, Movie
-from app.routes.exception import requires_fields
 from app.schemes import MovieSchema
 
 movies = Blueprint("movies", __name__)
@@ -27,20 +28,17 @@ def movies_() -> Movie:
     return Movie.query.all()
 
 
+class InputMovieSchema(ma.Schema):
+    title = ma.Str(required=True)
+
+
 @movies.route("/movies/", methods=["POST"])
 @authenticate(token_auth)
 @response(movies_schema)
-@requires_fields(
-    "title",
-    "genre_id",
-    "numberInStock",
-    "dailyRentalRate",
-    "publishDate",
-    "liked",
-)
-def add_movie() -> tuple[dict, int, dict[str, str]]:
-    genre = Genre.query.get_or_404(request.json["genre_id"])  # type: ignore
-    specs = dict(request.json)  # type: ignore
+@body(InputMovieSchema)
+def add_movie(data: dict[str, Any]) -> tuple[dict, int, dict[str, str]]:
+    genre = Genre.query.get_or_404(data["genre_id"])
+    specs = dict(data)
     specs["genre_id"] = genre.id
     movie = Movie(**specs)
     db.session.add(movie)
