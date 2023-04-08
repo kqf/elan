@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   BrowserRouter,
-  Link,
   Navigate,
   Route,
   Routes,
@@ -11,47 +10,16 @@ import {
 import { ToastContainer } from "react-toastify";
 import http from "../auth";
 import { User } from "../schemes";
-import Blog from "./blog";
 import LessonPage from "./Lesson";
 import Lessons from "./Lessons";
+import Blog from "./blog";
 import LoginForm from "./login";
 import Movies from "./movies";
 import NavBar from "./navbar";
 import NewMovie from "./newMovie";
 import RegisterForm from "./register";
+import Products from "./sideBarDemo";
 import UserList from "./users";
-
-function SideBar() {
-  return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/products/old">Old</Link>
-        </li>
-        <li>
-          <Link to="/products/new">New</Link>
-        </li>
-      </ul>
-    </div>
-  );
-}
-
-function Product(props: { state: string }) {
-  return <h2>This is {props.state} section</h2>;
-}
-
-function Products(props: any) {
-  return (
-    <div>
-      <h1>These are the product options</h1>
-      <SideBar />
-      <Routes>
-        <Route path="old" element={<Product state={"old"} />} />
-        <Route path="new" element={<Product state={"new"} />} />
-      </Routes>
-    </div>
-  );
-}
 
 function NotFound() {
   return (
