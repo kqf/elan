@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import http from "../auth";
+import MovieComponent from "../movieComponent";
 import { User } from "../schemes";
 import LessonPage from "./Lesson";
 import Lessons from "./Lessons";
