@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import http from "../auth";
-import MovieComponent from "../movieComponent";
-import { User } from "../schemes";
-import LessonPage from "./Lesson";
-import Lessons from "./Lessons";
-import Blog from "./blog";
-import LoginForm from "./login";
-import Movies from "./movies";
-import NavBar from "./navbar";
-import NewMovie from "./newMovie";
-import RegisterForm from "./register";
-import UserList from "./users";
+import http from "./auth";
+import LessonPage from "./components/Lesson";
+import Lessons from "./components/Lessons";
+import Blog from "./components/blog";
+import LoginForm from "./components/login";
+import Movies from "./components/movies";
+import NavBar from "./components/navbar";
+import NewMovie from "./components/newMovie";
+import RegisterForm from "./components/register";
+import UserList from "./components/users";
+import MovieComponent from "./movieComponent";
+import { User } from "./schemes";
 
 function NotFound() {
   return (
