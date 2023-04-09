@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import http from "../auth";
+import MovieComponent from "../movieComponent";
 import { User } from "../schemes";
 import LessonPage from "./Lesson";
 import Lessons from "./Lessons";
@@ -24,26 +18,6 @@ function NotFound() {
   return (
     <div>
       <h1>Not found</h1>
-    </div>
-  );
-}
-
-type MovieParams = {
-  id: string;
-};
-
-function MovieComponent() {
-  const params = useParams<MovieParams>();
-  const navigate = useNavigate();
-  return (
-    <div>
-      <h1>This is movie {params.id}</h1>
-      <button
-        className="btn btn-primary"
-        onClick={() => navigate("/", { replace: true })}
-      >
-        Save
-      </button>
     </div>
   );
 }
