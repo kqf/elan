@@ -18,7 +18,6 @@ import Movies from "./movies";
 import NavBar from "./navbar";
 import NewMovie from "./newMovie";
 import RegisterForm from "./register";
-import Products from "./sideBarDemo";
 import UserList from "./users";
 
 function NotFound() {
@@ -103,7 +102,6 @@ function SinglePageApp() {
             <Route path="/lesson/:id" element={protect(<LessonPage />)} />
             <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/blog/" element={<Blog />} />
-            <Route path="/products/*" element={<Products />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
