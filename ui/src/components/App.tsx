@@ -36,7 +36,7 @@ function Protect({
   }
 }
 
-function SinglePageApp() {
+function App() {
   const [state, setState] = useState<{ user?: User }>({});
   useEffect(() => {
     // Fetch the data
@@ -87,4 +87,4 @@ function SinglePageApp() {
   );
 }
 
-export default SinglePageApp;
+export default App;
