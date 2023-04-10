@@ -11,6 +11,7 @@ import Blog from "./components/blog";
 import LoginForm from "./components/login";
 import Movies from "./components/movies";
 import NavBar from "./components/navbar";
+import NewLesson from "./components/newLesson";
 import NewMovie from "./components/newMovie";
 import RegisterForm from "./components/register";
 import UserList from "./components/users";
@@ -78,6 +79,7 @@ function App() {
             <Route path="/users" element={protect(<UserList />)} />
             <Route path="/lesson/:id" element={protect(<LessonPage />)} />
             <Route path="/lessons" element={protect(<Lessons />)} />
+            <Route path="/lessons/new" element={protect(<NewLesson />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
