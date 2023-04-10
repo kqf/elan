@@ -1,6 +1,9 @@
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "./App.css";
 import http from "./auth";
 import LessonPage from "./components/Lesson";
 import Lessons from "./components/Lessons";
