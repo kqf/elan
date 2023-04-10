@@ -61,7 +61,7 @@ function NewLesson() {
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await axios.post("/movies/", {
+      await axios.post("/lessons/", {
         title: data.name,
         genre_id: data.genre,
         numberInStock: data.stock,
@@ -83,7 +83,7 @@ function NewLesson() {
 
   return (
     <div>
-      <h1>Add a new movie</h1>
+      <h1>Add a new Lesson</h1>
       <form onSubmit={onSubmit}>
         <ErrorField
           label={"Movie Name"}
