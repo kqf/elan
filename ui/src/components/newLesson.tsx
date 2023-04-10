@@ -61,7 +61,7 @@ function NewLesson() {
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await axios.post("/movies/", {
+      await axios.post("/lessons/", {
         title: data.name,
         genre_id: data.genre,
         numberInStock: data.stock,
