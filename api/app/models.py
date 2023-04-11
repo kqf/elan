@@ -129,6 +129,7 @@ class Lesson(db.Model):
     __tablename__ = "lessons"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
+    level = db.Column(db.String, nullable=True)
     users = db.relationship(
         "User",
         secondary="user_lessons",
