@@ -130,6 +130,7 @@ class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     level = db.Column(db.String, nullable=True)
+    topic = db.Column(db.String, nullable=True)
     users = db.relationship(
         "User",
         secondary="user_lessons",
