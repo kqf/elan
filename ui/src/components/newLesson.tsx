@@ -8,8 +8,8 @@ import { Genre } from "../schemes";
 
 type FormValues = {
   name: string;
-  genre: string;
-  stock: number;
+  level: string;
+  topic: string;
   rate: number;
 };
 
@@ -63,7 +63,7 @@ function NewLesson() {
     try {
       await axios.post("/lessons/", {
         title: data.name,
-        genre_id: data.genre,
+        genre_id: data.level,
         numberInStock: data.stock,
         dailyRentalRate: data.rate,
         publishDate: "unknown",
@@ -95,8 +95,8 @@ function NewLesson() {
         />
 
         <div className="form-group">
-          <label htmlFor="genre">Genre</label>
-          <select className="form-control" id="genre" {...register("genre")}>
+          <label htmlFor="level">Genre</label>
+          <select className="form-control" id="level" {...register("level")}>
             <option value=" " />
             {state.genres.map((option) => (
               <option key={option.id} value={option.id}>
