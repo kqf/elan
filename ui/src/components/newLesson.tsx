@@ -63,10 +63,9 @@ function NewLesson() {
     try {
       await axios.post("/lessons/", {
         title: data.name,
-        genre_id: data.level,
-        numberInStock: data.stock,
-        dailyRentalRate: data.rate,
-        publishDate: "unknown",
+        level: data.level,
+        topic: data.topic,
+        source: "unknown",
         liked: false,
       });
     } catch (ex) {
