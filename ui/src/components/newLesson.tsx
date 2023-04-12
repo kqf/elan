@@ -108,13 +108,9 @@ function NewLesson() {
         <ErrorField
           label={"Number in stock"}
           placeholder="1"
-          error={errors["stock"]}
-          inputs={register("stock", {
-            required: "Number in stock is required",
-            validate: (val: number) => {
-              if (val < 0 || val >= 100)
-                return "Number in stock should be between 0, 100";
-            },
+          error={errors["level"]}
+          inputs={register("level", {
+            required: "Please provide the lesson level",
           })}
         />
 
