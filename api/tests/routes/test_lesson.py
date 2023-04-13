@@ -44,4 +44,6 @@ def test_retrieves_a_lesson(client, example, headers, example_data):
         "id": 1,
         "pairs": example_data,
         "title": "lesson 1",
+        "level": None,
+        "topic": None,
     }
