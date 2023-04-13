@@ -27,7 +27,8 @@ class LessonSchema(ma.SQLAlchemyAutoSchema):
         model = Lesson
 
     id = ma.auto_field(required=True)
-    title = ma.auto_field(required=True)
+    title = ma.auto_field(required=False)
+    level = ma.auto_field(required=False)
     # user_id = ma.auto_field(required=False, load_only=True)
     pairs = ma.Nested(PairSchema, many=True, required=True)
 
