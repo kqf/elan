@@ -126,6 +126,15 @@ function NewLesson() {
           })}
         />
 
+        <ErrorField
+          label={"Rate"}
+          placeholder="1"
+          error={errors["topic"]}
+          inputs={register("topic", {
+            required: "Topic should not be empty",
+          })}
+        />
+
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
         </button>
