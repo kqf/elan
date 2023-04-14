@@ -1,16 +1,28 @@
 import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { Controller, FieldError, UseFormRegisterReturn, useFieldArray, useForm } from "react-hook-form";
+import {
+  Controller,
+  FieldError,
+  UseFormRegisterReturn,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Genre } from "../schemes";
+
+type PairEntry = {
+  firstName: string;
+  lastName: string;
+};
 
 type FormValues = {
   name: string;
   level: string;
   topic: string;
   rate: number;
+  test: Array<PairEntry>;
 };
 
 function ErrorField(props: {
@@ -44,8 +56,7 @@ function NewLesson() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    // @ts-ignore
-    name: "test"
+    name: "test",
   });
 
   const navigate = useNavigate();
@@ -142,28 +153,29 @@ function NewLesson() {
             required: "Topic should not be empty",
           })}
         />
-            <form onSubmit={handleSubmit(data => console.log(data))}>
-
-      <div>      <ul>
-        {fields.map((item, index) => (
-          <li key={item.id}>
-            <input {...register(`test.${index}.firstName`)} />
-            <Controller
-              render={({ field }) => <input {...field} />}
-              name={`test.${index}.lastName`}
-              control={control}
-            />
-            <button type="button" onClick={() => remove(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        onClick={() => append({ firstName: "bill", lastName: "luo" })}
-      >
-        append
-      </button>
-</div>
+        <div>
+          <ul>
+            {fields.map((item, index) => (
+              <li key={item.id}>
+                <input {...register(`test.${index}.firstName`)} />
+                <Controller
+                  render={({ field }) => <input {...field} />}
+                  name={`test.${index}.lastName`}
+                  control={control}
+                />
+                <button type="button" onClick={() => remove(index)}>
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            onClick={() => append({ firstName: "bill", lastName: "luo" })}
+          >
+            append
+          </button>
+        </div>
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
