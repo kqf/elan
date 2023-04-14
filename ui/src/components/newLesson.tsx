@@ -6,11 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Genre } from "../schemes";
 
+type PairEntry = {
+  firstName: string;
+  lastName: string;
+};
+
 type FormValues = {
   name: string;
   level: string;
   topic: string;
   rate: number;
+  test: Array<PairEntry>;
 };
 
 function ErrorField(props: {
@@ -44,7 +50,6 @@ function NewLesson() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    // @ts-ignore
     name: "test"
   });
 
@@ -144,7 +149,8 @@ function NewLesson() {
         />
             <form onSubmit={handleSubmit(data => console.log(data))}>
 
-      <div>      <ul>
+      <div>
+        <ul>
         {fields.map((item, index) => (
           <li key={item.id}>
             <input {...register(`test.${index}.firstName`)} />
