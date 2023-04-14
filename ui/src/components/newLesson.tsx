@@ -1,7 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { FieldError, UseFormRegisterReturn, useFieldArray, useForm } from "react-hook-form";
+import { Controller, FieldError, UseFormRegisterReturn, useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Genre } from "../schemes";
@@ -44,8 +44,10 @@ function NewLesson() {
 
   const { fields, append, remove } = useFieldArray({
     control,
+    // @ts-ignore
     name: "test"
   });
+
   const navigate = useNavigate();
   const [state, updateState] = useState({
     genres: [] as Array<Genre>,
@@ -142,7 +144,7 @@ function NewLesson() {
         />
             <form onSubmit={handleSubmit(data => console.log(data))}>
 
-      <ul>
+      <div>      <ul>
         {fields.map((item, index) => (
           <li key={item.id}>
             <input {...register(`test.${index}.firstName`)} />
@@ -161,6 +163,7 @@ function NewLesson() {
       >
         append
       </button>
+</div>
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
           Submit
