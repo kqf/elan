@@ -154,7 +154,7 @@ function NewLesson() {
           })}
         />
         <div>
-          <ul>
+          <ul className="list-group">
             {fields.map((item, index) => (
               <li key={item.id}>
                 <input {...register(`test.${index}.firstName`)} />
