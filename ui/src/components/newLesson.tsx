@@ -171,6 +171,7 @@ function NewLesson() {
           </ul>
           <button
             type="button"
+            className="btn btn-primary"
             onClick={() => append({ firstName: "bill", lastName: "luo" })}
           >
             append
