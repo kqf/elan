@@ -54,7 +54,7 @@ function NewLesson() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, insert } = useFieldArray({
     control,
     name: "test",
   });
@@ -166,16 +166,18 @@ function NewLesson() {
                 <button type="button" onClick={() => remove(index)}>
                   Delete
                 </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() =>
+                    insert(index, { firstName: "bill", lastName: "luo" })
+                  }
+                >
+                  Insert
+                </button>
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => append({ firstName: "bill", lastName: "luo" })}
-          >
-            append
-          </button>
         </div>
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
