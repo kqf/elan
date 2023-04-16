@@ -163,17 +163,17 @@ function NewLesson() {
                   name={`test.${index}.lastName`}
                   control={control}
                 />
-                <button type="button" onClick={() => remove(index)}>
-                  Delete
-                </button>
                 <button
                   type="button"
                   className="btn btn-primary"
                   onClick={() =>
-                    insert(index, { firstName: "bill", lastName: "luo" })
+                    insert(index, { firstName: "Source", lastName: "Target" })
                   }
                 >
                   Insert
+                </button>
+                <button type="button" onClick={() => remove(index)}>
+                  Delete
                 </button>
               </li>
             ))}
