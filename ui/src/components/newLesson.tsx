@@ -134,7 +134,7 @@ function NewLesson() {
         />
 
         <ErrorField
-          label={"Rate"}
+          label={"Topic"}
           placeholder="1"
           error={errors["topic"]}
           inputs={register("topic", {
