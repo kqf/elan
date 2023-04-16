@@ -136,18 +136,6 @@ function NewLesson() {
         <ErrorField
           label={"Rate"}
           placeholder="1"
-          error={errors["rate"]}
-          inputs={register("rate", {
-            required: "Number in stock is required",
-            validate: (val: number) => {
-              if (val < 0 || val >= 5) return "Rate should be between 0, 5";
-            },
-          })}
-        />
-
-        <ErrorField
-          label={"Rate"}
-          placeholder="1"
           error={errors["topic"]}
           inputs={register("topic", {
             required: "Topic should not be empty",
