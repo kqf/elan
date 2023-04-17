@@ -1,6 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Controller,
   FieldError,
@@ -63,21 +63,6 @@ function NewLesson() {
   const [state, updateState] = useState({
     genres: [] as Array<Genre>,
   });
-  useEffect(() => {
-    // Fetch the data
-    (async () => {
-      const genres = (await axios.get("/genres/")).data;
-      console.log(genres);
-      updateState((s) => {
-        return {
-          ...state,
-          genres: genres,
-        };
-      });
-    })();
-    // eslint-disable-next-line
-  }, []);
-
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
       await axios.post("/lessons/", {
