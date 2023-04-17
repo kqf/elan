@@ -125,8 +125,8 @@ function NewLesson() {
         </div>
 
         <ErrorField
-          label={"Number in stock"}
-          placeholder="1"
+          label={"Level"}
+          placeholder="B1"
           error={errors["level"]}
           inputs={register("level", {
             required: "Please provide the lesson level",
