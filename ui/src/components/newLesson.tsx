@@ -104,8 +104,8 @@ function NewLesson() {
       <h1>Add a new Lesson</h1>
       <form onSubmit={onSubmit}>
         <ErrorField
-          label={"Movie Name"}
-          placeholder="The shining"
+          label={"Title"}
+          placeholder="Living in a village"
           error={errors["name"]}
           inputs={register("name", {
             required: "Movie name is required",
