@@ -127,9 +127,9 @@ function NewLesson() {
           })}
         />
         <div>
-          <ul>
+          <ul className="list-group">
             {fields.map((item, index) => (
-              <li key={item.id}>
+              <li key={item.id} className="item">
                 <input {...register(`test.${index}.firstName`)} />
                 <Controller
                   render={({ field }) => <input {...field} />}
