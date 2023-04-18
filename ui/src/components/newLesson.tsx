@@ -151,6 +151,12 @@ function NewLesson() {
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            onClick={() => append({ firstName: "bill", lastName: "luo" })}
+          >
+            append
+          </button>
         </div>
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
