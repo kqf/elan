@@ -127,37 +127,55 @@ function NewLesson() {
           })}
         />
         <div>
-          <ul className="list-group">
-            {fields.map((item, index) => (
-              <li key={item.id} className="item">
-                <input {...register(`test.${index}.firstName`)} />
-                <Controller
-                  render={({ field }) => <input {...field} />}
-                  name={`test.${index}.lastName`}
-                  control={control}
-                />
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() =>
-                    insert(index, { firstName: "Source", lastName: "Target" })
-                  }
-                >
-                  Insert
-                </button>
-                <button type="button" onClick={() => remove(index)}>
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => append({ firstName: "bill", lastName: "luo" })}
-          >
-            Add a new Pair
-          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>Source </th>
+                <th>Target</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {fields.map((item, index) => {
+                return (
+                  <tr key={item.id}>
+                    <td>
+                      <input {...register(`test.${index}.firstName`)} />
+                    </td>
+                    <td>
+                      <Controller
+                        render={({ field }) => <input {...field} />}
+                        name={`test.${index}.lastName`}
+                        control={control}
+                      />
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => remove(index)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr>
+                <td colSpan={3} className="text-align center" align="center">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() =>
+                      append({ firstName: "bill", lastName: "luo" })
+                    }
+                  >
+                    Add a new Pair
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
