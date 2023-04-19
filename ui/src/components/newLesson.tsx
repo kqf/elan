@@ -161,6 +161,19 @@ function NewLesson() {
                   </tr>
                 );
               })}
+              <tr>
+                <td colSpan={3} className="text-align center" align="center">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() =>
+                      append({ firstName: "bill", lastName: "luo" })
+                    }
+                  >
+                    Add a new Pair
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
