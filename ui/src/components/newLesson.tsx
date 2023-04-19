@@ -141,11 +141,16 @@ function NewLesson() {
                 return (
                   <tr key={item.id}>
                     <td>
-                      <input {...register(`test.${index}.firstName`)} />
+                      <input
+                        className="form-control"
+                        {...register(`test.${index}.firstName`)}
+                      />
                     </td>
                     <td>
                       <Controller
-                        render={({ field }) => <input {...field} />}
+                        render={({ field }) => (
+                          <input className="form-control" {...field} />
+                        )}
                         name={`test.${index}.lastName`}
                         control={control}
                       />
