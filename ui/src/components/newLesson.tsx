@@ -127,7 +127,7 @@ function NewLesson() {
           })}
         />
         <div>
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 <th>Source </th>
@@ -167,7 +167,7 @@ function NewLesson() {
                     type="button"
                     className="btn btn-primary"
                     onClick={() =>
-                      append({ firstName: "bill", lastName: "luo" })
+                      append({ firstName: "der Vogel", lastName: "the Bird" })
                     }
                   >
                     Add a new Pair
