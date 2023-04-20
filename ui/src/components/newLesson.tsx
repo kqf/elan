@@ -127,7 +127,7 @@ function NewLesson() {
           })}
         />
         <div>
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 <th>Source </th>
@@ -141,11 +141,16 @@ function NewLesson() {
                 return (
                   <tr key={item.id}>
                     <td>
-                      <input {...register(`test.${index}.firstName`)} />
+=                      <input
+                        className="form-control"
+                        {...register(`test.${index}.firstName`)}
+                      />
                     </td>
                     <td>
                       <Controller
-                        render={({ field }) => <input {...field} />}
+                        render={({ field }) => (
+                          <input className="form-control" {...field} />
+                        )}
                         name={`test.${index}.lastName`}
                         control={control}
                       />
@@ -167,7 +172,7 @@ function NewLesson() {
                     type="button"
                     className="btn btn-primary"
                     onClick={() =>
-                      append({ firstName: "bill", lastName: "luo" })
+                      append({ firstName: "der Vogel", lastName: "the Bird" })
                     }
                   >
                     Add a new Pair
