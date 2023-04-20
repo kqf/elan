@@ -141,7 +141,7 @@ function NewLesson() {
                 return (
                   <tr key={item.id}>
                     <td>
-                      <input
+=                      <input
                         className="form-control"
                         {...register(`test.${index}.firstName`)}
                       />
