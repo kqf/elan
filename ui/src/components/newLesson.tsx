@@ -141,7 +141,7 @@ function NewLesson() {
                 return (
                   <tr key={item.id}>
                     <td>
-=                      <input
+                      <input
                         className="form-control"
                         {...register(`test.${index}.firstName`)}
                       />
@@ -154,6 +154,17 @@ function NewLesson() {
                         name={`test.${index}.lastName`}
                         control={control}
                       />
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-primary btn-sm"
+                        onClick={() =>
+                          insert(index, { firstName: "New", lastName: "Old" })
+                        }
+                      >
+                        Insert
+                      </button>
                     </td>
                     <td>
                       <button
