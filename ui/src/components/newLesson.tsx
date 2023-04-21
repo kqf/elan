@@ -149,17 +149,6 @@ function NewLesson() {
                     </td>
                     <td>
                       <button
-                        type="button"
-                        className="btn btn-primary btn-sm"
-                        onClick={() =>
-                          insert(index, { firstName: "New", lastName: "Old" })
-                        }
-                      >
-                        Insert
-                      </button>
-                    </td>
-                    <td>
-                      <button
                         className="btn btn-danger btn-sm"
                         onClick={() => remove(index)}
                       >
