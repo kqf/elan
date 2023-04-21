@@ -97,18 +97,6 @@ function NewLesson() {
           })}
         />
 
-        <div className="form-group">
-          <label htmlFor="level">Genre</label>
-          <select className="form-control" id="level" {...register("level")}>
-            <option value=" " />
-            {state.genres.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <ErrorField
           label={"Level"}
           placeholder="B1"
