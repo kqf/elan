@@ -1,6 +1,5 @@
 import axios from "axios";
 import _ from "lodash";
-import { useState } from "react";
 import {
   Controller,
   FieldError,
@@ -10,7 +9,6 @@ import {
 } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Genre } from "../schemes";
 
 type PairEntry = {
   firstName: string;
@@ -60,9 +58,6 @@ function NewLesson() {
   });
 
   const navigate = useNavigate();
-  const [state, updateState] = useState({
-    genres: [] as Array<Genre>,
-  });
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
       await axios.post("/lessons/", {
