@@ -84,15 +84,6 @@ function NewLesson() {
       <h1>Add a new Lesson</h1>
       <form onSubmit={onSubmit}>
         <ErrorField
-          label={"Title"}
-          placeholder="Living in a village"
-          error={errors["name"]}
-          inputs={register("name", {
-            required: "Movie name is required",
-          })}
-        />
-
-        <ErrorField
           label={"Level"}
           placeholder="B1"
           error={errors["level"]}
@@ -109,6 +100,15 @@ function NewLesson() {
             required: "Topic should not be empty",
           })}
         />
+        <ErrorField
+          label={"Title"}
+          placeholder="Living in a village"
+          error={errors["name"]}
+          inputs={register("name", {
+            required: "Movie name is required",
+          })}
+        />
+
         <div>
           <table className="table">
             <thead>
