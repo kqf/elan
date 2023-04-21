@@ -109,6 +109,15 @@ function NewLesson() {
             required: "Topic should not be empty",
           })}
         />
+        <ErrorField
+          label={"Title"}
+          placeholder="Living in a village"
+          error={errors["name"]}
+          inputs={register("name", {
+            required: "Movie name is required",
+          })}
+        />
+
         <div>
           <table className="table">
             <thead>
@@ -137,17 +146,6 @@ function NewLesson() {
                         name={`test.${index}.lastName`}
                         control={control}
                       />
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-sm"
-                        onClick={() =>
-                          insert(index, { firstName: "New", lastName: "Old" })
-                        }
-                      >
-                        Insert
-                      </button>
                     </td>
                     <td>
                       <button
