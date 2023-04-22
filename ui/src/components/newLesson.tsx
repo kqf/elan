@@ -16,7 +16,7 @@ type PairEntry = {
 };
 
 type FormValues = {
-  name: string;
+  title: string;
   level: string;
   topic: string;
   rate: number;
@@ -61,7 +61,7 @@ function NewLesson() {
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
       await axios.post("/lessons/", {
-        title: data.name,
+        title: data.title,
         level: data.level,
         topic: data.topic,
         source: "unknown",
@@ -103,8 +103,8 @@ function NewLesson() {
         <ErrorField
           label={"Title"}
           placeholder="Living in a village"
-          error={errors["name"]}
-          inputs={register("name", {
+          error={errors["title"]}
+          inputs={register("title", {
             required: "Movie name is required",
           })}
         />
