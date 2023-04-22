@@ -1,7 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
 import {
-  Controller,
   FieldError,
   UseFormRegisterReturn,
   useFieldArray,
@@ -79,6 +78,14 @@ function NewLesson() {
     navigate("/", { replace: true });
   });
 
+  const handleKeywordKeyPress =
+    (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        insert(index, { firstName: "Type", lastName: "Here" });
+        // append({ firstName: "der Vogel", lastName: "the Birdx" });
+      }
+    };
+
   return (
     <div>
       <h1>Add a new Lesson</h1>
@@ -130,12 +137,17 @@ function NewLesson() {
                       />
                     </td>
                     <td>
-                      <Controller
+                      {/* <Controller
                         render={({ field }) => (
                           <input className="form-control" {...field} />
-                        )}
+                        )
                         name={`test.${index}.lastName`}
                         control={control}
+                      /> */}
+                      <input
+                        className="form-control"
+                        onKeyDown={handleKeywordKeyPress(index)}
+                        {...register(`test.${index}.lastName`)}
                       />
                     </td>
                     <td>
