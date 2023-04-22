@@ -133,6 +133,7 @@ function NewLesson() {
                     <td>
                       <input
                         className="form-control"
+                        onKeyDown={handleKeywordKeyPress(index)}
                         {...register(`test.${index}.firstName`)}
                       />
                     </td>
