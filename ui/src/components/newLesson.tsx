@@ -123,7 +123,6 @@ function NewLesson() {
                 <th>Source </th>
                 <th>Target</th>
                 <th></th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -157,17 +156,6 @@ function NewLesson() {
                         onClick={() => remove(index)}
                       >
                         Delete
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-sm"
-                        onClick={() =>
-                          insert(index, { firstName: "New", lastName: "Old" })
-                        }
-                      >
-                        Insert
                       </button>
                     </td>
                   </tr>
