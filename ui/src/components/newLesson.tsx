@@ -81,8 +81,8 @@ function NewLesson() {
   const handleKeywordKeyPress =
     (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
-        insert(index, { firstName: "Type", lastName: "Here" });
-        // append({ firstName: "der Vogel", lastName: "the Birdx" });
+        e.preventDefault();
+        append({ firstName: "", lastName: "" });
       }
     };
 
