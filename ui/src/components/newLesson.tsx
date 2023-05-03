@@ -51,7 +51,7 @@ function NewLesson() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
-  const { fields, append, remove, insert } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "test",
   });
