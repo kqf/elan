@@ -137,13 +137,6 @@ function NewLesson() {
                       />
                     </td>
                     <td>
-                      {/* <Controller
-                        render={({ field }) => (
-                          <input className="form-control" {...field} />
-                        )
-                        name={`test.${index}.lastName`}
-                        control={control}
-                      /> */}
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
