@@ -32,7 +32,7 @@ export default function Lessons() {
   return (
     <div>
       <ToastContainer />
-      <div className="col">
+      <div className="col my-3">
         <button
           className="btn btn-primary"
           onClick={() => {
