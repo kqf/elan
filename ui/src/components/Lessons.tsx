@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
 
 axios.interceptors.response.use(null, (error) => {
@@ -32,6 +32,27 @@ export default function Lessons() {
   return (
     <div>
       <ToastContainer />
+      <div className="col">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            navigate("/movies/new", {
+              state: {
+                onSubmit: (movie: Movie) => {
+                  updateState({
+                    ...state,
+                    movies: [...state.movies, movie],
+                  });
+                },
+                payload: "Hello world",
+              },
+            });
+          }}
+        >
+          New Movie
+        </button>
+
+
       <ul className="list-group">
         {state.map((u) => {
           return (
