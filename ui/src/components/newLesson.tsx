@@ -51,7 +51,7 @@ function NewLesson() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
-  const { fields, append, remove, insert } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "test",
   });
@@ -137,13 +137,6 @@ function NewLesson() {
                       />
                     </td>
                     <td>
-                      {/* <Controller
-                        render={({ field }) => (
-                          <input className="form-control" {...field} />
-                        )
-                        name={`test.${index}.lastName`}
-                        control={control}
-                      /> */}
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
