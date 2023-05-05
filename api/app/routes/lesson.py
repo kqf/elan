@@ -29,3 +29,12 @@ def lesson(id) -> Lesson:
     if id < 1 or id > len(user.lessons):
         abort(404)
     return user.lessons[id - 1]
+
+
+@lessons.route("/lessons/", methods=["POST"])
+@authenticate(token_auth)
+@response(lesson_schema)
+def create() -> int:
+    user = token_auth.current_user()
+    print(user)
+    return 201
