@@ -36,7 +36,7 @@ export default function Lessons() {
         <button
           className="btn btn-primary"
           onClick={() => {
-            navigate("/movies/new");
+            navigate("/lessons/new");
           }}
         >
           New Lesson
