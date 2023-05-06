@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from apifairy import authenticate, response
+from apifairy import authenticate, body, response
 from flask import Blueprint, abort
 
-from app import token_auth
+from app import ma, token_auth
 from app.models import Lesson
 from app.schemes import LessonSchema
 
@@ -31,9 +31,15 @@ def lesson(id) -> Lesson:
     return user.lessons[id - 1]
 
 
+class AddLessonSchema(ma.Schema):
+    username = ma.Str(required=True)
+    password = ma.Str(required=True)
+    email = ma.Str(required=True)
+
+
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
-@response(lesson_schema)
+@body(AddLessonSchema)
 def create() -> int:
     user = token_auth.current_user()
     print(user)
