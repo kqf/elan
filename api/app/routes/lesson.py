@@ -38,7 +38,6 @@ class AddLessonSchema(ma.Schema):
     source = ma.Str(required=True)
 
 
-
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @body(AddLessonSchema)
