@@ -32,15 +32,16 @@ def lesson(id) -> Lesson:
 
 
 class AddLessonSchema(ma.Schema):
-    username = ma.Str(required=True)
-    password = ma.Str(required=True)
-    email = ma.Str(required=True)
+    title = ma.Str(required=True)
+    level = ma.Str(required=True)
+    topic = ma.Str(required=True)
+    source = ma.Str(required=True)
 
 
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @body(AddLessonSchema)
-def create() -> int:
+def create(payload: dict) -> int:
     user = token_auth.current_user()
     print(user)
     return 201
