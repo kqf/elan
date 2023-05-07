@@ -35,7 +35,6 @@ class AddLessonSchema(ma.Schema):
     title = ma.Str(required=True)
     level = ma.Str(required=True)
     topic = ma.Str(required=True)
-    source = ma.Str(required=True)
 
 
 @lessons.route("/lessons/", methods=["POST"])

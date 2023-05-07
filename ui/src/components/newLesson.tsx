@@ -63,7 +63,6 @@ function NewLesson() {
         title: data.title,
         level: data.level,
         topic: data.topic,
-        source: "unknown",
       });
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
