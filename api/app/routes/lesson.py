@@ -3,7 +3,7 @@ from __future__ import annotations
 from apifairy import authenticate, body, response
 from flask import Blueprint, abort
 
-from app import ma, token_auth
+from app import db, ma, token_auth
 from app.models import Lesson
 from app.schemes import LessonSchema
 
@@ -41,6 +41,6 @@ class AddLessonSchema(ma.Schema):
 @authenticate(token_auth)
 @body(AddLessonSchema)
 def create(payload: dict) -> int:
-    user = token_auth.current_user()
-    print(user)
+    db.session.add(Lesson(**payload))
+    db.session.commit()
     return 201
