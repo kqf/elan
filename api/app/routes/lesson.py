@@ -41,6 +41,11 @@ class AddLessonSchema(ma.Schema):
 @authenticate(token_auth)
 @body(AddLessonSchema)
 def create(payload: dict) -> int:
-    db.session.add(Lesson(**payload))
+    lesson = Lesson(**payload)
+    db.session.add(lesson)
     db.session.commit()
+
+    user = token_auth.current_user()
+    user.lessons.append(lesson)
+    db.commit()
     return 201
