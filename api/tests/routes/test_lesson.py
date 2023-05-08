@@ -47,3 +47,18 @@ def test_retrieves_a_lesson(client, example, headers, example_data):
         "level": None,
         "topic": None,
     }
+
+
+def test_creates_a_lesson(client, example, headers, example_data):
+    response = client.post(
+        "/lessons/",
+        headers=headers,
+        follow_redirects=True,
+        json={
+            "title": "Fake created lesson",
+            "level": "B1",
+            "topic": "Something",
+        },
+    )
+    assert response.status_code == 201
+    # assert response.json == {}
