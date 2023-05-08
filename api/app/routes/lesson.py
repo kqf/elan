@@ -40,12 +40,12 @@ class AddLessonSchema(ma.Schema):
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @body(AddLessonSchema)
-def create(payload: dict) -> int:
+def create(payload: dict) -> tuple:
     lesson = Lesson(**payload)
     db.session.add(lesson)
     db.session.commit()
 
     user = token_auth.current_user()
     user.lessons.append(lesson)
-    db.commit()
-    return 201
+    db.session.commit()
+    return {}, 201
