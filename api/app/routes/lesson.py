@@ -31,10 +31,16 @@ def lesson(id) -> Lesson:
     return user.lessons[id - 1]
 
 
+class PairSchema(ma.Schema):
+    iffield = ma.Str(required=True)
+    offield = ma.Str(required=True)
+
+
 class AddLessonSchema(ma.Schema):
     title = ma.Str(required=True)
     level = ma.Str(required=True)
     topic = ma.Str(required=True)
+    pairs = ma.fields.List(ma.fields.Nested(PairSchema))
 
 
 @lessons.route("/lessons/", methods=["POST"])
