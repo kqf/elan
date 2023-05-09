@@ -40,7 +40,7 @@ class AddLessonSchema(ma.Schema):
     title = ma.Str(required=True)
     level = ma.Str(required=True)
     topic = ma.Str(required=True)
-    pairs = ma.fields.List(ma.fields.Nested(PairSchema))
+    pairs = ma.List(ma.Nested(PairSchema))
 
 
 @lessons.route("/lessons/", methods=["POST"])
