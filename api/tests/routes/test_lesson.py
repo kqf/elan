@@ -58,6 +58,16 @@ def test_creates_a_lesson(client, example, headers, example_data):
             "title": "Fake created lesson",
             "level": "B1",
             "topic": "Something",
+            "pairs": [
+                {
+                    "iffield": "a",
+                    "offield": "z",
+                },
+                {
+                    "iffield": "b",
+                    "offield": "x",
+                },
+            ],
         },
     )
     assert response.status_code == 201
