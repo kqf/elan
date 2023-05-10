@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+
+import marshmallow_dataclass
 from apifairy import authenticate, body, response
 from flask import Blueprint, abort
 
-from app import db, ma, token_auth
+from app import db, token_auth
 from app.models import Lesson
 from app.schemes import LessonSchema
 
@@ -31,16 +34,21 @@ def lesson(id) -> Lesson:
     return user.lessons[id - 1]
 
 
-class PairSchema(ma.Schema):
-    iffield = ma.Str(required=True)
-    offield = ma.Str(required=True)
+@dataclass
+class PairPayload:
+    iffield: str
+    offield: str
 
 
-class AddLessonSchema(ma.Schema):
-    title = ma.Str(required=True)
-    level = ma.Str(required=True)
-    topic = ma.Str(required=True)
-    pairs = ma.List(ma.Nested(PairSchema))
+@dataclass
+class LessonPayload:
+    title: str
+    level: str
+    topic: str
+    pairs: list[PairPayload] = field(default_factory=list)
+
+
+AddLessonSchema = marshmallow_dataclass.class_schema(LessonPayload)()
 
 
 @lessons.route("/lessons/", methods=["POST"])
