@@ -54,8 +54,12 @@ AddLessonSchema = marshmallow_dataclass.class_schema(LessonPayload)()
 @lessons.route("/lessons/", methods=["POST"])
 @authenticate(token_auth)
 @body(AddLessonSchema)
-def create(payload: dict) -> tuple:
-    lesson = Lesson(**payload)
+def create(payload: LessonPayload) -> tuple:
+    lesson = Lesson(
+        title=payload.title,
+        level=payload.level,
+        topic=payload.topic,
+    )
     db.session.add(lesson)
     db.session.commit()
 
