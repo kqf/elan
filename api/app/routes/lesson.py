@@ -61,8 +61,6 @@ def create(payload: LessonPayload) -> tuple:
         level=payload.level,
         topic=payload.topic,
     )
-    db.session.add(lesson)
-    db.session.commit()
 
     user = token_auth.current_user()
     user.lessons.append(lesson)
