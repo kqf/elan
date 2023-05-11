@@ -6,6 +6,7 @@ import marshmallow_dataclass
 from apifairy import authenticate, body, response
 from flask import Blueprint, abort
 
+from api.app.models import Pair
 from app import db, token_auth
 from app.models import Lesson
 from app.schemes import LessonSchema
@@ -66,4 +67,8 @@ def create(payload: LessonPayload) -> tuple:
     user = token_auth.current_user()
     user.lessons.append(lesson)
     db.session.commit()
+    for pdata in payload.pairs:
+        pair = Pair(iffield=pdata.iffield, offield=pdata.offield)
+        lesson.pairs.append(pair)
+        db.session.commit()
     return {}, 201
