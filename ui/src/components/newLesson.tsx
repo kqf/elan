@@ -6,7 +6,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 type PairEntry = {
@@ -19,7 +18,7 @@ type FormValues = {
   level: string;
   topic: string;
   rate: number;
-  test: Array<PairEntry>;
+  pairs: Array<PairEntry>;
 };
 
 function ErrorField(props: {
@@ -53,10 +52,10 @@ function NewLesson() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "test",
+    name: "pairs",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
       await axios.post("/lessons/", {
@@ -72,8 +71,7 @@ function NewLesson() {
         }
       }
     }
-
-    navigate("/", { replace: true });
+    // navigate("/", { replace: true });
   });
 
   const handleKeywordKeyPress =
@@ -131,14 +129,14 @@ function NewLesson() {
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`test.${index}.firstName`)}
+                        {...register(`pairs.${index}.firstName`)}
                       />
                     </td>
                     <td>
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`test.${index}.lastName`)}
+                        {...register(`pairs.${index}.lastName`)}
                       />
                     </td>
                     <td>
