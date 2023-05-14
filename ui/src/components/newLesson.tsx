@@ -6,7 +6,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import http from "../auth";
 
@@ -57,7 +56,7 @@ function NewLesson() {
     name: "pairs",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
       await http.post("/lessons/", {
