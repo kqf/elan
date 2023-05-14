@@ -19,7 +19,6 @@ type FormValues = {
   title: string;
   level: string;
   topic: string;
-  rate: number;
   pairs: Array<PairEntry>;
 };
 
