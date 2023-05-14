@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 import http from "../auth";
 
 type PairEntry = {
-  firstName: string;
-  lastName: string;
+  iffield: string;
+  offield: string;
 };
 
 type FormValues = {
@@ -80,7 +80,7 @@ function NewLesson() {
     (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        append({ firstName: "", lastName: "" });
+        append({ iffield: "", offield: "" });
       }
     };
 
@@ -131,14 +131,14 @@ function NewLesson() {
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`pairs.${index}.firstName`)}
+                        {...register(`pairs.${index}.iffield`)}
                       />
                     </td>
                     <td>
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`pairs.${index}.lastName`)}
+                        {...register(`pairs.${index}.offield`)}
                       />
                     </td>
                     <td>
@@ -158,7 +158,7 @@ function NewLesson() {
                     type="button"
                     className="btn btn-primary"
                     onClick={() =>
-                      append({ firstName: "der Vogel", lastName: "the Bird" })
+                      append({ iffield: "der Vogel", offield: "the Bird" })
                     }
                   >
                     Add a new Pair
