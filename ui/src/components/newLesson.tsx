@@ -73,7 +73,7 @@ function NewLesson() {
         }
       }
     }
-    // navigate("/", { replace: true });
+    navigate("/lessons", { replace: true });
   });
 
   const handleKeywordKeyPress =
