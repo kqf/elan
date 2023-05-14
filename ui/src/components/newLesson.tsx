@@ -8,18 +8,18 @@ import {
 } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import http from "../auth";
 
 type PairEntry = {
-  firstName: string;
-  lastName: string;
+  iffield: string;
+  offield: string;
 };
 
 type FormValues = {
   title: string;
   level: string;
   topic: string;
-  rate: number;
-  test: Array<PairEntry>;
+  pairs: Array<PairEntry>;
 };
 
 function ErrorField(props: {
@@ -53,16 +53,17 @@ function NewLesson() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "test",
+    name: "pairs",
   });
 
   const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await axios.post("/lessons/", {
+      await http.post("/lessons/", {
         title: data.title,
         level: data.level,
         topic: data.topic,
+        pairs: data.pairs,
       });
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
@@ -72,15 +73,14 @@ function NewLesson() {
         }
       }
     }
-
-    navigate("/", { replace: true });
+    navigate("/lessons", { replace: true });
   });
 
   const handleKeywordKeyPress =
     (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        append({ firstName: "", lastName: "" });
+        append({ iffield: "", offield: "" });
       }
     };
 
@@ -131,14 +131,14 @@ function NewLesson() {
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`test.${index}.firstName`)}
+                        {...register(`pairs.${index}.iffield`)}
                       />
                     </td>
                     <td>
                       <input
                         className="form-control"
                         onKeyDown={handleKeywordKeyPress(index)}
-                        {...register(`test.${index}.lastName`)}
+                        {...register(`pairs.${index}.offield`)}
                       />
                     </td>
                     <td>
@@ -158,7 +158,7 @@ function NewLesson() {
                     type="button"
                     className="btn btn-primary"
                     onClick={() =>
-                      append({ firstName: "der Vogel", lastName: "the Bird" })
+                      append({ iffield: "der Vogel", offield: "the Bird" })
                     }
                   >
                     Add a new Pair
