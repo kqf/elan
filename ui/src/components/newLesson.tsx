@@ -7,6 +7,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { toast } from "react-toastify";
+import http from "../auth";
 
 type PairEntry = {
   firstName: string;
@@ -58,10 +59,11 @@ function NewLesson() {
   // const navigate = useNavigate();
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await axios.post("/lessons/", {
+      await http.post("/lessons/", {
         title: data.title,
         level: data.level,
         topic: data.topic,
+        pairs: data.pairs,
       });
     } catch (ex) {
       if (axios.isAxiosError(ex)) {
