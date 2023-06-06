@@ -99,7 +99,7 @@ function NewLesson() {
 
         <ErrorField
           label={"Topic"}
-          placeholder="1"
+          placeholder="Outdoor activities"
           error={errors["topic"]}
           inputs={register("topic", {
             required: "Topic should not be empty",
