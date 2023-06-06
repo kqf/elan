@@ -88,6 +88,18 @@ export default function LessonPage(props: { lesson?: Lesson }) {
       {state.lesson && (
         <div className="row">
           <h2>{state.lesson.title}</h2>
+
+          <div className="col my-3">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                navigate("/lessons/new");
+              }}
+            >
+              Practice
+            </button>
+          </div>
+
           <table className="table">
             <thead>
               <tr>
