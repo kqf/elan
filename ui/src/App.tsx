@@ -13,6 +13,7 @@ import Movies from "./components/movies";
 import NavBar from "./components/navbar";
 import NewLesson from "./components/newLesson";
 import NewMovie from "./components/newMovie";
+import Practice from "./components/practice";
 import RegisterForm from "./components/register";
 import UserList from "./components/users";
 import MovieComponent from "./movieComponent";
@@ -78,6 +79,10 @@ function App() {
             <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
             <Route path="/users" element={protect(<UserList />)} />
             <Route path="/lesson/:id" element={protect(<LessonPage />)} />
+            <Route
+              path="/lesson/:id/practice"
+              element={protect(<Practice />)}
+            />
             <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/lessons/new" element={protect(<NewLesson />)} />
             <Route path="/blog/" element={<Blog />} />
