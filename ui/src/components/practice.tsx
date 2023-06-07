@@ -10,6 +10,13 @@ function Practice() {
   if (lessonId === undefined) {
     navigate("/lessons");
   }
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ mode: "onChange" });
+
   return <h1>Excercise your skills for lesson {lessonId}</h1>;
 }
 
