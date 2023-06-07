@@ -80,7 +80,7 @@ function App() {
             <Route path="/users" element={protect(<UserList />)} />
             <Route path="/lesson/:id" element={protect(<LessonPage />)} />
             <Route
-              path="/lesson/:id/practice"
+              path="/lesson/:id?/practice"
               element={protect(<Practice />)}
             />
             <Route path="/lessons" element={protect(<Lessons />)} />
