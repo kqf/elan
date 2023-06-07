@@ -1,9 +1,34 @@
-import { useForm } from "react-hook-form";
+import { FieldError, UseFormRegisterReturn, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 type PracticeParams = {
   id?: string;
 };
+
+type FormValues = {
+  answer: string;
+};
+
+function ErrorField(props: {
+  label: string;
+  placeholder?: string;
+  error?: FieldError;
+  inputs: UseFormRegisterReturn;
+}) {
+  return (
+    <div className="form-group">
+      <label htmlFor={props.inputs.name}>{props.label}</label>
+      <input
+        className="form-control"
+        {...props.inputs}
+        placeholder={props.placeholder}
+      />
+      {props.error && (
+        <div className="alert alert-danger">{props.error.message}</div>
+      )}{" "}
+    </div>
+  );
+}
 
 function Practice() {
   const navigate = useNavigate();
@@ -25,8 +50,8 @@ function Practice() {
         <ErrorField
           label={"INPUT"}
           placeholder="Answer"
-          error={errors["level"]}
-          inputs={register("level", {
+          error={errors["answer"]}
+          inputs={register("answer", {
             required: "Please provide the lesson level",
           })}
         />
