@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 type PracticeParams = {
@@ -17,7 +18,21 @@ function Practice() {
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
-  return <h1>Excercise your skills for lesson {lessonId}</h1>;
+  return (
+    <div>
+      <h1>Excercise your skills for lesson {lessonId}</h1>
+      <form>
+        <ErrorField
+          label={"INPUT"}
+          placeholder="Answer"
+          error={errors["level"]}
+          inputs={register("level", {
+            required: "Please provide the lesson level",
+          })}
+        />
+      </form>
+    </div>
+  );
 }
 
 export default Practice;
