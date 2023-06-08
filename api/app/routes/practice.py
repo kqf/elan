@@ -1,25 +1,22 @@
 from __future__ import annotations
 
-from typing import Any
-
-from apifairy import authenticate, body, response
-from flask import Blueprint, url_for
+from apifairy import authenticate, response
+from flask import Blueprint
 
 from app import db, ma, token_auth
-from app.models import User, edit_user, register_user
-from app.schemes import UserSchema
+from app.models import User
 
-users = Blueprint("users", __name__)
+practice = Blueprint("practice", __name__)
 
 
 class PracticeInput(ma.Schema):
     iffield = ma.Str(required=True)
 
 
-@users.route("/practice/<int:id>/", methods=["GET"])
+@practice.route("/practice/<int:id>/", methods=["GET"])
 @authenticate(token_auth)
 @response(PracticeInput)
-def practice(id: int) -> User:
+def practice_start(id: int) -> User:
     user = token_auth.current_user()
     current = user.active_lesson
     if current is None or current.id != id:
