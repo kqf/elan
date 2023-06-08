@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { FieldError, UseFormRegisterReturn, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import http from "../auth";
 
 type PracticeParams = {
   id?: string;
@@ -36,6 +38,18 @@ function Practice() {
   if (lessonId === undefined) {
     navigate("/lessons");
   }
+  const [state, updateState] = useState({} as { task?: String });
+  useEffect(() => {
+    // Fetch the data
+    (async () => {
+      const response = await http.get(`/practice/${lessonId}`, () => {
+        navigate("/login");
+      });
+      updateState(response?.data);
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   const {
     register,
     control,
