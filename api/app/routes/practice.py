@@ -4,7 +4,7 @@ from apifairy import authenticate, response
 from flask import Blueprint
 
 from app import db, ma, token_auth
-from app.models import User
+from app.models import PracticeLesson
 
 practice = Blueprint("practice", __name__)
 
@@ -16,7 +16,7 @@ class PracticeInput(ma.Schema):
 @practice.route("/practice/<int:id>/", methods=["GET"])
 @authenticate(token_auth)
 @response(PracticeInput)
-def practice_start(id: int) -> User:
+def practice_start(id: int) -> str:
     user = token_auth.current_user()
     current = user.active_lesson
     if current is None or current.id != id:
