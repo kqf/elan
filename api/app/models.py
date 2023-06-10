@@ -134,7 +134,7 @@ class User(db.Model):
 class PracticeLesson(db.Model):
     __tablename__ = "practicelesson"
     lesson_id = db.Column(db.Integer, primary_key=True)
-    pair_id = db.Column(db.integer, primary_key=True)
+    pair_id = db.Column(db.Integer, primary_key=True)
 
 
 class Lesson(db.Model):
