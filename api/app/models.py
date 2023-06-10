@@ -132,18 +132,9 @@ class User(db.Model):
 
 
 class PracticeLesson(db.Model):
-    __tablename__ = "practice_lesson"
-    id = db.Column(db.Integer, primary_key=True)
-    lesson_id = db.Column(
-        db.Integer,
-        db.ForeignKey("lessons.id"),
-        nullable=True,
-    )
-    pair_id = db.Column(db.Integer, db.ForeignKey("pairs.id"), nullable=True)
-    user = db.relationship("User", back_populates="practice_lesson")
-
-    lesson = db.relationship("Lesson")
-    pair = db.relationship("Pair")
+    __tablename__ = "practicelesson"
+    lesson_id = db.Column(db.Integer, primary_key=True)
+    pair_id = db.Column(db.integer, primary_key=True)
 
 
 class Lesson(db.Model):
