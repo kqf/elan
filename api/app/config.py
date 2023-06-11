@@ -41,6 +41,7 @@ def build_app():
     from app.routes.lesson import lessons
     from app.routes.movie import movies
     from app.routes.pair import pairs
+    from app.routes.practice import practice
     from app.routes.users import users
 
     app.register_blueprint(lessons)
@@ -50,6 +51,7 @@ def build_app():
     app.register_blueprint(debug)
     app.register_blueprint(genres)
     app.register_blueprint(movies)
+    app.register_blueprint(practice)
     return app
 
 
