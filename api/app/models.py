@@ -126,7 +126,7 @@ class User(db.Model):
     practice_lesson = db.relationship("PracticeLesson", back_populates="user")
     practice_lesson_id = db.Column(
         db.Integer,
-        db.ForeignKey("practicelesson.id"),
+        db.ForeignKey("practicelesson.lesson_id"),
         nullable=True,
     )
 
