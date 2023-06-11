@@ -126,7 +126,7 @@ class User(db.Model):
     practice_lesson = db.relationship("PracticeLesson", back_populates="user")
     practice_lesson_id = db.Column(
         db.Integer,
-        db.ForeignKey("practicelesson.id"),
+        db.ForeignKey("practicelesson.lesson_id"),
         nullable=True,
     )
 
@@ -135,6 +135,7 @@ class PracticeLesson(db.Model):
     __tablename__ = "practicelesson"
     lesson_id = db.Column(db.Integer, primary_key=True)
     pair_id = db.Column(db.Integer, primary_key=True)
+    user = db.relationship("User", back_populates="practice_lesson")
 
 
 class Lesson(db.Model):
