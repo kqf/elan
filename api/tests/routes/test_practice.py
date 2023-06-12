@@ -1,5 +1,8 @@
 import pytest
 
+from app import db
+from app.models import Lesson, Pair, User
+
 
 @pytest.fixture
 def example(client, example_data):
