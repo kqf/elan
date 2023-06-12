@@ -1,4 +1,26 @@
-def test_retrieves_users(client, headers):
+import pytest
+
+
+@pytest.fixture
+def example(client, example_data):
+    users = User.query.all()
+    lesson = Lesson(title="lesson 1")
+    db.session.add(lesson)
+    db.session.commit()
+
+    pairs = [Pair(**p) for p in example_data]
+    for p in pairs:
+        db.session.add(p)
+        lesson.pairs.append(p)
+        db.session.commit()
+
+    for user in users:
+        user.lessons.append(lesson)
+        db.session.commit()
+    return pairs
+
+
+def test_retrieves_users(client, headers, example):
     response = client.get(
         "/practice/1",
         headers=headers,
