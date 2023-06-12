@@ -18,13 +18,13 @@ class PracticeInput(ma.Schema):
 @response(PracticeInput)
 def practice_start(id: int) -> str:
     user = token_auth.current_user()
-    current = user.active_lesson
+    current = user.practice_lesson
     if current is None or current.id != id:
         current = PracticeLesson(
             lesson=user.lessons[id],
         )
-        user.active_lesson = current
-        db.session.add(user.active_lesson)
+        user.practice_lesson = current
+        db.session.add(user.practice_lesson)
         db.session.commit()
 
     return user.lessons[current.lesson_id].pairs[current.pair_id].iffield
