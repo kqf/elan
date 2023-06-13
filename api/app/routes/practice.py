@@ -22,10 +22,11 @@ def practice_start(id: int) -> str:
     if current is None or current.id != id:
         current = PracticeLesson(
             lesson_id=user.lessons[id].id,
-            pair_id=0,
+            pair_id=1,
         )
         user.practice_lesson = current
         db.session.add(user.practice_lesson)
         db.session.commit()
 
-    return user.lessons[current.lesson_id].pairs[current.pair_id].iffield
+    lesson = user.lessons[current.lesson_id - 1]
+    return lesson.pairs[current.pair_id - 1].iffield
