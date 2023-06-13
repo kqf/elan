@@ -5,6 +5,20 @@ from app.models import Lesson, Pair, User
 
 
 @pytest.fixture
+def example_data():
+    return [
+        {
+            "iffield": "la vache",
+            "offield": "the cow",
+        },
+        {
+            "iffield": "le monde",
+            "offield": "the world",
+        },
+    ]
+
+
+@pytest.fixture
 def example(client, example_data):
     users = User.query.all()
     lesson = Lesson(title="lesson 1")
