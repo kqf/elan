@@ -39,7 +39,7 @@ def example(client, example_data):
 
 def test_retrieves_users(client, headers, example):
     response = client.get(
-        "/practice/1",
+        "/practice/0",
         headers=headers,
         follow_redirects=True,
     )

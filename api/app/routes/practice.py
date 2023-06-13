@@ -21,7 +21,8 @@ def practice_start(id: int) -> str:
     current = user.practice_lesson
     if current is None or current.id != id:
         current = PracticeLesson(
-            lesson=user.lessons[id],
+            lesson_id=user.lessons[id].id,
+            pair_id=0,
         )
         user.practice_lesson = current
         db.session.add(user.practice_lesson)
