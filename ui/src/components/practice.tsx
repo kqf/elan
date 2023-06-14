@@ -38,14 +38,16 @@ function Practice() {
   if (lessonId === undefined) {
     navigate("/lessons");
   }
-  const [state, updateState] = useState({} as { task?: String });
+  const [state, updateState] = useState({ task: "Undefined" } as {
+    task: string;
+  });
   useEffect(() => {
     // Fetch the data
     (async () => {
       const response = await http.get(`/practice/${lessonId}`, () => {
         navigate("/login");
       });
-      updateState(response?.data);
+      updateState({ task: response?.data.iffield });
     })();
     // eslint-disable-next-line
   }, []);
@@ -62,7 +64,7 @@ function Practice() {
       <h1>Excercise your skills for lesson {lessonId}</h1>
       <form>
         <ErrorField
-          label={"INPUT"}
+          label={state.task}
           placeholder="Answer"
           error={errors["answer"]}
           inputs={register("answer", {
