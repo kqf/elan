@@ -29,4 +29,4 @@ def practice_start(id: int) -> str:
         db.session.commit()
 
     lesson = user.lessons[current.lesson_id - 1]
-    return lesson.pairs[current.pair_id - 1].iffield
+    return {"iffield": lesson.pairs[current.pair_id - 1].iffield}
