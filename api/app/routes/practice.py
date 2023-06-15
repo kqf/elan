@@ -16,7 +16,7 @@ class PracticeInput(ma.Schema):
 @practice.route("/practice/<int:id>/", methods=["GET"])
 @authenticate(token_auth)
 @response(PracticeInput)
-def practice_start(id: int) -> str:
+def practice_start(id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
     if current is None or current.id != id:
