@@ -16,15 +16,17 @@ class PracticeInput(ma.Schema):
 @practice.route("/practice/<int:id>/", methods=["GET"])
 @authenticate(token_auth)
 @response(PracticeInput)
-def practice_start(id: int) -> str:
+def practice_start(id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
     if current is None or current.id != id:
         current = PracticeLesson(
-            lesson=user.lessons[id],
+            lesson_id=user.lessons[id].id,
+            pair_id=1,
         )
         user.practice_lesson = current
         db.session.add(user.practice_lesson)
         db.session.commit()
 
-    return user.lessons[current.lesson_id].pairs[current.pair_id].iffield
+    lesson = user.lessons[current.lesson_id - 1]
+    return {"iffield": lesson.pairs[current.pair_id - 1].iffield}
