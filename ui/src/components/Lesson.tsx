@@ -93,7 +93,7 @@ export default function LessonPage(props: { lesson?: Lesson }) {
             <button
               className="btn btn-primary"
               onClick={() => {
-                navigate(`/lessons/${lessonId}/practice`);
+                navigate(`/lesson/${lessonId}/practice`);
               }}
             >
               Practice
