@@ -44,7 +44,8 @@ function Practice() {
   useEffect(() => {
     // Fetch the data
     (async () => {
-      const response = await http.get(`/practice/${lessonId}`, () => {
+      const response = await http.get(`/practice/${lessonId}/`, () => {
+        console.log(response);
         navigate("/login");
       });
       updateState({ task: response?.data.iffield });
@@ -54,8 +55,6 @@ function Practice() {
 
   const {
     register,
-    control,
-    handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
