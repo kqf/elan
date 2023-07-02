@@ -11,6 +11,7 @@ practice = Blueprint("practice", __name__)
 
 class PracticeInput(ma.Schema):
     iffield = ma.Str(required=True)
+    finished = ma.Boolean(required=True)
 
 
 @practice.route("/practice/<int:id>/", methods=["GET"])
@@ -29,4 +30,9 @@ def practice_start(id: int) -> dict[str, str]:
         db.session.commit()
 
     lesson = user.lessons[current.lesson_id - 1]
-    return {"iffield": lesson.pairs[current.pair_id - 1].iffield}
+    current_pair = lesson.pairs[current.pair_id - 1]
+    current.pair_id += 1
+    return {
+        "iffield": current_pair.iffield,
+        "finished": current.pair_id < len(lesson.pairs),
+    }
