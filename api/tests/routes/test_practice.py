@@ -37,11 +37,11 @@ def example(client, example_data):
     return pairs
 
 
-def test_retrieves_users(client, headers, example):
+def test_the_practice(client, headers, example):
     response = client.get(
         "/practice/0",
         headers=headers,
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert response.json == {"iffield": "la vache"}
+    assert response.json == {"iffield": "la vache", "finished": False}
