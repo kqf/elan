@@ -66,19 +66,21 @@ function Practice() {
   } = useForm<FormValues>({ mode: "onChange" });
 
   return (
-    <div>
-      <h1>Excercise your skills for lesson {lessonId}</h1>
-      <form>
-        <ErrorField
-          label={state.task}
-          placeholder="Answer"
-          error={errors["answer"]}
-          inputs={register("answer", {
-            required: "Please provide the lesson level",
-          })}
-        />
-      </form>
-    </div>
+    state.finished && (
+      <div>
+        <h1>Excercise your skills for lesson {lessonId}</h1>
+        <form>
+          <ErrorField
+            label={state.task}
+            placeholder="Answer"
+            error={errors["answer"]}
+            inputs={register("answer", {
+              required: "Please provide the lesson level",
+            })}
+          />
+        </form>
+      </div>
+    )
   );
 }
 
