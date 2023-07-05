@@ -38,8 +38,12 @@ function Practice() {
   if (lessonId === undefined) {
     navigate("/lessons");
   }
-  const [state, updateState] = useState({ task: "Undefined" } as {
+  const [state, updateState] = useState({
+    task: "Undefined",
+    finished: false,
+  } as {
     task: string;
+    finished: Boolean;
   });
   useEffect(() => {
     // Fetch the data
@@ -48,7 +52,10 @@ function Practice() {
         console.log(response);
         navigate("/login");
       });
-      updateState({ task: response?.data.iffield });
+      updateState({
+        task: response?.data.iffield,
+        finished: response?.data.finished,
+      });
     })();
     // eslint-disable-next-line
   }, []);
@@ -59,19 +66,21 @@ function Practice() {
   } = useForm<FormValues>({ mode: "onChange" });
 
   return (
-    <div>
-      <h1>Excercise your skills for lesson {lessonId}</h1>
-      <form>
-        <ErrorField
-          label={state.task}
-          placeholder="Answer"
-          error={errors["answer"]}
-          inputs={register("answer", {
-            required: "Please provide the lesson level",
-          })}
-        />
-      </form>
-    </div>
+    state.finished && (
+      <div>
+        <h1>Excercise your skills for lesson {lessonId}</h1>
+        <form>
+          <ErrorField
+            label={state.task}
+            placeholder="Answer"
+            error={errors["answer"]}
+            inputs={register("answer", {
+              required: "Please provide the lesson level",
+            })}
+          />
+        </form>
+      </div>
+    )
   );
 }
 
