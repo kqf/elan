@@ -80,8 +80,9 @@ function Practice() {
       </form>
     </div>
   );
+  const message = <h1>The lesson is over</h1>;
 
-  return state.finished && session;
+  return state.finished ? message : session;
 }
 
 export default Practice;
