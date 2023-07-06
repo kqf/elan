@@ -36,3 +36,26 @@ def practice_start(id: int) -> dict[str, str]:
         "iffield": current_pair.iffield,
         "finished": current.pair_id < len(lesson.pairs),
     }
+
+
+@practice.route("/practice/<int:id>/", methods=["POST"])
+@authenticate(token_auth)
+def practice_verify(id: int) -> dict[str, str]:
+    user = token_auth.current_user()
+    current = user.practice_lesson
+    if current is None or current.lesson_id != id:
+        current = PracticeLesson(
+            lesson_id=user.lessons[id].id,
+            pair_id=1,
+        )
+        user.practice_lesson = current
+        db.session.add(user.practice_lesson)
+        db.session.commit()
+
+    lesson = user.lessons[current.lesson_id - 1]
+    current_pair = lesson.pairs[current.pair_id - 1]
+    current.pair_id += 1
+    return {
+        "iffield": current_pair.iffield,
+        "finished": current.pair_id < len(lesson.pairs),
+    }
