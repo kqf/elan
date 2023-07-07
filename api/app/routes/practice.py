@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from apifairy import authenticate, response
+from apifairy import authenticate, body, response
 from flask import Blueprint
 
 from app import db, ma, token_auth
@@ -38,19 +38,18 @@ def practice_start(id: int) -> dict[str, str]:
     }
 
 
+class PracticeResponse(ma.Schema):
+    offield = ma.Str(required=True)
+
+
 @practice.route("/practice/<int:id>/", methods=["POST"])
+@body(PracticeResponse)
 @authenticate(token_auth)
-def practice_verify(id: int) -> dict[str, str]:
+def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
     if current is None or current.lesson_id != id:
-        current = PracticeLesson(
-            lesson_id=user.lessons[id].id,
-            pair_id=1,
-        )
-        user.practice_lesson = current
-        db.session.add(user.practice_lesson)
-        db.session.commit()
+        raise RuntimeError("The app isn't working")
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
