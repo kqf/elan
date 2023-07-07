@@ -54,7 +54,7 @@ def practice_verify(payload, id: int) -> dict[str, str]:
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
     current.pair_id += 1
+    matched = current_pair.offield == payload["iffield"]
     return {
-        "iffield": current_pair.iffield,
-        "finished": current.pair_id < len(lesson.pairs),
+        "matched": matched,
     }
