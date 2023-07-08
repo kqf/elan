@@ -55,4 +55,4 @@ def test_the_practice(client, headers, example):
             "offield": "the cow",
         },
     )
-    assert response.json is None
+    assert response.json == {"matched": True}
