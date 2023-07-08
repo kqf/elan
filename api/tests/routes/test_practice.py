@@ -43,5 +43,16 @@ def test_the_practice(client, headers, example):
         headers=headers,
         follow_redirects=True,
     )
+
     assert response.status_code == 200
     assert response.json == {"iffield": "la vache", "finished": False}
+
+    response = client.post(
+        "/practice/0",
+        headers=headers,
+        follow_redirects=True,
+        json={
+            "offield": "the cow",
+        },
+    )
+    assert response.json is None
