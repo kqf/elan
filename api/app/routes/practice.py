@@ -59,7 +59,6 @@ def practice_verify(payload, id: int) -> dict[str, str]:
         user.practice_lesson.pair_id += 1
         db.session.add(user.practice_lesson)
         db.session.commit()
-
     return {
         "matched": matched,
     }
