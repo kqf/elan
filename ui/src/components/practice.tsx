@@ -62,13 +62,20 @@ function Practice() {
 
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
+
+  const onSubmit = handleSubmit(async (data: FormValues) => {
+    const response = await http.post("/users/", { offield: data.answer });
+    console.log(response);
+    navigate("/", { replace: true });
+  });
 
   const session = (
     <div>
       <h1>Excercise your skills for lesson {lessonId}</h1>
-      <form>
+      <form onSubmit={onSubmit}>
         <ErrorField
           label={state.task}
           placeholder="Answer"
