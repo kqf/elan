@@ -58,12 +58,16 @@ def practice_verify(payload, id: int) -> dict[str, str]:
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
-    current.pair_id += 1
     matched = current_pair.offield == payload["iffield"]
     if matched:
-        user.practice_lesson.pair_id += 1
+        updated = PracticeLesson(
+            lesson_id=user.lessons[id].id,
+            pair_id=current.pair_id + 1,
+        )
+        user.practice_lesson = updated
         db.session.add(user.practice_lesson)
         db.session.commit()
+
     return {
         "matched": matched,
     }
