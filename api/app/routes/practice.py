@@ -42,9 +42,14 @@ class PracticeResponseInput(ma.Schema):
     offield = ma.Str(required=True)
 
 
+class PracticeResponseResponse(ma.Schema):
+    matched = ma.Boolean(required=True)
+
+
 @practice.route("/practice/<int:id>/", methods=["POST"])
-@body(PracticeResponseInput)
 @authenticate(token_auth)
+@body(PracticeResponseInput)
+@response(PracticeResponseResponse)
 def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
