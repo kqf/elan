@@ -56,3 +56,4 @@ def test_the_practice(client, headers, example):
         },
     )
     assert response.json == {"matched": True}
+
