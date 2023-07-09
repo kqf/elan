@@ -38,13 +38,18 @@ def practice_start(id: int) -> dict[str, str]:
     }
 
 
-class PracticeResponse(ma.Schema):
+class PracticeResponseInput(ma.Schema):
     offield = ma.Str(required=True)
 
 
+class PracticeResponseResponse(ma.Schema):
+    matched = ma.Boolean(required=True)
+
+
 @practice.route("/practice/<int:id>/", methods=["POST"])
-@body(PracticeResponse)
 @authenticate(token_auth)
+@body(PracticeResponseInput)
+@response(PracticeResponseResponse)
 def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
