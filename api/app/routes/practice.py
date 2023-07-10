@@ -31,10 +31,9 @@ def practice_start(id: int) -> dict[str, str]:
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
-    current.pair_id += 1
     return {
         "iffield": current_pair.iffield,
-        "finished": current.pair_id < len(lesson.pairs),
+        "finished": current.pair_id + 1 < len(lesson.pairs),
     }
 
 
@@ -53,12 +52,13 @@ class PracticeResponseResponse(ma.Schema):
 def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
-    if current is None or current.lesson_id != id:
-        raise RuntimeError("The app isn't working")
+    if current is None or current.lesson_id != id + 1:
+        raise RuntimeError("The practice has not been started")
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
-    matched = current_pair.offield == payload["iffield"]
+    matched = current_pair.offield == payload["offield"]
+    print(current_pair.offield, payload["offield"])
     if matched:
         updated = PracticeLesson(
             lesson_id=user.lessons[id].id,
