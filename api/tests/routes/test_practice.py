@@ -37,16 +37,17 @@ def example(client, example_data):
     return pairs
 
 
-def test_the_practice(client, headers, example):
+def test_start_1(client, headers, example):
     response = client.get(
         "/practice/0",
         headers=headers,
         follow_redirects=True,
     )
-
     assert response.status_code == 200
     assert response.json == {"iffield": "la vache", "finished": False}
 
+
+def test_response(client, headers):
     response = client.post(
         "/practice/0",
         headers=headers,
@@ -56,4 +57,3 @@ def test_the_practice(client, headers, example):
         },
     )
     assert response.json == {"matched": True}
-
