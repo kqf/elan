@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from apifairy import authenticate, body, response
 from flask import Blueprint
 
@@ -12,12 +14,14 @@ practice = Blueprint("practice", __name__)
 class PracticeInput(ma.Schema):
     iffield = ma.Str(required=True)
     finished = ma.Boolean(required=True)
+    n_current = ma.Integer(required=True)
+    n_total = ma.Integer(required=True)
 
 
 @practice.route("/practice/<int:id>/", methods=["GET"])
 @authenticate(token_auth)
 @response(PracticeInput)
-def practice_start(id: int) -> dict[str, str]:
+def practice_start(id: int) -> dict[str, Any]:
     user = token_auth.current_user()
     current = user.practice_lesson
     if current is None or current.lesson_id != id:
@@ -31,9 +35,12 @@ def practice_start(id: int) -> dict[str, str]:
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
+
     return {
         "iffield": current_pair.iffield,
         "finished": current.pair_id + 1 < len(lesson.pairs),
+        "n_current": current.pair_id,
+        "n_total": len(lesson.pairs),
     }
 
 
