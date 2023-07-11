@@ -45,7 +45,12 @@ def test_the_practice(client, headers, example):
     )
 
     assert response.status_code == 200
-    assert response.json == {"iffield": "la vache", "finished": False}
+    assert response.json == {
+        "iffield": "la vache",
+        "finished": False,
+        "n_current": 1,
+        "n_total": 2,
+    }
 
     response = client.post(
         "/practice/0",
