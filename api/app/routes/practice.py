@@ -52,7 +52,7 @@ class PracticeResponseResponse(ma.Schema):
 def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
-    if current is None or current.lesson_id != id + 1:
+    if current is None or current.lesson_id - 1 != id:
         raise RuntimeError("The practice has not been started")
 
     lesson = user.lessons[current.lesson_id - 1]
