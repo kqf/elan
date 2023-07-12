@@ -24,7 +24,7 @@ class PracticeInput(ma.Schema):
 def practice_start(id: int) -> dict[str, Any]:
     user = token_auth.current_user()
     current = user.practice_lesson
-    if current is None or current.lesson_id != id:
+    if current is None or current.lesson_id - 1 != id:
         current = PracticeLesson(
             lesson_id=user.lessons[id].id,
             pair_id=1,
