@@ -83,3 +83,16 @@ def test_the_practice(client, headers, example):
         },
     )
     assert response.json == {"matched": False}
+
+    response = client.get(
+        "/practice/0",
+        headers=headers,
+        follow_redirects=True,
+    )
+
+    assert response.json == {
+        "iffield": "le monde",
+        "finished": False,
+        "n_current": 2,
+        "n_total": 2,
+    }
