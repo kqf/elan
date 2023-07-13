@@ -110,3 +110,18 @@ def test_the_practice(client, headers, example):
         },
     )
     assert response.json == {"matched": True}
+
+    # Check the finished lesson
+    response = client.get(
+        "/practice/0",
+        headers=headers,
+        follow_redirects=True,
+    )
+    # TODO: Handle the ill request
+
+    # assert response.json == {
+    #     "iffield": "le monde",
+    #     "finished": False,
+    #     "n_current": 2,
+    #     "n_total": 2,
+    # }
