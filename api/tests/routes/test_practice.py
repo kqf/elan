@@ -39,6 +39,7 @@ def example(client, example_data):
 
 def test_the_practice(client, headers, example):
     # sourcery skip: extract-duplicate-method
+    # Check the first pair
     response = client.get(
         "/practice/0",
         headers=headers,
@@ -63,6 +64,7 @@ def test_the_practice(client, headers, example):
     )
     assert response.json == {"matched": True}
 
+    # Check the second pair (wrong response)
     response = client.get(
         "/practice/0",
         headers=headers,
@@ -85,6 +87,7 @@ def test_the_practice(client, headers, example):
     )
     assert response.json == {"matched": False}
 
+    # Check the second pair (Correct response)
     response = client.get(
         "/practice/0",
         headers=headers,
