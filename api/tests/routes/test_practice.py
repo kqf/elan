@@ -73,3 +73,13 @@ def test_the_practice(client, headers, example):
         "n_current": 2,
         "n_total": 2,
     }
+
+    response = client.post(
+        "/practice/0",
+        headers=headers,
+        follow_redirects=True,
+        json={
+            "offield": "the cow",
+        },
+    )
+    assert response.json == {"matched": False}
