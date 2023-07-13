@@ -38,6 +38,7 @@ def example(client, example_data):
 
 
 def test_the_practice(client, headers, example):
+    # sourcery skip: extract-duplicate-method
     response = client.get(
         "/practice/0",
         headers=headers,
@@ -79,7 +80,7 @@ def test_the_practice(client, headers, example):
         headers=headers,
         follow_redirects=True,
         json={
-            "offield": "the cow",
+            "offield": "xyz",
         },
     )
     assert response.json == {"matched": False}
@@ -96,3 +97,13 @@ def test_the_practice(client, headers, example):
         "n_current": 2,
         "n_total": 2,
     }
+
+    response = client.post(
+        "/practice/0",
+        headers=headers,
+        follow_redirects=True,
+        json={
+            "offield": "the world",
+        },
+    )
+    assert response.json == {"matched": True}
