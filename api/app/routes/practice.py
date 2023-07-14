@@ -38,7 +38,7 @@ def practice_start(id: int) -> dict[str, Any]:
 
     return {
         "iffield": current_pair.iffield,
-        "finished": current.pair_id + 1 < len(lesson.pairs),
+        "finished": current.pair_id + 1 >= len(lesson.pairs),
         "n_current": current.pair_id,
         "n_total": len(lesson.pairs),
     }
