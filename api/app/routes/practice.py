@@ -24,7 +24,7 @@ class PracticeInput(ma.Schema):
 def practice_start(id: int) -> dict[str, Any]:
     user = token_auth.current_user()
     current = user.practice_lesson
-    if current is None or current.lesson_id - 1 != id:
+    if current is None or current.lesson_id != id:
         current = PracticeLesson(
             lesson_id=user.lessons[id - 1].id,
             pair_id=1,
@@ -59,7 +59,7 @@ class PracticeResponseResponse(ma.Schema):
 def practice_verify(payload, id: int) -> dict[str, str]:
     user = token_auth.current_user()
     current = user.practice_lesson
-    if current is None or current.lesson_id - 1 != id:
+    if current is None or current.lesson_id != id:
         raise RuntimeError("The practice has not been started")
 
     lesson = user.lessons[current.lesson_id - 1]
@@ -69,7 +69,7 @@ def practice_verify(payload, id: int) -> dict[str, str]:
         db.session.delete(user.practice_lesson)
         db.session.commit()
         updated = PracticeLesson(
-            lesson_id=user.lessons[id].id,
+            lesson_id=user.lessons[id - 1].id,
             pair_id=current.pair_id + 1,
         )
         user.practice_lesson = updated
