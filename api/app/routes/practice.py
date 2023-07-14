@@ -26,7 +26,7 @@ def practice_start(id: int) -> dict[str, Any]:
     current = user.practice_lesson
     if current is None or current.lesson_id - 1 != id:
         current = PracticeLesson(
-            lesson_id=user.lessons[id].id,
+            lesson_id=user.lessons[id - 1].id,
             pair_id=1,
         )
         user.practice_lesson = current
