@@ -67,9 +67,10 @@ function Practice() {
   } = useForm<FormValues>({ mode: "onChange" });
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
-    const response = await http.post("/users/", { offield: data.answer });
+    const response = await http.post(`/practice/${lessonId}/`, {
+      offield: data.answer,
+    });
     console.log(response);
-    navigate("/", { replace: true });
   });
 
   const session = (
