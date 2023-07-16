@@ -66,11 +66,9 @@ function NewLesson() {
         pairs: data.pairs,
       });
     } catch (ex) {
-      if (axios.isAxiosError(ex)) {
-        if (ex.response) {
-          console.log(ex.response);
-          toast.error("Somethign went wrong, can't upate the server");
-        }
+      if (axios.isAxiosError(ex) && ex.response) {
+        console.log(ex.response);
+        toast.error("Somethign went wrong, can't upate the server");
       }
     }
     navigate("/lessons", { replace: true });
