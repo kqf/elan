@@ -87,7 +87,7 @@ function Practice() {
           })}
         />
         <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
-          Submit
+          Check
         </button>
       </form>
     </div>
