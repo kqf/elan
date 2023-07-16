@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useEffect, useState } from "react";
 import { FieldError, UseFormRegisterReturn, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -85,6 +86,9 @@ function Practice() {
             required: "Please provide the lesson level",
           })}
         />
+        <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
+          Check
+        </button>
       </form>
     </div>
   );
