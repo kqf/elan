@@ -42,9 +42,11 @@ function Practice() {
   const [state, updateState] = useState({
     task: "Undefined",
     finished: false,
+    correct: true,
   } as {
     task: string;
     finished: Boolean;
+    correct: Boolean;
   });
   useEffect(() => {
     // Fetch the data
@@ -56,6 +58,7 @@ function Practice() {
       updateState({
         task: response?.data.iffield,
         finished: response?.data.finished,
+        correct: true,
       });
     })();
     // eslint-disable-next-line
@@ -72,6 +75,10 @@ function Practice() {
       offield: data.answer,
     });
     console.log(response);
+    updateState({
+      ...state,
+      correct: !response?.data.matched,
+    });
   });
 
   const session = (
