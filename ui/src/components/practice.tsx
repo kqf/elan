@@ -67,6 +67,7 @@ function Practice() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
@@ -74,11 +75,21 @@ function Practice() {
     const response = await http.post(`/practice/${lessonId}/`, {
       offield: data.answer,
     });
-    console.log(response);
-    updateState({
-      ...state,
-      correct: !response?.data.matched,
-    });
+    if (!response?.data.matched) {
+      setError("root.answer", {
+        type: "manual",
+        message: "Incorrect input",
+      });
+    }
+
+    if (response?.data.matched) {
+      const response = await http.get(`/practice/${lessonId}/`);
+      updateState({
+        task: response?.data.iffield,
+        finished: response?.data.finished,
+        correct: true,
+      });
+    }
   });
 
   const session = (
