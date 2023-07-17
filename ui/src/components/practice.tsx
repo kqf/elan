@@ -76,9 +76,9 @@ function Practice() {
       offield: data.answer,
     });
     if (!response?.data.matched) {
-      setError("root.answer", {
+      setError("answer", {
         type: "manual",
-        message: "Incorrect input",
+        message: `Incorrect input: "${data.answer}" is an incorrect answer`,
       });
     }
 
