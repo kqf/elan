@@ -82,7 +82,7 @@ function Practice() {
       });
     }
 
-    if (!response?.data.matched) {
+    if (response?.data.matched) {
       const response = await http.get(`/practice/${lessonId}/`);
       updateState({
         task: response?.data.iffield,
