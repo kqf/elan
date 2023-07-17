@@ -81,11 +81,15 @@ function Practice() {
         message: "Incorrect input",
       });
     }
-    console.log(response);
-    updateState({
-      ...state,
-      correct: !response?.data.matched,
-    });
+
+    if (!response?.data.matched) {
+      const response = await http.get(`/practice/${lessonId}/`);
+      updateState({
+        task: response?.data.iffield,
+        finished: response?.data.finished,
+        correct: true,
+      });
+    }
   });
 
   const session = (
