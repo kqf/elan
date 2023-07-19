@@ -34,6 +34,15 @@ def practice_start(id: int) -> dict[str, Any]:
         db.session.commit()
 
     lesson = user.lessons[current.lesson_id - 1]
+
+    if current.pair_id - 1 >= len(lesson.pairs):
+        return {
+            "iffield": "",
+            "finished": True,
+            "n_current": current.pair_id,
+            "n_total": len(lesson.pairs),
+        }
+
     current_pair = lesson.pairs[current.pair_id - 1]
 
     return {
