@@ -117,9 +117,6 @@ def test_the_practice(client, headers, example):
         headers=headers,
         follow_redirects=True,
     )
-    # TODO: Handle the ill request
-
-    print(response.json)
 
     assert response.json == {
         "iffield": "",
