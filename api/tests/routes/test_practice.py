@@ -119,9 +119,11 @@ def test_the_practice(client, headers, example):
     )
     # TODO: Handle the ill request
 
-    # assert response.json == {
-    #     "iffield": "le monde",
-    #     "finished": False,
-    #     "n_current": 2,
-    #     "n_total": 2,
-    # }
+    print(response.json)
+
+    assert response.json == {
+        "iffield": "",
+        "finished": True,
+        "n_current": 3,
+        "n_total": 2,
+    }
