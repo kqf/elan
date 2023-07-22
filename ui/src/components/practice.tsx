@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useEffect, useState } from "react";
 import { FieldError, UseFormRegisterReturn, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -41,9 +42,11 @@ function Practice() {
   const [state, updateState] = useState({
     task: "Undefined",
     finished: false,
+    correct: true,
   } as {
     task: string;
     finished: Boolean;
+    correct: Boolean;
   });
   useEffect(() => {
     // Fetch the data
@@ -55,6 +58,7 @@ function Practice() {
       updateState({
         task: response?.data.iffield,
         finished: response?.data.finished,
+        correct: true,
       });
     })();
     // eslint-disable-next-line
@@ -63,13 +67,29 @@ function Practice() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
-    const response = await http.post("/users/", { offield: data.answer });
-    console.log(response);
-    navigate("/", { replace: true });
+    const response = await http.post(`/practice/${lessonId}/`, {
+      offield: data.answer,
+    });
+    if (!response?.data.matched) {
+      setError("answer", {
+        type: "manual",
+        message: `Incorrect input: "${data.answer}" is an incorrect answer`,
+      });
+    }
+
+    if (response?.data.matched) {
+      const response = await http.get(`/practice/${lessonId}/`);
+      updateState({
+        task: response?.data.iffield,
+        finished: response?.data.finished,
+        correct: true,
+      });
+    }
   });
 
   const session = (
@@ -84,6 +104,9 @@ function Practice() {
             required: "Please provide the lesson level",
           })}
         />
+        <button disabled={!_.isEmpty(errors)} className="btn btn-primary">
+          Check
+        </button>
       </form>
     </div>
   );

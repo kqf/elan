@@ -41,7 +41,7 @@ def test_the_practice(client, headers, example):
     # sourcery skip: extract-duplicate-method
     # Check the first pair
     response = client.get(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
     )
@@ -55,7 +55,7 @@ def test_the_practice(client, headers, example):
     }
 
     response = client.post(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
         json={
@@ -66,7 +66,7 @@ def test_the_practice(client, headers, example):
 
     # Check the second pair (wrong response)
     response = client.get(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
     )
@@ -78,7 +78,7 @@ def test_the_practice(client, headers, example):
     }
 
     response = client.post(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
         json={
@@ -89,7 +89,7 @@ def test_the_practice(client, headers, example):
 
     # Check the second pair (Correct response)
     response = client.get(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
     )
@@ -102,7 +102,7 @@ def test_the_practice(client, headers, example):
     }
 
     response = client.post(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
         json={
@@ -113,15 +113,14 @@ def test_the_practice(client, headers, example):
 
     # Check the finished lesson
     response = client.get(
-        "/practice/0",
+        "/practice/1",
         headers=headers,
         follow_redirects=True,
     )
-    # TODO: Handle the ill request
 
-    # assert response.json == {
-    #     "iffield": "le monde",
-    #     "finished": False,
-    #     "n_current": 2,
-    #     "n_total": 2,
-    # }
+    assert response.json == {
+        "iffield": "",
+        "finished": True,
+        "n_current": 3,
+        "n_total": 2,
+    }
