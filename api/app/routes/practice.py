@@ -65,7 +65,7 @@ class PracticeResponseResponse(ma.Schema):
 @authenticate(token_auth)
 @body(PracticeResponseInput)
 @response(PracticeResponseResponse)
-def practice_verify(payload, id: int) -> dict[str, str]:
+def practice_verify(payload, id: int) -> dict[str, bool]:
     user = token_auth.current_user()
     current = user.practice_lesson
     if current is None or current.lesson_id != id:
@@ -73,7 +73,7 @@ def practice_verify(payload, id: int) -> dict[str, str]:
 
     lesson = user.lessons[current.lesson_id - 1]
     current_pair = lesson.pairs[current.pair_id - 1]
-    matched = current_pair.offield == payload["offield"]
+    matched = match(current_pair.offield, payload["offield"])
     if matched:
         db.session.delete(user.practice_lesson)
         db.session.commit()
@@ -89,3 +89,7 @@ def practice_verify(payload, id: int) -> dict[str, str]:
     return {
         "matched": matched,
     }
+
+
+def match(target: str, answer: str) -> bool:
+    return target.strip().lower() == answer.strip().lower()
