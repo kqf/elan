@@ -92,4 +92,4 @@ def practice_verify(payload, id: int) -> dict[str, bool]:
 
 
 def match(target: str, answer: str) -> bool:
-    return target == answer
+    return target.strip().lower() == answer.strip().lower()
