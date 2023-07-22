@@ -90,6 +90,7 @@ function Practice() {
         finished: response?.data.finished,
         correct: true,
       });
+      resetField("answer");
     }
   });
 
