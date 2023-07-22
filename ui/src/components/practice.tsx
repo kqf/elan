@@ -68,6 +68,7 @@ function Practice() {
     register,
     handleSubmit,
     setError,
+    resetField,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
