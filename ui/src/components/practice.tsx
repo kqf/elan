@@ -117,7 +117,7 @@ function Practice() {
       <h1>Excercise your skills for lesson {lessonId}</h1>
       <form onSubmit={onSubmit}>
         <ErrorField
-          label={state.task}
+          label={state.previous ? state.previous.task : state.task}
           placeholder="Answer"
           error={errors["answer"]}
           inputs={register("answer", {
