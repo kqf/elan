@@ -12,6 +12,11 @@ type FormValues = {
   answer: string;
 };
 
+type PreviousPair = {
+  task: string;
+  answer: string;
+};
+
 function ErrorField(props: {
   label: string;
   placeholder?: string;
@@ -43,10 +48,12 @@ function Practice() {
     task: "Undefined",
     finished: false,
     correct: true,
+    previous: undefined,
   } as {
     task: string;
     finished: Boolean;
     correct: Boolean;
+    previous?: PreviousPair;
   });
   useEffect(() => {
     // Fetch the data
@@ -73,6 +80,14 @@ function Practice() {
   } = useForm<FormValues>({ mode: "onChange" });
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
+    if (state.previous !== undefined) {
+      resetField("answer");
+      updateState({
+        ...state,
+        previous: undefined,
+      });
+      return;
+    }
     const response = await http.post(`/practice/${lessonId}/`, {
       offield: data.answer,
     });
@@ -89,8 +104,11 @@ function Practice() {
         task: response?.data.iffield,
         finished: response?.data.finished,
         correct: true,
+        previous: {
+          task: state.task,
+          answer: data.answer,
+        },
       });
-      resetField("answer");
     }
   });
 
