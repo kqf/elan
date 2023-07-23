@@ -80,6 +80,14 @@ function Practice() {
   } = useForm<FormValues>({ mode: "onChange" });
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
+    if (state.previous !== undefined) {
+      resetField("answer");
+      updateState({
+        ...state,
+        previous: undefined,
+      });
+      return;
+    }
     const response = await http.post(`/practice/${lessonId}/`, {
       offield: data.answer,
     });
@@ -101,7 +109,6 @@ function Practice() {
           answer: data.answer,
         },
       });
-      resetField("answer");
     }
   });
 
