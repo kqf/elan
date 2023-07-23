@@ -12,6 +12,11 @@ type FormValues = {
   answer: string;
 };
 
+type PreviousPair = {
+  task: string;
+  asnwer: string;
+};
+
 function ErrorField(props: {
   label: string;
   placeholder?: string;
@@ -43,10 +48,12 @@ function Practice() {
     task: "Undefined",
     finished: false,
     correct: true,
+    previous: undefined,
   } as {
     task: string;
     finished: Boolean;
     correct: Boolean;
+    previous?: PreviousPair;
   });
   useEffect(() => {
     // Fetch the data
