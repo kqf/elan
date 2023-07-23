@@ -14,7 +14,7 @@ type FormValues = {
 
 type PreviousPair = {
   task: string;
-  asnwer: string;
+  answer: string;
 };
 
 function ErrorField(props: {
@@ -96,6 +96,10 @@ function Practice() {
         task: response?.data.iffield,
         finished: response?.data.finished,
         correct: true,
+        previous: {
+          task: state.task,
+          answer: data.answer,
+        },
       });
       resetField("answer");
     }
