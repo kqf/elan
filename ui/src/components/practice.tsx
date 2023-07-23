@@ -68,6 +68,7 @@ function Practice() {
     register,
     handleSubmit,
     setError,
+    resetField,
     formState: { errors },
   } = useForm<FormValues>({ mode: "onChange" });
 
@@ -89,6 +90,7 @@ function Practice() {
         finished: response?.data.finished,
         correct: true,
       });
+      resetField("answer");
     }
   });
 
