@@ -120,6 +120,7 @@ function Practice() {
         <ErrorField
           label={state.previous ? state.previous.task : state.task}
           placeholder="Answer"
+          correctAnswer={state.previous}
           error={errors["answer"]}
           inputs={register("answer", {
             required: "Please provide the lesson level",
