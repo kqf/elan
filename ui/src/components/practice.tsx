@@ -21,6 +21,7 @@ function ErrorField(props: {
   label: string;
   placeholder?: string;
   error?: FieldError;
+  correctAnswer?: PreviousPair;
   inputs: UseFormRegisterReturn;
 }) {
   return (
@@ -33,7 +34,10 @@ function ErrorField(props: {
       />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )}{" "}
+      )}
+      {props.correctAnswer && (
+        <div className="alert alert-danger">{props.correctAnswer.answer}</div>
+      )}
     </div>
   );
 }
@@ -119,6 +123,7 @@ function Practice() {
         <ErrorField
           label={state.previous ? state.previous.task : state.task}
           placeholder="Answer"
+          correctAnswer={state.previous}
           error={errors["answer"]}
           inputs={register("answer", {
             required: "Please provide the lesson level",
