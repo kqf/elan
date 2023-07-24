@@ -21,6 +21,7 @@ function ErrorField(props: {
   label: string;
   placeholder?: string;
   error?: FieldError;
+  correctAnswer?: PreviousPair;
   inputs: UseFormRegisterReturn;
 }) {
   return (
@@ -33,7 +34,7 @@ function ErrorField(props: {
       />
       {props.error && (
         <div className="alert alert-danger">{props.error.message}</div>
-      )}{" "}
+      )}
     </div>
   );
 }
