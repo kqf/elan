@@ -44,7 +44,7 @@ function ErrorField(props: {
   );
 
   function correctResponse(answer: PreviousPair) {
-    return `Correct answer: ${answer.answer} -- ${answer.answer}`;
+    return `Correct answer: ${answer.task} -- ${answer.answer}`;
   }
 }
 
