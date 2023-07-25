@@ -36,10 +36,16 @@ function ErrorField(props: {
         <div className="alert alert-danger">{props.error.message}</div>
       )}
       {props.correctAnswer && (
-        <div className="alert alert-success">{`Correct answer: ${props.correctAnswer.answer}`}</div>
+        <div className="alert alert-success">
+          {correctResponse(props.correctAnswer)}
+        </div>
       )}
     </div>
   );
+
+  function correctResponse(answer: PreviousPair) {
+    return `Correct answer: ${answer.task} -- ${answer.answer}`;
+  }
 }
 
 function Practice() {
