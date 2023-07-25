@@ -36,7 +36,7 @@ function ErrorField(props: {
         <div className="alert alert-danger">{props.error.message}</div>
       )}
       {props.correctAnswer && (
-        <div className="alert alert-success">{props.correctAnswer.answer}</div>
+        <div className="alert alert-success">{`Correct answer: ${props.correctAnswer.answer}`}</div>
       )}
     </div>
   );
