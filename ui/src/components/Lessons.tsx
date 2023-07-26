@@ -34,7 +34,7 @@ export default function Lessons() {
     <div>
       <div className="row">
         <div className="col-3">
-          <div className="col">
+          <div className="col my-3">
             <ListGroup
               items={[
                 { name: "a", id: "1" },
@@ -44,14 +44,16 @@ export default function Lessons() {
               selectedItem={"a"}
             />
 
-            <ListGroup
-              items={[
-                { name: "a", id: "1" },
-                { name: "b", id: "2" },
-              ].map((item) => item)}
-              onClick={(arg0) => () => {}}
-              selectedItem={"a"}
-            />
+            <div className="col my-3">
+              <ListGroup
+                items={[
+                  { name: "a", id: "1" },
+                  { name: "b", id: "2" },
+                ].map((item) => item)}
+                onClick={(arg0) => () => {}}
+                selectedItem={"a"}
+              />
+            </div>
           </div>
         </div>
 
