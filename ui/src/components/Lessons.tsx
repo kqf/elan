@@ -43,7 +43,6 @@ export default function Lessons() {
               onClick={(arg0) => () => {}}
               selectedItem={"a"}
             />
-
             <div className="col my-3">
               <ListGroup
                 items={[
