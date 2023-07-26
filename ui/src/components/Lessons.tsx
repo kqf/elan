@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
+import ListGroup from "./listGroup";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -31,27 +32,40 @@ export default function Lessons() {
 
   return (
     <div>
-      <ToastContainer />
-      <div className="col my-3">
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            navigate("/lessons/new");
-          }}
-        >
-          New Lesson
-        </button>
-      </div>
+      <div className="row">
+        <div className="col-3">
+          <ListGroup
+            items={[
+              { name: "a", id: "1" },
+              { name: "b", id: "2" },
+            ].map((item) => item)}
+            onClick={(arg0) => () => {}}
+            selectedItem={"a"}
+          />
+        </div>
 
-      <ul className="list-group">
-        {state.map((u) => {
-          return (
-            <li key={u.id} className="list-group-item">
-              <Link to={`/lesson/${u.id}`}>{u.title}</Link>
-            </li>
-          );
-        })}
-      </ul>
+        <ToastContainer />
+        <div className="col my-3">
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              navigate("/lessons/new");
+            }}
+          >
+            New Lesson
+          </button>
+        </div>
+
+        <ul className="list-group">
+          {state.map((u) => {
+            return (
+              <li key={u.id} className="list-group-item">
+                <Link to={`/lesson/${u.id}`}>{u.title}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
