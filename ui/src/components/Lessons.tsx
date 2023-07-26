@@ -44,27 +44,29 @@ export default function Lessons() {
           />
         </div>
 
-        <ToastContainer />
-        <div className="col my-3">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              navigate("/lessons/new");
-            }}
-          >
-            New Lesson
-          </button>
-        </div>
+        <div className="col">
+          <ToastContainer />
+          <div className="col my-3">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                navigate("/lessons/new");
+              }}
+            >
+              New Lesson
+            </button>
+          </div>
 
-        <ul className="list-group">
-          {state.map((u) => {
-            return (
-              <li key={u.id} className="list-group-item">
-                <Link to={`/lesson/${u.id}`}>{u.title}</Link>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="list-group">
+            {state.map((u) => {
+              return (
+                <li key={u.id} className="list-group-item">
+                  <Link to={`/lesson/${u.id}`}>{u.title}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );
