@@ -44,7 +44,6 @@ export default function Lessons() {
               selectedItem={"a"}
               title={"Level"}
             />
-
             <div className="col my-3">
               <ListGroup
                 items={[
