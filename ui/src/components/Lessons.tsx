@@ -70,6 +70,14 @@ export default function Lessons() {
               New Lesson
             </button>
           </div>
+          <div className="form-group">
+            <input
+              className="form-control my-3"
+              name="search"
+              placeholder={"Search for movies ..."}
+              onChange={() => {}}
+            />
+          </div>
 
           <ul className="list-group">
             {state.map((u) => {
