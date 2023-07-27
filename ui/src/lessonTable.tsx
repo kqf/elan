@@ -7,7 +7,7 @@ export interface SortingColumn {
   order: boolean | "asc" | "desc";
 }
 
-function MovieTable(props: {
+function LessonTable(props: {
   movies: Array<Movie>;
   likeForMovie: (arg0: Movie) => () => void;
   deleteMovie: (arg0: Movie) => () => void;
@@ -80,4 +80,4 @@ function MovieTable(props: {
   );
 }
 
-export default MovieTable;
+export default LessonTable;
