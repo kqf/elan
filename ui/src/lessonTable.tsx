@@ -8,7 +8,7 @@ export interface SortingColumn {
 }
 
 function LessonTable(props: {
-  movies: Array<Movie>;
+  lessons: Array<Movie>;
   likeForMovie: (arg0: Movie) => () => void;
   deleteMovie: (arg0: Movie) => () => void;
   onSort: (column: SortingColumn) => void;
@@ -27,7 +27,9 @@ function LessonTable(props: {
   };
 
   const renderSortIcon = (field: String) => {
-    if (field !== props.sortingBy.column) return null;
+    if (field !== props.sortingBy.column) {
+      return null;
+    }
     if (props.sortingBy.order === "asc")
       return <i className="fa fa-sort-asc" />;
     return <i className="fa fa-sort-desc" />;
@@ -52,7 +54,7 @@ function LessonTable(props: {
         </tr>
       </thead>
       <tbody>
-        {props.movies.map((movie) => {
+        {props.lessons.map((movie) => {
           return (
             <tr key={movie.id}>
               <td>
