@@ -42,6 +42,7 @@ export default function Lessons() {
               ].map((item) => item)}
               onClick={(arg0) => () => {}}
               selectedItem={"a"}
+              title={"Level"}
             />
             <div className="col my-3">
               <ListGroup
@@ -51,6 +52,7 @@ export default function Lessons() {
                 ].map((item) => item)}
                 onClick={(arg0) => () => {}}
                 selectedItem={"a"}
+                title={"Topic"}
               />
             </div>
           </div>
