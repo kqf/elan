@@ -74,7 +74,7 @@ export default function Lessons() {
             <input
               className="form-control my-3"
               name="search"
-              placeholder={"Search for movies ..."}
+              placeholder={"Search for lessons ..."}
               onChange={() => {}}
             />
           </div>
