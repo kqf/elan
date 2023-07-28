@@ -47,21 +47,24 @@ function LessonTable(props: {
         </tr>
       </thead>
       <tbody>
-        {props.lessons.map((movie) => {
+        {props.lessons.map((lesson) => {
           return (
-            <tr key={movie.id}>
+            <tr key={lesson.id}>
               <td>
-                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                <Link to={`/movies/${lesson.id}`}>{lesson.title}</Link>
               </td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
+              <td>{lesson.genre.name}</td>
+              <td>{lesson.numberInStock}</td>
               <td>
-                <Like liked={movie.liked} onClick={props.likeForMovie(movie)} />
+                <Like
+                  liked={lesson.liked}
+                  onClick={props.likeForMovie(lesson)}
+                />
               </td>
               <td>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={props.deleteMovie(movie)}
+                  onClick={props.deleteMovie(lesson)}
                 >
                   Delete
                 </button>
