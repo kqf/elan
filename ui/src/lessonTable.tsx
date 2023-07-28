@@ -40,36 +40,31 @@ function LessonTable(props: {
       <thead>
         <tr>
           <th onClick={sortBy("title")}>Title {renderSortIcon("title")}</th>
-          <th onClick={sortBy("genre.name")}>
-            Genere {renderSortIcon("genre.name")}
-          </th>
-          <th onClick={sortBy("numberInStock")}>
-            Stock {renderSortIcon("numberInStock")}
-          </th>
-          <th onClick={sortBy("dailyRentalRate")}>
-            Rate {renderSortIcon("dailyRentalRate")}
-          </th>
+          <th onClick={sortBy("level")}>Level {renderSortIcon("level")}</th>
+          <th onClick={sortBy("topic")}>Topic {renderSortIcon("topic")}</th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {props.lessons.map((movie) => {
+        {props.lessons.map((lesson) => {
           return (
-            <tr key={movie.id}>
+            <tr key={lesson.id}>
               <td>
-                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                <Link to={`/movies/${lesson.id}`}>{lesson.title}</Link>
               </td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
+              <td>{lesson.genre.name}</td>
+              <td>{lesson.numberInStock}</td>
               <td>
-                <Like liked={movie.liked} onClick={props.likeForMovie(movie)} />
+                <Like
+                  liked={lesson.liked}
+                  onClick={props.likeForMovie(lesson)}
+                />
               </td>
               <td>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={props.deleteMovie(movie)}
+                  onClick={props.deleteMovie(lesson)}
                 >
                   Delete
                 </button>
