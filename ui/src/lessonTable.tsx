@@ -40,15 +40,8 @@ function LessonTable(props: {
       <thead>
         <tr>
           <th onClick={sortBy("title")}>Title {renderSortIcon("title")}</th>
-          <th onClick={sortBy("genre.name")}>
-            Genere {renderSortIcon("genre.name")}
-          </th>
-          <th onClick={sortBy("numberInStock")}>
-            Stock {renderSortIcon("numberInStock")}
-          </th>
-          <th onClick={sortBy("dailyRentalRate")}>
-            Rate {renderSortIcon("dailyRentalRate")}
-          </th>
+          <th onClick={sortBy("level")}>Level {renderSortIcon("level")}</th>
+          <th onClick={sortBy("topic")}>Topic {renderSortIcon("topic")}</th>
           <th></th>
           <th></th>
         </tr>
@@ -62,7 +55,6 @@ function LessonTable(props: {
               </td>
               <td>{movie.genre.name}</td>
               <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
               <td>
                 <Like liked={movie.liked} onClick={props.likeForMovie(movie)} />
               </td>
