@@ -17,6 +17,7 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 interface Lesson {
+  id: string;
   title: string;
   level: string;
   topic: string;
