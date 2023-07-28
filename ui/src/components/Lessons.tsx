@@ -16,9 +16,16 @@ axios.interceptors.response.use(null, (error) => {
   }
 });
 
+interface Lesson {
+  title: string;
+  level: string;
+  topic: string;
+  pairs: Array<any>;
+}
+
 export default function Lessons() {
   const navigate = useNavigate();
-  const [state, updateState] = useState([] as Array<any>);
+  const [state, updateState] = useState([] as Array<Lesson>);
   useEffect(() => {
     // Fetch the data
     (async () => {
