@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Like from "./components/like";
-import { Movie } from "./schemes";
+import { Lesson } from "./schemes";
 
 export interface SortingColumn {
   column: String;
@@ -8,9 +8,9 @@ export interface SortingColumn {
 }
 
 function LessonTable(props: {
-  lessons: Array<Movie>;
-  likeForMovie: (arg0: Movie) => () => void;
-  deleteMovie: (arg0: Movie) => () => void;
+  lessons: Array<Lesson>;
+  likeForMovie: (arg0: Lesson) => () => void;
+  deleteMovie: (arg0: Lesson) => () => void;
   onSort: (column: SortingColumn) => void;
   sortingBy: SortingColumn;
 }) {
@@ -53,13 +53,10 @@ function LessonTable(props: {
               <td>
                 <Link to={`/movies/${lesson.id}`}>{lesson.title}</Link>
               </td>
-              <td>{lesson.genre.name}</td>
-              <td>{lesson.numberInStock}</td>
+              <td>{lesson.level}</td>
+              <td>{lesson.topic}</td>
               <td>
-                <Like
-                  liked={lesson.liked}
-                  onClick={props.likeForMovie(lesson)}
-                />
+                <Like liked={true} onClick={props.likeForMovie(lesson)} />
               </td>
               <td>
                 <button
