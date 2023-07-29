@@ -53,13 +53,10 @@ function LessonTable(props: {
               <td>
                 <Link to={`/movies/${lesson.id}`}>{lesson.title}</Link>
               </td>
-              <td>{lesson.genre.name}</td>
-              <td>{lesson.numberInStock}</td>
+              <td>{lesson.level}</td>
+              <td>{lesson.topic}</td>
               <td>
-                <Like
-                  liked={lesson.liked}
-                  onClick={props.likeForMovie(lesson)}
-                />
+                <Like liked={true} onClick={props.likeForMovie(lesson)} />
               </td>
               <td>
                 <button
