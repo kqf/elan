@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
+import { Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 
 axios.interceptors.response.use(null, (error) => {
@@ -15,14 +16,6 @@ axios.interceptors.response.use(null, (error) => {
     toast.error("Unexpected error");
   }
 });
-
-interface Lesson {
-  id: string;
-  title: string;
-  level: string;
-  topic: string;
-  pairs: Array<any>;
-}
 
 export default function Lessons() {
   const navigate = useNavigate();
