@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
+import LessonTable, { SortingColumn } from "../lessonTable";
 import { Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 
@@ -79,6 +80,14 @@ export default function Lessons() {
               onChange={() => {}}
             />
           </div>
+
+          <LessonTable
+            lessons={state}
+            likeForMovie={(arg0: Lesson) => () => {}}
+            deleteMovie={(arg0: Lesson) => () => {}}
+            onSort={(column: SortingColumn) => {}}
+            sortingBy={{ column: "title", order: "asc" }}
+          />
 
           <ul className="list-group">
             {state.map((u) => {
