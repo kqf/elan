@@ -20,7 +20,14 @@ axios.interceptors.response.use(null, (error) => {
 
 export default function Lessons() {
   const navigate = useNavigate();
-  const [state, updateState] = useState([] as Array<Lesson>);
+  const [state, updateState] = useState({
+    lessons: [] as Array<Lesson>,
+    searchQuery: "" as string,
+    pageSize: 4,
+    currentPage: 1,
+    sortColumn: { column: "title", order: "asc" } as SortingColumn,
+  });
+
   useEffect(() => {
     // Fetch the data
     (async () => {
@@ -82,7 +89,7 @@ export default function Lessons() {
           </div>
 
           <LessonTable
-            lessons={state}
+            lessons={state.lessons}
             likeLesson={(arg0: Lesson) => () => {}}
             deleteLesson={(arg0: Lesson) => () => {}}
             onSort={(column: SortingColumn) => {}}
@@ -90,7 +97,7 @@ export default function Lessons() {
           />
 
           <ul className="list-group">
-            {state.map((u) => {
+            {state.lessons.map((u) => {
               return (
                 <li key={u.id} className="list-group-item">
                   <Link to={`/lesson/${u.id}`}>{u.title}</Link>
