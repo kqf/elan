@@ -52,7 +52,7 @@ export default function Lessons() {
                 { name: "b", id: "2" },
               ].map((item) => item)}
               onClick={(arg0) => () => {}}
-              selectedItem={"a"}
+              selectedItem={state.selectedLevel}
               title={"Level"}
             />
             <div className="col my-3">
@@ -62,7 +62,7 @@ export default function Lessons() {
                   { name: "b", id: "2" },
                 ].map((item) => item)}
                 onClick={(arg0) => () => {}}
-                selectedItem={"a"}
+                selectedItem={state.selectedTopic}
                 title={"Topic"}
               />
             </div>
