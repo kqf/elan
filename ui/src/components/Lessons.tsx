@@ -83,8 +83,8 @@ export default function Lessons() {
 
           <LessonTable
             lessons={state}
-            likeForMovie={(arg0: Lesson) => () => {}}
-            deleteMovie={(arg0: Lesson) => () => {}}
+            likeLesson={(arg0: Lesson) => () => {}}
+            deleteLesson={(arg0: Lesson) => () => {}}
             onSort={(column: SortingColumn) => {}}
             sortingBy={{ column: "title", order: "asc" }}
           />
