@@ -9,8 +9,8 @@ export interface SortingColumn {
 
 function LessonTable(props: {
   lessons: Array<Lesson>;
-  likeForMovie: (arg0: Lesson) => () => void;
-  deleteMovie: (arg0: Lesson) => () => void;
+  likeLesson: (arg0: Lesson) => () => void;
+  deleteLesson: (arg0: Lesson) => () => void;
   onSort: (column: SortingColumn) => void;
   sortingBy: SortingColumn;
 }) {
@@ -56,12 +56,12 @@ function LessonTable(props: {
               <td>{lesson.level}</td>
               <td>{lesson.topic}</td>
               <td>
-                <Like liked={true} onClick={props.likeForMovie(lesson)} />
+                <Like liked={true} onClick={props.likeLesson(lesson)} />
               </td>
               <td>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={props.deleteMovie(lesson)}
+                  onClick={props.deleteLesson(lesson)}
                 >
                   Delete
                 </button>
