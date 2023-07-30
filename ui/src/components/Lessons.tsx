@@ -22,6 +22,8 @@ export default function Lessons() {
   const navigate = useNavigate();
   const [state, updateState] = useState({
     lessons: [] as Array<Lesson>,
+    selectedLevel: "" as string,
+    selectedTopic: "" as string,
     searchQuery: "" as string,
     pageSize: 4,
     currentPage: 1,
