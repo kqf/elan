@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
-import { Lesson } from "../schemes";
+import { Genre, Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 
 axios.interceptors.response.use(null, (error) => {
@@ -25,7 +25,7 @@ export default function Lessons() {
     lessons: [] as Array<Lesson>,
     selectedLevel: "" as string,
     selectedTopic: "" as string,
-    topics: null as any,
+    topics: [] as Array<Genre>,
     searchQuery: "" as string,
     pageSize: 4,
     currentPage: 1,
@@ -57,10 +57,7 @@ export default function Lessons() {
         <div className="col-3">
           <div className="col my-3">
             <ListGroup
-              items={[
-                { name: "a", id: "1" },
-                { name: "b", id: "2" },
-              ].map((item) => item)}
+              items={state.topics.map((item) => item)}
               onClick={(arg0) => () => {}}
               selectedItem={state.selectedLevel}
               title={"Level"}
