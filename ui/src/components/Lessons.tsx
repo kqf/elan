@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,6 +25,7 @@ export default function Lessons() {
     lessons: [] as Array<Lesson>,
     selectedLevel: "" as string,
     selectedTopic: "" as string,
+    topics: null as any,
     searchQuery: "" as string,
     pageSize: 4,
     currentPage: 1,
@@ -36,9 +38,14 @@ export default function Lessons() {
       const response = await http.get("/lessons/", () => {
         navigate("/login");
       });
+      const lessons = response?.data;
+      const topics = _.uniq(_.map(lessons, "topic")).map((l, i) => {
+        return { name: l, id: String(i) };
+      });
       updateState({
         ...state,
         lessons: response?.data,
+        topics: topics,
       });
     })();
     // eslint-disable-next-line
