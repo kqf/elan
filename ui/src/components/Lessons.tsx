@@ -36,7 +36,10 @@ export default function Lessons() {
       const response = await http.get("/lessons/", () => {
         navigate("/login");
       });
-      updateState(response?.data);
+      updateState({
+        ...state,
+        lessons: response?.data,
+      });
     })();
     // eslint-disable-next-line
   }, []);
