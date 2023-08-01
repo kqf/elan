@@ -1,7 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
@@ -106,16 +106,6 @@ export default function Lessons() {
             onSort={(column: SortingColumn) => {}}
             sortingBy={{ column: "title", order: "asc" }}
           />
-
-          <ul className="list-group">
-            {state.lessons.map((u) => {
-              return (
-                <li key={u.id} className="list-group-item">
-                  <Link to={`/lesson/${u.id}`}>{u.title}</Link>
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </div>
     </div>
