@@ -69,10 +69,7 @@ export default function Lessons() {
             />
             <div className="col my-3">
               <ListGroup
-                items={[
-                  { name: "a", id: "1" },
-                  { name: "b", id: "2" },
-                ].map((item) => item)}
+                items={state.levels.map((item) => item)}
                 onClick={(arg0) => () => {}}
                 selectedItem={state.selectedTopic}
                 title={"Topic"}
