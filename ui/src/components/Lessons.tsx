@@ -71,7 +71,7 @@ export default function Lessons() {
               <ListGroup
                 items={state.levels.map((item) => item)}
                 onClick={(arg0) => () => {}}
-                selectedItem={state.selectedTopic}
+                selectedItem={state.selectedLevel}
                 title={"Topic"}
               />
             </div>
