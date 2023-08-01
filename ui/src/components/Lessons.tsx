@@ -23,9 +23,10 @@ export default function Lessons() {
   const navigate = useNavigate();
   const [state, updateState] = useState({
     lessons: [] as Array<Lesson>,
+    topics: [] as Array<Genre>,
+    levels: [] as Array<Genre>,
     selectedLevel: "" as string,
     selectedTopic: "" as string,
-    topics: [] as Array<Genre>,
     searchQuery: "" as string,
     pageSize: 4,
     currentPage: 1,
@@ -42,10 +43,14 @@ export default function Lessons() {
       const topics = _.uniq(_.map(lessons, "topic")).map((l, i) => {
         return { name: l, id: String(i) };
       });
+      const levels = _.uniq(_.map(lessons, "level")).map((l, i) => {
+        return { name: l, id: String(i) };
+      });
       updateState({
         ...state,
         lessons: response?.data,
         topics: topics,
+        levels: levels,
       });
     })();
     // eslint-disable-next-line
