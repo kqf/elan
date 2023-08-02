@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
-import { Genre, Lesson } from "../schemes";
+import { Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
 
@@ -24,8 +24,8 @@ export default function Lessons() {
   const navigate = useNavigate();
   const [state, updateState] = useState({
     lessons: [] as Array<Lesson>,
-    topics: [] as Array<Genre>,
-    levels: [] as Array<Genre>,
+    topics: [] as Array<String>,
+    levels: [] as Array<String>,
     selectedLevel: "" as string,
     selectedTopic: "" as string,
     searchQuery: "" as string,
@@ -41,12 +41,9 @@ export default function Lessons() {
         navigate("/login");
       });
       const lessons = response?.data;
-      const topics = _.uniq(_.map(lessons, "topic")).map((l, i) => {
-        return { name: l, id: String(i) };
-      });
-      const levels = _.uniq(_.map(lessons, "level")).map((l, i) => {
-        return { name: l, id: String(i) };
-      });
+      const topics = _.uniq(_.map(lessons, "topic"));
+      const levels = _.uniq(_.map(lessons, "level"));
+
       updateState({
         ...state,
         lessons: response?.data,
@@ -63,14 +60,14 @@ export default function Lessons() {
         <div className="col-3">
           <div className="col my-3">
             <ListGroup
-              items={state.topics.map((item) => item)}
+              items={state.topics}
               onClick={(arg0) => () => {}}
               selectedItem={state.selectedLevel}
               title={"Level"}
             />
             <div className="col my-3">
               <ListGroup
-                items={state.levels.map((item) => item)}
+                items={state.levels}
                 onClick={(arg0) => () => {}}
                 selectedItem={state.selectedLevel}
                 title={"Topic"}
