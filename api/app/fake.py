@@ -90,12 +90,15 @@ def create_movies(db: SQLAlchemy) -> None:
 
 
 def create_lessons(db: SQLAlchemy) -> None:
-    names = [
-        "Lesson 1",
-        "Lesson 2",
-        "Lesson 3",
+    names = [f"Lesson {i}" for i in range(10)]
+    lessons = [
+        Lesson(
+            title=name,
+            level=f"B {i % 3 + 1}",
+            topic=f"Topic {i % 4 + 1}",
+        )
+        for i, name in enumerate(names)
     ]
-    lessons = [Lesson(title=name) for name in names]
     db.session.add_all(lessons)
     db.session.commit()
 
@@ -104,6 +107,9 @@ def create_lessons(db: SQLAlchemy) -> None:
         db.session.commit()
 
     for (i, lesson), j in itertools.product(enumerate(lessons), range(10)):
-        pair = Pair(iffield=f"Pair {j} from leson{i}", offield="test")
+        pair = Pair(
+            iffield=f"Pair {j} from leson{i}. Answer is 'test'",
+            offield="test",
+        )
         lesson.pairs.append(pair)
         db.session.commit()
