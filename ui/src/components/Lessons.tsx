@@ -7,6 +7,7 @@ import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
 import { Genre, Lesson } from "../schemes";
 import ListGroup from "./listGroup";
+import Pagination from "./pagination";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -105,6 +106,14 @@ export default function Lessons() {
             deleteLesson={(arg0: Lesson) => () => {}}
             onSort={(column: SortingColumn) => {}}
             sortingBy={{ column: "title", order: "asc" }}
+          />
+
+          <Pagination
+            // itemCount={filteredByGenre.length}
+            itemCount={state.lessons.length}
+            pageSize={state.pageSize}
+            currentPage={state.currentPage}
+            // onClick={switchPage}
           />
         </div>
       </div>
