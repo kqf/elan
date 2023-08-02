@@ -123,7 +123,7 @@ function Movies() {
     <div className="row">
       <div className="col-3">
         <ListGroup
-          items={state.genres.map((item) => item)}
+          items={state.genres.map((item) => item.name)}
           onClick={handleGenreChange}
           selectedItem={state.selectedGenre}
         />
