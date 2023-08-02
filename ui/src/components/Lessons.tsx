@@ -113,7 +113,12 @@ export default function Lessons() {
             itemCount={state.lessons.length}
             pageSize={state.pageSize}
             currentPage={state.currentPage}
-            // onClick={switchPage}
+            onClick={(page: number) => () => {
+              updateState({
+                ...state,
+                currentPage: page,
+              });
+            }}
           />
         </div>
       </div>
