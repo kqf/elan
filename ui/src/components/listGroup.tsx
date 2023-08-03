@@ -1,8 +1,3 @@
-interface ListEntry {
-  name: String;
-  id: String;
-}
-
 function ListGroup(props: {
   items: Array<String>;
   onClick: (arg0: String) => () => void;
