@@ -97,7 +97,14 @@ export default function Lessons() {
               className="form-control my-3"
               name="search"
               placeholder={"Search for lessons ..."}
-              onChange={() => {}}
+              onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                updateState({
+                  ...state,
+                  searchQuery: event.currentTarget.value,
+                  // This is needed to fix the issues with search
+                  currentPage: 1,
+                });
+              }}
             />
           </div>
 
