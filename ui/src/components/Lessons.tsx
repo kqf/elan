@@ -64,7 +64,7 @@ export default function Lessons() {
               onClick={(topic) => () => {
                 updateState({ ...state, selectedTopic: topic as string });
               }}
-              selectedItem={state.selectedLevel}
+              selectedItem={state.selectedTopic}
               title={"Level"}
             />
             <div className="col my-3">
