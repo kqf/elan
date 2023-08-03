@@ -61,7 +61,9 @@ export default function Lessons() {
           <div className="col my-3">
             <ListGroup
               items={state.topics}
-              onClick={(arg0) => () => {}}
+              onClick={(topic) => () => {
+                updateState({ ...state, selectedTopic: topic as string });
+              }}
               selectedItem={state.selectedLevel}
               title={"Level"}
             />
