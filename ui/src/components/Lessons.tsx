@@ -101,6 +101,8 @@ export default function Lessons() {
                 updateState({
                   ...state,
                   searchQuery: event.currentTarget.value,
+                  selectedLevel: "",
+                  selectedTopic: "",
                   // This is needed to fix the issues with search
                   currentPage: 1,
                 });
