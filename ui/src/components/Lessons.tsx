@@ -54,10 +54,15 @@ export default function Lessons() {
     // eslint-disable-next-line
   }, []);
 
-  const filteredByTopic = state.lessons.filter(
-    (lesson) =>
-      state.selectedTopic === lesson.topic || state.selectedTopic === ""
-  );
+  const filteredByTopic = state.lessons
+    .filter(
+      (lesson) =>
+        state.selectedTopic === lesson.topic || state.selectedTopic === ""
+    )
+    .filter(
+      (lesson) =>
+        state.selectedLevel === lesson.level || state.selectedLevel === ""
+    );
 
   const final = filteredByTopic;
 
@@ -79,7 +84,8 @@ export default function Lessons() {
               <ListGroup
                 items={state.levels}
                 onClick={(level) => () => {
-                  updateState({ ...state, selectedLevel: level as string });
+                  const selected = level === state.selectedLevel ? "" : level;
+                  updateState({ ...state, selectedLevel: selected as string });
                 }}
                 selectedItem={state.selectedLevel}
                 title={"Topic"}
