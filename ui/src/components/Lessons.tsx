@@ -57,11 +57,11 @@ export default function Lessons() {
   const filteredByTopic = state.lessons
     .filter(
       (lesson) =>
-        state.selectedTopic === lesson.topic || state.selectedTopic === ""
+        state.selectedLevel === lesson.level || state.selectedLevel === ""
     )
     .filter(
       (lesson) =>
-        state.selectedLevel === lesson.level || state.selectedLevel === ""
+        state.selectedTopic === lesson.topic || state.selectedTopic === ""
     )
     .filter(
       (lesson) =>
