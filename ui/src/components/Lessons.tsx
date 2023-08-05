@@ -62,6 +62,11 @@ export default function Lessons() {
     .filter(
       (lesson) =>
         state.selectedLevel === lesson.level || state.selectedLevel === ""
+    )
+    .filter(
+      (lesson) =>
+        lesson.title.toLowerCase().startsWith(state.searchQuery) ||
+        state.searchQuery === ""
     );
 
   const final = filteredByTopic;
