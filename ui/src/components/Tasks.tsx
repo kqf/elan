@@ -29,13 +29,11 @@ export default function Lessons() {
       });
       const lessons = response?.data;
       const topics = _.uniq(_.map(lessons, "topic"));
-      const levels = _.uniq(_.map(lessons, "level")).reverse();
 
       updateState({
         ...state,
         lessons: response?.data,
         topics: topics,
-        levels: levels,
       });
     })();
     // eslint-disable-next-line
