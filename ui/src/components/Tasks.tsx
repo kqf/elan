@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
 import { Lesson } from "../schemes";
@@ -88,7 +87,6 @@ export default function Lessons() {
         </div>
 
         <div className="col">
-          <ToastContainer />
           <div className="col my-3">
             <button
               className="btn btn-primary"
