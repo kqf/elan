@@ -1,21 +1,12 @@
-import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
 import { Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
-
-axios.interceptors.response.use(null, (error) => {
-  const expectedError = error.response && error.resonse.status < 500;
-
-  if (!expectedError) {
-    toast.error("Unexpected error");
-  }
-});
 
 export default function Lessons() {
   const navigate = useNavigate();
