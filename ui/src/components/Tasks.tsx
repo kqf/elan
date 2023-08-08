@@ -32,7 +32,6 @@ export default function Lessons() {
 
       updateState({
         ...state,
-        lessons: response?.data,
         topics: topics,
       });
     })();
