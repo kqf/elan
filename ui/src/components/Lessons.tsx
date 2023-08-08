@@ -10,10 +10,7 @@ import ListGroup from "./listGroup";
 import Pagination from "./pagination";
 
 axios.interceptors.response.use(null, (error) => {
-  const expectedError =
-    error.response &&
-    error.response.status >= 400 &&
-    error.resonse.status < 500;
+  const expectedError = error.response && error.resonse.status < 500;
 
   if (!expectedError) {
     toast.error("Unexpected error");
