@@ -120,7 +120,9 @@ export default function Lessons() {
           <LessonTable
             lessons={final}
             likeLesson={(arg0: Lesson) => () => {}}
-            deleteLesson={(arg0: Lesson) => () => {}}
+            deleteLesson={(arg0: Lesson) => () => {
+              console.log("Debug");
+            }}
             onSort={(column: SortingColumn) => {}}
             sortingBy={{ column: "title", order: "asc" }}
           />
