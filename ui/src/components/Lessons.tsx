@@ -123,7 +123,12 @@ export default function Lessons() {
             deleteLesson={(arg0: Lesson) => () => {
               console.log("Debug");
             }}
-            onSort={(column: SortingColumn) => {}}
+            onSort={(column: SortingColumn) => {
+              updateState({
+                ...state,
+                sortColumn: column,
+              });
+            }}
             sortingBy={{ column: "title", order: "asc" }}
           />
 
