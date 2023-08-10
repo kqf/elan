@@ -73,7 +73,7 @@ function App() {
       <div>
         <div className="content">
           <Routes>
-            <Route path="/" element={protect(<Movies />)}></Route>
+            <Route path="/" element={protect(<Lessons />)}></Route>
             <Route path="/movies/" element={protect(<Movies />)} />
             <Route path="/movies/new" element={protect(<NewMovie />)} />
             <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
@@ -83,7 +83,6 @@ function App() {
               path="/lesson/:id?/practice"
               element={protect(<Practice />)}
             />
-            <Route path="/lessons" element={protect(<Lessons />)} />
             <Route path="/lessons/new" element={protect(<NewLesson />)} />
             <Route path="/blog/" element={<Blog />} />
             <Route path="/login" element={<LoginForm />} />
