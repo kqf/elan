@@ -120,8 +120,8 @@ export default function Lessons() {
           <LessonTable
             lessons={final}
             likeLesson={(arg0: Lesson) => () => {}}
-            deleteLesson={(arg0: Lesson) => () => {
-              navigate(`/lessons/practice/${arg0.id}`);
+            deleteLesson={(lesson: Lesson) => () => {
+              navigate(`/lessons/practice/${lesson.id}`);
             }}
             onSort={(column: SortingColumn) => {
               updateState({
