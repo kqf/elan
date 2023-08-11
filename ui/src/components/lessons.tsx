@@ -121,7 +121,7 @@ export default function Lessons() {
             lessons={final}
             likeLesson={(arg0: Lesson) => () => {}}
             deleteLesson={(arg0: Lesson) => () => {
-              console.log("Debug");
+              navigate(`/lessons/practice/${arg0.id}`);
             }}
             onSort={(column: SortingColumn) => {
               updateState({
