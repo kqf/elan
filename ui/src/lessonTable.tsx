@@ -60,10 +60,10 @@ function LessonTable(props: {
               </td>
               <td>
                 <button
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-primary btn-sm"
                   onClick={props.deleteLesson(lesson)}
                 >
-                  Delete
+                  Practice
                 </button>
               </td>
             </tr>
