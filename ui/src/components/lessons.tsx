@@ -61,7 +61,7 @@ export default function Lessons() {
     filteredByTopic,
     state.sortColumn.column,
     state.sortColumn.order
-  );
+  ) as Array<Lesson>;
 
   return (
     <div>
