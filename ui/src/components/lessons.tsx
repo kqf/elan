@@ -57,7 +57,11 @@ export default function Lessons() {
         state.searchQuery === ""
     );
 
-  const final = filteredByTopic;
+  const final = _.orderBy(
+    filteredByTopic,
+    state.sortColumn.column,
+    state.sortColumn.order
+  );
 
   return (
     <div>
