@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import http from "../auth";
 import LessonTable, { SortingColumn } from "../lessonTable";
+import paginate from "../paginate";
 import { Lesson } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
@@ -57,11 +58,14 @@ export default function Lessons() {
         state.searchQuery === ""
     );
 
+
   const final = _.orderBy(
     filteredByTopic,
     state.sortColumn.column,
     state.sortColumn.order
   ) as Array<Lesson>;
+
+  const final = paginate(sorted, state.currentPage, state.pageSize);
 
   return (
     <div>
