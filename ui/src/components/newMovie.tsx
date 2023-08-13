@@ -1,7 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { FieldError, useForm, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError, UseFormRegisterReturn, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Genre } from "../schemes";
@@ -70,11 +70,9 @@ function NewMovie() {
         liked: false,
       });
     } catch (ex) {
-      if (axios.isAxiosError(ex)) {
-        if (ex.response) {
-          console.log(ex.response);
-          toast.error("Somethign went wrong, can't upate the server");
-        }
+      if (axios.isAxiosError(ex) && ex.response) {
+        console.log(ex.response);
+        toast.error("Somethign went wrong, can't upate the server");
       }
     }
 
