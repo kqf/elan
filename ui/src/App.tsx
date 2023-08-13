@@ -9,14 +9,11 @@ import LessonPage from "./components/Lesson";
 import Blog from "./components/blog";
 import Lessons from "./components/lessons";
 import LoginForm from "./components/login";
-import Movies from "./components/movies";
 import NavBar from "./components/navbar";
 import NewLesson from "./components/newLesson";
-import NewMovie from "./components/newMovie";
 import Practice from "./components/practice";
 import RegisterForm from "./components/register";
 import UserList from "./components/users";
-import MovieComponent from "./movieComponent";
 import { User } from "./schemes";
 
 function NotFound() {
@@ -74,9 +71,6 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={protect(<Lessons />)}></Route>
-            <Route path="/movies/" element={protect(<Movies />)} />
-            <Route path="/movies/new" element={protect(<NewMovie />)} />
-            <Route path="/movies/:id?" element={protect(<MovieComponent />)} />
             <Route path="/users" element={protect(<UserList />)} />
             <Route path="/lesson/:id" element={protect(<LessonPage />)} />
             <Route
