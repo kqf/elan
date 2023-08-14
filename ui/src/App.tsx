@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 import "./App.css";
 import http from "./auth";
 import LessonPage from "./components/Lesson";
-import Blog from "./components/blog";
 import Lessons from "./components/lessons";
 import LoginForm from "./components/login";
 import NavBar from "./components/navbar";
@@ -78,7 +77,6 @@ function App() {
               element={protect(<Practice />)}
             />
             <Route path="/lessons/new" element={protect(<NewLesson />)} />
-            <Route path="/blog/" element={<Blog />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/not-found" element={<NotFound />} />
