@@ -10,7 +10,7 @@ function NavBar(props: { user?: User }) {
     window.location.reload();
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           Elan
