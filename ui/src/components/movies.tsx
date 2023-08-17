@@ -4,9 +4,19 @@ import { useNavigate } from "react-router-dom";
 import http from "../auth";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
-import { Genre, Movie } from "../schemes";
+import { Genre } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
+
+export interface Movie {
+  id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: number;
+  dailyRentalRate: number;
+  publishDate: string;
+  liked: boolean;
+}
 
 function Movies() {
   const [state, updateState] = useState({
