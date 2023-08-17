@@ -4,9 +4,13 @@ import { useNavigate } from "react-router-dom";
 import http from "../auth";
 import MovieTable, { SortingColumn } from "../movieTable";
 import paginate from "../paginate";
-import { Genre } from "../schemes";
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
+
+export interface Genre {
+  id: string;
+  name: string;
+}
 
 export interface Movie {
   id: string;
