@@ -90,7 +90,7 @@ def create_movies(db: SQLAlchemy) -> None:
 
 
 def create_lessons(db: SQLAlchemy) -> None:
-    names = [f"Lesson {i}" for i in range(10)]
+    names = [f"Lesson {i}" for i in range(24)]
     lessons = [
         Lesson(
             title=name,
