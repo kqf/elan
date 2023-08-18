@@ -1,6 +1,28 @@
 import { Link } from "react-router-dom";
 import Like from "./components/like";
-import { Movie } from "./schemes";
+export interface Movie {
+  id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: number;
+  dailyRentalRate: number;
+  publishDate: string;
+  liked: boolean;
+}
+export interface Genre {
+  id: string;
+  name: string;
+}
+
+export interface Movie {
+  id: string;
+  title: string;
+  genre: Genre;
+  numberInStock: number;
+  dailyRentalRate: number;
+  publishDate: string;
+  liked: boolean;
+}
 
 export interface SortingColumn {
   column: String;
