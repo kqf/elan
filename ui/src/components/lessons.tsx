@@ -140,8 +140,7 @@ export default function Lessons() {
           />
 
           <Pagination
-            // itemCount={filteredByGenre.length}
-            itemCount={final.length}
+            itemCount={sorted.length}
             pageSize={state.pageSize}
             currentPage={state.currentPage}
             onClick={(page: number) => () => {
