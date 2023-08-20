@@ -49,7 +49,9 @@ function MovieTable(props: {
   };
 
   const renderSortIcon = (field: String) => {
-    if (field !== props.sortingBy.column) return null;
+    if (field !== props.sortingBy.column) {
+      return null;
+    }
     if (props.sortingBy.order === "asc")
       return <i className="fa fa-sort-asc" />;
     return <i className="fa fa-sort-desc" />;
