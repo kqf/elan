@@ -2,12 +2,11 @@ import itertools
 
 from flask_sqlalchemy import SQLAlchemy
 
-from app.models import Genre, Lesson, Movie, Pair, User
+from app.models import Lesson, Movie, Pair, User
 
 _movies = [
     {
         "title": "Die Hard",
-        "genre": "Action",
         "numberInStock": 10,
         "dailyRentalRate": 2.99,
         "publishDate": "1988-07-15",
@@ -15,7 +14,6 @@ _movies = [
     },
     {
         "title": "The Hangover",
-        "genre": "Comedy",
         "numberInStock": 7,
         "dailyRentalRate": 1.99,
         "publishDate": "2009-06-05",
@@ -23,7 +21,6 @@ _movies = [
     },
     {
         "title": "The Godfather",
-        "genre": "Drama",
         "numberInStock": 3,
         "dailyRentalRate": 3.99,
         "publishDate": "1972-03-24",
@@ -31,7 +28,6 @@ _movies = [
     },
     {
         "title": "The Shawshank Redemption",
-        "genre": "Drama",
         "numberInStock": 5,
         "dailyRentalRate": 2.50,
         "publishDate": "1994-09-23",
@@ -39,7 +35,6 @@ _movies = [
     },
     {
         "title": "The Dark Knight",
-        "genre": "Action",
         "numberInStock": 3,
         "dailyRentalRate": 3.00,
         "publishDate": "2008-07-18",
@@ -47,7 +42,6 @@ _movies = [
     },
     {
         "title": "Forrest Gump",
-        "genre": "Drama",
         "numberInStock": 8,
         "dailyRentalRate": 1.99,
         "publishDate": "1994-07-06",
@@ -55,7 +49,6 @@ _movies = [
     },
     {
         "title": "Jurassic Park",
-        "genre": "Sci-Fi",
         "numberInStock": 2,
         "dailyRentalRate": 2.50,
         "publishDate": "1993-06-11",
@@ -63,7 +56,6 @@ _movies = [
     },
     {
         "title": "Pulp Fiction",
-        "genre": "Crime",
         "numberInStock": 4,
         "dailyRentalRate": 2.25,
         "publishDate": "1994-10-14",
@@ -73,8 +65,9 @@ _movies = [
 
 
 def create_movies(db: SQLAlchemy) -> None:
-    unique_genres: set[str] = {str(movie["genre"]) for movie in _movies}
-    genres = {genre: Genre(name=genre) for genre in sorted(unique_genres)}
+    # unique_genres: set[str] = {str(movie["genre"]) for movie in _movies}
+    genres = {}
+    # genres = {genre: Genre(name=genre) for genre in sorted(unique_genres)}
     db.session.add_all(genres.values())
     db.session.commit()
 
