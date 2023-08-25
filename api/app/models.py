@@ -168,17 +168,6 @@ class Pair(db.Model):
     )
 
 
-class Genre(db.Model):
-    __tablename__ = "genres"
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-        unique=True,
-        autoincrement=True,
-    )
-    name = db.Column(db.String)
-
-
 class Movie(db.Model):
     __tablename__ = "movies"
     id = db.Column(
@@ -188,8 +177,6 @@ class Movie(db.Model):
         autoincrement=True,
     )
     title = db.Column(db.String)
-    genre_id = db.Column(db.Integer, db.ForeignKey("genres.id"))
-    genre = db.relationship("Genre")
     numberInStock = db.Column(db.Integer)
     dailyRentalRate = db.Column(db.Float)
     publishDate = db.Column(db.String)
