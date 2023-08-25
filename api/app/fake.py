@@ -65,12 +65,8 @@ _movies = [
 
 
 def create_movies(db: SQLAlchemy) -> None:
-    def to_movie(movie):
-        model = {k: v for k, v in movie.items() if k != "genre"}
-        return model
-
     # create some movies
-    movies = [Movie(**to_movie(movie)) for movie in _movies]
+    movies = [Movie(**movie) for movie in _movies]
     db.session.add_all(movies)
     db.session.commit()
 
