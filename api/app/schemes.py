@@ -1,5 +1,5 @@
 from app import ma
-from app.models import Genre, Lesson, Movie, Pair, Token, User
+from app.models import Lesson, Movie, Pair, Token, User
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
@@ -38,13 +38,6 @@ class TokenSchema(ma.SQLAlchemyAutoSchema):
         model = Token
 
 
-class GenreSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Genre
-
-
 class MovieSchema(ma.SQLAlchemyAutoSchema):
-    genre = ma.Nested(GenreSchema)
-
     class Meta:
         model = Movie
