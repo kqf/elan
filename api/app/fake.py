@@ -2,7 +2,7 @@ import itertools
 
 from flask_sqlalchemy import SQLAlchemy
 
-from app.models import Lesson, Movie, Pair, User
+from app.models import Lesson, Pair, User
 
 _movies = [
     {
@@ -65,10 +65,7 @@ _movies = [
 
 
 def create_movies(db: SQLAlchemy) -> None:
-    # create some movies
-    movies = [Movie(**movie) for movie in _movies]
-    db.session.add_all(movies)
-    db.session.commit()
+    pass
 
 
 def create_lessons(db: SQLAlchemy) -> None:
