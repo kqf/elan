@@ -2,6 +2,7 @@ from app import ma
 from app.models import Lesson, Pair, Token, User
 
 
+
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
@@ -36,3 +37,4 @@ class LessonSchema(ma.SQLAlchemyAutoSchema):
 class TokenSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Token
+        
