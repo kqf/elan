@@ -166,18 +166,3 @@ class Pair(db.Model):
         secondary="lesson_pairs",
         back_populates="pairs",
     )
-
-
-class Movie(db.Model):
-    __tablename__ = "movies"
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-        unique=True,
-        autoincrement=True,
-    )
-    title = db.Column(db.String)
-    numberInStock = db.Column(db.Integer)
-    dailyRentalRate = db.Column(db.Float)
-    publishDate = db.Column(db.String)
-    liked = db.Column(db.Boolean)
