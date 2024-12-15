@@ -4,65 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.models import Lesson, Pair, User
 
-_movies = [
-    {
-        "title": "Die Hard",
-        "numberInStock": 10,
-        "dailyRentalRate": 2.99,
-        "publishDate": "1988-07-15",
-        "liked": True,
-    },
-    {
-        "title": "The Hangover",
-        "numberInStock": 7,
-        "dailyRentalRate": 1.99,
-        "publishDate": "2009-06-05",
-        "liked": False,
-    },
-    {
-        "title": "The Godfather",
-        "numberInStock": 3,
-        "dailyRentalRate": 3.99,
-        "publishDate": "1972-03-24",
-        "liked": True,
-    },
-    {
-        "title": "The Shawshank Redemption",
-        "numberInStock": 5,
-        "dailyRentalRate": 2.50,
-        "publishDate": "1994-09-23",
-        "liked": True,
-    },
-    {
-        "title": "The Dark Knight",
-        "numberInStock": 3,
-        "dailyRentalRate": 3.00,
-        "publishDate": "2008-07-18",
-        "liked": True,
-    },
-    {
-        "title": "Forrest Gump",
-        "numberInStock": 8,
-        "dailyRentalRate": 1.99,
-        "publishDate": "1994-07-06",
-        "liked": False,
-    },
-    {
-        "title": "Jurassic Park",
-        "numberInStock": 2,
-        "dailyRentalRate": 2.50,
-        "publishDate": "1993-06-11",
-        "liked": True,
-    },
-    {
-        "title": "Pulp Fiction",
-        "numberInStock": 4,
-        "dailyRentalRate": 2.25,
-        "publishDate": "1994-10-14",
-        "liked": False,
-    },
-]
-
 
 def create_movies(db: SQLAlchemy) -> None:
     pass
